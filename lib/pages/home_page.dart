@@ -232,8 +232,7 @@ class _ValoriSection extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          padding:
-              const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
           alignment: Alignment.center,
           color: Colors.transparent,
           child: const Text(
@@ -245,77 +244,124 @@ class _ValoriSection extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: double.infinity,
-          padding:
-              const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
-          color: Colors.transparent,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1100),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  const spacing = 16.0;
-                  final isNarrow = constraints.maxWidth < 600;
-                  final tileWidth = isNarrow
-                      ? constraints.maxWidth
-                      : (constraints.maxWidth - spacing) / 2;
-                  return Wrap(
-                    spacing: spacing,
-                    runSpacing: spacing,
-                    alignment: WrapAlignment.center,
-                    children: _valori
-                        .map((v) => SizedBox(
-                              width: tileWidth,
-                              child: _ValoreCard(
-                                  icon: v.$1,
-                                  titolo: v.$2,
-                                  descrizione: v.$3),
-                            ))
-                        .toList(),
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
+        ...List.generate(_valori.length, (i) {
+          final v = _valori[i];
+          return _ValoreRow(
+            icon: v.$1,
+            titolo: v.$2,
+            descrizione: v.$3,
+            tinted: i.isOdd,
+            iconOnLeft: i.isEven,
+          );
+        }),
       ],
     );
   }
 }
 
-class _ValoreCard extends StatelessWidget {
+class _ValoreRow extends StatelessWidget {
+  static const _tintBg = Color(0x1F1E6370); // ~12% opacity of 0xFF1E6370
+
   final IconData icon;
   final String titolo;
   final String descrizione;
-  const _ValoreCard(
-      {required this.icon, required this.titolo, required this.descrizione});
+  final bool tinted;
+  final bool iconOnLeft;
+
+  const _ValoreRow({
+    required this.icon,
+    required this.titolo,
+    required this.descrizione,
+    required this.tinted,
+    required this.iconOnLeft,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 56, color: const Color(0xFF1E6370)),
-            const SizedBox(height: 10),
-            Text(titolo,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21,
-                    color: Color(0xFF1E6370)),
-                textAlign: TextAlign.center),
-            const SizedBox(height: 6),
-            Text(descrizione,
-                style: const TextStyle(
-                    fontSize: 17, color: Colors.black87, height: 1.4),
-                textAlign: TextAlign.center),
-          ],
+    final bg = tinted ? _tintBg : Colors.transparent;
+    const brown = Color(0xFF922B05);
+    final titleColor =
+        tinted ? brown : const Color(0xFF1E6370);
+    final descColor =
+        tinted ? const Color(0xFF6B2004) : Colors.black87;
+    final iconColor =
+        tinted ? brown : const Color(0xFF1E6370);
+
+    return Container(
+      width: double.infinity,
+      color: bg,
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1100),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 600;
+              final iconWidget =
+                  Icon(icon, size: 68, color: iconColor);
+
+              if (isNarrow) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    iconWidget,
+                    const SizedBox(height: 16),
+                    Text(
+                      titolo,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        color: titleColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      descrizione,
+                      style: TextStyle(
+                        fontSize: 17,
+                        height: 1.5,
+                        color: descColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              }
+
+              final textWidget = Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      titolo,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        color: titleColor,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      descrizione,
+                      style: TextStyle(
+                        fontSize: 17,
+                        height: 1.5,
+                        color: descColor,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: iconOnLeft
+                    ? [iconWidget, const SizedBox(width: 24), textWidget]
+                    : [textWidget, const SizedBox(width: 24), iconWidget],
+              );
+            },
+          ),
         ),
       ),
     );
