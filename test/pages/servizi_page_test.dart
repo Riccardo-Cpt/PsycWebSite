@@ -27,13 +27,13 @@ void main() {
     expect(find.text('Contattami'), findsOneWidget);
   });
 
-  testWidgets('has expandable Contattami section at bottom', (tester) async {
+  testWidgets('has Contattami button at bottom', (tester) async {
     final router = GoRouter(routes: [
       GoRoute(path: '/', builder: (_, _) => const ServiziPage()),
     ]);
     await tester.pumpWidget(MaterialApp.router(routerConfig: router));
     await tester.pumpAndSettle();
 
-    expect(find.byType(ExpansionTile), findsOneWidget);
+    expect(find.widgetWithText(ElevatedButton, 'Contattami'), findsOneWidget);
   });
 }

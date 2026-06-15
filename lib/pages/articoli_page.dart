@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import '../main.dart';
-import '../database/app_database.dart';
+import '../models/articolo.dart';
 import '../widgets/nav_drawer.dart';
 
 class ArticoliPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class ArticoliPage extends StatefulWidget {
 
 class _ArticoliPageState extends State<ArticoliPage>
     with SingleTickerProviderStateMixin {
+  late Future<List<Articolo>> _futureArticoli;
   final _scrollController = ScrollController();
   final Map<int, GlobalKey> _articleKeys = {};
   double _scrollOffset = 0;
@@ -22,6 +24,7 @@ class _ArticoliPageState extends State<ArticoliPage>
   @override
   void initState() {
     super.initState();
+    _futureArticoli = articoliService.tutti();
     _scrollController.addListener(() {
       final offset = _scrollController.offset.clamp(0.0, 80.0);
       if ((offset - _scrollOffset).abs() > 0.5) {
@@ -55,7 +58,7 @@ class _ArticoliPageState extends State<ArticoliPage>
 
   void _closeNav() => _navCtrl.reverse();
 
-  void _showArticleIndex(List<ArticoliData> articoli) {
+  void _showArticleIndex(List<Articolo> articoli) {
     showDialog(
       context: context,
       builder: (_) => Dialog(
@@ -98,7 +101,12 @@ class _ArticoliPageState extends State<ArticoliPage>
                         itemCount: articoli.length,
                         itemBuilder: (_, i) => ListTile(
                           title: Text(articoli[i].titolo),
-                          subtitle: Text(articoli[i].dataPubblicazione),
+                          subtitle: Text(
+                            articoli[i].pubblicatoAt != null
+                                ? DateFormat('yyyy-MM-dd')
+                                    .format(articoli[i].pubblicatoAt!)
+                                : '',
+                          ),
                           onTap: () => _scrollToArticle(i, articoli),
                         ),
                       ),
@@ -110,7 +118,7 @@ class _ArticoliPageState extends State<ArticoliPage>
     );
   }
 
-  void _scrollToArticle(int index, List<ArticoliData> articoli) {
+  void _scrollToArticle(int index, List<Articolo> articoli) {
     if (index >= articoli.length) return;
     Navigator.pop(context);
     final id = articoli[index].id;
@@ -134,8 +142,8 @@ class _ArticoliPageState extends State<ArticoliPage>
             Color.lerp(const Color(0xFFFAFAFA), const Color(0xFFEEEEEE), t)!;
         final navOpen = _navCtrl.value > 0.01;
 
-        return StreamBuilder<List<ArticoliData>>(
-          stream: appDatabase.articoliDao.watchTutti(),
+        return FutureBuilder<List<Articolo>>(
+          future: _futureArticoli,
           builder: (context, snapshot) {
             final articoli = snapshot.data ?? [];
             for (final a in articoli) {
@@ -175,8 +183,8 @@ class _ArticoliPageState extends State<ArticoliPage>
                     transitionBuilder: (child, animation) =>
                         RotationTransition(
                           turns: animation,
-                          child:
-                              FadeTransition(opacity: animation, child: child),
+                          child: FadeTransition(
+                              opacity: animation, child: child),
                         ),
                     child: IconButton(
                       key: ValueKey(navOpen),
@@ -222,13 +230,22 @@ class _ArticoliPageState extends State<ArticoliPage>
                           ],
                         ),
                         const SizedBox(height: 16),
-                        if (articoli.isEmpty)
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting)
+                          const Center(child: CircularProgressIndicator())
+                        else if (snapshot.hasError)
+                          Center(
+                              child: Text('Errore: ${snapshot.error}',
+                                  style: const TextStyle(
+                                      color: Colors.red)))
+                        else if (articoli.isEmpty)
                           const Center(
                             child: Padding(
                               padding: EdgeInsets.all(48),
                               child: Text('Nessun articolo pubblicato.',
                                   style: TextStyle(
-                                      fontSize: 18, color: Colors.black54)),
+                                      fontSize: 18,
+                                      color: Colors.black54)),
                             ),
                           )
                         else
@@ -272,11 +289,10 @@ class _ArticoliPageState extends State<ArticoliPage>
       },
     );
   }
-
 }
 
 class _ArticoloCard extends StatefulWidget {
-  final ArticoliData articolo;
+  final Articolo articolo;
   final bool initiallyExpanded;
   const _ArticoloCard(
       {required this.articolo, required this.initiallyExpanded});
@@ -303,17 +319,21 @@ class _ArticoloCardState extends State<_ArticoloCard> {
     );
   }
 
-  Widget _buildCollapsed(ArticoliData a) {
+  Widget _buildCollapsed(Articolo a) {
     return ListTile(
       leading: const Icon(Icons.expand_more, color: Color(0xFF1E6370)),
       title: Text(a.titolo,
           style: const TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: Text(a.dataPubblicazione),
+      subtitle: Text(
+        a.pubblicatoAt != null
+            ? DateFormat('yyyy-MM-dd').format(a.pubblicatoAt!)
+            : '',
+      ),
       onTap: () => setState(() => _expanded = true),
     );
   }
 
-  Widget _buildExpanded(ArticoliData a) {
+  Widget _buildExpanded(Articolo a) {
     return InkWell(
       onTap: () => setState(() => _expanded = false),
       child: Padding(
@@ -321,11 +341,11 @@ class _ArticoloCardState extends State<_ArticoloCard> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isWide = constraints.maxWidth >= 720;
-            final imageWidget = a.immagine != null
+            final imageWidget = a.immagineUrl != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.memory(
-                      a.immagine!,
+                    child: Image.network(
+                      a.immagineUrl!,
                       fit: BoxFit.cover,
                     ),
                   )
@@ -338,12 +358,17 @@ class _ArticoloCardState extends State<_ArticoloCard> {
                     style: const TextStyle(
                         fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
-                Text(a.dataPubblicazione,
-                    style: const TextStyle(
-                        color: Colors.black54, fontSize: 14)),
+                Text(
+                  a.pubblicatoAt != null
+                      ? DateFormat('yyyy-MM-dd').format(a.pubblicatoAt!)
+                      : '',
+                  style: const TextStyle(
+                      color: Colors.black54, fontSize: 14),
+                ),
                 const SizedBox(height: 12),
                 Text(a.corpo,
-                    style: const TextStyle(fontSize: 16, height: 1.6)),
+                    style:
+                        const TextStyle(fontSize: 16, height: 1.6)),
               ],
             );
 

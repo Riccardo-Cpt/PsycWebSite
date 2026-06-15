@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:psic_app/pages/home_page.dart';
 import 'package:psic_app/config/contatti.dart';
+import 'package:psic_app/main.dart';
 
 // Returns only body overflow error messages; silently swallows asset-load
 // failures that occur because the test bundle has no real image files.
@@ -36,6 +37,14 @@ Future<List<String>> _pumpAt(WidgetTester tester, Size size) async {
 }
 
 void main() {
+  setUp(() {
+    articoliService.overrideForTest = Future.value([]);
+  });
+
+  tearDown(() {
+    articoliService.overrideForTest = null;
+  });
+
   testWidgets('value tiles do not overflow on a phone screen', (tester) async {
     final overflows = await _pumpAt(tester, const Size(375, 800));
     expect(overflows, isEmpty);

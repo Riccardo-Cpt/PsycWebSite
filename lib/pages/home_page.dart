@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../config/contatti.dart';
-import '../database/app_database.dart';
 import '../main.dart';
+import '../models/articolo.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 
@@ -368,8 +368,15 @@ class _ValoreRow extends StatelessWidget {
   }
 }
 
-class _UltimoArticoloSection extends StatelessWidget {
+class _UltimoArticoloSection extends StatefulWidget {
   const _UltimoArticoloSection();
+
+  @override
+  State<_UltimoArticoloSection> createState() => _UltimoArticoloSectionState();
+}
+
+class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
+  late final Future<List<Articolo>> _futureArticoli;
 
   static String _truncate(String text) {
     final words = text.split(RegExp(r'\s+'));
@@ -378,13 +385,24 @@ class _UltimoArticoloSection extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _futureArticoli = articoliService.tutti();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ArticoliData>>(
-      stream: appDatabase.articoliDao.watchTutti(),
+    return FutureBuilder<List<Articolo>>(
+      future: _futureArticoli,
       builder: (context, snapshot) {
         final articoli = snapshot.data ?? [];
         if (articoli.isEmpty) return const SizedBox.shrink();
         final a = articoli.first;
+        final dataTesto = a.pubblicatoAt != null
+            ? '${a.pubblicatoAt!.day.toString().padLeft(2, '0')}/'
+              '${a.pubblicatoAt!.month.toString().padLeft(2, '0')}/'
+              '${a.pubblicatoAt!.year}'
+            : '';
         return Container(
           width: double.infinity,
           color: Colors.transparent,
@@ -412,7 +430,7 @@ class _UltimoArticoloSection extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            a.dataPubblicazione,
+                            dataTesto,
                             style: const TextStyle(
                                 fontSize: 13, color: Colors.black45),
                           ),
@@ -448,15 +466,16 @@ class _UltimoArticoloSection extends StatelessWidget {
                         ],
                       );
 
-                      if (a.immagine == null) return textBlock;
+                      if (a.immagineUrl == null) return textBlock;
 
                       final imageWidget = ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.memory(
-                          a.immagine!,
+                        child: Image.network(
+                          a.immagineUrl!,
                           width: isWide ? 240 : double.infinity,
                           height: isWide ? 200 : 220,
                           fit: BoxFit.cover,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
                         ),
                       );
 
