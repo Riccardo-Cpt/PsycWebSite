@@ -33,17 +33,14 @@ dependencies:
   go_router: ^17.3.0
   url_launcher: ^6.3.0
   cupertino_icons: ^1.0.8
-  drift: ^2.33.0
-  drift_flutter: ^0.3.0
-  sqlite3_flutter_libs: ^0.6.0+eol
   image_picker: ^1.1.0
+  http: ^1.2.0
+  intl: ^0.20.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.4.0
-  drift_dev: ^2.33.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
