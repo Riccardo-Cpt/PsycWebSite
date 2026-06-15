@@ -52,6 +52,7 @@ class ArticoliService {
       throw Exception('Errore nel salvataggio: ${response.body}');
     }
     final list = jsonDecode(response.body) as List<dynamic>;
+    if (list.isEmpty) throw Exception('Nessun dato restituito dal server');
     return Articolo.fromJson(list.first as Map<String, dynamic>);
   }
 

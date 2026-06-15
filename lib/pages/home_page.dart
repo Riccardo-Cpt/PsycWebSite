@@ -368,8 +368,15 @@ class _ValoreRow extends StatelessWidget {
   }
 }
 
-class _UltimoArticoloSection extends StatelessWidget {
+class _UltimoArticoloSection extends StatefulWidget {
   const _UltimoArticoloSection();
+
+  @override
+  State<_UltimoArticoloSection> createState() => _UltimoArticoloSectionState();
+}
+
+class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
+  late final Future<List<Articolo>> _futureArticoli;
 
   static String _truncate(String text) {
     final words = text.split(RegExp(r'\s+'));
@@ -378,9 +385,15 @@ class _UltimoArticoloSection extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _futureArticoli = articoliService.tutti();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Articolo>>(
-      future: articoliService.tutti(),
+      future: _futureArticoli,
       builder: (context, snapshot) {
         final articoli = snapshot.data ?? [];
         if (articoli.isEmpty) return const SizedBox.shrink();

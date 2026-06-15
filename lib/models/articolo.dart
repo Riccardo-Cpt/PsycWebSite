@@ -23,10 +23,4 @@ class Articolo {
         immagineUrl: json['immagine_url'] as String?,
       );
 
-  Map<String, dynamic> toJson() => {
-        'titolo': titolo,
-        'corpo': corpo,
-        'pubblicato_at': pubblicatoAt?.toIso8601String(),
-        'immagine_url': immagineUrl,
-      };
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:psic_app/pages/articoli_page.dart';
-import 'package:psic_app/models/articolo.dart';
 import 'package:psic_app/main.dart';
 
 Widget _wrap(Widget child) => MaterialApp.router(

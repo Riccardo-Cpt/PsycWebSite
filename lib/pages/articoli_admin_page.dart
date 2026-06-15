@@ -134,23 +134,29 @@ class _AdminPanelState extends State<_AdminPanel> {
       ),
     );
     if (ok == true) {
-      if (articolo.immagineUrl != null) {
-        await storageService.deleteImmagine(articolo.immagineUrl!);
+      try {
+        if (articolo.immagineUrl != null) {
+          await storageService.deleteImmagine(articolo.immagineUrl!);
+        }
+        await articoliService.cancella(articolo.id);
+        _refresh();
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Errore durante l\'eliminazione: $e')),
+          );
+        }
       }
-      await articoliService.cancella(articolo.id);
-      _refresh();
     }
   }
 
   void _openForm(BuildContext context, {Articolo? articolo}) {
     final isWide = MediaQuery.of(context).size.width >= 720;
     if (isWide) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(
-            builder: (_) => _ArticoloFormPage(
-                articolo: articolo, onSaved: _refresh),
-          ))
-          .then((_) => _refresh());
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => _ArticoloFormPage(
+            articolo: articolo, onSaved: _refresh),
+      ));
     } else {
       showModalBottomSheet(
         context: context,
