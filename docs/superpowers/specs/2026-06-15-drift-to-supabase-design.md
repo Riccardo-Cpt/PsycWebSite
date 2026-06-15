@@ -48,7 +48,7 @@ create table articoli (
   id bigint generated always as identity primary key,
   titolo text not null,
   corpo text not null,
-  pubblicato_at timestamptz,
+  pubblicato_at timestampt,
   immagine_url text
 );
 ```
