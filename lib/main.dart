@@ -5,10 +5,12 @@ import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
 import 'widgets/nav_bar.dart';
-import 'database/app_database.dart';
+import 'services/articoli_service.dart';
+import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
 
-final appDatabase = AppDatabase();
+final articoliService = ArticoliService();
+final storageService = StorageService();
 final blogAuthService = BlogAuthService();
 
 final _router = GoRouter(
