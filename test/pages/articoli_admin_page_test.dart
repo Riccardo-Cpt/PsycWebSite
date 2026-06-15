@@ -15,6 +15,11 @@ Widget _wrap(Widget child) => MaterialApp.router(
 void main() {
   setUp(() {
     blogAuthService.isAdmin.value = false;
+    articoliService.overrideForTest = Future.value([]);
+  });
+
+  tearDown(() {
+    articoliService.overrideForTest = null;
   });
 
   testWidgets('shows password form by default', (tester) async {
