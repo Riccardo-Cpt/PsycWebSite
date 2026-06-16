@@ -135,7 +135,7 @@ class _AdminDashboard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               OutlinedButton.icon(
-                onPressed: () => context.go('/articoli'),
+                onPressed: () => context.go('/articoli/admin'),
                 icon: const Icon(Icons.article_outlined),
                 label: const Text('Gestisci blog'),
                 style: OutlinedButton.styleFrom(
