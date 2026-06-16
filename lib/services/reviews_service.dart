@@ -50,12 +50,14 @@ class ReviewsService {
 
   Future<void> inserisci({
     required String name,
+    required String title,
     required String description,
     required int stars,
   }) async {
     final uri = Uri.parse('${AdminConfig.supabaseRestUrl}/reviews');
     final body = jsonEncode({
       'Name': name,
+      'title': title,
       'Description': description,
       'stars': stars,
     });
@@ -67,12 +69,14 @@ class ReviewsService {
 
   Future<void> aggiorna({
     required int id,
+    required String title,
     required String description,
     required int stars,
   }) async {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
     final body = jsonEncode({
+      'title': title,
       'Description': description,
       'stars': stars,
     });

@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../config/contatti.dart';
 import '../main.dart';
 import '../models/articolo.dart';
+import '../models/review.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
             _CitazioneSofaSection(),
             _ValoriSection(),
             _UltimoArticoloSection(),
+            _UltimeRecensioniSection(),
             _CitazioneSection(),
             _CtaSection(),
             _ContactFooter(),
@@ -380,8 +382,8 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
 
   static String _truncate(String text) {
     final words = text.split(RegExp(r'\s+'));
-    if (words.length <= 300) return text;
-    return '${words.take(300).join(' ')}…';
+    if (words.length <= 100) return text;
+    return '${words.take(100).join(' ')}…';
   }
 
   @override
@@ -506,6 +508,155 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
           ),
         );
       },
+    );
+  }
+}
+
+class _UltimeRecensioniSection extends StatefulWidget {
+  const _UltimeRecensioniSection();
+
+  @override
+  State<_UltimeRecensioniSection> createState() =>
+      _UltimeRecensioniSectionState();
+}
+
+class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
+  late final Future<List<Review>> _futureReviews;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureReviews = reviewsService.tutti();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Review>>(
+      future: _futureReviews,
+      builder: (context, snapshot) {
+        final reviews = (snapshot.data ?? []).take(3).toList();
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            reviews.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Container(
+          width: double.infinity,
+          color: Colors.transparent,
+          padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 900),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Le ultime 3 recensioni',
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1E6370)),
+                  ),
+                  const SizedBox(height: 24),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isWide = constraints.maxWidth >= 600;
+                      if (isWide) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (int i = 0; i < reviews.length; i++) ...[
+                              if (i > 0) const SizedBox(width: 16),
+                              Expanded(child: _ReviewPreviewCard(reviews[i])),
+                            ],
+                          ],
+                        );
+                      }
+                      return Column(
+                        children: reviews
+                            .map((r) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: _ReviewPreviewCard(r),
+                                ))
+                            .toList(),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  TextButton.icon(
+                    onPressed: () => context.go('/recensioni'),
+                    icon: const Icon(Icons.arrow_forward,
+                        color: Color(0xFF1E6370)),
+                    label: const Text(
+                      'Leggi tutte le recensioni',
+                      style: TextStyle(
+                          color: Color(0xFF1E6370),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+String _truncateWords(String text, int maxWords) {
+  final words = text.split(RegExp(r'\s+'));
+  if (words.length <= maxWords) return text;
+  return '${words.take(maxWords).join(' ')}…';
+}
+
+class _ReviewPreviewCard extends StatelessWidget {
+  final Review review;
+  const _ReviewPreviewCard(this.review);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              review.name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            ),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                for (int i = 1; i <= 5; i++)
+                  Icon(
+                    i <= review.stars ? Icons.star : Icons.star_border,
+                    color: const Color(0xFFFFC107),
+                    size: 18,
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              review.title,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _truncateWords(review.description, 50),
+              style: const TextStyle(
+                  fontSize: 14,
+                  height: 1.5,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.black87),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

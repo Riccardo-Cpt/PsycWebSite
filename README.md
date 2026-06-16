@@ -44,6 +44,45 @@ Dal pannello `/admin`, cliccare **Esci dalla modalità admin** in fondo alla pag
 
 ---
 
+## Struttura del database Supabase
+
+### Tabella `articoli`
+
+| Colonna | Tipo | Note |
+|---|---|---|
+| `id` | int8 | Primary key, auto-increment |
+| `titolo` | text | Titolo dell'articolo |
+| `corpo` | text | Corpo dell'articolo |
+| `pubblicato_at` | timestamptz | Data di pubblicazione |
+| `immagine_url` | text | URL immagine (opzionale) |
+
+Accesso in lettura: anon key. Scrittura/eliminazione: service role key.
+
+### Tabella `reviews`
+
+| Colonna | Tipo | Note |
+|---|---|---|
+| `id` | int8 | Primary key, auto-increment |
+| `Name` | text | Username del recensore |
+| `title` | text | Titolo della recensione (not null) |
+| `Description` | text | Testo della recensione |
+| `stars` | int4 | Valutazione da 1 a 5 |
+| `created_at` | timestamptz | Data di creazione |
+
+Accesso in lettura: anon key. Scrittura/eliminazione: service role key.
+
+### Tabella `reviewer_users`
+
+| Colonna | Tipo | Note |
+|---|---|---|
+| `id` | int8 | Primary key, auto-increment |
+| `username` | text | Username univoco (unique constraint) |
+| `password_hash` | text | Hash SHA-256 della password |
+
+Accesso completo: service role key. Usata per autenticare gli utenti che lasciano recensioni.
+
+---
+
 ## Sviluppo locale
 
 ```bash

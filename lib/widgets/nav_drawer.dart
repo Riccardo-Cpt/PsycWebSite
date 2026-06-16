@@ -59,6 +59,13 @@ class NavDrawer extends StatelessWidget {
                 onTap: () => _go(context, '/'),
               ),
               ListTile(
+                leading: const Icon(Icons.person_outline,
+                    color: Color(0xFF1E6370)),
+                title: const Text('Chi sono',
+                    style: TextStyle(color: Color(0xFF1E6370))),
+                onTap: () => _go(context, '/chi-sono'),
+              ),
+              ListTile(
                 leading: const Icon(Icons.psychology_outlined,
                     color: Color(0xFF1E6370)),
                 title: const Text('Servizi',
