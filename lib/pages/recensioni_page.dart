@@ -215,15 +215,8 @@ class _ReviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                for (int i = 1; i <= 5; i++)
-                  Icon(
-                    i <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFFFFC107),
-                    size: 20,
-                  ),
-                const SizedBox(width: 12),
                 Text(review.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                 const Spacer(),
                 if (review.createdAt != null)
                   Text(
@@ -243,9 +236,23 @@ class _ReviewCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                for (int i = 1; i <= 5; i++)
+                  Icon(
+                    i <= review.stars ? Icons.star : Icons.star_border,
+                    color: const Color(0xFFFFC107),
+                    size: 20,
+                  ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(review.title,
+                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+            const SizedBox(height: 6),
             Text(review.description,
-                style: const TextStyle(fontSize: 15, height: 1.5)),
+                style: const TextStyle(fontSize: 15, height: 1.5, fontStyle: FontStyle.italic)),
           ],
         ),
       ),
@@ -394,6 +401,7 @@ class _ReviewForm extends StatefulWidget {
 }
 
 class _ReviewFormState extends State<_ReviewForm> {
+  late final TextEditingController _titleCtrl;
   late final TextEditingController _descCtrl;
   late int _stars;
   bool _saving = false;
@@ -401,20 +409,22 @@ class _ReviewFormState extends State<_ReviewForm> {
   @override
   void initState() {
     super.initState();
+    _titleCtrl = TextEditingController(text: widget.existing?.title ?? '');
     _descCtrl = TextEditingController(text: widget.existing?.description ?? '');
     _stars = widget.existing?.stars ?? 5;
   }
 
   @override
   void dispose() {
+    _titleCtrl.dispose();
     _descCtrl.dispose();
     super.dispose();
   }
 
   Future<void> _save() async {
-    if (_descCtrl.text.trim().isEmpty) {
+    if (_titleCtrl.text.trim().isEmpty || _descCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Inserisci una descrizione')),
+        const SnackBar(content: Text('Inserisci titolo e descrizione')),
       );
       return;
     }
@@ -423,12 +433,14 @@ class _ReviewFormState extends State<_ReviewForm> {
       if (widget.existing == null) {
         await reviewsService.inserisci(
           name: reviewAuthService.currentUsername!,
+          title: _titleCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           stars: _stars,
         );
       } else {
         await reviewsService.aggiorna(
           id: widget.existing!.id,
+          title: _titleCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           stars: _stars,
         );
@@ -476,6 +488,11 @@ class _ReviewFormState extends State<_ReviewForm> {
                   onPressed: () => setState(() => _stars = i),
                 ),
             ],
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            controller: _titleCtrl,
+            decoration: const InputDecoration(labelText: 'Titolo *'),
           ),
           const SizedBox(height: 12),
           TextField(
