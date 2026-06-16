@@ -108,7 +108,7 @@ class _AdminPanel extends StatelessWidget {
             labelColor: Color(0xFF1E6370),
             indicatorColor: Color(0xFF1E6370),
             tabs: [
-              Tab(text: 'Articoli'),
+              Tab(text: 'Blog'),
               Tab(text: 'Recensioni'),
             ],
           ),
@@ -213,7 +213,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Expanded(
-                child: Text('I miei articoli',
+                child: Text('Il mio blog',
                     style: TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),

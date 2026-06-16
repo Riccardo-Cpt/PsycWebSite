@@ -76,7 +76,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                   children: [
                     const Expanded(
                       child: Text(
-                        'Indice articoli',
+                        'Indice post',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -208,7 +208,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                           children: [
                             const Expanded(
                               child: Text(
-                                'I miei articoli',
+                                'Il mio blog',
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
@@ -216,7 +216,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               ),
                             ),
                             const Text(
-                              'Naviga tra gli articoli',
+                              'Naviga tra i post',
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
@@ -224,7 +224,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
-                              tooltip: 'Indice articoli',
+                              tooltip: 'Indice post',
                               onPressed: () => _showArticleIndex(articoli),
                             ),
                           ],

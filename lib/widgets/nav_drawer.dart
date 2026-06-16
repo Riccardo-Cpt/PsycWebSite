@@ -68,9 +68,16 @@ class NavDrawer extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.article_outlined,
                     color: Color(0xFF1E6370)),
-                title: const Text('I miei articoli',
+                title: const Text('Il mio blog',
                     style: TextStyle(color: Color(0xFF1E6370))),
                 onTap: () => _go(context, '/articoli'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.star_outline,
+                    color: Color(0xFF1E6370)),
+                title: const Text('Recensioni',
+                    style: TextStyle(color: Color(0xFF1E6370))),
+                onTap: () => _go(context, '/recensioni'),
               ),
             ],
           ),

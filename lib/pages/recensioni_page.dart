@@ -116,7 +116,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                 children: reviews
                     .map((r) => Padding(
                           padding: const EdgeInsets.only(bottom: 12),
-                          child: _ReviewCard(review: r),
+                          child: _ReviewCard(review: r, onDeleted: _refresh),
                         ))
                     .toList(),
               );
@@ -169,7 +169,40 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
 
 class _ReviewCard extends StatelessWidget {
   final Review review;
-  const _ReviewCard({required this.review});
+  final VoidCallback? onDeleted;
+  const _ReviewCard({required this.review, this.onDeleted});
+
+  Future<void> _confirmDelete(BuildContext context) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Elimina recensione'),
+        content: Text(
+            'Eliminare la recensione di "${review.name}"? L\'azione è irreversibile.'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Annulla')),
+          TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Elimina',
+                  style: TextStyle(color: Colors.red))),
+        ],
+      ),
+    );
+    if (ok == true) {
+      try {
+        await reviewsService.cancella(review.id);
+        onDeleted?.call();
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Errore durante l\'eliminazione: $e')),
+          );
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +218,7 @@ class _ReviewCard extends StatelessWidget {
                 for (int i = 1; i <= 5; i++)
                   Icon(
                     i <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFF1E6370),
+                    color: const Color(0xFFFFC107),
                     size: 20,
                   ),
                 const SizedBox(width: 12),
@@ -197,6 +230,17 @@ class _ReviewCard extends StatelessWidget {
                     DateFormat('yyyy-MM-dd').format(review.createdAt!),
                     style: const TextStyle(color: Colors.black54, fontSize: 13),
                   ),
+                ValueListenableBuilder<bool>(
+                  valueListenable: blogAuthService.isAdmin,
+                  builder: (context, isAdmin, _) => isAdmin
+                      ? IconButton(
+                          icon: const Icon(Icons.delete_outline,
+                              color: Colors.red, size: 20),
+                          tooltip: 'Elimina recensione',
+                          onPressed: () => _confirmDelete(context),
+                        )
+                      : const SizedBox.shrink(),
+                ),
               ],
             ),
             const SizedBox(height: 8),
