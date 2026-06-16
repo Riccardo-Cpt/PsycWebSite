@@ -6,6 +6,7 @@ import '../config/contatti.dart';
 import '../main.dart';
 import '../models/articolo.dart';
 import '../models/review.dart';
+import '../widgets/site_footer.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavScaffold(
       backgroundColor: Colors.transparent,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             _HeroSection(),
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
             _CitazioneSection(),
             _CtaSection(),
             _ContactFooter(),
+            const SiteFooter(),
           ],
         ),
       ),
@@ -713,7 +715,7 @@ class _CtaSection extends StatelessWidget {
             children: [
               _CtaButton(
                 icon: Icons.psychology,
-                label: 'I miei servizi',
+                label: 'Di cosa mi occupo',
                 backgroundColor: const Color(0xFF1E6370),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
