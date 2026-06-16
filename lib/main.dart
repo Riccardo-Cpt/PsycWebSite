@@ -8,10 +8,14 @@ import 'widgets/nav_bar.dart';
 import 'services/articoli_service.dart';
 import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
+import 'services/review_auth_service.dart';
+import 'services/reviews_service.dart';
 
 final articoliService = ArticoliService();
 final storageService = StorageService();
 final blogAuthService = BlogAuthService();
+final reviewAuthService = ReviewAuthService();
+final reviewsService = ReviewsService();
 
 final _router = GoRouter(
   errorBuilder: (context, state) => Scaffold(
