@@ -126,34 +126,39 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
           ValueListenableBuilder<bool>(
             valueListenable: reviewAuthService.isLoggedIn,
             builder: (context, isLoggedIn, _) {
-              return _loadingMyReview
-                  ? const Center(child: CircularProgressIndicator())
-                  : ElevatedButton(
-                      onPressed: _onButtonTap,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1E6370),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _loadingMyReview
+                      ? const Center(child: CircularProgressIndicator())
+                      : ElevatedButton(
+                          onPressed: _onButtonTap,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF1E6370),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          child: Text(
+                            isLoggedIn && _myReview != null
+                                ? 'Modifica la tua recensione'
+                                : 'Lascia una recensione',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                  if (isLoggedIn) ...[
+                    const SizedBox(height: 8),
+                    Center(
+                      child: TextButton(
+                        onPressed: () => reviewAuthService.logout(),
+                        child: const Text('Esci',
+                            style: TextStyle(color: Color(0xFF1E6370))),
                       ),
-                      child: Text(
-                        isLoggedIn && _myReview != null
-                            ? 'Modifica la tua recensione'
-                            : 'Lascia una recensione',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    );
+                    ),
+                  ],
+                ],
+              );
             },
           ),
-          if (reviewAuthService.isLoggedIn.value) ...[
-            const SizedBox(height: 8),
-            Center(
-              child: TextButton(
-                onPressed: () => reviewAuthService.logout(),
-                child: const Text('Esci',
-                    style: TextStyle(color: Color(0xFF1E6370))),
-              ),
-            ),
-          ],
         ],
       ),
     );

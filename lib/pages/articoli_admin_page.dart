@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../widgets/nav_bar.dart';
 import '../main.dart';
 import '../models/articolo.dart';
+import '../models/review.dart';
 
 class ArticoliAdminPage extends StatelessWidget {
   const ArticoliAdminPage({super.key});
@@ -93,14 +94,48 @@ class _PasswordGateState extends State<_PasswordGate> {
 
 // ── Admin panel ───────────────────────────────────────────────────────────────
 
-class _AdminPanel extends StatefulWidget {
+class _AdminPanel extends StatelessWidget {
   const _AdminPanel();
 
   @override
-  State<_AdminPanel> createState() => _AdminPanelState();
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const TabBar(
+            labelColor: Color(0xFF1E6370),
+            indicatorColor: Color(0xFF1E6370),
+            tabs: [
+              Tab(text: 'Articoli'),
+              Tab(text: 'Recensioni'),
+            ],
+          ),
+          const Expanded(
+            child: TabBarView(
+              children: [
+                _ArticoliTab(),
+                _RecensioniTab(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _AdminPanelState extends State<_AdminPanel> {
+// ── Articoli tab ──────────────────────────────────────────────────────────────
+
+class _ArticoliTab extends StatefulWidget {
+  const _ArticoliTab();
+
+  @override
+  State<_ArticoliTab> createState() => _ArticoliTabState();
+}
+
+class _ArticoliTabState extends State<_ArticoliTab> {
   late Future<List<Articolo>> _futureArticoli;
 
   @override
@@ -178,9 +213,9 @@ class _AdminPanelState extends State<_AdminPanel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Expanded(
-                child: Text('Pannello Admin — I miei articoli',
+                child: Text('I miei articoli',
                     style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold)),
+                        fontSize: 20, fontWeight: FontWeight.bold)),
               ),
               ElevatedButton.icon(
                 onPressed: () => _openForm(context),
@@ -245,6 +280,130 @@ class _AdminPanelState extends State<_AdminPanel> {
                                 _confirmDelete(context, a),
                           ),
                         ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Recensioni tab ────────────────────────────────────────────────────────────
+
+class _RecensioniTab extends StatefulWidget {
+  const _RecensioniTab();
+
+  @override
+  State<_RecensioniTab> createState() => _RecensioniTabState();
+}
+
+class _RecensioniTabState extends State<_RecensioniTab> {
+  late Future<List<Review>> _futureReviews;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureReviews = reviewsService.tutti();
+  }
+
+  void _refresh() {
+    setState(() => _futureReviews = reviewsService.tutti());
+  }
+
+  Future<void> _confirmDelete(BuildContext context, Review review) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Elimina recensione'),
+        content: Text(
+            'Eliminare la recensione di "${review.name}"? L\'azione è irreversibile.'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Annulla')),
+          TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Elimina',
+                  style: TextStyle(color: Colors.red))),
+        ],
+      ),
+    );
+    if (ok == true) {
+      try {
+        await reviewsService.cancella(review.id);
+        _refresh();
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Errore durante l\'eliminazione: $e')),
+          );
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Recensioni utenti',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 16),
+          Expanded(
+            child: FutureBuilder<List<Review>>(
+              future: _futureReviews,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                      child: Text('Errore: ${snapshot.error}',
+                          style: const TextStyle(color: Colors.red)));
+                }
+                final reviews = snapshot.data ?? [];
+                if (reviews.isEmpty) {
+                  return const Center(
+                      child: Text('Nessuna recensione.',
+                          style: TextStyle(color: Colors.black54)));
+                }
+                return ListView.separated(
+                  itemCount: reviews.length,
+                  separatorBuilder: (_, _) => const Divider(height: 1),
+                  itemBuilder: (context, i) {
+                    final r = reviews[i];
+                    return ListTile(
+                      title: Row(
+                        children: [
+                          Text(r.name,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 8),
+                          for (int s = 1; s <= 5; s++)
+                            Icon(
+                              s <= r.stars ? Icons.star : Icons.star_border,
+                              color: const Color(0xFF1E6370),
+                              size: 16,
+                            ),
+                        ],
+                      ),
+                      subtitle: Text(
+                        r.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        tooltip: 'Elimina',
+                        onPressed: () => _confirmDelete(context, r),
                       ),
                     );
                   },

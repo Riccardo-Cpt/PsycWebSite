@@ -81,4 +81,13 @@ class ReviewsService {
       throw Exception('Errore nella modifica della recensione: ${response.body}');
     }
   }
+
+  Future<void> cancella(int id) async {
+    final uri = Uri.parse(
+        '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
+    final response = await http.delete(uri, headers: _writeHeaders);
+    if (response.statusCode != 204) {
+      throw Exception('Errore nell\'eliminazione della recensione: ${response.body}');
+    }
+  }
 }
