@@ -8,13 +8,7 @@ class AdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavScaffold(
-      body: ValueListenableBuilder<bool>(
-        valueListenable: blogAuthService.isAdmin,
-        builder: (context, isAdmin, _) =>
-            isAdmin ? const _AdminActive() : const _PasswordGate(),
-      ),
-    );
+    return const NavScaffold(body: _PasswordGate());
   }
 }
 
@@ -83,44 +77,6 @@ class _PasswordGateState extends State<_PasswordGate> {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ── Already logged in ─────────────────────────────────────────────────────────
-
-class _AdminActive extends StatelessWidget {
-  const _AdminActive();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Icon(Icons.admin_panel_settings,
-                  size: 56, color: Color(0xFF1E6370)),
-              const SizedBox(height: 12),
-              const Text(
-                'Sei già loggato come admin.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Colors.black54),
-              ),
-              const SizedBox(height: 24),
-              TextButton(
-                onPressed: () => blogAuthService.logout(),
-                child: const Text('Esci dalla modalità admin',
-                    style: TextStyle(color: Colors.red)),
-              ),
-            ],
           ),
         ),
       ),
