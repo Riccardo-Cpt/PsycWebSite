@@ -32,7 +32,7 @@ class ReviewsService {
   Future<List<Review>> tutti() async {
     if (overrideForTest != null) return overrideForTest!;
     final uri = Uri.parse(
-        '${AdminConfig.supabaseRestUrl}/reviews?select=*&approved=eq.1&order=created_at.desc');
+        '${AdminConfig.supabaseRestUrl}/reviews?select=*&approved=eq.true&order=created_at.desc');
     final response = await http.get(uri, headers: _readHeaders);
     if (response.statusCode != 200) {
       throw Exception('Errore nel recupero delle recensioni: ${response.body}');
@@ -45,7 +45,7 @@ class ReviewsService {
   Future<List<Review>> tuttiAdmin() async {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews'
-        '?select=*,reviewer_users(nome,cognome,email)'
+        '?select=*,reviewer_users(name,surname,email)'
         '&order=created_at.desc');
     final response = await http.get(uri, headers: _adminReadHeaders);
     if (response.statusCode != 200) {
@@ -61,7 +61,7 @@ class ReviewsService {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews'
         '?username=eq.$encodedUsername&select=*');
-    final response = await http.get(uri, headers: _readHeaders);
+    final response = await http.get(uri, headers: _adminReadHeaders);
     if (response.statusCode != 200) {
       throw Exception('Errore nel recupero della recensione: ${response.body}');
     }
@@ -71,7 +71,7 @@ class ReviewsService {
   }
 
   Future<void> inserisci({
-    required String name,
+    required String username,
     required String title,
     required String description,
     required int stars,
@@ -81,17 +81,17 @@ class ReviewsService {
   }) async {
     final uri = Uri.parse('${AdminConfig.supabaseRestUrl}/reviews');
     final body = jsonEncode({
-      'username': name,
+      'username': username,
       'title': title,
-      'Description': description,
+      'description': description,
       'stars': stars,
-      'approved': 0,
+      'approved': false,
     });
     final response = await http.post(uri, headers: _writeHeaders, body: body);
     if (response.statusCode != 201) {
       throw Exception('Errore nel salvataggio della recensione: ${response.body}');
     }
-    _notificaAdmin(name, title, name: name, surname: surname, email: email);
+    _notificaAdmin(username, title, name: name, surname: surname, email: email);
   }
 
   Future<void> aggiorna({
@@ -104,9 +104,9 @@ class ReviewsService {
         '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
     final body = jsonEncode({
       'title': title,
-      'Description': description,
+      'description': description,
       'stars': stars,
-      'approved': 0,
+      'approved': false,
     });
     final response = await http.patch(uri, headers: _writeHeaders, body: body);
     if (response.statusCode != 200 && response.statusCode != 204) {
@@ -118,7 +118,7 @@ class ReviewsService {
   Future<void> approva(int id) async {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
-    final body = jsonEncode({'approved': 1});
+    final body = jsonEncode({'approved': true});
     final response = await http.patch(uri, headers: _writeHeaders, body: body);
     if (response.statusCode != 200 && response.statusCode != 204) {
       throw Exception('Errore nell\'approvazione della recensione: ${response.body}');
@@ -136,13 +136,14 @@ class ReviewsService {
 
   void _notificaAdmin(String username, String title,
       {String? name, String? surname, String? email}) {
-    final nomeCompleto = (name != null && surname != null)
-        ? '$name $surname'
-        : username;
-    final emailInfo = email != null ? '\nEmail: $email' : '';
     final subject = Uri.encodeComponent('Nuova recensione in attesa di approvazione');
     final bodyText = Uri.encodeComponent(
-      'L\'utente "$username" ($nomeCompleto$emailInfo) ha lasciato una nuova recensione intitolata "$title".\n\n'
+      'È stata ricevuta una nuova recensione che richiede la tua approvazione.\n\n'
+      'Username: $username\n'
+      'Nome: ${name ?? '-'}\n'
+      'Cognome: ${surname ?? '-'}\n'
+      'Email: ${email ?? '-'}\n\n'
+      'Titolo recensione: "$title"\n\n'
       'Accedi al pannello admin per approvarla o rifiutarla.',
     );
     launchUrl(

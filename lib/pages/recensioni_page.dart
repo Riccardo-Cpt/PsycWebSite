@@ -51,14 +51,22 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
     }
     if (!mounted) return;
     setState(() => _loadingMyReview = true);
-    final username = reviewAuthService.currentUsername!;
-    final existing = await reviewsService.mia(username);
-    if (!mounted) return;
-    setState(() {
-      _myReview = existing;
-      _loadingMyReview = false;
-    });
-    _openForm(existing);
+    try {
+      final username = reviewAuthService.currentUsername!;
+      final existing = await reviewsService.mia(username);
+      if (!mounted) return;
+      setState(() {
+        _myReview = existing;
+        _loadingMyReview = false;
+      });
+      _openForm(existing);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _loadingMyReview = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Errore: $e')),
+      );
+    }
   }
 
   void _openForm(Review? existing) {
@@ -476,7 +484,7 @@ class _ReviewFormState extends State<_ReviewForm> {
     try {
       if (widget.existing == null) {
         await reviewsService.inserisci(
-          name: reviewAuthService.currentUsername!,
+          username: reviewAuthService.currentUsername!,
           title: _titleCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           stars: _stars,

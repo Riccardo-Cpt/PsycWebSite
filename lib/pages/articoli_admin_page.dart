@@ -312,7 +312,9 @@ class _RecensioniTabState extends State<_RecensioniTab> {
   }
 
   void _refresh() {
-    setState(() => _futureReviews = reviewsService.tuttiAdmin());
+    setState(() {
+      _futureReviews = reviewsService.tuttiAdmin();
+    });
   }
 
   Future<void> _approva(BuildContext context, Review review) async {
@@ -406,8 +408,8 @@ class _RecensioniTabState extends State<_RecensioniTab> {
                           style: const TextStyle(color: Colors.red)));
                 }
                 final all = snapshot.data ?? [];
-                final pending = all.where((r) => r.approved == 0).toList();
-                final approved = all.where((r) => r.approved == 1).toList();
+                final pending = all.where((r) => !r.approved).toList();
+                final approved = all.where((r) => r.approved).toList();
                 if (all.isEmpty) {
                   return const Center(
                       child: Text('Nessuna recensione.',

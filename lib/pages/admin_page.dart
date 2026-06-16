@@ -12,7 +12,7 @@ class AdminPage extends StatelessWidget {
       body: ValueListenableBuilder<bool>(
         valueListenable: blogAuthService.isAdmin,
         builder: (context, isAdmin, _) =>
-            isAdmin ? const _AdminDashboard() : const _PasswordGate(),
+            isAdmin ? const _AdminActive() : const _PasswordGate(),
       ),
     );
   }
@@ -38,7 +38,9 @@ class _PasswordGateState extends State<_PasswordGate> {
 
   void _login() {
     blogAuthService.login(_controller.text);
-    if (!blogAuthService.isAdmin.value && mounted) {
+    if (blogAuthService.isAdmin.value) {
+      if (mounted) context.go('/');
+    } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Password errata')),
       );
@@ -88,16 +90,16 @@ class _PasswordGateState extends State<_PasswordGate> {
   }
 }
 
-// ── Admin dashboard ───────────────────────────────────────────────────────────
+// ── Already logged in ─────────────────────────────────────────────────────────
 
-class _AdminDashboard extends StatelessWidget {
-  const _AdminDashboard();
+class _AdminActive extends StatelessWidget {
+  const _AdminActive();
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 480),
+        constraints: const BoxConstraints(maxWidth: 400),
         child: Padding(
           padding: const EdgeInsets.all(32),
           child: Column(
@@ -105,44 +107,12 @@ class _AdminDashboard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Icon(Icons.admin_panel_settings,
-                  size: 64, color: Color(0xFF1E6370)),
-              const SizedBox(height: 16),
-              const Text(
-                'Admin attivo',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E6370)),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Naviga il sito per gestire i contenuti.\n'
-                'I controlli di amministrazione sono visibili sulle pagine.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, color: Colors.black54),
-              ),
-              const SizedBox(height: 32),
-              OutlinedButton.icon(
-                onPressed: () => context.go('/recensioni'),
-                icon: const Icon(Icons.star_outline),
-                label: const Text('Gestisci recensioni'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF1E6370),
-                  side: const BorderSide(color: Color(0xFF1E6370)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-              ),
+                  size: 56, color: Color(0xFF1E6370)),
               const SizedBox(height: 12),
-              OutlinedButton.icon(
-                onPressed: () => context.go('/articoli/admin'),
-                icon: const Icon(Icons.article_outlined),
-                label: const Text('Gestisci blog'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF1E6370),
-                  side: const BorderSide(color: Color(0xFF1E6370)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
+              const Text(
+                'Sei già loggato come admin.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: Colors.black54),
               ),
               const SizedBox(height: 24),
               TextButton(

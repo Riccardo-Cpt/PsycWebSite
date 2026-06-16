@@ -65,10 +65,10 @@ Accesso in lettura: anon key. Scrittura/eliminazione: service role key.
 | `id` | int8 | Primary key, auto-increment |
 | `username` | text | Username del recensore (FK → `reviewer_users.username`) |
 | `title` | text | Titolo della recensione (not null) |
-| `Description` | text | Testo della recensione |
+| `description` | text | Testo della recensione |
 | `stars` | int4 | Valutazione da 1 a 5 |
 | `created_at` | timestamptz | Data di creazione |
-| `approved` | int4 | 0 = in attesa di approvazione, 1 = approvata (default 0) |
+| `approved` | boolean | false = in attesa di approvazione, true = approvata (default false) |
 
 Accesso in lettura (pubblico): anon key, filtra `approved=eq.1`. Lettura admin e scrittura/eliminazione: service role key.
 
@@ -79,8 +79,8 @@ Accesso in lettura (pubblico): anon key, filtra `approved=eq.1`. Lettura admin e
 | `id` | int8 | Primary key, auto-increment |
 | `username` | text | Username univoco (unique constraint) |
 | `password_hash` | text | Hash SHA-256 della password |
-| `nome` | text | Nome reale del recensore (non visibile in UI) |
-| `cognome` | text | Cognome reale del recensore (non visibile in UI) |
+| `name` | text | Nome reale del recensore (non visibile in UI) |
+| `surname` | text | Cognome reale del recensore (non visibile in UI) |
 | `email` | text | Email del recensore (non visibile in UI) |
 
 Accesso completo: service role key. Usata per autenticare gli utenti che lasciano recensioni. I campi `nome`, `cognome`, `email` vengono mostrati solo all'admin nel pannello di approvazione, per verificare che il paziente abbia effettivamente svolto sedute.

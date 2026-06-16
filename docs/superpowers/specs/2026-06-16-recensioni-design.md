@@ -17,7 +17,7 @@ create table reviewer_users (
 create table reviews (
   id bigint generated always as identity primary key,
   "Name" text unique not null,
-  "Description" text not null,
+  "description" text not null,
   created_at timestamptz default now(),
   stars int not null check (stars >= 1 and stars <= 5)
 );
@@ -52,7 +52,7 @@ class Review {
 }
 ```
 
-`fromJson` maps: `id`, `Name`, `Description`, `created_at`, `stars`.
+`fromJson` maps: `id`, `Name`, `description`, `created_at`, `stars`.
 
 ## Service Layer
 
@@ -60,7 +60,7 @@ class Review {
 
 Password hashing: SHA-256 via `crypto` package.
 
-| Method | Description |
+| Method | description |
 |---|---|
 | `ValueNotifier<bool> isLoggedIn` | Drives UI |
 | `String? currentUsername` | Set on login, cleared on logout |
@@ -99,7 +99,7 @@ Uses `NavScaffold`. Contains:
 `Card` showing:
 - Row of 5 star icons (filled `Icons.star`, empty `Icons.star_border`), color `Color(0xFF1E6370)`
 - Reviewer name (bold) + date (`DateFormat('yyyy-MM-dd')`)
-- Description text
+- description text
 
 ### Button logic
 

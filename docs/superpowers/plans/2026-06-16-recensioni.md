@@ -87,7 +87,7 @@ void main() {
       final r = Review.fromJson({
         'id': 1,
         'Name': 'mario',
-        'Description': 'ottimo servizio',
+        'description': 'ottimo servizio',
         'created_at': '2026-06-16T10:00:00Z',
         'stars': 4,
       });
@@ -102,7 +102,7 @@ void main() {
       final r = Review.fromJson({
         'id': 2,
         'Name': 'lucia',
-        'Description': 'buono',
+        'description': 'buono',
         'created_at': null,
         'stars': 3,
       });
@@ -140,7 +140,7 @@ class Review {
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         id: json['id'] as int,
         name: json['Name'] as String,
-        description: json['Description'] as String,
+        description: json['description'] as String,
         createdAt: json['created_at'] != null
             ? DateTime.parse(json['created_at'] as String)
             : null,
@@ -428,7 +428,7 @@ class ReviewsService {
     final uri = Uri.parse('${AdminConfig.supabaseRestUrl}/reviews');
     final body = jsonEncode({
       'Name': name,
-      'Description': description,
+      'description': description,
       'stars': stars,
     });
     final response = await http.post(uri, headers: _writeHeaders, body: body);
@@ -445,7 +445,7 @@ class ReviewsService {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
     final body = jsonEncode({
-      'Description': description,
+      'description': description,
       'stars': stars,
     });
     final response = await http.patch(uri, headers: _writeHeaders, body: body);
@@ -1284,7 +1284,7 @@ create table reviewer_users (
 create table reviews (
   id bigint generated always as identity primary key,
   "Name" text unique not null,
-  "Description" text not null,
+  "description" text not null,
   created_at timestamptz default now(),
   stars int not null check (stars >= 1 and stars <= 5)
 );
