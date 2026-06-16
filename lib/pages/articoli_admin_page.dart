@@ -308,11 +308,37 @@ class _RecensioniTabState extends State<_RecensioniTab> {
   @override
   void initState() {
     super.initState();
-    _futureReviews = reviewsService.tutti();
+    _futureReviews = reviewsService.tuttiAdmin();
   }
 
   void _refresh() {
-    setState(() => _futureReviews = reviewsService.tutti());
+    setState(() => _futureReviews = reviewsService.tuttiAdmin());
+  }
+
+  Future<void> _approva(BuildContext context, Review review) async {
+    try {
+      await reviewsService.approva(review.id);
+      _refresh();
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Errore nell\'approvazione: $e')),
+        );
+      }
+    }
+  }
+
+  Future<void> _rifiuta(BuildContext context, Review review) async {
+    try {
+      await reviewsService.cancella(review.id);
+      _refresh();
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Errore durante l\'eliminazione: $e')),
+        );
+      }
+    }
   }
 
   Future<void> _confirmDelete(BuildContext context, Review review) async {
@@ -321,7 +347,7 @@ class _RecensioniTabState extends State<_RecensioniTab> {
       builder: (_) => AlertDialog(
         title: const Text('Elimina recensione'),
         content: Text(
-            'Eliminare la recensione di "${review.name}"? L\'azione è irreversibile.'),
+            'Eliminare la recensione di "${review.username}"? L\'azione è irreversibile.'),
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(context, false),
@@ -347,6 +373,16 @@ class _RecensioniTabState extends State<_RecensioniTab> {
     }
   }
 
+  String _buildConfirmationText(Review r) {
+    final name = r.name ?? '';
+    final surname = r.surname ?? '';
+    final email = r.userEmail ?? '';
+    final nomeCompleto = '${name.isNotEmpty ? name : '?'} ${surname.isNotEmpty ? surname : '?'}'.trim();
+    final emailTesto = email.isNotEmpty ? email : '?';
+    return 'Per poter pubblicare questa recensione devi prima confermare di aver svolto '
+        'almeno una seduta con $nomeCompleto con email $emailTesto';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -369,48 +405,156 @@ class _RecensioniTabState extends State<_RecensioniTab> {
                       child: Text('Errore: ${snapshot.error}',
                           style: const TextStyle(color: Colors.red)));
                 }
-                final reviews = snapshot.data ?? [];
-                if (reviews.isEmpty) {
+                final all = snapshot.data ?? [];
+                final pending = all.where((r) => r.approved == 0).toList();
+                final approved = all.where((r) => r.approved == 1).toList();
+                if (all.isEmpty) {
                   return const Center(
                       child: Text('Nessuna recensione.',
                           style: TextStyle(color: Colors.black54)));
                 }
-                return ListView.separated(
-                  itemCount: reviews.length,
-                  separatorBuilder: (_, _) => const Divider(height: 1),
-                  itemBuilder: (context, i) {
-                    final r = reviews[i];
-                    return ListTile(
-                      title: Row(
-                        children: [
-                          Text(r.name,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold)),
-                          const SizedBox(width: 8),
-                          for (int s = 1; s <= 5; s++)
-                            Icon(
-                              s <= r.stars ? Icons.star : Icons.star_border,
-                              color: const Color(0xFF1E6370),
-                              size: 16,
+                return ListView(
+                  children: [
+                    if (pending.isNotEmpty) ...[
+                      _SectionHeader(
+                        label: 'Da approvare (${pending.length})',
+                        color: Colors.orange.shade700,
+                      ),
+                      ...pending.map((r) => _ReviewTile(
+                            review: r,
+                            confirmationText: _buildConfirmationText(r),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.check_circle,
+                                      color: Colors.green),
+                                  tooltip: 'Approva',
+                                  onPressed: () => _approva(context, r),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.cancel,
+                                      color: Colors.red),
+                                  tooltip: 'Rifiuta ed elimina',
+                                  onPressed: () => _rifiuta(context, r),
+                                ),
+                              ],
                             ),
-                        ],
+                          )),
+                      const Divider(height: 24, thickness: 1),
+                    ],
+                    if (approved.isNotEmpty) ...[
+                      _SectionHeader(
+                        label: 'Approvate (${approved.length})',
+                        color: Colors.green.shade700,
                       ),
-                      subtitle: Text(
-                        r.description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        tooltip: 'Elimina',
-                        onPressed: () => _confirmDelete(context, r),
-                      ),
-                    );
-                  },
+                      ...approved.map((r) => _ReviewTile(
+                            review: r,
+                            trailing: IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              tooltip: 'Elimina',
+                              onPressed: () => _confirmDelete(context, r),
+                            ),
+                          )),
+                    ],
+                  ],
                 );
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String label;
+  final Color color;
+  const _SectionHeader({required this.label, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(label,
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: color)),
+    );
+  }
+}
+
+class _ReviewTile extends StatelessWidget {
+  final Review review;
+  final Widget trailing;
+  final String? confirmationText;
+  const _ReviewTile({required this.review, required this.trailing, this.confirmationText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Row(
+              children: [
+                Text(review.username,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(width: 8),
+                for (int s = 1; s <= 5; s++)
+                  Icon(
+                    s <= review.stars ? Icons.star : Icons.star_border,
+                    color: const Color(0xFFFFC107),
+                    size: 16,
+                  ),
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(review.title,
+                    style: const TextStyle(fontWeight: FontWeight.w600)),
+                Text(
+                  review.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+            isThreeLine: true,
+            trailing: trailing,
+          ),
+          if (confirmationText != null)
+            Container(
+              margin: const EdgeInsets.only(top: 4, bottom: 4),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                border: Border.all(color: Colors.orange.shade300),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.info_outline,
+                      size: 16, color: Colors.orange.shade700),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      confirmationText!,
+                      style: TextStyle(
+                          fontSize: 13, color: Colors.orange.shade900),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          const Divider(height: 1),
         ],
       ),
     );
