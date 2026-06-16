@@ -17,13 +17,16 @@ class _ChiSonoBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 760),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 760),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
               _ProfileCard(),
               SizedBox(height: 40),
               _Section(
@@ -128,10 +131,13 @@ class _ChiSonoBody extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 48),
-              SiteFooter(),
             ],
           ),
         ),
+      ),
+          ),
+          SiteFooter(),
+        ],
       ),
     );
   }

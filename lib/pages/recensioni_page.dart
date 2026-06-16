@@ -79,10 +79,14 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
           const Text(
             'Recensioni',
             style: TextStyle(
@@ -160,7 +164,10 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
               );
             },
           ),
-          const SizedBox(height: 24),
+              const SizedBox(height: 24),
+            ],
+          ),
+          ),
           const SiteFooter(),
         ],
       ),
