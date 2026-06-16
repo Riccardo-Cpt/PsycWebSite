@@ -456,7 +456,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                             icon: const Icon(Icons.arrow_forward,
                                 color: Color(0xFF1E6370)),
                             label: const Text(
-                              'Leggi tutti gli articoli',
+                              'Leggi tutti i post del blog',
                               style: TextStyle(
                                   color: Color(0xFF1E6370),
                                   fontSize: 15,

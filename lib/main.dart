@@ -4,14 +4,20 @@ import 'pages/home_page.dart';
 import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
+import 'pages/admin_page.dart';
+import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
 import 'services/articoli_service.dart';
 import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
+import 'services/review_auth_service.dart';
+import 'services/reviews_service.dart';
 
 final articoliService = ArticoliService();
 final storageService = StorageService();
 final blogAuthService = BlogAuthService();
+final reviewAuthService = ReviewAuthService();
+final reviewsService = ReviewsService();
 
 final _router = GoRouter(
   errorBuilder: (context, state) => Scaffold(
@@ -25,6 +31,8 @@ final _router = GoRouter(
     GoRoute(path: '/servizi', builder: (_, _) => const ServiziPage()),
     GoRoute(path: '/articoli', builder: (_, _) => const ArticoliPage()),
     GoRoute(path: '/articoli/admin', builder: (_, _) => const ArticoliAdminPage()),
+    GoRoute(path: '/recensioni', builder: (_, _) => const RecensioniPage()),
+    GoRoute(path: '/admin', builder: (_, _) => const AdminPage()),
   ],
 );
 

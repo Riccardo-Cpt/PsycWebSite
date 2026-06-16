@@ -1,20 +1,58 @@
-# psicologist app with calendar
+# Dr.ssa Maria Bianchi — Sito Web
 
-This project consists on a web app containing a calendar session accessible only by admin with password admin1234. The admin can schedule and cancel appointments for its clients. The calendar functionality is associated with a sqllite database (managed by flutter "drift" framework.)-
-The database consists on tables:
-- clients: containing anagraphical information for client
-- booking: every booking associated to each client.
+Sito web professionale per la Dr.ssa Maria Bianchi, Psicologa e Psicoterapeuta. Sviluppato con Flutter Web e Supabase come backend.
 
-## Getting Started
+## Pagine pubbliche
 
-This project is a starting point for a Flutter application.
+| Percorso | Descrizione |
+|---|---|
+| `/` | Home page con presentazione, valori e ultimo articolo del blog |
+| `/servizi` | Servizi offerti |
+| `/articoli` | Blog — tutti gli articoli pubblicati |
+| `/recensioni` | Recensioni dei clienti — lettura e scrittura |
 
-A few resources to get you started if this is your first Flutter project:
+## Pannello di amministrazione
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+L'area admin è accessibile digitando manualmente `/admin` nella barra dell'indirizzo del browser. **Non è raggiungibile da nessun link nel sito.**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Password:** `admin123`  
+*(modificabile in `lib/config/admin_config.dart`)*
+
+Una volta autenticato, la sessione rimane attiva per tutta la navigazione fino al ricaricamento della pagina o al logout manuale.
+
+### Gestione articoli del blog
+
+1. Accedere a `/admin` e inserire la password.
+2. Dal pannello, cliccare **Gestisci blog** per andare alla pagina `/articoli`.
+3. In alternativa, navigare direttamente a `/articoli/admin`.
+
+Dalla sezione **Blog** del pannello admin è possibile:
+- **Creare** un nuovo articolo (titolo, corpo, immagine opzionale)
+- **Modificare** un articolo esistente
+- **Eliminare** un articolo (con conferma)
+
+### Gestione recensioni
+
+1. Accedere a `/admin` e inserire la password.
+2. Dal pannello, cliccare **Gestisci recensioni** per andare alla pagina `/recensioni`.
+
+Con la sessione admin attiva, su ogni recensione appare un pulsante **cestino rosso** per eliminarla (con conferma).
+
+### Logout
+
+Dal pannello `/admin`, cliccare **Esci dalla modalità admin** in fondo alla pagina.
+
+---
+
+## Sviluppo locale
+
+```bash
+flutter pub get
+flutter run -d chrome
+```
+
+Per build di produzione:
+
+```bash
+flutter build web
+```
