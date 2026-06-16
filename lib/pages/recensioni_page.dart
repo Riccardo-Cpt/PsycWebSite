@@ -51,14 +51,22 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
     }
     if (!mounted) return;
     setState(() => _loadingMyReview = true);
-    final username = reviewAuthService.currentUsername!;
-    final existing = await reviewsService.mia(username);
-    if (!mounted) return;
-    setState(() {
-      _myReview = existing;
-      _loadingMyReview = false;
-    });
-    _openForm(existing);
+    try {
+      final username = reviewAuthService.currentUsername!;
+      final existing = await reviewsService.mia(username);
+      if (!mounted) return;
+      setState(() {
+        _myReview = existing;
+        _loadingMyReview = false;
+      });
+      _openForm(existing);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _loadingMyReview = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Errore: $e')),
+      );
+    }
   }
 
   void _openForm(Review? existing) {
@@ -188,7 +196,7 @@ class _ReviewCard extends StatelessWidget {
       builder: (_) => AlertDialog(
         title: const Text('Elimina recensione'),
         content: Text(
-            'Eliminare la recensione di "${review.name}"? L\'azione è irreversibile.'),
+            'Eliminare la recensione di "${review.username}"? L\'azione è irreversibile.'),
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(context, false),
@@ -225,7 +233,7 @@ class _ReviewCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(review.name,
+                Text(review.username,
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                 const Spacer(),
                 if (review.createdAt != null)
@@ -284,6 +292,9 @@ class _AuthDialogState extends State<_AuthDialog> {
   final _usernameCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmCtrl = TextEditingController();
+  final _nomeCtrl = TextEditingController();
+  final _cognomeCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
   String? _error;
   bool _loading = false;
 
@@ -292,6 +303,9 @@ class _AuthDialogState extends State<_AuthDialog> {
     _usernameCtrl.dispose();
     _passwordCtrl.dispose();
     _confirmCtrl.dispose();
+    _nomeCtrl.dispose();
+    _cognomeCtrl.dispose();
+    _emailCtrl.dispose();
     super.dispose();
   }
 
@@ -302,9 +316,15 @@ class _AuthDialogState extends State<_AuthDialog> {
       setState(() => _error = 'Inserisci username e password');
       return;
     }
-    if (!_isLogin && password != _confirmCtrl.text) {
-      setState(() => _error = 'Le password non coincidono');
-      return;
+    if (!_isLogin) {
+      if (password != _confirmCtrl.text) {
+        setState(() => _error = 'Le password non coincidono');
+        return;
+      }
+      if (_nomeCtrl.text.trim().isEmpty || _cognomeCtrl.text.trim().isEmpty || _emailCtrl.text.trim().isEmpty) {
+        setState(() => _error = 'Compila tutti i campi obbligatori');
+        return;
+      }
     }
     setState(() {
       _error = null;
@@ -314,7 +334,13 @@ class _AuthDialogState extends State<_AuthDialog> {
       if (_isLogin) {
         await reviewAuthService.login(username, password);
       } else {
-        await reviewAuthService.register(username, password);
+        await reviewAuthService.register(
+          username,
+          password,
+          name: _nomeCtrl.text.trim(),
+          surname: _cognomeCtrl.text.trim(),
+          email: _emailCtrl.text.trim(),
+        );
       }
       if (mounted) Navigator.pop(context, true);
     } catch (e) {
@@ -354,6 +380,22 @@ class _AuthDialogState extends State<_AuthDialog> {
                 obscureText: true,
                 decoration:
                     const InputDecoration(labelText: 'Conferma password'),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _nomeCtrl,
+                decoration: const InputDecoration(labelText: 'Nome *'),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _cognomeCtrl,
+                decoration: const InputDecoration(labelText: 'Cognome *'),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _emailCtrl,
+                decoration: const InputDecoration(labelText: 'Email *'),
+                keyboardType: TextInputType.emailAddress,
                 onSubmitted: (_) => _submit(),
               ),
             ],
@@ -442,10 +484,13 @@ class _ReviewFormState extends State<_ReviewForm> {
     try {
       if (widget.existing == null) {
         await reviewsService.inserisci(
-          name: reviewAuthService.currentUsername!,
+          username: reviewAuthService.currentUsername!,
           title: _titleCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           stars: _stars,
+          name: reviewAuthService.currentName,
+          surname: reviewAuthService.currentSurname,
+          email: reviewAuthService.currentEmail,
         );
       } else {
         await reviewsService.aggiorna(

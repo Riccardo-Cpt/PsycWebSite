@@ -30,7 +30,7 @@ Replace the current rigid 2×2 card grid with a fluid alternating-row layout tha
 
 ## Colors
 
-| Context          | Title color          | Description color  | Background                        |
+| Context          | Title color          | description color  | Background                        |
 |------------------|----------------------|--------------------|-----------------------------------|
 | Transparent row  | `Color(0xFF1E6370)`  | `Colors.black87`   | transparent                       |
 | Tinted row       | `Colors.white`       | `Colors.white70`   | `Color(0xFF1E6370).withOpacity(0.12)` |

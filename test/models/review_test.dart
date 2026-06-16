@@ -7,7 +7,7 @@ void main() {
       final r = Review.fromJson({
         'id': 1,
         'Name': 'mario',
-        'Description': 'ottimo servizio',
+        'description': 'ottimo servizio',
         'created_at': '2026-06-16T10:00:00Z',
         'stars': 4,
       });
@@ -22,7 +22,7 @@ void main() {
       final r = Review.fromJson({
         'id': 2,
         'Name': 'lucia',
-        'Description': 'buono',
+        'description': 'buono',
         'created_at': null,
         'stars': 3,
       });

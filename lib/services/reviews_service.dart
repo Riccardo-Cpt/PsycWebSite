@@ -1,12 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import '../config/admin_config.dart';
+import '../config/contatti.dart';
 import '../models/review.dart';
 
 class ReviewsService {
   static const _readHeaders = {
     'apikey': AdminConfig.supabaseAnonKey,
     'Authorization': 'Bearer ${AdminConfig.supabaseAnonKey}',
+  };
+
+  static const _adminReadHeaders = {
+    'apikey': AdminConfig.supabaseServiceRoleKey,
+    'Authorization': 'Bearer ${AdminConfig.supabaseServiceRoleKey}',
   };
 
   static const _writeHeaders = {
@@ -21,11 +28,26 @@ class ReviewsService {
   // ignore: avoid_public_members_for_test
   Future<Review?> Function(String)? overrideMiaForTest;
 
+  /// Public: only approved reviews.
   Future<List<Review>> tutti() async {
     if (overrideForTest != null) return overrideForTest!;
     final uri = Uri.parse(
-        '${AdminConfig.supabaseRestUrl}/reviews?select=*&order=created_at.desc');
+        '${AdminConfig.supabaseRestUrl}/reviews?select=*&approved=eq.true&order=created_at.desc');
     final response = await http.get(uri, headers: _readHeaders);
+    if (response.statusCode != 200) {
+      throw Exception('Errore nel recupero delle recensioni: ${response.body}');
+    }
+    final list = jsonDecode(response.body) as List<dynamic>;
+    return list.map((e) => Review.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
+  /// Admin: all reviews regardless of approval status, with user details joined.
+  Future<List<Review>> tuttiAdmin() async {
+    final uri = Uri.parse(
+        '${AdminConfig.supabaseRestUrl}/reviews'
+        '?select=*,reviewer_users(name,surname,email)'
+        '&order=created_at.desc');
+    final response = await http.get(uri, headers: _adminReadHeaders);
     if (response.statusCode != 200) {
       throw Exception('Errore nel recupero delle recensioni: ${response.body}');
     }
@@ -38,8 +60,8 @@ class ReviewsService {
     final encodedUsername = Uri.encodeQueryComponent(username);
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews'
-        '?Name=eq.$encodedUsername&select=*');
-    final response = await http.get(uri, headers: _readHeaders);
+        '?username=eq.$encodedUsername&select=*');
+    final response = await http.get(uri, headers: _adminReadHeaders);
     if (response.statusCode != 200) {
       throw Exception('Errore nel recupero della recensione: ${response.body}');
     }
@@ -49,22 +71,27 @@ class ReviewsService {
   }
 
   Future<void> inserisci({
-    required String name,
+    required String username,
     required String title,
     required String description,
     required int stars,
+    String? name,
+    String? surname,
+    String? email,
   }) async {
     final uri = Uri.parse('${AdminConfig.supabaseRestUrl}/reviews');
     final body = jsonEncode({
-      'Name': name,
+      'username': username,
       'title': title,
-      'Description': description,
+      'description': description,
       'stars': stars,
+      'approved': false,
     });
     final response = await http.post(uri, headers: _writeHeaders, body: body);
     if (response.statusCode != 201) {
       throw Exception('Errore nel salvataggio della recensione: ${response.body}');
     }
+    _notificaAdmin(username, title, name: name, surname: surname, email: email);
   }
 
   Future<void> aggiorna({
@@ -77,12 +104,24 @@ class ReviewsService {
         '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
     final body = jsonEncode({
       'title': title,
-      'Description': description,
+      'description': description,
       'stars': stars,
+      'approved': false,
     });
     final response = await http.patch(uri, headers: _writeHeaders, body: body);
     if (response.statusCode != 200 && response.statusCode != 204) {
       throw Exception('Errore nella modifica della recensione: ${response.body}');
+    }
+    _notificaAdmin('(modifica)', title);
+  }
+
+  Future<void> approva(int id) async {
+    final uri = Uri.parse(
+        '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
+    final body = jsonEncode({'approved': true});
+    final response = await http.patch(uri, headers: _writeHeaders, body: body);
+    if (response.statusCode != 200 && response.statusCode != 204) {
+      throw Exception('Errore nell\'approvazione della recensione: ${response.body}');
     }
   }
 
@@ -93,5 +132,22 @@ class ReviewsService {
     if (response.statusCode != 204) {
       throw Exception('Errore nell\'eliminazione della recensione: ${response.body}');
     }
+  }
+
+  void _notificaAdmin(String username, String title,
+      {String? name, String? surname, String? email}) {
+    final subject = Uri.encodeComponent('Nuova recensione in attesa di approvazione');
+    final bodyText = Uri.encodeComponent(
+      'È stata ricevuta una nuova recensione che richiede la tua approvazione.\n\n'
+      'Username: $username\n'
+      'Nome: ${name ?? '-'}\n'
+      'Cognome: ${surname ?? '-'}\n'
+      'Email: ${email ?? '-'}\n\n'
+      'Titolo recensione: "$title"\n\n'
+      'Accedi al pannello admin per approvarla o rifiutarla.',
+    );
+    launchUrl(
+      Uri.parse('mailto:${Contatti.email}?subject=$subject&body=$bodyText'),
+    );
   }
 }
