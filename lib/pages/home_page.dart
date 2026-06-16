@@ -384,8 +384,15 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
 
   static String _truncate(String text) {
     final words = text.split(RegExp(r'\s+'));
-    if (words.length <= 100) return text;
-    return '${words.take(100).join(' ')}…';
+    if (words.length <= 50) return text;
+    return '${words.take(50).join(' ')}…';
+  }
+
+  static String _formatDate(DateTime? d) {
+    if (d == null) return '';
+    return '${d.day.toString().padLeft(2, '0')}/'
+        '${d.month.toString().padLeft(2, '0')}/'
+        '${d.year}';
   }
 
   @override
@@ -399,19 +406,12 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
     return FutureBuilder<List<Articolo>>(
       future: _futureArticoli,
       builder: (context, snapshot) {
-        final articoli = snapshot.data ?? [];
+        final articoli = (snapshot.data ?? []).take(3).toList();
         if (articoli.isEmpty) return const SizedBox.shrink();
-        final a = articoli.first;
-        final dataTesto = a.pubblicatoAt != null
-            ? '${a.pubblicatoAt!.day.toString().padLeft(2, '0')}/'
-              '${a.pubblicatoAt!.month.toString().padLeft(2, '0')}/'
-              '${a.pubblicatoAt!.year}'
-            : '';
         return Container(
           width: double.infinity,
           color: Colors.transparent,
-          padding:
-              const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 900),
@@ -419,90 +419,33 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Ultimo articolo pubblicato',
+                    'Dal blog',
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E6370)),
                   ),
-                  const SizedBox(height: 16),
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isWide = constraints.maxWidth >= 600;
-
-                      final textBlock = Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            dataTesto,
-                            style: const TextStyle(
-                                fontSize: 13, color: Colors.black45),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            a.titolo,
-                            style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF134456)),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            _truncate(a.corpo),
-                            style: const TextStyle(
-                                fontSize: 16,
-                                height: 1.7,
-                                color: Colors.black87),
-                          ),
-                          const SizedBox(height: 20),
-                          TextButton.icon(
-                            onPressed: () => context.go('/articoli'),
-                            icon: const Icon(Icons.arrow_forward,
-                                color: Color(0xFF1E6370)),
-                            label: const Text(
-                              'Leggi tutti i post del blog',
-                              style: TextStyle(
-                                  color: Color(0xFF1E6370),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      );
-
-                      if (a.immagineUrl == null) return textBlock;
-
-                      final imageWidget = ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          a.immagineUrl!,
-                          width: isWide ? 240 : double.infinity,
-                          height: isWide ? 200 : 220,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  const SizedBox(height: 24),
+                  ...articoli.map((a) => Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: _ArticoloCard(
+                          articolo: a,
+                          dataTesto: _formatDate(a.pubblicatoAt),
+                          corpo: _truncate(a.corpo),
                         ),
-                      );
-
-                      if (!isWide) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            imageWidget,
-                            const SizedBox(height: 16),
-                            textBlock,
-                          ],
-                        );
-                      }
-
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          imageWidget,
-                          const SizedBox(width: 24),
-                          Expanded(child: textBlock),
-                        ],
-                      );
-                    },
+                      )),
+                  const SizedBox(height: 4),
+                  TextButton.icon(
+                    onPressed: () => context.go('/articoli'),
+                    icon: const Icon(Icons.arrow_forward,
+                        color: Color(0xFF1E6370)),
+                    label: const Text(
+                      'Leggi tutti i post del blog',
+                      style: TextStyle(
+                          color: Color(0xFF1E6370),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ],
               ),
@@ -510,6 +453,65 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
           ),
         );
       },
+    );
+  }
+}
+
+class _ArticoloCard extends StatelessWidget {
+  final Articolo articolo;
+  final String dataTesto;
+  final String corpo;
+  const _ArticoloCard(
+      {required this.articolo,
+      required this.dataTesto,
+      required this.corpo});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (articolo.immagineUrl != null) ...[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  articolo.immagineUrl!,
+                  width: 100,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                ),
+              ),
+              const SizedBox(width: 16),
+            ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (dataTesto.isNotEmpty)
+                    Text(dataTesto,
+                        style: const TextStyle(
+                            fontSize: 12, color: Colors.black45)),
+                  const SizedBox(height: 4),
+                  Text(articolo.titolo,
+                      style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF134456))),
+                  const SizedBox(height: 6),
+                  Text(corpo,
+                      style: const TextStyle(
+                          fontSize: 14, height: 1.6, color: Colors.black87)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

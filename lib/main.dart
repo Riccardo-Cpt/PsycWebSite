@@ -4,7 +4,6 @@ import 'pages/home_page.dart';
 import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
-import 'pages/admin_page.dart';
 import 'pages/chi_sono_page.dart';
 import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
@@ -31,9 +30,8 @@ final _router = GoRouter(
     GoRoute(path: '/', builder: (_, _) => const HomePage()),
     GoRoute(path: '/servizi', builder: (_, _) => const ServiziPage()),
     GoRoute(path: '/articoli', builder: (_, _) => const ArticoliPage()),
-    GoRoute(path: '/articoli/admin', builder: (_, _) => const ArticoliAdminPage()),
     GoRoute(path: '/recensioni', builder: (_, _) => const RecensioniPage()),
-    GoRoute(path: '/admin', builder: (_, _) => const AdminPage()),
+    GoRoute(path: '/admin', builder: (_, _) => const ArticoliAdminPage()),
     GoRoute(path: '/chi-sono', builder: (_, _) => const ChiSonoPage()),
   ],
 );

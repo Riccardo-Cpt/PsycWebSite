@@ -6,8 +6,9 @@ Sito web professionale per la Dr.ssa Maria Bianchi, Psicologa e Psicoterapeuta. 
 
 | Percorso | Descrizione |
 |---|---|
-| `/` | Home page con presentazione, valori e ultimo articolo del blog |
-| `/servizi` | Servizi offerti |
+| `/` | Home page con presentazione, valori e ultime recensioni |
+| `/chi-sono` | Formazione, specializzazioni ed esperienze della dottoressa |
+| `/servizi` | Servizi offerti e aree di intervento |
 | `/articoli` | Blog — tutti gli articoli pubblicati |
 | `/recensioni` | Recensioni dei clienti — lettura e scrittura |
 
@@ -18,29 +19,26 @@ L'area admin è accessibile digitando manualmente `/admin` nella barra dell'indi
 **Password:** `admin123`  
 *(modificabile in `lib/config/admin_config.dart`)*
 
-Una volta autenticato, la sessione rimane attiva per tutta la navigazione fino al ricaricamento della pagina o al logout manuale.
+Una volta autenticata, la sessione rimane attiva per tutta la navigazione fino al ricaricamento della pagina o al logout manuale.
 
-### Gestione articoli del blog
+Il pannello mostra due tab:
 
-1. Accedere a `/admin` e inserire la password.
-2. Dal pannello, cliccare **Gestisci blog** per andare alla pagina `/articoli`.
-3. In alternativa, navigare direttamente a `/articoli/admin`.
+### Tab "Blog"
 
-Dalla sezione **Blog** del pannello admin è possibile:
 - **Creare** un nuovo articolo (titolo, corpo, immagine opzionale)
 - **Modificare** un articolo esistente
 - **Eliminare** un articolo (con conferma)
 
-### Gestione recensioni
+### Tab "Recensioni"
 
-1. Accedere a `/admin` e inserire la password.
-2. Dal pannello, cliccare **Gestisci recensioni** per andare alla pagina `/recensioni`.
+Le recensioni sono divise in due sezioni:
 
-Con la sessione admin attiva, su ogni recensione appare un pulsante **cestino rosso** per eliminarla (con conferma).
+- **Da approvare** — recensioni in attesa. Per ciascuna viene mostrato il nome, cognome ed email del recensore per verificare che abbia effettivamente svolto sedute. Pulsanti: ✓ approva, ✗ rifiuta ed elimina.
+- **Approvate** — recensioni visibili al pubblico. Pulsante: cestino rosso per eliminare (con conferma).
 
 ### Logout
 
-Dal pannello `/admin`, cliccare **Esci dalla modalità admin** in fondo alla pagina.
+Nel nav drawer del sito è presente il pulsante **Esci dalla modalità admin** quando la sessione è attiva.
 
 ---
 
@@ -66,24 +64,36 @@ Accesso in lettura: anon key. Scrittura/eliminazione: service role key.
 | `username` | text | Username del recensore (FK → `reviewer_users.username`) |
 | `title` | text | Titolo della recensione (not null) |
 | `description` | text | Testo della recensione |
-| `stars` | int4 | Valutazione da 1 a 5 |
+| `stars` | int4 | Valutazione da 1 a 5 (check constraint) |
 | `created_at` | timestamptz | Data di creazione |
 | `approved` | boolean | false = in attesa di approvazione, true = approvata (default false) |
 
-Accesso in lettura (pubblico): anon key, filtra `approved=eq.1`. Lettura admin e scrittura/eliminazione: service role key.
+Accesso in lettura pubblico: anon key, filtra `approved=eq.true`. Lettura admin e scrittura/eliminazione: service role key.
+
+**Row Level Security:** RLS deve essere abilitato con la seguente policy affinché le recensioni approvate siano visibili pubblicamente:
+
+```sql
+CREATE POLICY "public read approved reviews"
+ON reviews
+FOR SELECT
+USING (approved = true);
+```
+
+Senza questa policy, Supabase restituisce un array vuoto alle chiamate con anon key anche se esistono record approvati.
 
 ### Tabella `reviewer_users`
 
 | Colonna | Tipo | Note |
 |---|---|---|
-| `id` | int8 | Primary key, auto-increment |
-| `username` | text | Username univoco (unique constraint) |
+| `id` | int8 | Primary key (composita con `username`) |
+| `username` | text | Username univoco (unique + not null) |
+| `name` | text | Nome reale del recensore (non visibile in UI pubblica) |
+| `surname` | text | Cognome reale del recensore (non visibile in UI pubblica) |
+| `email` | text | Email del recensore (non visibile in UI pubblica) |
 | `password_hash` | text | Hash SHA-256 della password |
-| `name` | text | Nome reale del recensore (non visibile in UI) |
-| `surname` | text | Cognome reale del recensore (non visibile in UI) |
-| `email` | text | Email del recensore (non visibile in UI) |
+| `created_at` | timestamptz | Data di registrazione |
 
-Accesso completo: service role key. Usata per autenticare gli utenti che lasciano recensioni. I campi `nome`, `cognome`, `email` vengono mostrati solo all'admin nel pannello di approvazione, per verificare che il paziente abbia effettivamente svolto sedute.
+Accesso completo: service role key. I campi `name`, `surname`, `email` vengono mostrati solo all'admin nel pannello di approvazione recensioni.
 
 ---
 
