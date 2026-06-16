@@ -201,10 +201,14 @@ class _ArticoliPageState extends State<ArticoliPage>
                 children: [
                   SingleChildScrollView(
                     controller: _scrollController,
-                    padding: const EdgeInsets.all(24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
                         Row(
                           children: [
                             const Expanded(
@@ -262,6 +266,9 @@ class _ArticoliPageState extends State<ArticoliPage>
                               ),
                             );
                           }),
+                            ],
+                          ),
+                        ),
                         const SiteFooter(),
                       ],
                     ),

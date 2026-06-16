@@ -45,10 +45,14 @@ class ServiziPage extends StatelessWidget {
     return NavScaffold(
       backgroundColor: const Color(0xFFFAFAFA),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
             const Text(
               'Di cosa mi occupo',
               style: TextStyle(
@@ -94,6 +98,9 @@ class ServiziPage extends StatelessWidget {
             const SizedBox(height: 24),
             const _ContattiSection(),
             const SizedBox(height: 24),
+                ],
+              ),
+            ),
             const SiteFooter(),
           ],
         ),
