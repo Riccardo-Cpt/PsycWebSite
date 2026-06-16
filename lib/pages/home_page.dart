@@ -6,6 +6,7 @@ import '../config/contatti.dart';
 import '../main.dart';
 import '../models/articolo.dart';
 import '../models/review.dart';
+import '../widgets/site_footer.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavScaffold(
       backgroundColor: Colors.transparent,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             _HeroSection(),
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
             _CitazioneSection(),
             _CtaSection(),
             _ContactFooter(),
+            const SiteFooter(),
           ],
         ),
       ),

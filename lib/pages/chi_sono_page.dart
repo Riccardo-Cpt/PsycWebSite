@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/site_footer.dart';
 
 class ChiSonoPage extends StatelessWidget {
   const ChiSonoPage({super.key});
@@ -127,6 +128,7 @@ class _ChiSonoBody extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 48),
+              SiteFooter(),
             ],
           ),
         ),

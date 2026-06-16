@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../config/contatti.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/site_footer.dart';
 
 class ServiziPage extends StatelessWidget {
   const ServiziPage({super.key});
@@ -90,17 +91,10 @@ class ServiziPage extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 40),
-            const Text(
-              'Se desideri approfondire o iniziare un percorso, puoi contattarmi per un primo colloquio conoscitivo.',
-              style: TextStyle(
-                  fontSize: 17,
-                  height: 1.7,
-                  color: Colors.black87),
-            ),
             const SizedBox(height: 24),
             const _ContattiSection(),
             const SizedBox(height: 24),
+            const SiteFooter(),
           ],
         ),
       ),

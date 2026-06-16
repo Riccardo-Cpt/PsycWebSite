@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 import '../models/review.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/site_footer.dart';
 
 class RecensioniPage extends StatelessWidget {
   const RecensioniPage({super.key});
@@ -159,6 +160,8 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
               );
             },
           ),
+          const SizedBox(height: 24),
+          const SiteFooter(),
         ],
       ),
     );

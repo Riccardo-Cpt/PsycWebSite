@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 import '../models/articolo.dart';
 import '../widgets/nav_drawer.dart';
+import '../widgets/site_footer.dart';
 
 class ArticoliPage extends StatefulWidget {
   const ArticoliPage({super.key});
@@ -261,6 +262,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               ),
                             );
                           }),
+                        const SiteFooter(),
                       ],
                     ),
                   ),
