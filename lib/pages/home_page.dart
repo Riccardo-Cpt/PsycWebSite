@@ -713,7 +713,7 @@ class _CtaSection extends StatelessWidget {
             children: [
               _CtaButton(
                 icon: Icons.psychology,
-                label: 'I miei servizi',
+                label: 'Di cosa mi occupo',
                 backgroundColor: const Color(0xFF1E6370),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),

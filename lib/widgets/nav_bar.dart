@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'nav_drawer.dart';
+import 'site_footer.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
   final double scrollOffset;
@@ -145,7 +146,12 @@ class _NavScaffoldState extends State<NavScaffold>
                   alignment: Alignment.topCenter,
                 ),
               ),
-              widget.body,
+              Column(
+                children: [
+                  Expanded(child: widget.body),
+                  const SiteFooter(),
+                ],
+              ),
               // Scrim
               if (_ctrl.value > 0)
                 GestureDetector(

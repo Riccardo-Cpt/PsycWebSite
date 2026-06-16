@@ -6,24 +6,36 @@ import '../widgets/nav_bar.dart';
 class ServiziPage extends StatelessWidget {
   const ServiziPage({super.key});
 
-  static const _servizi = [
+  static const _aree = [
     (
-      'Terapia Individuale',
-      'Percorso psicologico personalizzato per affrontare difficoltà emotive, ansia, depressione e crescita personale.',
+      'Ansia e gestione dello stress',
+      'Supporto nel riconoscere e gestire l\'ansia, gli attacchi di panico e le tensioni croniche legate al lavoro, alle relazioni o ai cambiamenti di vita.',
       'assets/images/individual_therapy.png',
-      true,  // imageOnLeft
+      true,
     ),
     (
-      'Terapia di Coppia',
-      'Supporto alla relazione per migliorare la comunicazione, gestire i conflitti e ritrovare l\'equilibrio di coppia.',
+      'Difficoltà relazionali e di coppia',
+      'Percorsi per migliorare la comunicazione, affrontare i conflitti e ritrovare equilibrio nelle relazioni affettive e familiari.',
       'assets/images/couple_therapy.jpeg',
-      false, // imageOnRight
+      false,
     ),
     (
-      'Terapia Speciale',
-      'Interventi mirati per situazioni specifiche: elaborazione del lutto, trauma, fobia, supporto oncologico.',
+      'Adolescenza',
+      'Interventi dedicati ai giovani e alle loro famiglie per affrontare le sfide dell\'identità, del rendimento scolastico e delle relazioni tra pari.',
       'assets/images/special_terapy.jpg',
-      true,  // imageOnLeft
+      true,
+    ),
+    (
+      'Autostima e crescita personale',
+      'Lavoro su sé stessi per rafforzare la fiducia nelle proprie capacità, superare blocchi emotivi e sviluppare una visione più autentica di sé.',
+      'assets/images/individual_therapy.png',
+      false,
+    ),
+    (
+      'Momenti di crisi e regolazione emotiva',
+      'Supporto nei periodi di forte difficoltà — lutti, separazioni, traumi, burnout — con strumenti concreti per ritrovare stabilità e risorse interiori.',
+      'assets/images/couple_therapy.jpeg',
+      true,
     ),
   ];
 
@@ -34,23 +46,40 @@ class ServiziPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Text('Servizi Offerti',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E6370))),
+            const Text(
+              'Di cosa mi occupo',
+              style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E6370)),
             ),
+            const SizedBox(height: 16),
+            const Text(
+              'Mi occupo di benessere psicologico in tutte le sue forme. '
+              'Attraverso un approccio personalizzato e basato sulla relazione terapeutica, '
+              'accompagno le persone in percorsi di cambiamento, comprensione di sé e '
+              'recupero dell\'equilibrio emotivo. Di seguito le principali aree in cui lavoro.',
+              style: TextStyle(fontSize: 16, height: 1.7, color: Colors.black87),
+            ),
+            const SizedBox(height: 40),
+            const Text(
+              'Aree di intervento',
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E6370)),
+            ),
+            const SizedBox(height: 16),
             LayoutBuilder(
               builder: (context, constraints) {
                 return Wrap(
                   runSpacing: 13,
-                  children: _servizi
+                  children: _aree
                       .map((s) => SizedBox(
                             width: constraints.maxWidth,
-                            child: _ServizioCard(
+                            child: _AreaCard(
                               titolo: s.$1,
                               descrizione: s.$2,
                               imagePath: s.$3,
@@ -61,8 +90,17 @@ class ServiziPage extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 40),
+            const Text(
+              'Se desideri approfondire o iniziare un percorso, puoi contattarmi per un primo colloquio conoscitivo.',
+              style: TextStyle(
+                  fontSize: 17,
+                  height: 1.7,
+                  color: Colors.black87),
+            ),
             const SizedBox(height: 24),
             const _ContattiSection(),
+            const SizedBox(height: 24),
           ],
         ),
       ),
@@ -166,13 +204,13 @@ class _ContattiSection extends StatelessWidget {
   }
 }
 
-class _ServizioCard extends StatelessWidget {
+class _AreaCard extends StatelessWidget {
   final String titolo;
   final String descrizione;
   final String imagePath;
   final bool imageOnLeft;
 
-  const _ServizioCard({
+  const _AreaCard({
     required this.titolo,
     required this.descrizione,
     required this.imagePath,
