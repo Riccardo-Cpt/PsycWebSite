@@ -73,8 +73,12 @@ class ReviewsService {
       }),
     );
     if (response.statusCode != 200) {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body['error'] == 'duplicate') {
+      String? errorCode;
+      try {
+        final body = jsonDecode(response.body) as Map<String, dynamic>;
+        errorCode = body['error'] as String?;
+      } catch (_) {}
+      if (errorCode == 'duplicate') {
         throw Exception(
             'Hai già inviato una recensione. Puoi contattarci per modificarla.');
       }
