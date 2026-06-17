@@ -34,22 +34,22 @@ class _ChiSonoBody extends StatelessWidget {
                 title: 'Formazione',
                 items: [
                   _SectionItem(
-                    year: '2004',
+                    year: '1998',
                     text:
-                        'Laurea magistrale in Psicologia Clinica e di Comunità con lode, '
-                        'Università degli Studi di Milano.',
+                        'Laurea quinquiennale in Psicologia Clinica '
+                        ' — Università degli Studi di Padova.',
                   ),
                   _SectionItem(
-                    year: '2009',
+                    year: '2002',
                     text:
-                        'Scuola di Specializzazione in Psicoterapia Cognitivo-Comportamentale, '
-                        'Istituto di Psicologia Cognitiva — Milano. Durata quadriennale.',
+                        'Diploma quadriennale di Specializzazione in Psicoterapia Psicoanalitica Relazionale '
+                        '— Istituto di Psicologia Cognitiva, Milano.',
                   ),
                   _SectionItem(
-                    year: '2012',
+                    year: '2005',
                     text:
-                        'Master di II livello in Psicologia della Salute e Intervento Clinico, '
-                        'Università Cattolica del Sacro Cuore — Milano.',
+                        'Master In psicologia delle Emergenze '
+                        ' — Università Cattolica del Sacro Cuore, Milano.',
                   ),
                 ],
               ),
@@ -60,7 +60,7 @@ class _ChiSonoBody extends StatelessWidget {
                 items: [
                   _SectionItem(
                     text:
-                        'Terapia Cognitivo-Comportamentale (CBT) per disturbi d\'ansia, '
+                        'Sessuologia clinica, '
                         'depressione e attacchi di panico.',
                   ),
                   _SectionItem(
@@ -100,8 +100,8 @@ class _ChiSonoBody extends StatelessWidget {
                   _SectionItem(
                     year: '2018 – oggi',
                     text:
-                        'Studio privato a Milano. Psicoterapia individuale, di coppia '
-                        'e interventi specialistici. Supervisione di colleghi in formazione.',
+                        'Studio privato a Somma Lombardo. Psicoterapia individuale, di coppia '
+                        'e interventi specialistici.',
                   ),
                 ],
               ),
@@ -164,7 +164,7 @@ class _ProfileCard extends StatelessWidget {
               height: 180,
               color: const Color(0xFFE0F0F3),
               child: const Icon(Icons.person,
-                  size: 80, color: Color(0xFF1E6370)),
+                  size: 80, color: Color(0xFF3B7A1D)),
             ),
           ),
         ),
@@ -175,7 +175,7 @@ class _ProfileCard extends StatelessWidget {
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1E6370)),
+              color: Color(0xFF3B7A1D)),
         ),
         const SizedBox(height: 6),
         const Text(
@@ -217,19 +217,19 @@ class _Section extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: const Color(0xFF1E6370), size: 24),
+            Icon(icon, color: const Color(0xFF3B7A1D), size: 24),
             const SizedBox(width: 10),
             Text(
               title,
               style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF3B7A1D)),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        const Divider(color: Color(0xFF1E6370), thickness: 1),
+        const Divider(color: Color(0xFF3B7A1D), thickness: 1),
         const SizedBox(height: 12),
         ...items,
       ],

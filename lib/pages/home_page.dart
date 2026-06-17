@@ -57,10 +57,10 @@ class _HeroSection extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 52,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E6370)),
+                    color: Color(0xFF3B7A1D)),
               ),
               const Text(
-                'Psicologa e Psicoterapeuta',
+                'Psicologa e psicoterapeuta',
                 style: TextStyle(
                     fontSize: 30,
                     color: Color(0xFF2E8494),
@@ -68,9 +68,7 @@ class _HeroSection extends StatelessWidget {
               ),
               const SizedBox(height: 35),
               Text(
-                'Offro un percorso terapeutico personalizzato in un ambiente '
-                'sicuro e accogliente. Mi occupo di terapia individuale, di coppia '
-                'e di interventi specialistici per situazioni specifiche.',
+                'Offro uno spazio di ascolto e riflessione per affrontare ansia, stress, difficoltà relazionali e momenti di cambiamento. Il mio approccio ',
                 style: TextStyle(
                     fontSize: 24,
                     color: const Color(0xFF134456).withValues(alpha: 0.85),
@@ -196,7 +194,7 @@ class _CitazioneSofaSection extends StatelessWidget {
                   Icon(Icons.format_quote, color: Color(0xFFEAC4B0), size: 56),
                   SizedBox(height: 14),
                   Text(
-                    'Il tuo benessere\nè la mia aspirazione\ndi vita',
+                    'Credo nel valore della relazione terapeutica\n come strumento\n di consapevolezza e crescita personale.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -224,8 +222,8 @@ class _ValoriSection extends StatelessWidget {
         'Ogni persona è ascoltata senza giudizio in un ambiente sicuro e accogliente.'),
     (Icons.lock, 'Riservatezza assoluta',
         'Il segreto professionale è un pilastro fondamentale del rapporto terapeutico.'),
-    (Icons.science, 'Approccio basato sull\'evidenza',
-        'Tecniche validate scientificamente adattate alle esigenze del singolo.'),
+    (Icons.science, 'Il mio approccio',
+        'Integro competenze scientifiche e ascolto autentico, creando un percorso personalizzato che rispetta i tempi e le esigenze di ciascuno. La psicoterapia è per me un dialogo che aiuta a comprendere, trasformare e ritrovare fiducia nelle proprie risorse.'),
     (Icons.spa, 'Spazio sicuro',
         'Un luogo fisico e mentale dove esprimersi liberamente senza timore.'),
   ];
@@ -244,7 +242,7 @@ class _ValoriSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 45,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1E6370),
+              color: Color(0xFF3B7A1D),
             ),
           ),
         ),
@@ -264,7 +262,7 @@ class _ValoriSection extends StatelessWidget {
 }
 
 class _ValoreRow extends StatelessWidget {
-  static const _tintBg = Color(0x1F1E6370); // ~12% opacity of 0xFF1E6370
+  static const _tintBg = Color(0x1F1E6370); // ~12% opacity of 0xFF3B7A1D
 
   final IconData icon;
   final String titolo;
@@ -285,11 +283,11 @@ class _ValoreRow extends StatelessWidget {
     final bg = tinted ? _tintBg : Colors.transparent;
     const brown = Color(0xFF922B05);
     final titleColor =
-        tinted ? brown : const Color(0xFF1E6370);
+        tinted ? brown : const Color(0xFF3B7A1D);
     final descColor =
         tinted ? const Color(0xFF6B2004) : Colors.black87;
     final iconColor =
-        tinted ? brown : const Color(0xFF1E6370);
+        tinted ? brown : const Color(0xFF3B7A1D);
 
     return Container(
       width: double.infinity,
@@ -423,7 +421,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF3B7A1D)),
                   ),
                   const SizedBox(height: 24),
                   ...articoli.map((a) => Padding(
@@ -438,11 +436,11 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                   TextButton.icon(
                     onPressed: () => context.go('/articoli'),
                     icon: const Icon(Icons.arrow_forward,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF3B7A1D)),
                     label: const Text(
                       'Leggi tutti i post del blog',
                       style: TextStyle(
-                          color: Color(0xFF1E6370),
+                          color: Color(0xFF3B7A1D),
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
                     ),
@@ -558,7 +556,7 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF3B7A1D)),
                   ),
                   const SizedBox(height: 24),
                   LayoutBuilder(
@@ -589,11 +587,11 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                   TextButton.icon(
                     onPressed: () => context.go('/recensioni'),
                     icon: const Icon(Icons.arrow_forward,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF3B7A1D)),
                     label: const Text(
                       'Leggi tutte le recensioni',
                       style: TextStyle(
-                          color: Color(0xFF1E6370),
+                          color: Color(0xFF3B7A1D),
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
                     ),
@@ -672,11 +670,11 @@ class _CitazioneSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFF1E6370),
+      color: const Color(0xFF3B7A1D),
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
       child: const Center(
         child: Text(
-          'Solo tramite la terapia\nl\'uomo ascende a nuova forma\ndiventando musica',
+          'Offro uno spazio di ascolto e riflessione\n per affrontare ansia, stress, difficoltà relazionali\n e momenti di cambiamento.',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
@@ -707,7 +705,7 @@ class _CtaSection extends StatelessWidget {
             style: TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF1E6370)),
+                color: Color(0xFF3B7A1D)),
           ),
           const SizedBox(height: 32),
           Wrap(
@@ -718,14 +716,14 @@ class _CtaSection extends StatelessWidget {
               _CtaButton(
                 icon: Icons.psychology,
                 label: 'Di cosa mi occupo',
-                backgroundColor: const Color(0xFF1E6370),
+                backgroundColor: const Color(0xFF3B7A1D),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
               ),
               _CtaButton(
                 icon: Icons.email_outlined,
                 label: 'Scrivimi una email',
-                backgroundColor: const Color(0xFF1E6370),
+                backgroundColor: const Color(0xFF3B7A1D),
                 foregroundColor: Colors.white,
                 onPressed: () => inviaEmail(Contatti.email),
               ),
@@ -795,7 +793,7 @@ class _ContactFooter extends StatelessWidget {
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370))),
+                  color: Color(0xFF3B7A1D))),
           const SizedBox(height: 24),
           SelectionArea(
             child: Wrap(
@@ -806,28 +804,28 @@ class _ContactFooter extends StatelessWidget {
                 ContactChip(
                   icon: Icons.phone,
                   text: Contatti.telefono,
-                  color: const Color(0xFF1E6370),
+                  color: const Color(0xFF3B7A1D),
                   hoverColor: const Color(0xFF134456),
                   onTap: () => chiamaTelefono(Contatti.telefono),
                 ),
                 ContactChip(
                   icon: Icons.location_on,
                   text: Contatti.indirizzo,
-                  color: const Color(0xFF1E6370),
+                  color: const Color(0xFF3B7A1D),
                   hoverColor: const Color(0xFF134456),
                   onTap: () => apriMappa(Contatti.indirizzo),
                 ),
                 ContactChip(
                   icon: Icons.email,
                   text: Contatti.email,
-                  color: const Color(0xFF1E6370),
+                  color: const Color(0xFF3B7A1D),
                   hoverColor: const Color(0xFF134456),
                   onTap: () => inviaEmail(Contatti.email),
                 ),
                 ContactChip(
                   icon: Icons.facebook,
                   text: 'Facebook',
-                  color: const Color(0xFF1E6370),
+                  color: const Color(0xFF3B7A1D),
                   hoverColor: const Color(0xFF134456),
                   onTap: () => launchUrl(Uri.parse(Contatti.facebook),
                       webOnlyWindowName: '_blank'),

@@ -58,7 +58,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E6370)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B7A1D)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

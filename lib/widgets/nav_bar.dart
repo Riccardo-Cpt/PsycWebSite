@@ -25,7 +25,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       backgroundColor: bgColor,
-      foregroundColor: const Color(0xFF1E6370),
+      foregroundColor: const Color(0xFF3B7A1D),
       automaticallyImplyLeading: false,
       elevation: t * 3.0,
       scrolledUnderElevation: 0,
@@ -34,7 +34,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
         child: const Text(
           'Dr.ssa Maria Bianchi',
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Color(0xFF1E6370)),
+              fontWeight: FontWeight.bold, color: Color(0xFF3B7A1D)),
         ),
       ),
       actions: [
@@ -44,7 +44,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
             child: Text(
               'Naviga nel sito',
               style: TextStyle(
-                color: Color(0xFF1E6370),
+                color: Color(0xFF3B7A1D),
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
               ),

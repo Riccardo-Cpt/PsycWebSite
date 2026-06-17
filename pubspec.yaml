@@ -60,6 +60,9 @@ flutter:
     - assets/images/individual_therapy.png
     - assets/images/couple_therapy.jpeg
     - assets/images/special_terapy.jpg
+    - assets/images/youth_therapy.jpg
+    - assets/images/self_regulation.jpg
+    - assets/images/personal_growth.jpg
     - assets/images/PychologistSatOnSofa.jpg
     - assets/images/MainBackground.jpg
 

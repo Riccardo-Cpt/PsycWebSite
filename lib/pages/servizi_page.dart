@@ -23,19 +23,19 @@ class ServiziPage extends StatelessWidget {
     (
       'Adolescenza',
       'Interventi dedicati ai giovani e alle loro famiglie per affrontare le sfide dell\'identità, del rendimento scolastico e delle relazioni tra pari.',
-      'assets/images/special_terapy.jpg',
+      'assets/images/youth_therapy.jpg',
       true,
     ),
     (
       'Autostima e crescita personale',
       'Lavoro su sé stessi per rafforzare la fiducia nelle proprie capacità, superare blocchi emotivi e sviluppare una visione più autentica di sé.',
-      'assets/images/individual_therapy.png',
+      'assets/images/personal_growth.jpg',
       false,
     ),
     (
       'Momenti di crisi e regolazione emotiva',
       'Supporto nei periodi di forte difficoltà — lutti, separazioni, traumi, burnout — con strumenti concreti per ritrovare stabilità e risorse interiori.',
-      'assets/images/couple_therapy.jpeg',
+      'assets/images/self_regulation.jpg',
       true,
     ),
   ];
@@ -58,7 +58,7 @@ class ServiziPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF3B7A1D)),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -74,7 +74,7 @@ class ServiziPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF3B7A1D)),
             ),
             const SizedBox(height: 16),
             LayoutBuilder(
@@ -132,12 +132,12 @@ class _ContattiSection extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E6370)),
+                      color: Color(0xFF3B7A1D)),
                 ),
                 const SizedBox(height: 24),
                 ListTile(
                   leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF1E6370),
+                    backgroundColor: Color(0xFF3B7A1D),
                     child: Icon(Icons.phone, color: Colors.white),
                   ),
                   title: const Text('Chiama',
@@ -152,7 +152,7 @@ class _ContattiSection extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF1E6370),
+                    backgroundColor: Color(0xFF3B7A1D),
                     child: Icon(Icons.email_outlined, color: Colors.white),
                   ),
                   title: const Text('Scrivi un\'email',
@@ -169,7 +169,7 @@ class _ContattiSection extends StatelessWidget {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: const Text('Chiudi',
-                      style: TextStyle(color: Color(0xFF1E6370))),
+                      style: TextStyle(color: Color(0xFF3B7A1D))),
                 ),
               ],
             ),
@@ -191,7 +191,7 @@ class _ContattiSection extends StatelessWidget {
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1E6370),
+            backgroundColor: const Color(0xFF3B7A1D),
             foregroundColor: Colors.white,
             padding:
                 const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -246,7 +246,7 @@ class _AreaCard extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E6370))),
+                      color: Color(0xFF3B7A1D))),
               const SizedBox(height: 10),
               Text(descrizione,
                   style: const TextStyle(

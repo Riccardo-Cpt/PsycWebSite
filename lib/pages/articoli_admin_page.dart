@@ -76,7 +76,7 @@ class _PasswordGateState extends State<_PasswordGate> {
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E6370),
+                    backgroundColor: const Color(0xFF3B7A1D),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -105,8 +105,8 @@ class _AdminPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TabBar(
-            labelColor: Color(0xFF1E6370),
-            indicatorColor: Color(0xFF1E6370),
+            labelColor: Color(0xFF3B7A1D),
+            indicatorColor: Color(0xFF3B7A1D),
             tabs: [
               Tab(text: 'Blog'),
               Tab(text: 'Recensioni'),
@@ -222,7 +222,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
                 icon: const Icon(Icons.add),
                 label: const Text('Nuovo articolo'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1E6370),
+                  backgroundColor: const Color(0xFF3B7A1D),
                   foregroundColor: Colors.white,
                 ),
               ),
@@ -267,7 +267,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit,
-                                color: Color(0xFF1E6370)),
+                                color: Color(0xFF3B7A1D)),
                             tooltip: 'Modifica',
                             onPressed: () =>
                                 _openForm(context, articolo: a),
@@ -741,7 +741,7 @@ class _ArticoloFormState extends State<_ArticoloForm> {
               : ElevatedButton(
                   onPressed: _save,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E6370),
+                    backgroundColor: const Color(0xFF3B7A1D),
                     foregroundColor: Colors.white,
                     padding:
                         const EdgeInsets.symmetric(vertical: 16),
@@ -767,7 +767,7 @@ class _ArticoloFormPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF1E6370),
+        foregroundColor: const Color(0xFF3B7A1D),
         title: Text(
             articolo == null ? 'Nuovo articolo' : 'Modifica articolo'),
       ),

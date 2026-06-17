@@ -154,7 +154,7 @@ class _ArticoliPageState extends State<ArticoliPage>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: appBarBg,
-                foregroundColor: const Color(0xFF1E6370),
+                foregroundColor: const Color(0xFF3B7A1D),
                 elevation: t * 3.0,
                 scrolledUnderElevation: 0,
                 title: InkWell(
@@ -163,7 +163,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                     'Dr.ssa Maria Bianchi',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF3B7A1D)),
                   ),
                 ),
                 actions: [
@@ -173,7 +173,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                       child: Text(
                         'Naviga nel sito',
                         style: TextStyle(
-                            color: Color(0xFF1E6370),
+                            color: Color(0xFF3B7A1D),
                             fontSize: 17,
                             fontWeight: FontWeight.w600),
                       ),
@@ -217,7 +217,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1E6370)),
+                                    color: Color(0xFF3B7A1D)),
                               ),
                             ),
                             const Text(
@@ -225,7 +225,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1E6370)),
+                                  color: Color(0xFF3B7A1D)),
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
@@ -330,7 +330,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
 
   Widget _buildCollapsed(Articolo a) {
     return ListTile(
-      leading: const Icon(Icons.expand_more, color: Color(0xFF1E6370)),
+      leading: const Icon(Icons.expand_more, color: Color(0xFF3B7A1D)),
       title: Text(a.titolo,
           style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(

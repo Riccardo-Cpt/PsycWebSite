@@ -46,7 +46,7 @@ class _ValoriSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 45,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1E6370),
+              color: Color(0xFF3B7A1D),
             ),
           ),
         ),
@@ -83,14 +83,14 @@ class _ValoreRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bg = tinted
-        ? const Color(0xFF1E6370).withOpacity(0.12)
+        ? const Color(0xFF3B7A1D).withOpacity(0.12)
         : Colors.transparent;
     final titleColor =
-        tinted ? Colors.white : const Color(0xFF1E6370);
+        tinted ? Colors.white : const Color(0xFF3B7A1D);
     final descColor =
         tinted ? Colors.white70 : Colors.black87;
     final iconColor =
-        tinted ? Colors.white : const Color(0xFF1E6370);
+        tinted ? Colors.white : const Color(0xFF3B7A1D);
 
     return Container(
       width: double.infinity,
