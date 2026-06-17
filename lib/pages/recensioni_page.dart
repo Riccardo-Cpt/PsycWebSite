@@ -42,12 +42,12 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
   }
 
   Future<void> _onButtonTap() async {
-    if (!reviewAuthService.isLoggedIn.value) {
-      final loggedIn = await showDialog<bool>(
+    if (!reviewAuthService.isVerified.value) {
+      final verified = await showDialog<bool>(
         context: context,
         builder: (_) => const _AuthDialog(),
       );
-      if (loggedIn != true || !mounted) return;
+      if (verified != true || !mounted) return;
     }
     if (!mounted) return;
     setState(() => _loadingMyReview = true);
@@ -137,8 +137,8 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
           ),
           const SizedBox(height: 24),
           ValueListenableBuilder<bool>(
-            valueListenable: reviewAuthService.isLoggedIn,
-            builder: (context, isLoggedIn, _) {
+            valueListenable: reviewAuthService.isVerified,
+            builder: (context, isVerified, _) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -152,17 +152,17 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           child: Text(
-                            isLoggedIn && _myReview != null
+                            isVerified && _myReview != null
                                 ? 'Modifica la tua recensione'
                                 : 'Lascia una recensione',
                             style: const TextStyle(fontSize: 16),
                           ),
                         ),
-                  if (isLoggedIn) ...[
+                  if (isVerified) ...[
                     const SizedBox(height: 8),
                     Center(
                       child: TextButton(
-                        onPressed: () => reviewAuthService.logout(),
+                        onPressed: () => reviewAuthService.reset(),
                         child: const Text('Esci',
                             style: TextStyle(color: Color(0xFF1E6370))),
                       ),
@@ -311,17 +311,13 @@ class _AuthDialogState extends State<_AuthDialog> {
 
   Future<void> _submit() async {
     final username = _usernameCtrl.text.trim();
-    final password = _passwordCtrl.text;
-    if (username.isEmpty || password.isEmpty) {
-      setState(() => _error = 'Inserisci username e password');
+    final email = _emailCtrl.text.trim();
+    if (username.isEmpty || email.isEmpty) {
+      setState(() => _error = 'Inserisci username ed email');
       return;
     }
     if (!_isLogin) {
-      if (password != _confirmCtrl.text) {
-        setState(() => _error = 'Le password non coincidono');
-        return;
-      }
-      if (_nomeCtrl.text.trim().isEmpty || _cognomeCtrl.text.trim().isEmpty || _emailCtrl.text.trim().isEmpty) {
+      if (_nomeCtrl.text.trim().isEmpty || _cognomeCtrl.text.trim().isEmpty) {
         setState(() => _error = 'Compila tutti i campi obbligatori');
         return;
       }
@@ -332,15 +328,11 @@ class _AuthDialogState extends State<_AuthDialog> {
     });
     try {
       if (_isLogin) {
-        await reviewAuthService.login(username, password);
+        // TODO: Implement magic link flow for login
+        throw UnimplementedError('Login flow not yet implemented');
       } else {
-        await reviewAuthService.register(
-          username,
-          password,
-          name: _nomeCtrl.text.trim(),
-          surname: _cognomeCtrl.text.trim(),
-          email: _emailCtrl.text.trim(),
-        );
+        // TODO: Implement magic link flow for register
+        throw UnimplementedError('Register flow not yet implemented');
       }
       if (mounted) Navigator.pop(context, true);
     } catch (e) {
@@ -489,7 +481,7 @@ class _ReviewFormState extends State<_ReviewForm> {
           description: _descCtrl.text.trim(),
           stars: _stars,
           name: reviewAuthService.currentName,
-          surname: reviewAuthService.currentSurname,
+          surname: null,
           email: reviewAuthService.currentEmail,
         );
       } else {
