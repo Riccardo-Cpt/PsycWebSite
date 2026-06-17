@@ -68,12 +68,7 @@ serve(async (req) => {
         `,
       }),
     });
-    if (!emailRes.ok) {
-      const body = await emailRes.text();
-      throw new Error(`Errore Resend: ${body}`);
-    }
-
-    // Always return ok to avoid email enumeration
+    // Always return ok — don't expose Resend failures (prevents email enumeration)
     return new Response(JSON.stringify({ ok: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
