@@ -25,8 +25,6 @@ class _RecensioniBody extends StatefulWidget {
 
 class _RecensioniBodyState extends State<_RecensioniBody> {
   late Future<List<Review>> _futureReviews;
-  Review? _myReview;
-  bool _loadingMyReview = false;
 
   @override
   void initState() {
@@ -37,49 +35,20 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
   void _refresh() {
     setState(() {
       _futureReviews = reviewsService.tutti();
-      _myReview = null;
     });
   }
 
-  Future<void> _onButtonTap() async {
-    if (!reviewAuthService.isLoggedIn.value) {
-      final loggedIn = await showDialog<bool>(
-        context: context,
-        builder: (_) => const _AuthDialog(),
-      );
-      if (loggedIn != true || !mounted) return;
-    }
-    if (!mounted) return;
-    setState(() => _loadingMyReview = true);
-    try {
-      final username = reviewAuthService.currentUsername!;
-      final existing = await reviewsService.mia(username);
-      if (!mounted) return;
-      setState(() {
-        _myReview = existing;
-        _loadingMyReview = false;
-      });
-      _openForm(existing);
-    } catch (e) {
-      if (!mounted) return;
-      setState(() => _loadingMyReview = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Errore: $e')),
-      );
-    }
-  }
-
-  void _openForm(Review? existing) {
+  void _openForm() {
     final isWide = MediaQuery.of(context).size.width >= 720;
     if (isWide) {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => _ReviewFormPage(existing: existing, onSaved: _refresh),
+        builder: (_) => _ReviewFlowPage(onSaved: _refresh),
       ));
     } else {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        builder: (_) => _ReviewFormSheet(existing: existing, onSaved: _refresh),
+        builder: (_) => _ReviewFlowSheet(onSaved: _refresh),
       );
     }
   }
@@ -95,86 +64,64 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-          const Text(
-            'Recensioni',
-            style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF1E6370)),
-          ),
-          const SizedBox(height: 16),
-          FutureBuilder<List<Review>>(
-            future: _futureReviews,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('Errore: ${snapshot.error}',
-                      style: const TextStyle(color: Colors.red)),
-                );
-              }
-              final reviews = snapshot.data ?? [];
-              if (reviews.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 48),
-                  child: Center(
-                    child: Text('Nessuna recensione ancora.',
-                        style: TextStyle(fontSize: 18, color: Colors.black54)),
-                  ),
-                );
-              }
-              return Column(
-                children: reviews
-                    .map((r) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: _ReviewCard(review: r, onDeleted: _refresh),
-                        ))
-                    .toList(),
-              );
-            },
-          ),
-          const SizedBox(height: 24),
-          ValueListenableBuilder<bool>(
-            valueListenable: reviewAuthService.isLoggedIn,
-            builder: (context, isLoggedIn, _) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _loadingMyReview
-                      ? const Center(child: CircularProgressIndicator())
-                      : ElevatedButton(
-                          onPressed: _onButtonTap,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF1E6370),
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                          ),
-                          child: Text(
-                            isLoggedIn && _myReview != null
-                                ? 'Modifica la tua recensione'
-                                : 'Lascia una recensione',
-                            style: const TextStyle(fontSize: 16),
-                          ),
+                const Text(
+                  'Recensioni',
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1E6370)),
+                ),
+                const SizedBox(height: 16),
+                FutureBuilder<List<Review>>(
+                  future: _futureReviews,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Errore: ${snapshot.error}',
+                            style: const TextStyle(color: Colors.red)),
+                      );
+                    }
+                    final reviews = snapshot.data ?? [];
+                    if (reviews.isEmpty) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 48),
+                        child: Center(
+                          child: Text('Nessuna recensione ancora.',
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.black54)),
                         ),
-                  if (isLoggedIn) ...[
-                    const SizedBox(height: 8),
-                    Center(
-                      child: TextButton(
-                        onPressed: () => reviewAuthService.logout(),
-                        child: const Text('Esci',
-                            style: TextStyle(color: Color(0xFF1E6370))),
-                      ),
-                    ),
-                  ],
-                ],
-              );
-            },
-          ),
-              const SizedBox(height: 24),
-            ],
-          ),
+                      );
+                    }
+                    return Column(
+                      children: reviews
+                          .map((r) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child:
+                                    _ReviewCard(review: r, onDeleted: _refresh),
+                              ))
+                          .toList(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: _openForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1E6370),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text(
+                    'Lascia una recensione',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
           const SiteFooter(),
         ],
@@ -234,12 +181,14 @@ class _ReviewCard extends StatelessWidget {
             Row(
               children: [
                 Text(review.username,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14)),
                 const Spacer(),
                 if (review.createdAt != null)
                   Text(
                     DateFormat('yyyy-MM-dd').format(review.createdAt!),
-                    style: const TextStyle(color: Colors.black54, fontSize: 13),
+                    style:
+                        const TextStyle(color: Colors.black54, fontSize: 13),
                   ),
                 ValueListenableBuilder<bool>(
                   valueListenable: blogAuthService.isAdmin,
@@ -267,10 +216,12 @@ class _ReviewCard extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(review.title,
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600, fontSize: 15)),
             const SizedBox(height: 6),
             Text(review.description,
-                style: const TextStyle(fontSize: 15, height: 1.5, fontStyle: FontStyle.italic)),
+                style: const TextStyle(
+                    fontSize: 15, height: 1.5, fontStyle: FontStyle.italic)),
           ],
         ),
       ),
@@ -278,71 +229,102 @@ class _ReviewCard extends StatelessWidget {
   }
 }
 
-// ── Auth dialog ────────────────────────────────────────────────────────────────
+// ── Flow: step 1 = identity form, step 2 = review form ────────────────────────
 
-class _AuthDialog extends StatefulWidget {
-  const _AuthDialog();
+class _ReviewFlow extends StatefulWidget {
+  final VoidCallback onSaved;
+  const _ReviewFlow({required this.onSaved});
 
   @override
-  State<_AuthDialog> createState() => _AuthDialogState();
+  State<_ReviewFlow> createState() => _ReviewFlowState();
 }
 
-class _AuthDialogState extends State<_AuthDialog> {
-  bool _isLogin = true;
+class _ReviewFlowState extends State<_ReviewFlow> {
+  // Step 1 controllers
+  final _emailCtrl = TextEditingController();
   final _usernameCtrl = TextEditingController();
-  final _passwordCtrl = TextEditingController();
-  final _confirmCtrl = TextEditingController();
   final _nomeCtrl = TextEditingController();
   final _cognomeCtrl = TextEditingController();
-  final _emailCtrl = TextEditingController();
-  String? _error;
+
+  // Step 2 controllers
+  final _titleCtrl = TextEditingController();
+  final _descCtrl = TextEditingController();
+  int _stars = 5;
+
   bool _loading = false;
+  bool _submitted = false;
+  String? _error;
 
   @override
   void dispose() {
+    _emailCtrl.dispose();
     _usernameCtrl.dispose();
-    _passwordCtrl.dispose();
-    _confirmCtrl.dispose();
     _nomeCtrl.dispose();
     _cognomeCtrl.dispose();
-    _emailCtrl.dispose();
+    _titleCtrl.dispose();
+    _descCtrl.dispose();
     super.dispose();
   }
 
-  Future<void> _submit() async {
+  Future<void> _sendLink() async {
+    final email = _emailCtrl.text.trim();
     final username = _usernameCtrl.text.trim();
-    final password = _passwordCtrl.text;
-    if (username.isEmpty || password.isEmpty) {
-      setState(() => _error = 'Inserisci username e password');
+    final name = _nomeCtrl.text.trim();
+    final surname = _cognomeCtrl.text.trim();
+    if (email.isEmpty || username.isEmpty || name.isEmpty || surname.isEmpty) {
+      setState(() => _error = 'Compila tutti i campi');
       return;
-    }
-    if (!_isLogin) {
-      if (password != _confirmCtrl.text) {
-        setState(() => _error = 'Le password non coincidono');
-        return;
-      }
-      if (_nomeCtrl.text.trim().isEmpty || _cognomeCtrl.text.trim().isEmpty || _emailCtrl.text.trim().isEmpty) {
-        setState(() => _error = 'Compila tutti i campi obbligatori');
-        return;
-      }
     }
     setState(() {
       _error = null;
       _loading = true;
     });
     try {
-      if (_isLogin) {
-        await reviewAuthService.login(username, password);
-      } else {
-        await reviewAuthService.register(
-          username,
-          password,
-          name: _nomeCtrl.text.trim(),
-          surname: _cognomeCtrl.text.trim(),
-          email: _emailCtrl.text.trim(),
+      await reviewAuthService.sendMagicLink(
+        email: email,
+        username: username,
+        name: name,
+        surname: surname,
+      );
+      if (mounted) {
+        setState(() => _loading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  'Link inviato! Controlla la tua email e clicca il link per continuare.')),
         );
       }
-      if (mounted) Navigator.pop(context, true);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _error = e.toString().replaceFirst('Exception: ', '');
+          _loading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _submitReview() async {
+    if (_titleCtrl.text.trim().isEmpty || _descCtrl.text.trim().isEmpty) {
+      setState(() => _error = 'Inserisci titolo e descrizione');
+      return;
+    }
+    setState(() {
+      _error = null;
+      _loading = true;
+    });
+    try {
+      await reviewsService.inserisci(
+        email: reviewAuthService.currentEmail!,
+        title: _titleCtrl.text.trim(),
+        description: _descCtrl.text.trim(),
+        stars: _stars,
+      );
+      reviewAuthService.reset();
+      if (mounted) {
+        setState(() => _submitted = true);
+        widget.onSaved();
+      }
     } catch (e) {
       if (mounted) {
         setState(() {
@@ -355,232 +337,142 @@ class _AuthDialogState extends State<_AuthDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(_isLogin ? 'Accedi' : 'Registrati'),
-      content: SingleChildScrollView(
+    if (_submitted) {
+      return const Padding(
+        padding: EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
-              controller: _usernameCtrl,
-              decoration: const InputDecoration(labelText: 'Username'),
+            Icon(Icons.check_circle_outline, color: Color(0xFF1E6370), size: 64),
+            SizedBox(height: 16),
+            Text(
+              'Recensione rilasciata.',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _passwordCtrl,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-              onSubmitted: _isLogin ? (_) => _submit() : null,
+            SizedBox(height: 8),
+            Text(
+              'Deve essere approvata da un admin prima di essere pubblicata e visibile nel sito.',
+              style: TextStyle(fontSize: 15, color: Colors.black54),
+              textAlign: TextAlign.center,
             ),
-            if (!_isLogin) ...[
-              const SizedBox(height: 8),
-              TextField(
-                controller: _confirmCtrl,
-                obscureText: true,
-                decoration:
-                    const InputDecoration(labelText: 'Conferma password'),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _nomeCtrl,
-                decoration: const InputDecoration(labelText: 'Nome *'),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _cognomeCtrl,
-                decoration: const InputDecoration(labelText: 'Cognome *'),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _emailCtrl,
-                decoration: const InputDecoration(labelText: 'Email *'),
-                keyboardType: TextInputType.emailAddress,
-                onSubmitted: (_) => _submit(),
-              ),
-            ],
-            if (_error != null) ...[
-              const SizedBox(height: 8),
-              Text(_error!, style: const TextStyle(color: Colors.red)),
-            ],
           ],
         ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => setState(() {
-            _isLogin = !_isLogin;
-            _error = null;
-          }),
-          child: Text(
-            _isLogin
-                ? 'Non hai un account? Registrati'
-                : 'Hai già un account? Accedi',
-            style: const TextStyle(color: Color(0xFF1E6370)),
-          ),
-        ),
-        if (_loading)
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator(strokeWidth: 2)),
-          )
-        else
-          ElevatedButton(
-            onPressed: _submit,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E6370),
-              foregroundColor: Colors.white,
-            ),
-            child: Text(_isLogin ? 'Accedi' : 'Registrati'),
-          ),
-      ],
-    );
-  }
-}
-
-// ── Review form (shared logic) ─────────────────────────────────────────────────
-
-class _ReviewForm extends StatefulWidget {
-  final Review? existing;
-  final VoidCallback onSaved;
-  const _ReviewForm({this.existing, required this.onSaved});
-
-  @override
-  State<_ReviewForm> createState() => _ReviewFormState();
-}
-
-class _ReviewFormState extends State<_ReviewForm> {
-  late final TextEditingController _titleCtrl;
-  late final TextEditingController _descCtrl;
-  late int _stars;
-  bool _saving = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _titleCtrl = TextEditingController(text: widget.existing?.title ?? '');
-    _descCtrl = TextEditingController(text: widget.existing?.description ?? '');
-    _stars = widget.existing?.stars ?? 5;
-  }
-
-  @override
-  void dispose() {
-    _titleCtrl.dispose();
-    _descCtrl.dispose();
-    super.dispose();
-  }
-
-  Future<void> _save() async {
-    if (_titleCtrl.text.trim().isEmpty || _descCtrl.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Inserisci titolo e descrizione')),
       );
-      return;
     }
-    setState(() => _saving = true);
-    try {
-      if (widget.existing == null) {
-        await reviewsService.inserisci(
-          username: reviewAuthService.currentUsername!,
-          title: _titleCtrl.text.trim(),
-          description: _descCtrl.text.trim(),
-          stars: _stars,
-          name: reviewAuthService.currentName,
-          surname: reviewAuthService.currentSurname,
-          email: reviewAuthService.currentEmail,
-        );
-      } else {
-        await reviewsService.aggiorna(
-          id: widget.existing!.id,
-          title: _titleCtrl.text.trim(),
-          description: _descCtrl.text.trim(),
-          stars: _stars,
-        );
-      }
-      if (mounted) widget.onSaved();
-    } catch (e) {
-      if (mounted) {
-        setState(() => _saving = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Errore durante il salvataggio: $e')),
-        );
-      }
-    }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 24,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            widget.existing == null ? 'Lascia una recensione' : 'Modifica la tua recensione',
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+    return ValueListenableBuilder<bool>(
+      valueListenable: reviewAuthService.isVerified,
+      builder: (context, isVerified, _) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
           ),
-          const SizedBox(height: 16),
-          Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (int i = 1; i <= 5; i++)
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  icon: Icon(
-                    i <= _stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFF1E6370),
-                    size: 32,
-                  ),
-                  onPressed: () => setState(() => _stars = i),
-                ),
+              if (!isVerified) ..._buildStep1() else ..._buildStep2(),
+              if (_error != null) ...[
+                const SizedBox(height: 8),
+                Text(_error!, style: const TextStyle(color: Colors.red)),
+              ],
+              const SizedBox(height: 20),
+              _loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(
+                      onPressed: isVerified ? _submitReview : _sendLink,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1E6370),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      child: Text(
+                        isVerified ? 'Invia recensione' : 'Invia link di conferma',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
             ],
           ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _titleCtrl,
-            decoration: const InputDecoration(labelText: 'Titolo *'),
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _descCtrl,
-            decoration: const InputDecoration(labelText: 'Descrizione *'),
-            minLines: 4,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-          ),
-          const SizedBox(height: 20),
-          _saving
-              ? const Center(child: CircularProgressIndicator())
-              : ElevatedButton(
-                  onPressed: _save,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E6370),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text('Salva', style: TextStyle(fontSize: 16)),
-                ),
-        ],
-      ),
+        );
+      },
     );
   }
+
+  List<Widget> _buildStep1() => [
+        const Text('Lascia una recensione',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        const Text(
+          'Inserisci i tuoi dati. Riceverai un link via email per confermare e inviare la tua recensione.',
+          style: TextStyle(color: Colors.black54),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: _emailCtrl,
+          decoration: const InputDecoration(labelText: 'Email *'),
+          keyboardType: TextInputType.emailAddress,
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _usernameCtrl,
+          decoration: const InputDecoration(labelText: 'Username *'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _nomeCtrl,
+          decoration: const InputDecoration(labelText: 'Nome *'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _cognomeCtrl,
+          decoration: const InputDecoration(labelText: 'Cognome *'),
+        ),
+      ];
+
+  List<Widget> _buildStep2() => [
+        const Text('La tua recensione',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            for (int i = 1; i <= 5; i++)
+              IconButton(
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: Icon(
+                  i <= _stars ? Icons.star : Icons.star_border,
+                  color: const Color(0xFF1E6370),
+                  size: 32,
+                ),
+                onPressed: () => setState(() => _stars = i),
+              ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _titleCtrl,
+          decoration: const InputDecoration(labelText: 'Titolo *'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _descCtrl,
+          decoration: const InputDecoration(labelText: 'Descrizione *'),
+          minLines: 4,
+          maxLines: null,
+          keyboardType: TextInputType.multiline,
+        ),
+      ];
 }
 
 // ── Wide: full page ────────────────────────────────────────────────────────────
 
-class _ReviewFormPage extends StatelessWidget {
-  final Review? existing;
+class _ReviewFlowPage extends StatelessWidget {
   final VoidCallback onSaved;
-  const _ReviewFormPage({this.existing, required this.onSaved});
+  const _ReviewFlowPage({required this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -588,14 +480,12 @@ class _ReviewFormPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
         foregroundColor: const Color(0xFF1E6370),
-        title: Text(
-            existing == null ? 'Lascia una recensione' : 'Modifica la tua recensione'),
+        title: const Text('Lascia una recensione'),
       ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 700),
-          child: _ReviewForm(
-            existing: existing,
+          child: _ReviewFlow(
             onSaved: () {
               onSaved();
               Navigator.pop(context);
@@ -609,10 +499,9 @@ class _ReviewFormPage extends StatelessWidget {
 
 // ── Narrow: bottom sheet ───────────────────────────────────────────────────────
 
-class _ReviewFormSheet extends StatelessWidget {
-  final Review? existing;
+class _ReviewFlowSheet extends StatelessWidget {
   final VoidCallback onSaved;
-  const _ReviewFormSheet({this.existing, required this.onSaved});
+  const _ReviewFlowSheet({required this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -621,8 +510,7 @@ class _ReviewFormSheet extends StatelessWidget {
       minChildSize: 0.5,
       maxChildSize: 1.0,
       expand: false,
-      builder: (_, _) => _ReviewForm(
-        existing: existing,
+      builder: (_, _) => _ReviewFlow(
         onSaved: () {
           onSaved();
           Navigator.pop(context);

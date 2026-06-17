@@ -4,58 +4,70 @@ import 'package:psic_app/services/review_auth_service.dart';
 void main() {
   late ReviewAuthService service;
 
-  setUp(() {
-    service = ReviewAuthService();
-  });
+  setUp(() => service = ReviewAuthService());
 
-  group('login', () {
-    test('sets isLoggedIn and currentUsername on success', () async {
-      service.overrideLoginForTest = (u, p) async {};
-      await service.login('mario', 'pass123');
-      expect(service.isLoggedIn.value, isTrue);
-      expect(service.currentUsername, 'mario');
+  group('sendMagicLink', () {
+    test('does not set isVerified', () async {
+      service.overrideSendMagicLinkForTest = (_, __, ___, ____) async {};
+      await service.sendMagicLink(
+        email: 'a@b.com',
+        username: 'user1',
+        name: 'Mario',
+        surname: 'Rossi',
+      );
+      expect(service.isVerified.value, isFalse);
     });
 
-    test('throws and does not set state on wrong password', () async {
-      service.overrideLoginForTest = (u, p) async {
-        throw Exception('Credenziali errate');
+    test('throws on error', () async {
+      service.overrideSendMagicLinkForTest = (_, __, ___, ____) async {
+        throw Exception('network error');
       };
       expect(
-        () => service.login('mario', 'wrong'),
+        () => service.sendMagicLink(
+          email: 'a@b.com',
+          username: 'user1',
+          name: 'Mario',
+          surname: 'Rossi',
+        ),
         throwsException,
       );
-      expect(service.isLoggedIn.value, isFalse);
-      expect(service.currentUsername, isNull);
     });
   });
 
-  group('register', () {
-    test('sets isLoggedIn and currentUsername on success', () async {
-      service.overrideRegisterForTest = (u, p) async {};
-      await service.register('newuser', 'pass123');
-      expect(service.isLoggedIn.value, isTrue);
-      expect(service.currentUsername, 'newuser');
-    });
-
-    test('throws on duplicate username without setting state', () async {
-      service.overrideRegisterForTest = (u, p) async {
-        throw Exception('Username già in uso');
+  group('verifyToken', () {
+    test('sets isVerified and stores identity on success', () async {
+      service.overrideVerifyTokenForTest = (_) async => {
+        'email': 'a@b.com',
+        'username': 'user1',
+        'name': 'Mario',
       };
-      expect(
-        () => service.register('existing', 'pass123'),
-        throwsException,
-      );
-      expect(service.isLoggedIn.value, isFalse);
+      await service.verifyToken('valid-token');
+      expect(service.isVerified.value, isTrue);
+      expect(service.currentEmail, 'a@b.com');
+      expect(service.currentUsername, 'user1');
+      expect(service.currentName, 'Mario');
     });
-  });
 
-  group('logout', () {
-    test('clears isLoggedIn and currentUsername', () async {
-      service.overrideLoginForTest = (u, p) async {};
-      await service.login('mario', 'pass');
-      service.logout();
-      expect(service.isLoggedIn.value, isFalse);
+    test('throws and does not set isVerified on error', () async {
+      service.overrideVerifyTokenForTest = (_) async =>
+          throw Exception('Link non valido o scaduto');
+      expect(() => service.verifyToken('bad-token'), throwsException);
+      expect(service.isVerified.value, isFalse);
+      expect(service.currentEmail, isNull);
+    });
+
+    test('reset clears all state', () async {
+      service.overrideVerifyTokenForTest = (_) async => {
+        'email': 'a@b.com',
+        'username': 'user1',
+        'name': 'Mario',
+      };
+      await service.verifyToken('valid-token');
+      service.reset();
+      expect(service.isVerified.value, isFalse);
+      expect(service.currentEmail, isNull);
       expect(service.currentUsername, isNull);
+      expect(service.currentName, isNull);
     });
   });
 }

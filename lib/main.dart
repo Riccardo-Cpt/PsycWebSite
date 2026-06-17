@@ -30,7 +30,16 @@ final _router = GoRouter(
     GoRoute(path: '/', builder: (_, _) => const HomePage()),
     GoRoute(path: '/servizi', builder: (_, _) => const ServiziPage()),
     GoRoute(path: '/articoli', builder: (_, _) => const ArticoliPage()),
-    GoRoute(path: '/recensioni', builder: (_, _) => const RecensioniPage()),
+    GoRoute(
+      path: '/recensioni',
+      builder: (_, state) {
+        final token = state.uri.queryParameters['token'];
+        if (token != null && token.isNotEmpty) {
+          reviewAuthService.verifyToken(token).catchError((_) {});
+        }
+        return const RecensioniPage();
+      },
+    ),
     GoRoute(path: '/admin', builder: (_, _) => const ArticoliAdminPage()),
     GoRoute(path: '/chi-sono', builder: (_, _) => const ChiSonoPage()),
   ],

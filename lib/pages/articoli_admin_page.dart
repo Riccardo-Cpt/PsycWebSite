@@ -376,13 +376,10 @@ class _RecensioniTabState extends State<_RecensioniTab> {
   }
 
   String _buildConfirmationText(Review r) {
-    final name = r.name ?? '';
-    final surname = r.surname ?? '';
-    final email = r.userEmail ?? '';
-    final nomeCompleto = '${name.isNotEmpty ? name : '?'} ${surname.isNotEmpty ? surname : '?'}'.trim();
-    final emailTesto = email.isNotEmpty ? email : '?';
+    final username = r.username;
+    final email = r.email;
     return 'Per poter pubblicare questa recensione devi prima confermare di aver svolto '
-        'almeno una seduta con $nomeCompleto con email $emailTesto';
+        'almeno una seduta con $username con email $email';
   }
 
   @override
