@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 import '../config/admin_config.dart';
-import '../config/contatti.dart';
 import '../models/review.dart';
 
 class ReviewsService {
@@ -25,8 +23,6 @@ class ReviewsService {
 
   // ignore: avoid_public_members_for_test
   Future<List<Review>>? overrideForTest;
-  // ignore: avoid_public_members_for_test
-  Future<Review?> Function(String)? overrideMiaForTest;
 
   /// Public: only approved reviews.
   Future<List<Review>> tutti() async {
@@ -41,11 +37,11 @@ class ReviewsService {
     return list.map((e) => Review.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  /// Admin: all reviews regardless of approval status, with user details joined.
+  /// Admin: all reviews regardless of approval status.
   Future<List<Review>> tuttiAdmin() async {
     final uri = Uri.parse(
         '${AdminConfig.supabaseRestUrl}/reviews'
-        '?select=*,reviewer_users(name,surname,email)'
+        '?select=*'
         '&order=created_at.desc');
     final response = await http.get(uri, headers: _adminReadHeaders);
     if (response.statusCode != 200) {
@@ -55,64 +51,35 @@ class ReviewsService {
     return list.map((e) => Review.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-  Future<Review?> mia(String username) async {
-    if (overrideMiaForTest != null) return overrideMiaForTest!(username);
-    final encodedUsername = Uri.encodeQueryComponent(username);
-    final uri = Uri.parse(
-        '${AdminConfig.supabaseRestUrl}/reviews'
-        '?username=eq.$encodedUsername&select=*');
-    final response = await http.get(uri, headers: _adminReadHeaders);
-    if (response.statusCode != 200) {
-      throw Exception('Errore nel recupero della recensione: ${response.body}');
-    }
-    final list = jsonDecode(response.body) as List<dynamic>;
-    if (list.isEmpty) return null;
-    return Review.fromJson(list.first as Map<String, dynamic>);
-  }
-
   Future<void> inserisci({
-    required String username,
-    required String title,
-    required String description,
-    required int stars,
-    String? name,
-    String? surname,
-    String? email,
-  }) async {
-    final uri = Uri.parse('${AdminConfig.supabaseRestUrl}/reviews');
-    final body = jsonEncode({
-      'username': username,
-      'title': title,
-      'description': description,
-      'stars': stars,
-      'approved': false,
-    });
-    final response = await http.post(uri, headers: _writeHeaders, body: body);
-    if (response.statusCode != 201) {
-      throw Exception('Errore nel salvataggio della recensione: ${response.body}');
-    }
-    _notificaAdmin(username, title, name: name, surname: surname, email: email);
-  }
-
-  Future<void> aggiorna({
-    required int id,
+    required String email,
     required String title,
     required String description,
     required int stars,
   }) async {
     final uri = Uri.parse(
-        '${AdminConfig.supabaseRestUrl}/reviews?id=eq.$id');
-    final body = jsonEncode({
-      'title': title,
-      'description': description,
-      'stars': stars,
-      'approved': false,
-    });
-    final response = await http.patch(uri, headers: _writeHeaders, body: body);
-    if (response.statusCode != 200 && response.statusCode != 204) {
-      throw Exception('Errore nella modifica della recensione: ${response.body}');
+        '${AdminConfig.supabaseUrl}/functions/v1/submit-review');
+    final response = await http.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer ${AdminConfig.supabaseAnonKey}',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'email': email,
+        'title': title,
+        'description': description,
+        'stars': stars,
+      }),
+    );
+    if (response.statusCode != 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      if (body['error'] == 'duplicate') {
+        throw Exception(
+            'Hai già inviato una recensione. Puoi contattarci per modificarla.');
+      }
+      throw Exception('Errore: riprova più tardi.');
     }
-    _notificaAdmin('(modifica)', title);
   }
 
   Future<void> approva(int id) async {
@@ -132,22 +99,5 @@ class ReviewsService {
     if (response.statusCode != 204) {
       throw Exception('Errore nell\'eliminazione della recensione: ${response.body}');
     }
-  }
-
-  void _notificaAdmin(String username, String title,
-      {String? name, String? surname, String? email}) {
-    final subject = Uri.encodeComponent('Nuova recensione in attesa di approvazione');
-    final bodyText = Uri.encodeComponent(
-      'È stata ricevuta una nuova recensione che richiede la tua approvazione.\n\n'
-      'Username: $username\n'
-      'Nome: ${name ?? '-'}\n'
-      'Cognome: ${surname ?? '-'}\n'
-      'Email: ${email ?? '-'}\n\n'
-      'Titolo recensione: "$title"\n\n'
-      'Accedi al pannello admin per approvarla o rifiutarla.',
-    );
-    launchUrl(
-      Uri.parse('mailto:${Contatti.email}?subject=$subject&body=$bodyText'),
-    );
   }
 }

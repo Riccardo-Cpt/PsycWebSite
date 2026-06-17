@@ -52,14 +52,13 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
     if (!mounted) return;
     setState(() => _loadingMyReview = true);
     try {
-      final username = reviewAuthService.currentUsername!;
-      final existing = await reviewsService.mia(username);
+      // TODO: Task 4 will reimplement review lookup and editing
       if (!mounted) return;
       setState(() {
-        _myReview = existing;
+        _myReview = null;
         _loadingMyReview = false;
       });
-      _openForm(existing);
+      _openForm(null);
     } catch (e) {
       if (!mounted) return;
       setState(() => _loadingMyReview = false);
@@ -476,21 +475,14 @@ class _ReviewFormState extends State<_ReviewForm> {
     try {
       if (widget.existing == null) {
         await reviewsService.inserisci(
-          username: reviewAuthService.currentUsername!,
+          email: reviewAuthService.currentEmail!,
           title: _titleCtrl.text.trim(),
           description: _descCtrl.text.trim(),
           stars: _stars,
-          name: reviewAuthService.currentName,
-          surname: null,
-          email: reviewAuthService.currentEmail,
         );
       } else {
-        await reviewsService.aggiorna(
-          id: widget.existing!.id,
-          title: _titleCtrl.text.trim(),
-          description: _descCtrl.text.trim(),
-          stars: _stars,
-        );
+        // TODO: Task 4 will reimplement review editing
+        throw Exception('Modifica non ancora implementata');
       }
       if (mounted) widget.onSaved();
     } catch (e) {
