@@ -62,10 +62,19 @@ class ReviewAuthService {
       if (response.statusCode != 200) {
         throw Exception('Link non valido o scaduto. Richiedi un nuovo link.');
       }
-      data = jsonDecode(response.body) as Map<String, dynamic>;
-      if (data['error'] != null) {
+      late final Map<String, dynamic> decoded;
+      try {
+        decoded = jsonDecode(response.body) as Map<String, dynamic>;
+      } catch (_) {
         throw Exception('Link non valido o scaduto. Richiedi un nuovo link.');
       }
+      if (decoded['error'] != null) {
+        throw Exception('Link non valido o scaduto. Richiedi un nuovo link.');
+      }
+      if (decoded['email'] == null || decoded['username'] == null) {
+        throw Exception('Link non valido o scaduto. Richiedi un nuovo link.');
+      }
+      data = decoded;
     }
     currentEmail = data['email'] as String;
     currentUsername = data['username'] as String;
