@@ -296,7 +296,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _error = 'Errore: riprova più tardi.';
+          _error = e.toString().replaceFirst('Exception: ', '');
           _loading = false;
         });
       }

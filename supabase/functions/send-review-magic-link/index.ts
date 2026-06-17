@@ -29,6 +29,19 @@ serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    // Check if this email already has a submitted review
+    const { data: existing } = await supabase
+      .from('reviews')
+      .select('id')
+      .eq('email', email)
+      .limit(1);
+    if (existing && existing.length > 0) {
+      return new Response(JSON.stringify({ error: 'already_reviewed' }), {
+        status: 409,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     // Upsert user (email is PK)
     const { error: upsertError } = await supabase
       .from('reviewer_users')

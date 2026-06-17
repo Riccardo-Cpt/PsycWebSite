@@ -39,6 +39,9 @@ class ReviewAuthService {
         'surname': surname,
       }),
     );
+    if (response.statusCode == 409) {
+      throw Exception('Hai già inviato una recensione. Puoi contattarci per modificarla.');
+    }
     if (response.statusCode != 200) {
       throw Exception('Errore: riprova più tardi.');
     }
