@@ -252,6 +252,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
   int _stars = 5;
 
   bool _loading = false;
+  bool _submitted = false;
   String? _error;
 
   @override
@@ -320,7 +321,10 @@ class _ReviewFlowState extends State<_ReviewFlow> {
         stars: _stars,
       );
       reviewAuthService.reset();
-      if (mounted) widget.onSaved();
+      if (mounted) {
+        setState(() => _submitted = true);
+        widget.onSaved();
+      }
     } catch (e) {
       if (mounted) {
         setState(() {
@@ -333,6 +337,30 @@ class _ReviewFlowState extends State<_ReviewFlow> {
 
   @override
   Widget build(BuildContext context) {
+    if (_submitted) {
+      return const Padding(
+        padding: EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.check_circle_outline, color: Color(0xFF1E6370), size: 64),
+            SizedBox(height: 16),
+            Text(
+              'Recensione rilasciata.',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Deve essere approvata da un admin prima di essere pubblicata e visibile nel sito.',
+              style: TextStyle(fontSize: 15, color: Colors.black54),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }
+
     return ValueListenableBuilder<bool>(
       valueListenable: reviewAuthService.isVerified,
       builder: (context, isVerified, _) {
