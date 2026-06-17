@@ -13,14 +13,14 @@ Widget _wrap(Widget child) => MaterialApp.router(
 void main() {
   setUp(() {
     reviewsService.overrideForTest = Future.value([]);
-    reviewAuthService.isLoggedIn.value = false;
+    reviewAuthService.isVerified.value = false;
     reviewAuthService.currentUsername = null;
   });
 
   tearDown(() {
     reviewsService.overrideForTest = null;
-    reviewAuthService.overrideLoginForTest = null;
-    reviewAuthService.overrideRegisterForTest = null;
+    reviewAuthService.overrideSendMagicLinkForTest = null;
+    reviewAuthService.overrideVerifyTokenForTest = null;
   });
 
   testWidgets('renders heading and submit button', (tester) async {
