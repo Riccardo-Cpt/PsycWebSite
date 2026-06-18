@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
             _AChiMiRivolgoSection(),
             _PrimoColloquioBox(),
             _AreeInterventoSection(),
+            _LabirintiSection(),
             _UltimoArticoloSection(),
             _UltimeRecensioniSection(),
             _CtaSection(),
@@ -90,7 +91,7 @@ class _HeroSectionState extends State<_HeroSection>
           ),
           // Soft overlay so text stays readable
           Positioned.fill(
-            child: Container(color: Colors.white.withValues(alpha: 0.10)),
+            child: Container(color: Colors.black.withValues(alpha: 0.4)),
           ),
           // Content
           AnimatedBuilder(
@@ -114,14 +115,14 @@ class _HeroSectionState extends State<_HeroSection>
                       style: TextStyle(
                           fontSize: 48,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Color(0xFFF5F5F5)),
                     ),
                     const SizedBox(height: 12),
                     const Text(
                       'Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie',
                       style: TextStyle(
                           fontSize: 26,
-                          color: Colors.white,
+                          color: Color(0xFFFFFFF0),
                           fontWeight: FontWeight.w500,
                           height: 1.4),
                     ),
@@ -130,7 +131,7 @@ class _HeroSectionState extends State<_HeroSection>
                       'Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: Color(0xFFFFFFF0),
                           height: 1.6),
                     ),
                       const SizedBox(height: 50),
@@ -188,47 +189,36 @@ class _IntroSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 720;
-              final imageWidget = ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Image.asset(
-                  'assets/images/NinfeeStagno.jpeg',
-                  width: 340,
-                  height: 420,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: Text(
+                  text,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    height: 1.75,
+                    color: Color(0xFF2C2C2C),
+                  ),
                 ),
-              );
-              final textWidget = Text(
-                text,
-                style: const TextStyle(
-                  fontSize: 18,
-                  height: 1.75,
-                  color: Color(0xFF2C2C2C),
+              ),
+              const SizedBox(width: 40),
+              Expanded(
+                flex: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: AspectRatio(
+                    aspectRatio: 340 / 420,
+                    child: Image.asset(
+                      'assets/images/NinfeeStagno.jpeg',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                    ),
+                  ),
                 ),
-              );
-
-              if (!isWide) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    imageWidget,
-                    const SizedBox(height: 32),
-                    textWidget,
-                  ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: textWidget),
-                  const SizedBox(width: 48),
-                  imageWidget,
-                ],
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),
@@ -261,81 +251,70 @@ class _AChiMiRivolgoSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 720;
-              final imageWidget = ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Image.asset(
-                  'assets/images/AlberoVento.jpeg',
-                  width: 320,
-                  height: 400,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                ),
-              );
-              final contentWidget = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'A chi mi rivolgo',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF93a996),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: AspectRatio(
+                    aspectRatio: 320 / 400,
+                    child: Image.asset(
+                      'assets/images/AlberoVento.jpeg',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  ..._categorie.map((c) => Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(c.$1, color: const Color(0xFF93a996), size: 28),
-                        const SizedBox(width: 14),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(c.$2,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                      color: Color(0xFF93a996))),
-                              const SizedBox(height: 4),
-                              Text(c.$3,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      height: 1.55,
-                                      color: Color(0xFF2C2C2C))),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-                ],
-              );
-
-              if (!isWide) {
-                return Column(
+                ),
+              ),
+              const SizedBox(width: 40),
+              Expanded(
+                flex: 3,
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    contentWidget,
-                    const SizedBox(height: 36),
-                    Center(child: imageWidget),
+                    const Text(
+                      'A chi mi rivolgo',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF93a996),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    ..._categorie.map((c) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(c.$1, color: const Color(0xFF93a996), size: 28),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(c.$2,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        color: Color(0xFF93a996))),
+                                const SizedBox(height: 4),
+                                Text(c.$3,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        height: 1.55,
+                                        color: Color(0xFF2C2C2C))),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
                   ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  imageWidget,
-                  const SizedBox(width: 48),
-                  Expanded(child: contentWidget),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -350,38 +329,45 @@ class _PrimoColloquioBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textContent = Column(
+    final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Il primo colloquio',
           style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: Color(0xFF93a996)),
         ),
-        SizedBox(height: 20),
-        Text(
+        const SizedBox(height: 20),
+        const Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
           style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
         ),
-        SizedBox(height: 16),
-        Text(
+        const SizedBox(height: 16),
+        const Text(
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
           style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
         ),
+        const SizedBox(height: 28),
+        ElevatedButton.icon(
+          onPressed: () => showDialog(
+            context: context,
+            builder: (_) => const ContactFormDialog(),
+          ),
+          icon: const Icon(Icons.calendar_today_outlined),
+          label: const Text('Richiedi un primo colloquio',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF2E8494),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            elevation: 3,
+          ),
+        ),
       ],
-    );
-
-    final imageWidget = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: Image.asset(
-        'assets/images/SassoParticolare.jpeg',
-        width: 320,
-        height: 380,
-        fit: BoxFit.cover,
-        errorBuilder: (_, _, _) => const SizedBox.shrink(),
-      ),
     );
 
     return Container(
@@ -391,28 +377,26 @@ class _PrimoColloquioBox extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 720;
-              if (!isWide) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    textContent,
-                    const SizedBox(height: 32),
-                    Center(child: imageWidget),
-                  ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: textContent),
-                  const SizedBox(width: 48),
-                  imageWidget,
-                ],
-              );
-            },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 3, child: textContent),
+              const SizedBox(width: 40),
+              Expanded(
+                flex: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: AspectRatio(
+                    aspectRatio: 320 / 380,
+                    child: Image.asset(
+                      'assets/images/SassoParticolare.jpeg',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -446,7 +430,7 @@ class _AreeInterventoSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 19),
+      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 0),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
@@ -454,7 +438,7 @@ class _AreeInterventoSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Aree di intervento',
+                'Aree di lavoro',
                 style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -507,6 +491,76 @@ class _AreaChip extends StatelessWidget {
   }
 }
 
+// ── Labirinti section ──────────────────────────────────────────────────────────
+
+class _LabirintiSection extends StatelessWidget {
+  const _LabirintiSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF0F7F4),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1100),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: AspectRatio(
+                    aspectRatio: 360 / 420,
+                    child: Image.asset(
+                      'assets/images/Maze.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 40),
+              const Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Labirinti',
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF93a996)),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
+                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
+                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
+                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _UltimoArticoloSection extends StatefulWidget {
   const _UltimoArticoloSection();
 
@@ -554,7 +608,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Dal blog',
+                    'Ultimo articolo pubblicato',
                     style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
