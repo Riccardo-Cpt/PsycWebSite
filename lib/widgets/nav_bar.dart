@@ -15,7 +15,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(100);
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +25,33 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       backgroundColor: bgColor,
-      foregroundColor: const Color(0xFF3B7A1D),
+      foregroundColor: const Color(0xFF93a996),
       automaticallyImplyLeading: false,
       elevation: t * 3.0,
       scrolledUnderElevation: 0,
+      toolbarHeight: 100,
       title: InkWell(
         onTap: () => context.go('/'),
-        child: const Text(
-          'Dr.ssa Maria Bianchi',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Color(0xFF3B7A1D)),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/images/Logo.png',
+              height: 72,
+              fit: BoxFit.contain,
+              errorBuilder: (_, _, _) => const SizedBox.shrink(),
+            ),
+            const SizedBox(width: 36),
+            Image.asset(
+              'assets/images/Signature.png',
+              height: 52,
+              fit: BoxFit.contain,
+              errorBuilder: (_, _, _) => const Text(
+                'Dr.ssa Maria Bianchi',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF93a996)),
+              ),
+            ),
+          ],
         ),
       ),
       actions: [
@@ -44,7 +61,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
             child: Text(
               'Naviga nel sito',
               style: TextStyle(
-                color: Color(0xFF3B7A1D),
+                color: Color(0xFF93a996),
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
               ),
@@ -134,17 +151,9 @@ class _NavScaffoldState extends State<NavScaffold>
             drawerOpen: _ctrl.value > 0.01,
             onToggleDrawer: _toggle,
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color(0xFFFFFFF0),
           body: Stack(
             children: [
-              // Global background image, fixed behind everything
-              Positioned.fill(
-                child: Image.asset(
-                  'assets/images/MainBackground.jpg',
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                ),
-              ),
               widget.body,
               // Scrim
               if (_ctrl.value > 0)

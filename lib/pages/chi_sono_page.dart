@@ -164,7 +164,7 @@ class _ProfileCard extends StatelessWidget {
               height: 180,
               color: const Color(0xFFE0F0F3),
               child: const Icon(Icons.person,
-                  size: 80, color: Color(0xFF3B7A1D)),
+                  size: 80, color: Color(0xFF93a996)),
             ),
           ),
         ),
@@ -175,7 +175,7 @@ class _ProfileCard extends StatelessWidget {
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3B7A1D)),
+              color: Color(0xFF93a996)),
         ),
         const SizedBox(height: 6),
         const Text(
@@ -183,7 +183,7 @@ class _ProfileCard extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 18,
-              color: Color(0xFF2E8494),
+              color: Color(0xFF93a996),
               fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
@@ -217,19 +217,19 @@ class _Section extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: const Color(0xFF3B7A1D), size: 24),
+            Icon(icon, color: const Color(0xFF93a996), size: 24),
             const SizedBox(width: 10),
             Text(
               title,
               style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3B7A1D)),
+                  color: Color(0xFF93a996)),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        const Divider(color: Color(0xFF3B7A1D), thickness: 1),
+        const Divider(color: Color(0xFF93a996), thickness: 1),
         const SizedBox(height: 12),
         ...items,
       ],
@@ -259,7 +259,7 @@ class _SectionItem extends StatelessWidget {
                 year!,
                 style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF2E8494),
+                    color: Color(0xFF93a996),
                     fontSize: 14),
               ),
             ),

@@ -69,7 +69,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF3B7A1D)),
+                      color: Color(0xFF93a996)),
                 ),
                 const SizedBox(height: 16),
                 FutureBuilder<List<Review>>(
@@ -110,7 +110,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                 ElevatedButton(
                   onPressed: _openForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3B7A1D),
+                    backgroundColor: const Color(0xFF93a996),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -343,7 +343,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.check_circle_outline, color: Color(0xFF3B7A1D), size: 64),
+            Icon(Icons.check_circle_outline, color: Color(0xFF93a996), size: 64),
             SizedBox(height: 16),
             Text(
               'Recensione rilasciata.',
@@ -386,7 +386,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                   : ElevatedButton(
                       onPressed: isVerified ? _submitReview : _sendLink,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF3B7A1D),
+                        backgroundColor: const Color(0xFF93a996),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
@@ -445,7 +445,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                 constraints: const BoxConstraints(),
                 icon: Icon(
                   i <= _stars ? Icons.star : Icons.star_border,
-                  color: const Color(0xFF3B7A1D),
+                  color: const Color(0xFF93a996),
                   size: 32,
                 ),
                 onPressed: () => setState(() => _stars = i),
@@ -479,7 +479,7 @@ class _ReviewFlowPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF3B7A1D),
+        foregroundColor: const Color(0xFF93a996),
         title: const Text('Lascia una recensione'),
       ),
       body: Center(

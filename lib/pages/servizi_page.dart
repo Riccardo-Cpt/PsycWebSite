@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/contatti.dart';
-import '../widgets/contact_chip.dart';
+import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -58,7 +57,7 @@ class ServiziPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3B7A1D)),
+                  color: Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -74,7 +73,7 @@ class ServiziPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3B7A1D)),
+                  color: Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
             LayoutBuilder(
@@ -112,89 +111,25 @@ class ServiziPage extends StatelessWidget {
 class _ContattiSection extends StatelessWidget {
   const _ContattiSection();
 
-  void _showPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        insetPadding: const EdgeInsets.symmetric(horizontal: 80, vertical: 24),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 360),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'Contattami',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF3B7A1D)),
-                ),
-                const SizedBox(height: 24),
-                ListTile(
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF3B7A1D),
-                    child: Icon(Icons.phone, color: Colors.white),
-                  ),
-                  title: const Text('Chiama',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: const Text(Contatti.telefono,
-                      textAlign: TextAlign.center),
-                  onTap: () {
-                    Navigator.pop(context);
-                    chiamaTelefono(Contatti.telefono);
-                  },
-                ),
-                ListTile(
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF3B7A1D),
-                    child: Icon(Icons.email_outlined, color: Colors.white),
-                  ),
-                  title: const Text('Scrivi un\'email',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: const Text(Contatti.email,
-                      textAlign: TextAlign.center),
-                  onTap: () {
-                    Navigator.pop(context);
-                    inviaEmail(Contatti.email);
-                  },
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Chiudi',
-                      style: TextStyle(color: Color(0xFF3B7A1D))),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: IntrinsicWidth(
         child: ElevatedButton.icon(
-          onPressed: () => _showPopup(context),
-          icon: const Icon(Icons.contact_phone_outlined),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (_) => const ContactFormDialog(),
+          ),
+          icon: const Icon(Icons.calendar_today_outlined),
           label: const Text(
-            'Contattami',
+            'Richiedi un primo colloquio',
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF3B7A1D),
+            backgroundColor: const Color(0xFF93a996),
             foregroundColor: Colors.white,
             padding:
-                const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)),
             elevation: 3,
@@ -246,7 +181,7 @@ class _AreaCard extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF3B7A1D))),
+                      color: Color(0xFF93a996))),
               const SizedBox(height: 10),
               Text(descrizione,
                   style: const TextStyle(

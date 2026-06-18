@@ -34,15 +34,37 @@ Per il sito conviene mantenere le pagine principali più accoglienti, chiare e o
 
 In questo modo il visitatore trova prima uno spazio di riconoscimento e fiducia e poi, se lo desidera, approfondisce gli aspetti professionali, pratici e informativi.
 
-# Suggerimento strategico
+Il sito non deve essere d'impatto, ma permetter il visitatore di interessarsi e leggere i contenuti. Vogliamo evitare qualsiasi sezione contenenti citazioni o frasi fatte, si preferisce inserire molto testo esplicativo.
 
-Se desideri un sito particolarmente ordinato, puoi usare nel menu solo le pagine principali e lasciare le altre come pagine di approfondimento raggiungibili dall’interno dei testi o dal footer.
+Il contenuto viene sparso su più pagine per snellire e facilitare la fruizione dei contenuti.
 
-Questo rende la navigazione più pulita e aiuta chi arriva sul sito a orientarsi più facilmente fin dai primi secondi.
+# Di seguito si presentano le sezioni ed il contenuto che devono contenere
 
-# Testi finali pronti da copiare nel sito
+# 1. Home
 
-# Home
+## Header / Menu
+
+- Logo o nome professionale 
+- Home
+- Chi sono
+- A chi mi rivolgo
+- Approccio terapeutico
+- Psicoterapia
+- Contatti
+
+## Hero iniziale
+
+### Titolo
+
+**Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie**
+
+### Sottotitolo
+
+Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.
+
+### Call To Action
+
+**Richiedi un primo colloquio**
 
 ## Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie
 
@@ -54,7 +76,43 @@ Nel mio studio offro uno spazio di ascolto professionale, riservato e accoglient
 
 Il percorso psicologico o psicoterapeutico nasce dall’incontro con una storia unica e viene costruito con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.
 
+
+## A chi mi rivolgo
+
+- Adulti
+- Adolescenti
+- Coppie e famiglie
+- Crisi del ciclo di vita
+
+## Come lavoro
+
+Spiegazione sintetica dell'approccio terapeutico.
+
+## Aree di intervento
+
+- Ansia e stress
+- Traumi e lutto
+- Difficoltà relazionali e affettive
+- Dipendenze
+- Disturbi della sessualità
+- Fragilità adolescenziali
+- Conflitti di coppia e familiari
+
+## Primo colloquio
+
+Box evidenziato e distinto dal resto della pagina contenente scritta:
+"Il primo incontro è uno spazio dedicato all’ascolto della domanda di aiuto e alla comprensione del bisogno portato.
+
+È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto."
+
+## Richiamo simbolico finale
+
+### Labirinti
+
+In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.
+
 ### Aree di lavoro
+Aggiungere piccole icone per indicare un nuovo punto, bisogna rendere questa sezione non pesante alla lettura
 
 - Ansia
 - Attacchi di panico
@@ -70,13 +128,8 @@ Il percorso psicologico o psicoterapeutico nasce dall’incontro con una storia 
 - Disturbi alimentari
 - Crisi del ciclo di vita
 
-### Primo colloquio
 
-Il primo incontro è uno spazio dedicato all’ascolto della domanda di aiuto e alla comprensione del bisogno portato.
-
-È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.
-
-# Chi sono
+# 2. Chi sono
 
 ## Presentazione
 
@@ -107,7 +160,7 @@ Il mio approccio è umanistico-relazionale, con formazione psicoanalitica contem
 
 Al centro del lavoro c’è la persona nella sua storia, nei suoi vissuti e nelle sue relazioni significative.
 
-# A chi mi rivolgo
+# 3. A chi mi rivolgo
 
 ## Adulti
 
@@ -136,7 +189,7 @@ Il lavoro può riguardare fasi delicate dell’esistenza come:
 
 e altri passaggi complessi della vita.
 
-# Approccio terapeutico
+# 4. Approccio terapeutico
 
 ## EMDR
 
@@ -177,7 +230,7 @@ L’obiettivo del lavoro terapeutico è aiutare la persona a:
 - Entrare in contatto con le proprie risorse
 - Sviluppare un cambiamento più autentico e duraturo
 
-# Psicoterapia
+# 5. Psicoterapia
 
 ## Che cos’è la psicoterapia
 
@@ -212,7 +265,7 @@ L’obiettivo non è soltanto ridurre la sofferenza, ma favorire:
 - Valorizzazione delle risorse personali
 - Cambiamento autentico e duraturo
 
-# Disturbi trattati
+# 6. Disturbi trattati
 
 Mi occupo di disagio psicologico nelle sue diverse manifestazioni:
 
@@ -241,7 +294,7 @@ Accolgo inoltre situazioni legate:
 
 Ogni persona viene incontrata nella sua specificità, senza etichette riduttive.
 
-# Psicologo, psicoterapeuta e psichiatra
+# 7. Psicologo, psicoterapeuta e psichiatra
 
 ## Chi è lo psicoterapeuta
 
@@ -269,7 +322,7 @@ Si occupa di:
 
 A seconda del bisogno della persona, queste figure possono collaborare tra loro offrendo un intervento integrato e adeguato alla complessità della situazione.
 
-# Privacy e consenso informato
+# 8. Privacy e consenso informato
 
 ## Privacy
 
@@ -300,7 +353,7 @@ Questo aspetto è particolarmente importante nelle situazioni di separazione fam
 
 Privacy e consenso informato rappresentano strumenti fondamentali di tutela, chiarezza e fiducia all’interno della relazione professionale.
 
-# FAQ
+# 9. FAQ
 
 ## Prima di iniziare
 
@@ -360,7 +413,7 @@ Prima dell’avvio vengono illustrati obiettivi, modalità di lavoro, tutela del
 
 ---
 
-# Contatti e primo colloquio
+# 10. Contatti e primo colloquio
 
 ## Il primo colloquio
 
@@ -386,7 +439,7 @@ Ogni contatto e ogni colloquio avvengono in un contesto di ascolto professionale
 
 ---
 
-# Labirinti
+# 11. Labirinti
 
 ## Strumenti utilizzati
 
@@ -471,311 +524,3 @@ Il lavoro terapeutico non cancella ciò che è stato vissuto, ma può aiutare a 
 A volte il percorso comincia proprio quando non si vede ancora chiaramente la via.
 
 Ed è proprio in questo attraversamento, paziente e condiviso, che può emergere qualcosa di nuovo: una maggiore comprensione di sé, una forma più profonda di fiducia e una possibilità di cambiamento.
-
----
-
-# Mini guida grafica personalizzata per il sito
-
-## Stile visivo consigliato
-
-Per questo sito è consigliato uno stile contemporaneo, pulito, accogliente e raffinato.
-
-L'impressione generale dovrebbe trasmettere:
-
-- Calma
-- Affidabilità
-- Ascolto
-- Professionalità
-
-Evitando sia un effetto troppo freddo e clinico sia una grafica eccessivamente decorativa.
-
-## Palette colori consigliata
-
-- Avorio o bianco caldo come base
-- Beige sabbia e tortora chiaro per superfici secondarie
-- Verde salvia o verde grigio per dettagli e accenti
-- Piccoli tocchi di rosa cipria o blu polvere
-
-È preferibile evitare colori troppo saturi o contrasti eccessivi.
-
-## Font consigliati
-
-### Corpo testo
-
-- Inter
-- Open Sans
-
-### Titoli
-
-- Lora
-- Cormorant Garamond
-
-L'obiettivo è privilegiare leggibilità, coerenza e respiro tipografico.
-
-## Immagini e atmosfera visiva
-
-Sono consigliate immagini sobrie e non invasive:
-
-- Texture naturali
-- Dettagli di luce
-- Elementi botanici
-- Acqua
-- Pietra
-- Sentieri
-- Superfici materiche
-
-Meglio evitare immagini troppo stock, eccessivamente sorridenti o artificiali.
-
-## Struttura grafica della homepage
-
-1. Hero iniziale
-2. Breve presentazione
-3. A chi mi rivolgo
-4. Come lavoro
-5. Aree di intervento
-6. Primo colloquio
-7. Richiamo simbolico finale
-
-## Tono generale
-
-Professionale, umano, sobrio e contemporaneo.
-
----
-
-# Wireframe testuale della homepage
-
-## Header / Menu
-
-- Logo o nome professionale
-- Home
-- Chi sono
-- A chi mi rivolgo
-- Approccio terapeutico
-- Psicoterapia
-- Contatti
-
-## Hero iniziale
-
-### Titolo
-
-**Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie**
-
-### Sottotitolo
-
-Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.
-
-### Call To Action
-
-**Richiedi un primo colloquio**
-
-## Breve presentazione
-
-Testo introduttivo con ampio spazio bianco e forte leggibilità.
-
-## A chi mi rivolgo
-
-- Adulti
-- Adolescenti
-- Coppie e famiglie
-- Crisi del ciclo di vita
-
-## Come lavoro
-
-Spiegazione sintetica dell'approccio terapeutico.
-
-## Aree di intervento
-
-- Ansia e stress
-- Traumi e lutto
-- Difficoltà relazionali e affettive
-- Dipendenze
-- Disturbi della sessualità
-- Fragilità adolescenziali
-- Conflitti di coppia e familiari
-
-## Primo colloquio
-
-Box evidenziato e distinto dal resto della pagina.
-
-## Richiamo simbolico finale
-
-### Labirinti
-
-In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.
-
----
-
-# Mini moodboard testuale
-
-## Palette 1 – Naturale e accogliente
-
-**Base**
-
-- Avorio caldo
-- Bianco morbido
-
-**Secondari**
-
-- Beige sabbia
-- Tortora chiaro
-
-**Accenti**
-
-- Verde salvia
-- Rosa cipria tenue
-
-**Effetto**
-
-Calmo, delicato e rassicurante.
-
-## Palette 2 – Elegante e contemporanea
-
-**Base**
-
-- Bianco caldo
-- Grigio chiarissimo
-
-**Secondari**
-
-- Taupe chiaro
-- Pietra
-
-**Accenti**
-
-- Verde oliva polveroso
-- Blu grigio morbido
-
-**Effetto**
-
-Raffinato, essenziale e internazionale.
-
-## Palette 3 – Luminosa e minimale
-
-**Base**
-
-- Bianco
-- Avorio chiaro
-- Crema tenue
-
-**Accenti**
-
-- Verde grigio
-- Sabbia fredda
-
-**Effetto**
-
-Arioso, pulito ed essenziale.
-
-## Combinazioni font
-
-### Soluzione 1
-
-- Titoli: Lora o Cormorant Garamond
-- Testo: Inter o Open Sans
-
-### Soluzione 2
-
-- Tutto il sito: Inter o Source Sans Pro
-
-### Soluzione 3
-
-- Titoli: Lora
-- Testo: Source Sans Pro o Open Sans
-
----
-
-# Scheda definitiva per il web designer
-
-## Stile generale
-
-Il sito deve presentare un'estetica:
-
-- Contemporanea
-- Pulita
-- Luminosa
-- Accogliente
-
-Con molto spazio bianco, gerarchie visive chiare e un tono professionale ma umano.
-
-## Palette finale
-
-### Base
-
-- Avorio caldo
-- Bianco morbido
-
-### Secondari
-
-- Beige sabbia
-- Tortora chiaro
-
-### Accenti
-
-- Verde salvia
-- Rosa cipria tenue
-
-## Font finali
-
-### Titoli
-
-**Lora**
-
-### Corpo testo
-
-**Inter**
-
-## Menu principale
-
-- Home
-- Chi sono
-- A chi mi rivolgo
-- Approccio terapeutico
-- Psicoterapia
-- Disturbi trattati
-- Contatti
-
-## Pagine secondarie
-
-- Strumenti utilizzati
-- Psicologo, psicoterapeuta e psichiatra
-- Privacy e consenso informato
-- FAQ
-- Labirinti
-
-## Tono dei testi
-
-- Professionale
-- Chiaro
-- Accogliente
-- Contemporaneo
-
-## Indicazioni sulle immagini
-
-Preferire:
-
-- Texture naturali
-- Dettagli di luce
-- Elementi botanici
-- Acqua
-- Pietra
-- Sentieri
-- Immagini evocative e discrete
-
-Evitare:
-
-- Foto stock artificiali
-- Immagini eccessivamente patinate
-- Grafiche invasive
-
-## Indicazioni pratiche
-
-- Molto spazio bianco
-- Sezioni ben distanziate
-- Testi brevi e leggibili
-- Card leggere e ordinate
-- Pulsanti essenziali
-- Colori morbidi
-
-### Obiettivo finale
-
-Creare un sito elegante, rassicurante, contemporaneo e professionale, capace di trasmettere fiducia, ascolto e autorevolezza fin dal primo contatto.

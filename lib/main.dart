@@ -12,12 +12,14 @@ import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
 import 'services/review_auth_service.dart';
 import 'services/reviews_service.dart';
+import 'services/contact_service.dart';
 
 final articoliService = ArticoliService();
 final storageService = StorageService();
 final blogAuthService = BlogAuthService();
 final reviewAuthService = ReviewAuthService();
 final reviewsService = ReviewsService();
+final contactService = ContactService();
 
 final _router = GoRouter(
   errorBuilder: (context, state) => Scaffold(
@@ -58,7 +60,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B7A1D)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

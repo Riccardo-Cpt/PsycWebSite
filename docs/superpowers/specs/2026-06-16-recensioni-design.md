@@ -97,7 +97,7 @@ Uses `NavScaffold`. Contains:
 ### Review card
 
 `Card` showing:
-- Row of 5 star icons (filled `Icons.star`, empty `Icons.star_border`), color `Color(0xFF3B7A1D)`
+- Row of 5 star icons (filled `Icons.star`, empty `Icons.star_border`), color `Color(0xFF93a996)`
 - Reviewer name (bold) + date (`DateFormat('yyyy-MM-dd')`)
 - description text
 
@@ -142,8 +142,8 @@ On save:
 `lib/widgets/nav_drawer.dart` — add entry:
 ```dart
 ListTile(
-  leading: const Icon(Icons.star_outline, color: Color(0xFF3B7A1D)),
-  title: const Text('Recensioni', style: TextStyle(color: Color(0xFF3B7A1D))),
+  leading: const Icon(Icons.star_outline, color: Color(0xFF93a996)),
+  title: const Text('Recensioni', style: TextStyle(color: Color(0xFF93a996))),
   onTap: () => _go(context, '/recensioni'),
 ),
 ```

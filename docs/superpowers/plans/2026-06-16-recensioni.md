@@ -589,7 +589,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B7A1D)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
@@ -692,7 +692,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
             style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF3B7A1D)),
+                color: Color(0xFF93a996)),
           ),
           const SizedBox(height: 16),
           FutureBuilder<List<Review>>(
@@ -736,7 +736,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                   : ElevatedButton(
                       onPressed: _onButtonTap,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF3B7A1D),
+                        backgroundColor: const Color(0xFF93a996),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
@@ -755,7 +755,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
               child: TextButton(
                 onPressed: () => reviewAuthService.logout(),
                 child: const Text('Esci',
-                    style: TextStyle(color: Color(0xFF3B7A1D))),
+                    style: TextStyle(color: Color(0xFF93a996))),
               ),
             ),
           ],
@@ -785,7 +785,7 @@ class _ReviewCard extends StatelessWidget {
                 for (int i = 1; i <= 5; i++)
                   Icon(
                     i <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFF3B7A1D),
+                    color: const Color(0xFF93a996),
                     size: 20,
                   ),
                 const SizedBox(width: 12),
@@ -913,7 +913,7 @@ class _AuthDialogState extends State<_AuthDialog> {
             _isLogin
                 ? 'Non hai un account? Registrati'
                 : 'Hai già un account? Accedi',
-            style: const TextStyle(color: Color(0xFF3B7A1D)),
+            style: const TextStyle(color: Color(0xFF93a996)),
           ),
         ),
         if (_loading)
@@ -928,7 +928,7 @@ class _AuthDialogState extends State<_AuthDialog> {
           ElevatedButton(
             onPressed: _submit,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF3B7A1D),
+              backgroundColor: const Color(0xFF93a996),
               foregroundColor: Colors.white,
             ),
             child: Text(_isLogin ? 'Accedi' : 'Registrati'),
@@ -1026,7 +1026,7 @@ class _ReviewFormState extends State<_ReviewForm> {
                   constraints: const BoxConstraints(),
                   icon: Icon(
                     i <= _stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFF3B7A1D),
+                    color: const Color(0xFF93a996),
                     size: 32,
                   ),
                   onPressed: () => setState(() => _stars = i),
@@ -1047,7 +1047,7 @@ class _ReviewFormState extends State<_ReviewForm> {
               : ElevatedButton(
                   onPressed: _save,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF3B7A1D),
+                    backgroundColor: const Color(0xFF93a996),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -1071,7 +1071,7 @@ class _ReviewFormPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF3B7A1D),
+        foregroundColor: const Color(0xFF93a996),
         title: Text(
             existing == null ? 'Lascia una recensione' : 'Modifica la tua recensione'),
       ),
@@ -1196,7 +1196,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B7A1D)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
@@ -1220,36 +1220,36 @@ children: [
         Text(
           'Dr.ssa Maria Bianchi',
           style: TextStyle(
-              color: Color(0xFF3B7A1D),
+              color: Color(0xFF93a996),
               fontSize: 18,
               fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 4),
         Text(
           'Psicologa e Psicoterapeuta',
-          style: TextStyle(color: Color(0xFF3B7A1D), fontSize: 13),
+          style: TextStyle(color: Color(0xFF93a996), fontSize: 13),
         ),
       ],
     ),
   ),
   ListTile(
-    leading: const Icon(Icons.home_outlined, color: Color(0xFF3B7A1D)),
-    title: const Text('Home', style: TextStyle(color: Color(0xFF3B7A1D))),
+    leading: const Icon(Icons.home_outlined, color: Color(0xFF93a996)),
+    title: const Text('Home', style: TextStyle(color: Color(0xFF93a996))),
     onTap: () => _go(context, '/'),
   ),
   ListTile(
-    leading: const Icon(Icons.psychology_outlined, color: Color(0xFF3B7A1D)),
-    title: const Text('Servizi', style: TextStyle(color: Color(0xFF3B7A1D))),
+    leading: const Icon(Icons.psychology_outlined, color: Color(0xFF93a996)),
+    title: const Text('Servizi', style: TextStyle(color: Color(0xFF93a996))),
     onTap: () => _go(context, '/servizi'),
   ),
   ListTile(
-    leading: const Icon(Icons.article_outlined, color: Color(0xFF3B7A1D)),
-    title: const Text('I miei articoli', style: TextStyle(color: Color(0xFF3B7A1D))),
+    leading: const Icon(Icons.article_outlined, color: Color(0xFF93a996)),
+    title: const Text('I miei articoli', style: TextStyle(color: Color(0xFF93a996))),
     onTap: () => _go(context, '/articoli'),
   ),
   ListTile(
-    leading: const Icon(Icons.star_outline, color: Color(0xFF3B7A1D)),
-    title: const Text('Recensioni', style: TextStyle(color: Color(0xFF3B7A1D))),
+    leading: const Icon(Icons.star_outline, color: Color(0xFF93a996)),
+    title: const Text('Recensioni', style: TextStyle(color: Color(0xFF93a996))),
     onTap: () => _go(context, '/recensioni'),
   ),
 ],
