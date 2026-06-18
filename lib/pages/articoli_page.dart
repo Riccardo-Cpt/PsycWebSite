@@ -174,7 +174,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                         'Naviga nel sito',
                         style: TextStyle(
                             color: Color(0xFF93a996),
-                            fontSize: 17,
+                            fontSize: 28,
                             fontWeight: FontWeight.w600),
                       ),
                     ),
