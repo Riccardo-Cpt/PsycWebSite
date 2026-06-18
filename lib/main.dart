@@ -6,6 +6,10 @@ import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
 import 'pages/approccio_terapeutico_page.dart';
 import 'pages/psicoterapia_page.dart';
+import 'pages/figure_professionali_page.dart';
+import 'pages/disturbi_page.dart';
+import 'pages/privacy_page.dart';
+import 'pages/faq_page.dart';
 import 'pages/chi_sono_page.dart';
 import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
@@ -48,6 +52,10 @@ final _router = GoRouter(
     GoRoute(path: '/chi-sono', builder: (_, _) => const ChiSonoPage()),
     GoRoute(path: '/approccio-terapeutico', builder: (_, _) => const ApproccioTerapeuticoPage()),
     GoRoute(path: '/psicoterapia', builder: (_, _) => const PsicoterapiaPage()),
+    GoRoute(path: '/disturbi', builder: (_, _) => const DisturbPage()),
+    GoRoute(path: '/figure-professionali', builder: (_, _) => const FigureProfessionaliPage()),
+    GoRoute(path: '/privacy', builder: (_, _) => const PrivacyPage()),
+    GoRoute(path: '/faq', builder: (_, _) => const FaqPage()),
   ],
 );
 
