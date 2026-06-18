@@ -107,7 +107,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
         children: [
           const Text(
             'Richiedi un primo colloquio',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           const Text(

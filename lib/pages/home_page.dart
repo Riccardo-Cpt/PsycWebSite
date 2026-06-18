@@ -182,6 +182,21 @@ class _IntroSection extends StatelessWidget {
         'Il percorso psicologico o psicoterapeutico nasce dall\'incontro con una storia unica e viene costruito '
         'con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.';
 
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 340 / 420,
+        child: Image.asset(
+          'assets/images/NinfeeStagno.jpeg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
+    final textWidget = Text(
+      text,
+      style: const TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -189,36 +204,23 @@ class _IntroSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Text(
-                  text,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    height: 1.75,
-                    color: Color(0xFF2C2C2C),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 40),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 340 / 420,
-                    child: Image.asset(
-                      'assets/images/NinfeeStagno.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [textWidget, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: textWidget),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: image),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -244,6 +246,59 @@ class _AChiMiRivolgoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 320 / 400,
+        child: Image.asset(
+          'assets/images/AlberoVento.jpeg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'A chi mi rivolgo',
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF93a996),
+          ),
+        ),
+        const SizedBox(height: 24),
+        ..._categorie.map((c) => Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(c.$1, color: const Color(0xFF93a996), size: 28),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(c.$2,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Color(0xFF93a996))),
+                    const SizedBox(height: 4),
+                    Text(c.$3,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            height: 1.55,
+                            color: Color(0xFF2C2C2C))),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )),
+      ],
+    );
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
@@ -251,70 +306,23 @@ class _AChiMiRivolgoSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 320 / 400,
-                    child: Image.asset(
-                      'assets/images/AlberoVento.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 40),
-              Expanded(
-                flex: 3,
-                child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'A chi mi rivolgo',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    ..._categorie.map((c) => Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(c.$1, color: const Color(0xFF93a996), size: 28),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(c.$2,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                        color: Color(0xFF93a996))),
-                                const SizedBox(height: 4),
-                                Text(c.$3,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        height: 1.55,
-                                        color: Color(0xFF2C2C2C))),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                  ],
-                ),
-              ),
-            ],
+                  children: [content, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 2, child: image),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 3, child: content),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -370,6 +378,17 @@ class _PrimoColloquioBox extends StatelessWidget {
       ],
     );
 
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 320 / 380,
+        child: Image.asset(
+          'assets/images/SassoParticolare.jpeg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -377,26 +396,23 @@ class _PrimoColloquioBox extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(flex: 3, child: textContent),
-              const SizedBox(width: 40),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 320 / 380,
-                    child: Image.asset(
-                      'assets/images/SassoParticolare.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [textContent, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: textContent),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: image),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -498,6 +514,44 @@ class _LabirintiSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 360 / 420,
+        child: Image.asset(
+          'assets/images/Maze.png',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
+    const content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Labirinti',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF93a996)),
+        ),
+        SizedBox(height: 20),
+        Text(
+          'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
+          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+        ),
+        SizedBox(height: 16),
+        Text(
+          'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
+          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+        ),
+        SizedBox(height: 16),
+        Text(
+          'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
+          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+        ),
+      ],
+    );
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
@@ -505,55 +559,23 @@ class _LabirintiSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 360 / 420,
-                    child: Image.asset(
-                      'assets/images/Maze.png',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 40),
-              const Expanded(
-                flex: 3,
-                child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Labirinti',
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF93a996)),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
-                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
-                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
-                      style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                  children: [content, SizedBox(height: 32)],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 2, child: image),
+                  const SizedBox(width: 40),
+                  const Expanded(flex: 3, child: content),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -881,7 +903,7 @@ class _CtaSection extends StatelessWidget {
             children: [
               _CtaButton(
                 icon: Icons.psychology,
-                label: 'A chi mi rivolgo',
+                label: 'Di cosa mi occupo',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
