@@ -422,17 +422,17 @@ class _CtaSection extends StatelessWidget {
                 child: isWide
                     ? Center(
                         child: SizedBox(
-                          width: 700,
+                          width: 800,
                           height: 380,
                           child: Image.asset(
-                            'assets/images/germinatingPlants.jpg',
+                            'assets/images/NinfeeStagno2.jpeg',
                             fit: BoxFit.fill,
                             errorBuilder: (_, _, _) => const SizedBox.shrink(),
                           ),
                         ),
                       )
                     : Image.asset(
-                        'assets/images/germinatingPlants.jpg',
+                        'assets/images/NinfeeStagno2.jpeg',
                         width: double.infinity,
                         height: 380,
                         fit: BoxFit.fill,
