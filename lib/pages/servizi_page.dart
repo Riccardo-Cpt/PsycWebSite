@@ -69,7 +69,7 @@ class ServiziPage extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             const Text(
-              'Aree di intervento',
+              'A chi mi rivolgo',
               style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,

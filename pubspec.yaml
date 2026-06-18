@@ -72,6 +72,10 @@ flutter:
     - assets/images/Logo.png
     - assets/images/Signature.png
     - assets/images/Maze.png
+    - assets/images/NinfeeStagno2.jpeg
+    - assets/images/TaleaPiantaGrassa.jpeg
+    - assets/images/germinatingPlants.jpg
+    - assets/images/NinfeeSottAcqua.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
