@@ -546,7 +546,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
         return Container(
           width: double.infinity,
           color: Colors.transparent,
-          padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 900),
@@ -606,7 +606,7 @@ class _ArticoloCard extends StatelessWidget {
     return Card(
       elevation: 1,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(14),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -681,7 +681,7 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
         return Container(
           width: double.infinity,
           color: Colors.transparent,
-          padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 900),
@@ -758,7 +758,7 @@ class _ReviewPreviewCard extends StatelessWidget {
     return Card(
       elevation: 2,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -808,7 +808,7 @@ class _CtaSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 32),
+      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 32),
       color: Colors.transparent,
       child: Column(
         children: [

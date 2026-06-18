@@ -62,7 +62,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               'Naviga nel sito',
               style: TextStyle(
                 color: Color(0xFF93a996),
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: FontWeight.w600,
               ),
             ),
