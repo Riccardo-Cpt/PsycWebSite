@@ -5,6 +5,7 @@ import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
 import 'pages/approccio_terapeutico_page.dart';
+import 'pages/psicoterapia_page.dart';
 import 'pages/chi_sono_page.dart';
 import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
@@ -46,6 +47,7 @@ final _router = GoRouter(
     GoRoute(path: '/admin', builder: (_, _) => const ArticoliAdminPage()),
     GoRoute(path: '/chi-sono', builder: (_, _) => const ChiSonoPage()),
     GoRoute(path: '/approccio-terapeutico', builder: (_, _) => const ApproccioTerapeuticoPage()),
+    GoRoute(path: '/psicoterapia', builder: (_, _) => const PsicoterapiaPage()),
   ],
 );
 

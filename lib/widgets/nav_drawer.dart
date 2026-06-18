@@ -80,6 +80,13 @@ class NavDrawer extends StatelessWidget {
                 onTap: () => _go(context, '/approccio-terapeutico'),
               ),
               ListTile(
+                leading: const Icon(Icons.volunteer_activism_outlined,
+                    color: Color(0xFF93a996)),
+                title: const Text('Psicoterapia',
+                    style: TextStyle(color: Color(0xFF93a996))),
+                onTap: () => _go(context, '/psicoterapia'),
+              ),
+              ListTile(
                 leading: const Icon(Icons.article_outlined,
                     color: Color(0xFF93a996)),
                 title: const Text('Il mio blog',

@@ -76,6 +76,9 @@ flutter:
     - assets/images/TaleaPiantaGrassa.jpeg
     - assets/images/germinatingPlants.jpg
     - assets/images/NinfeeSottAcqua.jpeg
+    - assets/images/Arcobaleno.jpeg
+    - assets/images/fallingLeaves.jpg
+    - assets/images/lilium.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
