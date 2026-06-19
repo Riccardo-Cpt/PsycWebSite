@@ -903,14 +903,14 @@ class _CtaSection extends StatelessWidget {
             children: [
               _CtaButton(
                 icon: Icons.psychology,
-                label: 'Scopri di cosa mi occupo',
+                label: 'Di cosa mi occupo',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
               ),
               _CtaButton(
                 icon: Icons.calendar_today_outlined,
-                label: 'Prenota un primo colloquio',
+                label: 'Contattami',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => showDialog(
@@ -920,7 +920,7 @@ class _CtaSection extends StatelessWidget {
               ),
               _CtaButton(
                 icon: Icons.person_3_rounded ,
-                label: 'Cos\'è uno psicoterapeuta',
+                label: 'Lo psicoterapeuta',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/figure-professionali'),
