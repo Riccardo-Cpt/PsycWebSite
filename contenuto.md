@@ -56,32 +56,32 @@ Il contenuto viene sparso su più pagine per snellire e facilitare la fruizione 
 
 ### Titolo
 
-**Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie**
+**Psicologa Psicoterapeuta per adulti, adolescenti, coppie e famiglie**
 
 ### Sottotitolo
 
-Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.
+Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento e desidera comprendere meglio ciò che sta vivendo.
 
 ### Call To Action
 
 **Richiedi un primo colloquio**
 
-## Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie
+## Psicologa Psicoterapeuta per adulti, adolescenti, coppie e famiglie
 
-Ci sono momenti della vita in cui tutto può sembrare più faticoso: le relazioni si complicano, l’ansia prende spazio, il dolore emotivo diventa difficile da sostenere o ci si sente semplicemente smarriti.
+Chiedere aiuto no è un segno di debolezza, ma un passo importante verso una maggiore consapevolezza di sé. La psicoterapia può aiutare a comprendere il proprio disagio, ritrovare equilibrio, affrontare crisi personali o relazionali e sviluppare nuove risorse interiori.
 
-In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione di sé e verso la possibilità di ritrovare equilibrio.
+In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione di sé e verso la possibilità di ritrovare maggiore equilibrio.
 
-Nel mio studio offro uno spazio di ascolto professionale, riservato e accogliente, in cui la persona possa sentirsi riconosciuta nella propria esperienza e accompagnata con rispetto, sensibilità e competenza.
+Accogliere la sofferenza psicologica significa offrire uno spazio in cui la persona possa sentirsi ascoltata, riconosciuta e accompagnata.
 
-Il percorso psicologico o psicoterapeutico nasce dall’incontro con una storia unica e viene costruito con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.
+Il percorso di psicoterapia nasce dall’incontro con una storia unica e viene costruito con attenzione ai tempi, ai bisogni e alla specificità di ciascuno. L'obiettivo è offrire un luogo sicuro in cui dare significato al disagio e costruire un cambiamento autentico.
 
 ## A chi mi rivolgo
 
 - Adulti
-- Adolescenti
+- Adolescenti, e giovani adulti
 - Coppie e famiglie
-- Crisi del ciclo di vita
+- Terza età
 
 ## Come lavoro
 
@@ -89,13 +89,18 @@ Spiegazione sintetica dell'approccio terapeutico.
 
 ## Aree di intervento
 
-- Ansia e stress
-- Traumi e lutto
-- Difficoltà relazionali e affettive
-- Dipendenze
-- Disturbi della sessualità
-- Fragilità adolescenziali
-- Conflitti di coppia e familiari
+- Disturbi di ansia, attacchi di panico, stress acuto, disturbi dell'adattamento e vissuti di forte preoccupazione anche quando collegati a esperienze traumatiche più gravi come disturbo post traumatico da stress.
+- Vissuti depressivi, tristezza persistente, perdita di motivazione e autostima, difficoltà nel ritrovare energia, interesse e fiducia nelle proprie possibilità. 
+- Difficoltà relazionali e dipendenza affettiva, problemi di coppia, nella comunicazione, nell'intimità o nella costruzione di legami soddisfacenti.
+- Sintomi psicofisici e somatizzazioni, quando il disagio emotivo si esprime anche attraverso il corpo, con tensioni, dolori, malesseri o preoccupazioni legate alla salute. 
+- Dipendenze e comportamenti compulsivi, comprese le difficoltà legate all'uso di sostanze, al gioco d'azzardo, a internet, allo shopping compulsivoo altre forme di di dipendenza comportamentale.
+- Problematiche dell'area sessuale (maschile e femminile): disturbo del desiderio, dell'eccitazione, dell'orgasmo, da dolore sessuale e non (vulvodinia, vaginismo, nevralgia del pudendo, dispareunia).
+- Disturbi alimentari e difficoltà nel rapporto con il corpo, il cibo e l'immagine di sé
+- Disturbi del sonno, difficoltà di adattamento, impulsività e gestione della rabbia, e momenti di disorientamento legatia cambiamenti importanti nella vita o sepazioni.
+- Traumi, esperienze di maltrattamento, violenza familiare, trascuratezza, abuso, separazioni difficili, lutti e altre ferite emotive significative.
+- Stress lavorativo, mobbing, burnout e difficoltà psicologiche legate al contesto professionale.
+- Disturbi dissociativi, disturbi della personalità (borderline, paranoide, schizoide, antisociale, istrionico, narcisistico, evitante, dipendente, ossessivo-compulsivo ecc).
+- Neurodivergenza, sovraccarico emotivo, burout autistico.
 
 ## Primo colloquio
 
@@ -108,23 +113,28 @@ Box evidenziato e distinto dal resto della pagina contenente scritta:
 
 ### Labirinti
 
-In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.
-
+In alcuni momenti della vita ci si può sentire smarriti. Il labirinto rappresenta la metafora del percorso interiore. in alcuni momenti della vita ci si può sentire intrappolati in passaggi difficili e ripetitivi dove è impossibile trovare una chiara direzione. I disagio psicologico può assumere proprio questa forma: un cammino complesso, faticoso, a tratti senza uscita. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza per ritrovarsi migliorati.
+ 
 ### Aree di lavoro
 Aggiungere piccole icone per indicare un nuovo punto, bisogna rendere questa sezione non pesante alla lettura
 
 - Ansia
 - Attacchi di panico
-- Stress
+- Stress lavorativo
 - Vissuti depressivi
 - Lutto
 - Traumi
+- Violenza domestica
 - Difficoltà relazionali e affettive
 - Conflitti di coppia e familiari
 - Fragilità adolescenziali
 - Dipendenze
 - Problematiche della sessualità
 - Disturbi alimentari
+- disturbi della personalità
+- Gelosia
+- Neurodivergenza
+- Autismo ad alto funzionamento
 - Crisi del ciclo di vita
 
 
