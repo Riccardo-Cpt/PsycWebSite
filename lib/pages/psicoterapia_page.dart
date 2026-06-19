@@ -130,7 +130,7 @@ class _CosESection extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 340 / 420,
                     child: Image.asset(
-                      'assets/images/Arcobaleno.jpeg',
+                      'assets/images/Arcobaleno.webp',
                       fit: BoxFit.cover,
                       errorBuilder: (_, _, _) => const SizedBox.shrink(),
                     ),
@@ -178,7 +178,7 @@ class _QuandoSection extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 320 / 400,
                     child: Image.asset(
-                      'assets/images/fallingLeaves.jpg',
+                      'assets/images/fallingLeaves.webp',
                       fit: BoxFit.cover,
                       errorBuilder: (_, _, _) => const SizedBox.shrink(),
                     ),
@@ -420,7 +420,7 @@ class _CtaSection extends StatelessWidget {
                   width: double.infinity,
                   height: isWide ? 390 : 360,
                   child: Image.asset(
-                    'assets/images/NinfeeStagno2.jpeg',
+                    'assets/images/NinfeeStagno2.webp',
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (_, _, _) => const SizedBox.shrink(),

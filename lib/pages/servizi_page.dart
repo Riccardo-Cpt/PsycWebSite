@@ -16,25 +16,25 @@ class ServiziPage extends StatelessWidget {
     (
       'Difficoltà relazionali e di coppia',
       'Percorsi per migliorare la comunicazione, affrontare i conflitti e ritrovare equilibrio nelle relazioni affettive e familiari.',
-      'assets/images/couple_therapy.jpeg',
+      'assets/images/couple_therapy.webp',
       false,
     ),
     (
       'Adolescenza',
       'Interventi dedicati ai giovani e alle loro famiglie per affrontare le sfide dell\'identità, del rendimento scolastico e delle relazioni tra pari.',
-      'assets/images/youth_therapy.jpg',
+      'assets/images/youth_therapy.webp',
       true,
     ),
     (
       'Autostima e crescita personale',
       'Lavoro su sé stessi per rafforzare la fiducia nelle proprie capacità, superare blocchi emotivi e sviluppare una visione più autentica di sé.',
-      'assets/images/personal_growth.jpg',
+      'assets/images/personal_growth.webp',
       false,
     ),
     (
       'Momenti di crisi e regolazione emotiva',
       'Supporto nei periodi di forte difficoltà — lutti, separazioni, traumi, burnout — con strumenti concreti per ritrovare stabilità e risorse interiori.',
-      'assets/images/self_regulation.jpg',
+      'assets/images/self_regulation.webp',
       true,
     ),
   ];

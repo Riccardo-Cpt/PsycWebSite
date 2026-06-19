@@ -83,7 +83,7 @@ class _HeroSectionState extends State<_HeroSection>
           // Background image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/NinfeeStagnoOpache.jpeg',
+              'assets/images/NinfeeStagnoOpache.webp',
               fit: BoxFit.cover,
               alignment: Alignment.center,
               errorBuilder: (_, _, _) => const SizedBox.shrink(),
@@ -187,7 +187,7 @@ class _IntroSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 340 / 420,
         child: Image.asset(
-          'assets/images/fotodonna.jpg',
+          'assets/images/fotodonna.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -251,7 +251,7 @@ class _AChiMiRivolgoSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 320 / 400,
         child: Image.asset(
-          'assets/images/AlberoVento.jpeg',
+          'assets/images/AlberoVento.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -383,7 +383,7 @@ class _PrimoColloquioBox extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 400 / 380,
         child: Image.asset(
-          'assets/images/SassoParticolare.jpeg',
+          'assets/images/SassoParticolare.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),

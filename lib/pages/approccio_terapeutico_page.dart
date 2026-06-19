@@ -108,7 +108,7 @@ class _CentralitaPersonaSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 400 / 380,
         child: Image.asset(
-          'assets/images/NinfeeStagno.jpeg',
+          'assets/images/NinfeeStagno.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -182,7 +182,7 @@ class _RelazioneSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 400 / 380,
         child: Image.asset(
-          'assets/images/TaleaPiantaGrassa.jpeg',
+          'assets/images/TaleaPiantaGrassa.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -255,7 +255,7 @@ class _PercorsoSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 400 / 380,
         child: Image.asset(
-          'assets/images/fallingLeaves.jpg',
+          'assets/images/fallingLeaves.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -507,7 +507,7 @@ class _CtaSection extends StatelessWidget {
                 width: double.infinity,
                 height: isWide ? 390 : 330,
                 child: Image.asset(
-                  'assets/images/germinatingPlants.jpg',
+                  'assets/images/germinatingPlants.webp',
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (_, _, _) => const SizedBox.shrink(),

@@ -77,7 +77,7 @@ class _PsicologoSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 340 / 420,
         child: Image.asset(
-          'assets/images/NinfeeSottAcqua.jpeg',
+          'assets/images/NinfeeSottAcqua.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -155,7 +155,7 @@ class _PsicoterapeutaSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 320 / 400,
         child: Image.asset(
-          'assets/images/TaleaPiantaGrassa.jpeg',
+          'assets/images/TaleaPiantaGrassa.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -235,7 +235,7 @@ class _PsichiatraSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 340 / 420,
         child: Image.asset(
-          'assets/images/fallingLeaves.jpg',
+          'assets/images/fallingLeaves.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
