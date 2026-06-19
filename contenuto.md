@@ -140,11 +140,11 @@ Aggiungere piccole icone per indicare un nuovo punto, bisogna rendere questa sez
 
 # 2. Chi sono
 
-## Presentazione
+## Presentazione e il mio lavoro oggi 
 
 Sono la Dott.ssa Antonella Petrini, Psicologa e Psicoterapeuta.
 
-Nel mio lavoro accolgo adulti, adolescenti, coppie e famiglie che attraversano momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi ascoltati con rispetto, competenza e attenzione alla propria unicità.
+Nel mio lavoro accolgo persone che sentono il bisogno di comprendere meglio ciò che stanno vivendo, che attraversano momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi ascoltati con rispetto, competenza e attenzione alla propria unicità.
 
 ## Formazione ed esperienza
 
@@ -194,15 +194,18 @@ Il lavoro può riguardare fasi delicate dell’esistenza come:
 - Lutto
 - Traumi
 - Menopausa
+- Terza età
 - Stress lavorativo
-
 e altri passaggi complessi della vita.
 
 # 4. Approccio terapeutico
 
 ## EMDR
-
-Tra gli strumenti clinici che utilizzo vi è anche l’EMDR (*Eye Movement Desensitization and Reprocessing*), un approccio terapeutico utilizzato in particolare per l’elaborazione di esperienze traumatiche o emotivamente molto intense.
+L’EMDR, acronimo di Eye Movement Desensitization and Reprocessing, in italiano “desensibilizzazione e rielaborazione attraverso i movimenti oculari”, è un approccio psicoterapeutico utilizzato per il trattamento del trauma e di problematiche legate allo stress, in particolare allo stress traumatico. Si tratta di una metodologia strutturata che si focalizza sul ricordo dell’esperienza traumatica e utilizza movimenti oculari o altre forme di stimolazione bilaterale alternata destra/sinistra per favorire l’elaborazione di esperienze traumatiche o emotivamente stressanti.
+L’EMDR si basa sull’idea che alcune esperienze difficili possano non essere elaborate in modo adeguato e continuare a produrre sofferenza nel presente. Ricordi, immagini, emozioni e sensazioni fisiche collegate all’evento possono rimanere particolarmente attivi e ripresentarsi attraverso ansia, pensieri intrusivi, evitamento, iperattivazione, blocchi emotivi o altre forme di disagio psicologico.
+Attraverso il lavoro terapeutico con EMDR, il ricordo disturbante può progressivamente perdere la sua carica emotiva negativa ed essere integrato in modo più adattivo nella storia della persona. L’obiettivo non è cancellare ciò che è accaduto, ma permettere alla persona di ricordare l’esperienza senza riviverla con la stessa intensità emotiva e corporea.
+Nel percorso psicoterapeutico, l’EMDR viene valutato e utilizzato in base alla situazione clinica, alla fase del lavoro e agli obiettivi condivisi. Può essere indicato non solo in presenza di eventi traumatici evidenti, ma anche quando esperienze emotivamente intense o stressanti continuano a influenzare il benessere psicologico, le relazioni e il modo in cui la persona percepisce se stessa.
+All’interno del mio lavoro clinico, l’EMDR può essere integrato con attenzione nel percorso psicoterapeutico, sempre nel rispetto dei tempi, delle risorse e della specificità della persona. Non viene applicato come tecnica standard, ma come strumento terapeutico inserito in una relazione di cura più ampia, costruita sulla comprensione della storia personale e del significato della sofferenza.
 
 Può essere utile quando alcuni eventi del passato continuano a produrre sofferenza nel presente attraverso:
 
