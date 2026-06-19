@@ -76,7 +76,6 @@ Nel mio studio offro uno spazio di ascolto professionale, riservato e accoglient
 
 Il percorso psicologico o psicoterapeutico nasce dall’incontro con una storia unica e viene costruito con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.
 
-
 ## A chi mi rivolgo
 
 - Adulti
