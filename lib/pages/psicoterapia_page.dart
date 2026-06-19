@@ -417,7 +417,7 @@ class _CtaSection extends StatelessWidget {
                 width: double.infinity,
                 height: isWide ? 330 : 310,
                 child: Image.asset(
-                  'assets/images/germinatingPlants.webp',
+                  'assets/images/forestTrees.webp',
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (_, _, _) => const SizedBox.shrink(),

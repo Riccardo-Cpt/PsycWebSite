@@ -35,11 +35,11 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(width: 36),
+            const SizedBox(width: 50),
             Image.asset(
-              'assets/images/firma.jpeg',
-              height: 45,
-              fit: BoxFit.contain,
+              'assets/images/firma.png',
+              height: 40,
+              fit: BoxFit.fitHeight,  // fills height, width follows naturally
               errorBuilder: (_, _, _) => const Text(
                 'Dr.ssa Maria Bianchi',
                 style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF93a996)),
@@ -49,19 +49,20 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        const Padding(
-          padding: EdgeInsets.only(right: 4),
-          child: Center(
-            child: Text(
-              'Naviga nel sito',
-              style: TextStyle(
-                color: Color(0xFF93a996),
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
+        if (MediaQuery.of(context).size.width >= 600)
+          const Padding(
+            padding: EdgeInsets.only(right: 4),
+            child: Center(
+              child: Text(
+                'Naviga nel sito',
+                style: TextStyle(
+                  color: Color(0xFF93a996),
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
-        ),
         AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           transitionBuilder: (child, animation) =>
