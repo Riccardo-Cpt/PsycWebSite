@@ -187,7 +187,7 @@ class _IntroSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 340 / 420,
         child: Image.asset(
-          'assets/images/fotodonna.webp',
+          'assets/images/foto_donna_seduta.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -519,7 +519,7 @@ class _LabirintiSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 360 / 420,
         child: Image.asset(
-          'assets/images/Maze.png',
+          'assets/images/Maze.webp',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),

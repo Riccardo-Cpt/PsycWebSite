@@ -310,7 +310,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 340 / 420,
                     child: Image.asset(
-                      'assets/images/lilium.png',
+                      'assets/images/lilium.webp',
                       fit: BoxFit.cover,
                       errorBuilder: (_, _, _) => const SizedBox.shrink(),
                     ),

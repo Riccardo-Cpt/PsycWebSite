@@ -10,7 +10,7 @@ class ServiziPage extends StatelessWidget {
     (
       'Ansia e gestione dello stress',
       'Supporto nel riconoscere e gestire l\'ansia, gli attacchi di panico e le tensioni croniche legate al lavoro, alle relazioni o ai cambiamenti di vita.',
-      'assets/images/individual_therapy.png',
+      'assets/images/individual_therapy.webp',
       true,
     ),
     (

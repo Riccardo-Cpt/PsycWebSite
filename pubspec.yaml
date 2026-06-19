@@ -56,8 +56,9 @@ flutter:
 
   assets:
     - assets/images/foto_psicologa.webp
-    - assets/images/psicologia.png
-    - assets/images/individual_therapy.png
+    - assets/images/foto_donna_seduta.webp
+    - assets/images/psicologia.webp
+    - assets/images/individual_therapy.webp
     - assets/images/couple_therapy.webp
     - assets/images/special_terapy.webp
     - assets/images/youth_therapy.webp
@@ -68,16 +69,16 @@ flutter:
     - assets/images/NinfeeStagnoOpache.webp
     - assets/images/AlberoVento.webp
     - assets/images/SassoParticolare.webp
-    - assets/images/Logo.png
-    - assets/images/Signature.png
-    - assets/images/Maze.png
+    - assets/images/Logo.webp
+    - assets/images/Signature.webp
+    - assets/images/Maze.webp
     - assets/images/NinfeeStagno2.webp
     - assets/images/TaleaPiantaGrassa.webp
     - assets/images/germinatingPlants.webp
     - assets/images/NinfeeSottAcqua.webp
     - assets/images/Arcobaleno.webp
     - assets/images/fallingLeaves.webp
-    - assets/images/lilium.png
+    - assets/images/lilium.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
