@@ -505,7 +505,7 @@ class _CtaSection extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: isWide ? 330 : 310,
+                height: isWide ? 330 : 330,
                 child: Image.asset(
                   'assets/images/NinfeeStagno2.webp',
                   width: double.infinity,
