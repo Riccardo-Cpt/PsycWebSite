@@ -75,72 +75,69 @@ class _CentralitaPersonaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'La centralità della persona',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF93a996)),
+        ),
+        const SizedBox(height: 12),
+        const Text(
+            'Al centro del lavoro terapeutico c\'è la persona nella sua unicità, '
+            'con la sua storia, i suoi vissuti e il significato che la sofferenza '
+            'assume nella sua esperienza.'
+            'Ogni persona porta con sé una storia diversa, fatta di legami, '
+            'perdite, risorse e ferite. Il punto di partenza non è una diagnosi, '
+            'ma un ascolto autentico di ciò che quella persona vive, sente e porta '
+            'nel momento in cui chiede aiuto.'
+            'Questo orientamento richiede tempo, presenza e disponibilità a stare '
+            'vicino all\'esperienza dell\'altro senza fretta di interpretarla o '
+            'di ricondurla a schemi prestabiliti.',
+          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+        ),
+        const SizedBox(height: 16),
+      ],
+    );
+
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 400 / 380,
+        child: Image.asset(
+          'assets/images/NinfeeStagno.jpeg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      color: Colors.transparent,
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Expanded(
-                flex: 3,
-                child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'La centralità della persona',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Al centro del lavoro terapeutico c\'è la persona nella sua unicità, '
-                      'con la sua storia, i suoi vissuti e il significato che la sofferenza '
-                      'assume nella sua esperienza.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Ogni persona porta con sé una storia diversa, fatta di legami, '
-                      'perdite, risorse e ferite. Il punto di partenza non è una diagnosi, '
-                      'ma un ascolto autentico di ciò che quella persona vive, sente e porta '
-                      'nel momento in cui chiede aiuto.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Questo orientamento richiede tempo, presenza e disponibilità a stare '
-                      'vicino all\'esperienza dell\'altro senza fretta di interpretarla o '
-                      'di ricondurla a schemi prestabiliti.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 48),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 340 / 420,
-                    child: Image.asset(
-                      'assets/images/NinfeeStagno2.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+                  children: [textContent, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: textContent),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: image),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -153,73 +150,68 @@ class _RelazioneSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'La relazione terapeutica',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF93a996)),
+        ),
+        const SizedBox(height: 12),
+        const Text(
+              'L\'ascolto e la relazione terapeutica sono strumenti fondamentali del '
+              'lavoro clinico.'
+              'Attraverso una relazione fondata su fiducia, rispetto e continuità, '
+              'la persona può sentirsi accolta e compresa. Non si tratta di un rapporto '
+              'neutro o distante, ma di una presenza autentica che accompagna con attenzione '
+              'e sensibilità.'
+              'La relazione diventa essa stessa uno strumento di cura: nel modo in cui '
+              'viene vissuta e attraversata, offre la possibilità di riconoscere schemi '
+              'relazionali profondi e di sperimentare nuove forme di connessione con sé '
+              'stessi e con l\'altro.',
+          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+        ),
+        const SizedBox(height: 16),
+      ],
+    );
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 400 / 380,
+        child: Image.asset(
+          'assets/images/TaleaPiantaGrassa.jpeg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF9F9F9),
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      color: Colors.transparent,
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 320 / 400,
-                    child: Image.asset(
-                      'assets/images/TaleaPiantaGrassa.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 48),
-              const Expanded(
-                flex: 3,
-                child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'La relazione terapeutica',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'L\'ascolto e la relazione terapeutica sono strumenti fondamentali del '
-                      'lavoro clinico.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Attraverso una relazione fondata su fiducia, rispetto e continuità, '
-                      'la persona può sentirsi accolta e compresa. Non si tratta di un rapporto '
-                      'neutro o distante, ma di una presenza autentica che accompagna con attenzione '
-                      'e sensibilità.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'La relazione diventa essa stessa uno strumento di cura: nel modo in cui '
-                      'viene vissuta e attraversata, offre la possibilità di riconoscere schemi '
-                      'relazionali profondi e di sperimentare nuove forme di connessione con sé '
-                      'stessi e con l\'altro.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                  children: [textContent, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 2, child: image),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 3, child: textContent),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -232,76 +224,74 @@ class _PercorsoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'La centralità della persona',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF93a996)),
+        ),
+        const SizedBox(height: 12),
+        const Text(
+            'La psicoterapia non è una risposta standard a un sintomo, ma un percorso '
+            'costruito insieme, che tiene conto dei tempi, delle risorse, delle fragilità '
+            'e delle possibilità di cambiamento di ciascuno.'
+            'I primi incontri sono dedicati alla comprensione della richiesta e alla '
+            'valutazione condivisa del percorso più adatto. Non si parte con un programma '
+            'già definito, ma con la disponibilità a costruirlo insieme, incontro dopo incontro.'
+            'La durata e l\'intensità del lavoro vengono valutate in modo flessibile, '
+            'in relazione all\'evoluzione della situazione e agli obiettivi condivisi.',
+          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+        ),
+        const SizedBox(height: 16),
+      ],
+    );
+
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: AspectRatio(
+        aspectRatio: 400 / 380,
+        child: Image.asset(
+          'assets/images/fallingLeaves.jpg',
+          fit: BoxFit.cover,
+          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      color: Colors.transparent,
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Expanded(
-                flex: 3,
-                child: Column(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Un percorso costruito insieme',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'La psicoterapia non è una risposta standard a un sintomo, ma un percorso '
-                      'costruito insieme, che tiene conto dei tempi, delle risorse, delle fragilità '
-                      'e delle possibilità di cambiamento di ciascuno.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'I primi incontri sono dedicati alla comprensione della richiesta e alla '
-                      'valutazione condivisa del percorso più adatto. Non si parte con un programma '
-                      'già definito, ma con la disponibilità a costruirlo insieme, incontro dopo incontro.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'La durata e l\'intensità del lavoro vengono valutate in modo flessibile, '
-                      'in relazione all\'evoluzione della situazione e agli obiettivi condivisi.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 48),
-              Expanded(
-                flex: 2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: AspectRatio(
-                    aspectRatio: 340 / 420,
-                    child: Image.asset(
-                      'assets/images/NinfeeSottAcqua.jpeg',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+                  children: [textContent, const SizedBox(height: 32), image],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: textContent),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: image),
+                ],
+              );
+            },
           ),
         ),
       ),
     );
   }
 }
+
 
 class _CambiamentoSection extends StatelessWidget {
   const _CambiamentoSection();
@@ -510,33 +500,18 @@ class _CtaSection extends StatelessWidget {
       color: const Color(0xFF93a996),
       child: Stack(
         children: [
-          LayoutBuilder(
+        LayoutBuilder(
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= 720;
               return SizedBox(
                 width: double.infinity,
-                height: 380,
-                child: isWide
-                    ? Center(
-                        child: SizedBox(
-                          width: 850,
-                          height: 380,
-                          child: Image.asset(
-                            'assets/images/germinatingPlants.jpg',
-                            fit: BoxFit.fill,
-                            errorBuilder: (_, _, _) =>
-                                const ColoredBox(color: Color(0xFF93a996)),
-                          ),
-                        ),
-                      )
-                    : Image.asset(
-                        'assets/images/germinatingPlants.jpg',
-                        width: double.infinity,
-                        height: 380,
-                        fit: BoxFit.fill,
-                        errorBuilder: (_, _, _) =>
-                            const ColoredBox(color: Color(0xFF93a996)),
-                      ),
+                height: isWide ? 390 : 330,
+                child: Image.asset(
+                  'assets/images/germinatingPlants.jpg',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                ),
               );
             },
           ),

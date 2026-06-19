@@ -143,7 +143,7 @@ class _HeroSectionState extends State<_HeroSection>
                         icon: const Icon(Icons.calendar_today_outlined),
                         label: const Text('Richiedi un primo colloquio',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
+                                fontSize: 20, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF93a996),
                           foregroundColor: Colors.white,
@@ -187,7 +187,7 @@ class _IntroSection extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 340 / 420,
         child: Image.asset(
-          'assets/images/NinfeeStagno.jpeg',
+          'assets/images/fotodonna.jpg',
           fit: BoxFit.cover,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
@@ -347,17 +347,17 @@ class _PrimoColloquioBox extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: Color(0xFF93a996)),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 12),
         const Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
-          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 10),
         const Text(
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
         ),
-        const SizedBox(height: 28),
+        const SizedBox(height: 16),
         ElevatedButton.icon(
           onPressed: () => showDialog(
             context: context,
@@ -369,7 +369,7 @@ class _PrimoColloquioBox extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF2E8494),
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)),
             elevation: 3,
@@ -381,7 +381,7 @@ class _PrimoColloquioBox extends StatelessWidget {
     final image = ClipRRect(
       borderRadius: BorderRadius.circular(14),
       child: AspectRatio(
-        aspectRatio: 320 / 380,
+        aspectRatio: 400 / 380,
         child: Image.asset(
           'assets/images/SassoParticolare.jpeg',
           fit: BoxFit.cover,
@@ -392,7 +392,7 @@ class _PrimoColloquioBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
@@ -884,7 +884,7 @@ class _CtaSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 32),
+      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 60),
       color: Colors.transparent,
       child: Column(
         children: [
@@ -903,20 +903,27 @@ class _CtaSection extends StatelessWidget {
             children: [
               _CtaButton(
                 icon: Icons.psychology,
-                label: 'Di cosa mi occupo',
+                label: 'Scopri di cosa mi occupo',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
               ),
               _CtaButton(
                 icon: Icons.calendar_today_outlined,
-                label: 'Richiedi un primo colloquio',
+                label: 'Prenota un primo colloquio',
                 backgroundColor: const Color(0xFF93a996),
                 foregroundColor: Colors.white,
                 onPressed: () => showDialog(
                   context: context,
                   builder: (_) => const ContactFormDialog(),
                 ),
+              ),
+              _CtaButton(
+                icon: Icons.person_3_rounded ,
+                label: 'Cos\'è uno psicoterapeuta',
+                backgroundColor: const Color(0xFF93a996),
+                foregroundColor: Colors.white,
+                onPressed: () => context.go('/figure-professionali'),
               ),
             ],
           ),

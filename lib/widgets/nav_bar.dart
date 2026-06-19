@@ -15,7 +15,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(60);
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +27,18 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: bgColor,
       foregroundColor: const Color(0xFF93a996),
       automaticallyImplyLeading: false,
-      elevation: t * 3.0,
+      elevation: t * 2.0,
       scrolledUnderElevation: 0,
-      toolbarHeight: 100,
+      toolbarHeight: 60,
       title: InkWell(
         onTap: () => context.go('/'),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              'assets/images/Logo.png',
-              height: 72,
-              fit: BoxFit.contain,
-              errorBuilder: (_, _, _) => const SizedBox.shrink(),
-            ),
             const SizedBox(width: 36),
             Image.asset(
               'assets/images/Signature.png',
-              height: 52,
+              height: 45,
               fit: BoxFit.contain,
               errorBuilder: (_, _, _) => const Text(
                 'Dr.ssa Maria Bianchi',
@@ -62,7 +56,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               'Naviga nel sito',
               style: TextStyle(
                 color: Color(0xFF93a996),
-                fontSize: 32,
+                fontSize: 28,
                 fontWeight: FontWeight.w600,
               ),
             ),

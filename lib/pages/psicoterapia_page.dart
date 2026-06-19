@@ -414,33 +414,20 @@ class _CtaSection extends StatelessWidget {
       child: Stack(
         children: [
           LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 720;
-              return SizedBox(
-                width: double.infinity,
-                height: 380,
-                child: isWide
-                    ? Center(
-                        child: SizedBox(
-                          width: 800,
-                          height: 380,
-                          child: Image.asset(
-                            'assets/images/NinfeeStagno2.jpeg',
-                            fit: BoxFit.fill,
-                            errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                          ),
-                        ),
-                      )
-                    : Image.asset(
-                        'assets/images/NinfeeStagno2.jpeg',
-                        width: double.infinity,
-                        height: 380,
-                        fit: BoxFit.fill,
-                        errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                      ),
-              );
-            },
-          ),
+              builder: (context, constraints) {
+                final isWide = constraints.maxWidth >= 720;
+                return SizedBox(
+                  width: double.infinity,
+                  height: isWide ? 390 : 360,
+                  child: Image.asset(
+                    'assets/images/NinfeeStagno2.jpeg',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  ),
+                );
+              },
+            ),
           Positioned.fill(
             child: Container(
               color: Colors.black.withValues(alpha: 0.50),
