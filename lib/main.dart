@@ -4,6 +4,12 @@ import 'pages/home_page.dart';
 import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
 import 'pages/articoli_admin_page.dart';
+import 'pages/approccio_terapeutico_page.dart';
+import 'pages/psicoterapia_page.dart';
+import 'pages/figure_professionali_page.dart';
+import 'pages/disturbi_page.dart';
+import 'pages/privacy_page.dart';
+import 'pages/faq_page.dart';
 import 'pages/chi_sono_page.dart';
 import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
@@ -12,12 +18,14 @@ import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
 import 'services/review_auth_service.dart';
 import 'services/reviews_service.dart';
+import 'services/contact_service.dart';
 
 final articoliService = ArticoliService();
 final storageService = StorageService();
 final blogAuthService = BlogAuthService();
 final reviewAuthService = ReviewAuthService();
 final reviewsService = ReviewsService();
+final contactService = ContactService();
 
 final _router = GoRouter(
   errorBuilder: (context, state) => Scaffold(
@@ -42,6 +50,12 @@ final _router = GoRouter(
     ),
     GoRoute(path: '/admin', builder: (_, _) => const ArticoliAdminPage()),
     GoRoute(path: '/chi-sono', builder: (_, _) => const ChiSonoPage()),
+    GoRoute(path: '/approccio-terapeutico', builder: (_, _) => const ApproccioTerapeuticoPage()),
+    GoRoute(path: '/psicoterapia', builder: (_, _) => const PsicoterapiaPage()),
+    GoRoute(path: '/disturbi', builder: (_, _) => const DisturbPage()),
+    GoRoute(path: '/figure-professionali', builder: (_, _) => const FigureProfessionaliPage()),
+    GoRoute(path: '/privacy', builder: (_, _) => const PrivacyPage()),
+    GoRoute(path: '/faq', builder: (_, _) => const FaqPage()),
   ],
 );
 
@@ -58,7 +72,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E6370)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

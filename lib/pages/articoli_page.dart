@@ -154,31 +154,41 @@ class _ArticoliPageState extends State<ArticoliPage>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: appBarBg,
-                foregroundColor: const Color(0xFF1E6370),
+                foregroundColor: const Color(0xFF93a996),
                 elevation: t * 3.0,
                 scrolledUnderElevation: 0,
                 title: InkWell(
                   onTap: () => context.go('/'),
-                  child: const Text(
-                    'Dr.ssa Maria Bianchi',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E6370)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(width: 50),
+                      Image.asset(
+                        'assets/images/firma.png',
+                        height: 40,
+                        fit: BoxFit.fitHeight,
+                        errorBuilder: (_, _, _) => const Text(
+                          'Dr.ssa Maria Bianchi',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF93a996)),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 actions: [
-                  const Padding(
-                    padding: EdgeInsets.only(right: 4),
-                    child: Center(
-                      child: Text(
-                        'Naviga nel sito',
-                        style: TextStyle(
-                            color: Color(0xFF1E6370),
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600),
+                  if (MediaQuery.of(context).size.width >= 600)
+                    const Padding(
+                      padding: EdgeInsets.only(right: 4),
+                      child: Center(
+                        child: Text(
+                          'Naviga nel sito',
+                          style: TextStyle(
+                              color: Color(0xFF93a996),
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
-                  ),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     transitionBuilder: (child, animation) =>
@@ -217,7 +227,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1E6370)),
+                                    color: Color(0xFF93a996)),
                               ),
                             ),
                             const Text(
@@ -225,7 +235,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1E6370)),
+                                  color: Color(0xFF93a996)),
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
@@ -330,7 +340,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
 
   Widget _buildCollapsed(Articolo a) {
     return ListTile(
-      leading: const Icon(Icons.expand_more, color: Color(0xFF1E6370)),
+      leading: const Icon(Icons.expand_more, color: Color(0xFF93a996)),
       title: Text(a.titolo,
           style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(

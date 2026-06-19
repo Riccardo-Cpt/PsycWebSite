@@ -9,14 +9,14 @@ void main() {
         'titolo': 'Test',
         'corpo': 'Corpo',
         'pubblicato_at': '2024-03-15T10:30:00+00:00',
-        'immagine_url': 'https://example.com/img.jpg',
+        'immagine_url': 'https://example.com/img.webp',
       };
       final a = Articolo.fromJson(json);
       expect(a.id, 1);
       expect(a.titolo, 'Test');
       expect(a.corpo, 'Corpo');
       expect(a.pubblicatoAt, DateTime.parse('2024-03-15T10:30:00+00:00'));
-      expect(a.immagineUrl, 'https://example.com/img.jpg');
+      expect(a.immagineUrl, 'https://example.com/img.webp');
     });
 
     test('handles null immagine_url', () {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/contatti.dart';
-import '../widgets/contact_chip.dart';
+import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -11,31 +10,31 @@ class ServiziPage extends StatelessWidget {
     (
       'Ansia e gestione dello stress',
       'Supporto nel riconoscere e gestire l\'ansia, gli attacchi di panico e le tensioni croniche legate al lavoro, alle relazioni o ai cambiamenti di vita.',
-      'assets/images/individual_therapy.png',
+      'assets/images/individual_therapy.webp',
       true,
     ),
     (
       'Difficoltà relazionali e di coppia',
       'Percorsi per migliorare la comunicazione, affrontare i conflitti e ritrovare equilibrio nelle relazioni affettive e familiari.',
-      'assets/images/couple_therapy.jpeg',
+      'assets/images/couple_therapy.webp',
       false,
     ),
     (
       'Adolescenza',
       'Interventi dedicati ai giovani e alle loro famiglie per affrontare le sfide dell\'identità, del rendimento scolastico e delle relazioni tra pari.',
-      'assets/images/special_terapy.jpg',
+      'assets/images/youth_therapy.webp',
       true,
     ),
     (
       'Autostima e crescita personale',
       'Lavoro su sé stessi per rafforzare la fiducia nelle proprie capacità, superare blocchi emotivi e sviluppare una visione più autentica di sé.',
-      'assets/images/individual_therapy.png',
+      'assets/images/personal_growth.webp',
       false,
     ),
     (
       'Momenti di crisi e regolazione emotiva',
       'Supporto nei periodi di forte difficoltà — lutti, separazioni, traumi, burnout — con strumenti concreti per ritrovare stabilità e risorse interiori.',
-      'assets/images/couple_therapy.jpeg',
+      'assets/images/self_regulation.webp',
       true,
     ),
   ];
@@ -58,7 +57,7 @@ class ServiziPage extends StatelessWidget {
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -70,11 +69,11 @@ class ServiziPage extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             const Text(
-              'Aree di intervento',
+              'A chi mi rivolgo',
               style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
             LayoutBuilder(
@@ -95,9 +94,7 @@ class ServiziPage extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 24),
-            const _ContattiSection(),
-            const SizedBox(height: 24),
+            const _CtaSection(),
                 ],
               ),
             ),
@@ -109,98 +106,90 @@ class ServiziPage extends StatelessWidget {
   }
 }
 
-class _ContattiSection extends StatelessWidget {
-  const _ContattiSection();
-
-  void _showPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        insetPadding: const EdgeInsets.symmetric(horizontal: 80, vertical: 24),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 360),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'Contattami',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E6370)),
-                ),
-                const SizedBox(height: 24),
-                ListTile(
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF1E6370),
-                    child: Icon(Icons.phone, color: Colors.white),
-                  ),
-                  title: const Text('Chiama',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: const Text(Contatti.telefono,
-                      textAlign: TextAlign.center),
-                  onTap: () {
-                    Navigator.pop(context);
-                    chiamaTelefono(Contatti.telefono);
-                  },
-                ),
-                ListTile(
-                  leading: const CircleAvatar(
-                    backgroundColor: Color(0xFF1E6370),
-                    child: Icon(Icons.email_outlined, color: Colors.white),
-                  ),
-                  title: const Text('Scrivi un\'email',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: const Text(Contatti.email,
-                      textAlign: TextAlign.center),
-                  onTap: () {
-                    Navigator.pop(context);
-                    inviaEmail(Contatti.email);
-                  },
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('Chiudi',
-                      style: TextStyle(color: Color(0xFF1E6370))),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+class _CtaSection extends StatelessWidget {
+  const _CtaSection();
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: IntrinsicWidth(
-        child: ElevatedButton.icon(
-          onPressed: () => _showPopup(context),
-          icon: const Icon(Icons.contact_phone_outlined),
-          label: const Text(
-            'Contattami',
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth >= 720;
+        return Container(
+          width: double.infinity,
+          color: const Color(0xFF93a996),
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: isWide ? 330 : 310,
+                child: Image.asset(
+                  'assets/images/germinatingPlants.webp',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                ),
+              ),
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withValues(alpha: 0.50),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 40),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Hai domande sul percorso?',
+                        style: TextStyle(
+                          fontSize: isWide ? 36 : 26,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Il primo colloquio è uno spazio di ascolto senza impegno, '
+                        'per cominciare a orientarsi insieme.',
+                        style: TextStyle(
+                          fontSize: isWide ? 26 : 22,
+                          height: 1.65,
+                          color: Colors.white70,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 32),
+                      OutlinedButton.icon(
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (_) => const ContactFormDialog(),
+                        ),
+                        icon: const Icon(Icons.calendar_today_outlined,
+                            color: Colors.white),
+                        label: Text(
+                          'Richiedi un primo colloquio',
+                          style: TextStyle(
+                              fontSize: isWide ? 20 : 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.white, width: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 28, vertical: 23),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1E6370),
-            foregroundColor: Colors.white,
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)),
-            elevation: 3,
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -246,7 +235,7 @@ class _AreaCard extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E6370))),
+                      color: Color(0xFF93a996))),
               const SizedBox(height: 10),
               Text(descrizione,
                   style: const TextStyle(

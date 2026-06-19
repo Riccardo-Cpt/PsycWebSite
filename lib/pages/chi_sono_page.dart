@@ -19,6 +19,7 @@ class _ChiSonoBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const _HeroHeader(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
             child: Center(
@@ -27,116 +28,173 @@ class _ChiSonoBody extends StatelessWidget {
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-              _ProfileCard(),
-              SizedBox(height: 40),
-              _Section(
-                icon: Icons.school_outlined,
-                title: 'Formazione',
-                items: [
-                  _SectionItem(
-                    year: '2004',
-                    text:
-                        'Laurea magistrale in Psicologia Clinica e di Comunità con lode, '
-                        'Università degli Studi di Milano.',
-                  ),
-                  _SectionItem(
-                    year: '2009',
-                    text:
-                        'Scuola di Specializzazione in Psicoterapia Cognitivo-Comportamentale, '
-                        'Istituto di Psicologia Cognitiva — Milano. Durata quadriennale.',
-                  ),
-                  _SectionItem(
-                    year: '2012',
-                    text:
-                        'Master di II livello in Psicologia della Salute e Intervento Clinico, '
-                        'Università Cattolica del Sacro Cuore — Milano.',
-                  ),
-                ],
+                    _ProfileCard(),
+                    SizedBox(height: 40),
+                    _PresentazioneSection(),
+                    SizedBox(height: 40),
+                    _Section(
+                      icon: Icons.school_outlined,
+                      title: 'Formazione ed esperienza',
+                      items: [
+                        _SectionItem(text: 'Laurea in Psicologia Clinica e di Comunità'),
+                        _SectionItem(text: 'Abilitazione professionale'),
+                        _SectionItem(text: 'Master in Psicologia delle Emergenze'),
+                        _SectionItem(text: 'Formazione in Sessuologia Clinica'),
+                        _SectionItem(
+                            text: 'Specializzazione in Psicoterapia Psicoanalitica Relazionale'),
+                        _SectionItem(
+                            text: 'Approfondimento nella cura dei traumi psicologici con EMDR'),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    _ExperienceNote(),
+                    SizedBox(height: 40),
+                    _Section(
+                      icon: Icons.work_outline,
+                      title: 'Il mio lavoro oggi',
+                      items: [
+                        _SectionItem(
+                          text: 'Lavoro come libera professionista nel mio studio privato, '
+                              'continuando ad aggiornarmi attraverso attività formative ed ECM, '
+                              'per offrire un intervento clinico competente, attento e fondato '
+                              'su una preparazione costante.',
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40),
+                    _Section(
+                      icon: Icons.psychology_outlined,
+                      title: 'Il mio orientamento clinico',
+                      items: [
+                        _SectionItem(
+                          text: 'Il mio approccio è umanistico-relazionale, con formazione '
+                              'psicoanalitica contemporanea.',
+                        ),
+                        _SectionItem(
+                          text: 'Al centro del lavoro c\'è la persona nella sua storia, '
+                              'nei suoi vissuti e nelle sue relazioni significative.',
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 48),
+                  ],
+                ),
               ),
-              SizedBox(height: 32),
-              _Section(
-                icon: Icons.psychology_outlined,
-                title: 'Specializzazioni',
-                items: [
-                  _SectionItem(
-                    text:
-                        'Terapia Cognitivo-Comportamentale (CBT) per disturbi d\'ansia, '
-                        'depressione e attacchi di panico.',
-                  ),
-                  _SectionItem(
-                    text:
-                        'EMDR (Eye Movement Desensitization and Reprocessing) per '
-                        'il trattamento del trauma e del PTSD. Certificazione EMDR Europe.',
-                  ),
-                  _SectionItem(
-                    text:
-                        'Mindfulness-Based Cognitive Therapy (MBCT) — prevenzione '
-                        'delle ricadute depressive e gestione dello stress.',
-                  ),
-                  _SectionItem(
-                    text:
-                        'Psicoterapia di coppia e familiare con approccio sistemico-relazionale.',
-                  ),
-                ],
+            ),
+          ),
+          const SiteFooter(),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Hero header ───────────────────────────────────────────────────────────────
+
+class _HeroHeader extends StatelessWidget {
+  const _HeroHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF0F7F4),
+      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 760),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Chi sono',
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF93a996),
+                ),
               ),
-              SizedBox(height: 32),
-              _Section(
-                icon: Icons.work_outline,
-                title: 'Esperienze',
-                items: [
-                  _SectionItem(
-                    year: '2009 – 2014',
-                    text:
-                        'Psicologa clinica presso il Servizio di Salute Mentale '
-                        'dell\'Azienda Socio-Sanitaria Territoriale di Milano Nord. '
-                        'Presa in carico di pazienti adulti con disturbi dell\'umore e d\'ansia.',
-                  ),
-                  _SectionItem(
-                    year: '2014 – 2018',
-                    text:
-                        'Consulente presso il Centro di Psicologia e Psicoterapia '
-                        '"Mente & Benessere" — Milano. Attività clinica individuale e di coppia.',
-                  ),
-                  _SectionItem(
-                    year: '2018 – oggi',
-                    text:
-                        'Studio privato a Milano. Psicoterapia individuale, di coppia '
-                        'e interventi specialistici. Supervisione di colleghi in formazione.',
-                  ),
-                ],
+              SizedBox(height: 16),
+              Text(
+                'Psicologa e Psicoterapeuta con un approccio umanistico-relazionale. '
+                'Accolgo adulti, adolescenti, coppie e famiglie che desiderano uno spazio '
+                'di ascolto autentico e accompagnamento professionale.',
+                style: TextStyle(
+                  fontSize: 19,
+                  height: 1.75,
+                  color: Color(0xFF2C2C2C),
+                ),
               ),
-              SizedBox(height: 32),
-              _Section(
-                icon: Icons.emoji_events_outlined,
-                title: 'Riconoscimenti',
-                items: [
-                  _SectionItem(
-                    year: '2015',
-                    text:
-                        'Premio "Giovane Professionista dell\'Anno" — Ordine degli Psicologi '
-                        'della Lombardia, per l\'attività clinica e la ricerca sul benessere psicologico.',
-                  ),
-                  _SectionItem(
-                    year: '2019',
-                    text:
-                        'Menzione speciale al Congresso Nazionale di Psicoterapia Cognitiva '
-                        'per il contributo scientifico sul trattamento integrato del trauma.',
-                  ),
-                  _SectionItem(
-                    year: '2022',
-                    text:
-                        'Docente invitata presso l\'Università degli Studi di Milano — '
-                        'corso di Psicologia Clinica per studenti magistrali.',
-                  ),
-                ],
-              ),
-              SizedBox(height: 48),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+// ── Presentazione ─────────────────────────────────────────────────────────────
+
+class _PresentazioneSection extends StatelessWidget {
+  const _PresentazioneSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(Icons.person_outline, color: Color(0xFF93a996), size: 24),
+            SizedBox(width: 10),
+            Text(
+              'Presentazione',
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF93a996)),
+            ),
+          ],
+        ),
+        SizedBox(height: 4),
+        Divider(color: Color(0xFF93a996), thickness: 1),
+        SizedBox(height: 16),
+        Text(
+          'Nel mio lavoro accolgo adulti, adolescenti, coppie e famiglie che attraversano '
+          'momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi '
+          'ascoltati con rispetto, competenza e attenzione alla propria unicità.',
+          style: TextStyle(fontSize: 16, height: 1.7, color: Color(0xFF2C2C2C)),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Experience note ───────────────────────────────────────────────────────────
+
+class _ExperienceNote extends StatelessWidget {
+  const _ExperienceNote();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF0F7F4),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline, color: Color(0xFF93a996), size: 20),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Nel corso degli anni ho maturato esperienza in consultori, ospedali, scuole, '
+              'comuni, associazioni e altri contesti dell\'area sociale.',
+              style: TextStyle(fontSize: 15, height: 1.65, color: Color(0xFF2C2C2C)),
+            ),
           ),
-          SiteFooter(),
         ],
       ),
     );
@@ -154,7 +212,7 @@ class _ProfileCard extends StatelessWidget {
       children: [
         ClipOval(
           child: Image.asset(
-            'assets/images/foto_psicologa.jpg',
+            'assets/images/foto_psicologa.webp',
             width: 180,
             height: 180,
             fit: BoxFit.cover,
@@ -163,8 +221,7 @@ class _ProfileCard extends StatelessWidget {
               width: 180,
               height: 180,
               color: const Color(0xFFE0F0F3),
-              child: const Icon(Icons.person,
-                  size: 80, color: Color(0xFF1E6370)),
+              child: const Icon(Icons.person, size: 80, color: Color(0xFF93a996)),
             ),
           ),
         ),
@@ -175,7 +232,7 @@ class _ProfileCard extends StatelessWidget {
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1E6370)),
+              color: Color(0xFF93a996)),
         ),
         const SizedBox(height: 6),
         const Text(
@@ -183,7 +240,7 @@ class _ProfileCard extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 18,
-              color: Color(0xFF2E8494),
+              color: Color(0xFF93a996),
               fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
@@ -217,19 +274,19 @@ class _Section extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: const Color(0xFF1E6370), size: 24),
+            Icon(icon, color: const Color(0xFF93a996), size: 24),
             const SizedBox(width: 10),
             Text(
               title,
               style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E6370)),
+                  color: Color(0xFF93a996)),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        const Divider(color: Color(0xFF1E6370), thickness: 1),
+        const Divider(color: Color(0xFF93a996), thickness: 1),
         const SizedBox(height: 12),
         ...items,
       ],
@@ -240,10 +297,9 @@ class _Section extends StatelessWidget {
 // ── Section item ──────────────────────────────────────────────────────────────
 
 class _SectionItem extends StatelessWidget {
-  final String? year;
   final String text;
 
-  const _SectionItem({this.year, required this.text});
+  const _SectionItem({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -252,19 +308,11 @@ class _SectionItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (year != null) ...[
-            SizedBox(
-              width: 80,
-              child: Text(
-                year!,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF2E8494),
-                    fontSize: 14),
-              ),
-            ),
-          ] else
-            const SizedBox(width: 16),
+          const Padding(
+            padding: EdgeInsets.only(top: 7),
+            child: Icon(Icons.circle, size: 7, color: Color(0xFF93a996)),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               text,

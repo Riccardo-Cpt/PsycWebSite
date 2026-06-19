@@ -8,7 +8,7 @@ Replace the current rigid 2×2 card grid with a fluid alternating-row layout tha
 
 - The section title "I miei valori" is unchanged in style and position.
 - Each value is rendered as a full-width horizontal band.
-- Bands alternate background: rows 0 and 2 are transparent; rows 1 and 3 use a soft tint of `Color(0xFF1E6370)` (low opacity, e.g. `withOpacity(0.12)`).
+- Bands alternate background: rows 0 and 2 are transparent; rows 1 and 3 use a soft tint of `Color(0xFF93a996)` (low opacity, e.g. `withOpacity(0.12)`).
 - Content within each band is constrained to `maxWidth: 1100` and padded symmetrically (`horizontal: 24, vertical: 40`).
 - No Card widget, no elevation, no border, no explicit dividers.
 
@@ -18,7 +18,7 @@ Replace the current rigid 2×2 card grid with a fluid alternating-row layout tha
 - **Odd-indexed rows (0, 2):** icon on the left, text block on the right.
 - **Even-indexed rows (1, 3):** icon on the right, text block on the left.
 - Icon size: 68px.
-- Text block: title in bold (fontSize 22, color `Color(0xFF1E6370)` on transparent rows, white on tinted rows), description below (fontSize 17, height 1.5, `Colors.black87` on transparent rows, `Colors.white70` on tinted rows). Text is left-aligned within its block.
+- Text block: title in bold (fontSize 22, color `Color(0xFF93a996)` on transparent rows, white on tinted rows), description below (fontSize 17, height 1.5, `Colors.black87` on transparent rows, `Colors.white70` on tinted rows). Text is left-aligned within its block.
 - `SizedBox(width: 24)` gap between icon and text block.
 
 ## Responsive Collapse (< 600px)
@@ -32,8 +32,8 @@ Replace the current rigid 2×2 card grid with a fluid alternating-row layout tha
 
 | Context          | Title color          | description color  | Background                        |
 |------------------|----------------------|--------------------|-----------------------------------|
-| Transparent row  | `Color(0xFF1E6370)`  | `Colors.black87`   | transparent                       |
-| Tinted row       | `Colors.white`       | `Colors.white70`   | `Color(0xFF1E6370).withOpacity(0.12)` |
+| Transparent row  | `Color(0xFF93a996)`  | `Colors.black87`   | transparent                       |
+| Tinted row       | `Colors.white`       | `Colors.white70`   | `Color(0xFF93a996).withOpacity(0.12)` |
 
 ## Files Affected
 

@@ -139,14 +139,14 @@ void main() {
         'titolo': 'Test',
         'corpo': 'Corpo',
         'pubblicato_at': '2024-03-15T10:30:00+00:00',
-        'immagine_url': 'https://example.com/img.jpg',
+        'immagine_url': 'https://example.com/img.webp',
       };
       final a = Articolo.fromJson(json);
       expect(a.id, 1);
       expect(a.titolo, 'Test');
       expect(a.corpo, 'Corpo');
       expect(a.pubblicatoAt, DateTime.parse('2024-03-15T10:30:00+00:00'));
-      expect(a.immagineUrl, 'https://example.com/img.jpg');
+      expect(a.immagineUrl, 'https://example.com/img.webp');
     });
 
     test('handles null immagine_url', () {
@@ -480,7 +480,7 @@ class PsicApp extends StatelessWidget {
       title: 'Dr.ssa Maria Bianchi — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E6370)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
@@ -752,7 +752,7 @@ class _ArticoliPageState extends State<ArticoliPage>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: appBarBg,
-                foregroundColor: const Color(0xFF1E6370),
+                foregroundColor: const Color(0xFF93a996),
                 elevation: t * 3.0,
                 scrolledUnderElevation: 0,
                 title: InkWell(
@@ -761,7 +761,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                     'Dr.ssa Maria Bianchi',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E6370)),
+                        color: Color(0xFF93a996)),
                   ),
                 ),
                 actions: [
@@ -771,7 +771,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                       child: Text(
                         'Naviga nel sito',
                         style: TextStyle(
-                            color: Color(0xFF1E6370),
+                            color: Color(0xFF93a996),
                             fontSize: 17,
                             fontWeight: FontWeight.w600),
                       ),
@@ -811,7 +811,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                                 style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1E6370)),
+                                    color: Color(0xFF93a996)),
                               ),
                             ),
                             const Text(
@@ -819,7 +819,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1E6370)),
+                                  color: Color(0xFF93a996)),
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
@@ -920,7 +920,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
 
   Widget _buildCollapsed(Articolo a) {
     return ListTile(
-      leading: const Icon(Icons.expand_more, color: Color(0xFF1E6370)),
+      leading: const Icon(Icons.expand_more, color: Color(0xFF93a996)),
       title: Text(a.titolo,
           style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(
@@ -1180,7 +1180,7 @@ class _PasswordGateState extends State<_PasswordGate> {
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E6370),
+                    backgroundColor: const Color(0xFF93a996),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -1286,7 +1286,7 @@ class _AdminPanelState extends State<_AdminPanel> {
                 icon: const Icon(Icons.add),
                 label: const Text('Nuovo articolo'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1E6370),
+                  backgroundColor: const Color(0xFF93a996),
                   foregroundColor: Colors.white,
                 ),
               ),
@@ -1331,7 +1331,7 @@ class _AdminPanelState extends State<_AdminPanel> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit,
-                                color: Color(0xFF1E6370)),
+                                color: Color(0xFF93a996)),
                             tooltip: 'Modifica',
                             onPressed: () =>
                                 _openForm(context, articolo: a),
@@ -1542,7 +1542,7 @@ class _ArticoloFormState extends State<_ArticoloForm> {
               : ElevatedButton(
                   onPressed: _save,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1E6370),
+                    backgroundColor: const Color(0xFF93a996),
                     foregroundColor: Colors.white,
                     padding:
                         const EdgeInsets.symmetric(vertical: 16),
@@ -1568,7 +1568,7 @@ class _ArticoloFormPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF1E6370),
+        foregroundColor: const Color(0xFF93a996),
         title: Text(
             articolo == null ? 'Nuovo articolo' : 'Modifica articolo'),
       ),
