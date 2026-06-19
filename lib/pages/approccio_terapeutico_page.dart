@@ -495,86 +495,85 @@ class _CtaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFF93a996),
-      child: Stack(
-        children: [
-        LayoutBuilder(
-            builder: (context, constraints) {
-              final isWide = constraints.maxWidth >= 720;
-              return SizedBox(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth >= 720;
+        return Container(
+          width: double.infinity,
+          color: const Color(0xFF93a996),
+          child: Stack(
+            children: [
+              SizedBox(
                 width: double.infinity,
-                height: isWide ? 390 : 330,
+                height: isWide ? 330 : 310,
                 child: Image.asset(
-                  'assets/images/germinatingPlants.webp',
+                  'assets/images/NinfeeStagno2.webp',
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (_, _, _) => const SizedBox.shrink(),
                 ),
-              );
-            },
-          ),
-          Positioned.fill(
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.50),
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
-            child: Center(
-              child: Column(
-                children: [
-                  const Text(
-                    'Hai domande sul percorso?',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 14),
-                  const Text(
-                    'Il primo colloquio è uno spazio di ascolto senza impegno, '
-                    'per cominciare a orientarsi insieme.',
-                    style: TextStyle(
-                      fontSize: 17,
-                      height: 1.65,
-                      color: Colors.white70,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 32),
-                  OutlinedButton.icon(
-                    onPressed: () => showDialog(
-                      context: context,
-                      builder: (_) => const ContactFormDialog(),
-                    ),
-                    icon: const Icon(Icons.calendar_today_outlined,
-                        color: Colors.white),
-                    label: const Text(
-                      'Richiedi un primo colloquio',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.white, width: 2),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 28, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                  ),
-                ],
               ),
-            ),
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withValues(alpha: 0.50),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 40),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Hai domande sul percorso?',
+                        style: TextStyle(
+                          fontSize: isWide ? 36 : 26,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Il primo colloquio è uno spazio di ascolto senza impegno, '
+                        'per cominciare a orientarsi insieme.',
+                        style: TextStyle(
+                          fontSize: isWide ? 26 : 22,
+                          height: 1.65,
+                          color: Colors.white70,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 32),
+                      OutlinedButton.icon(
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (_) => const ContactFormDialog(),
+                        ),
+                        icon: const Icon(Icons.calendar_today_outlined,
+                            color: Colors.white),
+                        label: Text(
+                          'Richiedi un primo colloquio',
+                          style: TextStyle(
+                              fontSize: isWide ? 20 : 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.white, width: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 28, vertical: 23),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
