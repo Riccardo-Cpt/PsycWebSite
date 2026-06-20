@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 
@@ -15,6 +17,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
   final _titleCtrl = TextEditingController();
   final _messageCtrl = TextEditingController();
 
+  PlatformFile? _tessera;
   bool _loading = false;
   bool _submitted = false;
   String? _error;
@@ -29,6 +32,17 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
     super.dispose();
   }
 
+  Future<void> _pickTessera() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
+      withData: true,
+    );
+    if (result != null && result.files.isNotEmpty) {
+      setState(() => _tessera = result.files.first);
+    }
+  }
+
   Future<void> _submit() async {
     final name = _nameCtrl.text.trim();
     final surname = _surnameCtrl.text.trim();
@@ -39,14 +53,21 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
       setState(() => _error = 'Compila tutti i campi');
       return;
     }
+    if (_tessera == null) {
+      setState(() => _error = 'Allega la tessera sanitaria');
+      return;
+    }
     setState(() { _error = null; _loading = true; });
     try {
+      final tesseraBase64 = base64Encode(_tessera!.bytes!);
       await contactService.invia(
         name: name,
         surname: surname,
         email: email,
         title: title,
         message: message,
+        tesseraBase64: tesseraBase64,
+        tesseraFileName: _tessera!.name,
       );
       if (mounted) setState(() => _submitted = true);
     } catch (e) {
@@ -152,6 +173,24 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
             minLines: 4,
             maxLines: null,
             keyboardType: TextInputType.multiline,
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton.icon(
+            onPressed: _pickTessera,
+            icon: Icon(
+              _tessera != null ? Icons.check_circle_outline : Icons.attach_file,
+              color: _tessera != null ? const Color(0xFF93a996) : null,
+            ),
+            label: Text(
+              _tessera != null ? _tessera!.name : 'Allega tessera sanitaria *',
+              overflow: TextOverflow.ellipsis,
+            ),
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(
+                color: _tessera != null ? const Color(0xFF93a996) : Colors.grey,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            ),
           ),
           if (_error != null) ...[
             const SizedBox(height: 8),

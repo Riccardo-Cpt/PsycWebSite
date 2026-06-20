@@ -26,7 +26,7 @@
 8. Privacy e consenso informato
 9. FAQ
 10. Contatti e primo colloquio
-11. Labirinti
+11. Blog i labirinti
 
 # Nota editoriale
 
@@ -79,8 +79,9 @@ Il percorso di psicoterapia nasce dall’incontro con una storia unica e viene c
 ## A chi mi rivolgo
 
 - Adulti
-- Adolescenti, e giovani adulti
-- Coppie e famiglie
+- Adolescenti e giovani adulti
+- Coppie
+- famiglie
 - Terza età
 
 ## Come lavoro
@@ -140,22 +141,22 @@ Aggiungere piccole icone per indicare un nuovo punto, bisogna rendere questa sez
 
 # 2. Chi sono
 
-## Presentazione
+## Presentazione e il mio lavoro oggi 
 
 Sono la Dott.ssa Antonella Petrini, Psicologa e Psicoterapeuta.
 
-Nel mio lavoro accolgo adulti, adolescenti, coppie e famiglie che attraversano momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi ascoltati con rispetto, competenza e attenzione alla propria unicità.
+Nel mio lavoro accolgo persone che sentono il bisogno di comprendere meglio ciò che stanno vivendo, che attraversano momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi ascoltati con rispetto, competenza e attenzione alla propria unicità.
 
 ## Formazione ed esperienza
 
-La mia formazione comprende:
+La mia formazione comprende
 
-- Laurea in Psicologia Clinica e di Comunità
+- Laurea di cinque anni in Psicologia Clinica e di Comunità
 - Abilitazione professionale
 - Master in Psicologia delle Emergenze
 - Formazione in Sessuologia Clinica
-- Specializzazione in Psicoterapia Psicoanalitica Relazionale
-- Approfondimento nella cura dei traumi psicologici con EMDR
+- Specializzazione quadriennale in Psicoterapia Psicoanalitica Relazionale
+- Approfondimento nella cura dei traumi psicologici con EMDR e Flash Technique
 
 Nel corso degli anni ho maturato esperienza in consultori, ospedali, scuole, comuni, associazioni e altri contesti dell’area sociale.
 
@@ -194,15 +195,18 @@ Il lavoro può riguardare fasi delicate dell’esistenza come:
 - Lutto
 - Traumi
 - Menopausa
+- Terza età
 - Stress lavorativo
-
 e altri passaggi complessi della vita.
 
 # 4. Approccio terapeutico
 
 ## EMDR
-
-Tra gli strumenti clinici che utilizzo vi è anche l’EMDR (*Eye Movement Desensitization and Reprocessing*), un approccio terapeutico utilizzato in particolare per l’elaborazione di esperienze traumatiche o emotivamente molto intense.
+L’EMDR, acronimo di Eye Movement Desensitization and Reprocessing, in italiano “desensibilizzazione e rielaborazione attraverso i movimenti oculari”, è un approccio psicoterapeutico utilizzato per il trattamento del trauma e di problematiche legate allo stress, in particolare allo stress traumatico. Si tratta di una metodologia strutturata che si focalizza sul ricordo dell’esperienza traumatica e utilizza movimenti oculari o altre forme di stimolazione bilaterale alternata destra/sinistra per favorire l’elaborazione di esperienze traumatiche o emotivamente stressanti.
+L’EMDR si basa sull’idea che alcune esperienze difficili possano non essere elaborate in modo adeguato e continuare a produrre sofferenza nel presente. Ricordi, immagini, emozioni e sensazioni fisiche collegate all’evento possono rimanere particolarmente attivi e ripresentarsi attraverso ansia, pensieri intrusivi, evitamento, iperattivazione, blocchi emotivi o altre forme di disagio psicologico.
+Attraverso il lavoro terapeutico con EMDR, il ricordo disturbante può progressivamente perdere la sua carica emotiva negativa ed essere integrato in modo più adattivo nella storia della persona. L’obiettivo non è cancellare ciò che è accaduto, ma permettere alla persona di ricordare l’esperienza senza riviverla con la stessa intensità emotiva e corporea.
+Nel percorso psicoterapeutico, l’EMDR viene valutato e utilizzato in base alla situazione clinica, alla fase del lavoro e agli obiettivi condivisi. Può essere indicato non solo in presenza di eventi traumatici evidenti, ma anche quando esperienze emotivamente intense o stressanti continuano a influenzare il benessere psicologico, le relazioni e il modo in cui la persona percepisce se stessa.
+All’interno del mio lavoro clinico, l’EMDR può essere integrato con attenzione nel percorso psicoterapeutico, sempre nel rispetto dei tempi, delle risorse e della specificità della persona. Non viene applicato come tecnica standard, ma come strumento terapeutico inserito in una relazione di cura più ampia, costruita sulla comprensione della storia personale e del significato della sofferenza.
 
 Può essere utile quando alcuni eventi del passato continuano a produrre sofferenza nel presente attraverso:
 
@@ -232,7 +236,7 @@ La psicoterapia non è una risposta standard a un sintomo, ma un percorso costru
 
 ## Cambiamento e consapevolezza
 
-L’obiettivo del lavoro terapeutico è aiutare la persona a:
+L’obiettivo del lavoro terapeutico è aiutare la persona a
 
 - Dare senso a ciò che vive
 - Riconoscere i propri modelli relazionali
@@ -241,23 +245,13 @@ L’obiettivo del lavoro terapeutico è aiutare la persona a:
 
 # 5. Psicoterapia
 
-## Che cos’è la psicoterapia
+## Che cos’è la psicoterapia 
 
-La psicoterapia è un percorso di cura e conoscenza di sé che aiuta a comprendere il significato del disagio psicologico, dei sintomi e delle difficoltà relazionali.
+La psicoterapia è un percorso di cura e conoscenza di sé che aiuta a comprendere il significato del disagio psicologico, dei sintomi e delle difficoltà in generale.  
 
 ## Quando può essere utile
+La psicoterapia può essere utile quando il disagio emotivo, relazionale o psicologico diventa difficile da comprendere o sostenere da soli. Quando un semplice supporto non è sufficiente e si avverte la necessità di un cambiamento più profondo.Quando si è in presenza di sintomi evidenti e disturbi specifici, ma anche solo per affrontare blocchi quotidiani, fasi di transizione o dinamiche ripetitive dannose. Offre uno spazio di ascolto e cura in cui dare senso alla sofferenza, ritrovare orientamento e sviluppare nuove risorse personali. 
 
-Può essere utile in presenza di:
-
-- Ansia
-- Attacchi di panico
-- Vissuti depressivi
-- Lutto
-- Traumi
-- Stress
-- Difficoltà affettive e relazionali
-- Problematiche familiari o di coppia
-- Altri momenti di sofferenza emotiva
 
 ## Come si svolge il percorso
 
@@ -267,7 +261,7 @@ La relazione terapeutica diventa uno spazio in cui comprendere, elaborare e tras
 
 ## Obiettivi del lavoro terapeutico
 
-L’obiettivo non è soltanto ridurre la sofferenza, ma favorire:
+L’obiettivo non è soltanto ridurre la sofferenza, ma favorire
 
 - Maggiore consapevolezza di sé
 - Riconoscimento dei propri bisogni
@@ -276,7 +270,7 @@ L’obiettivo non è soltanto ridurre la sofferenza, ma favorire:
 
 # 6. Disturbi trattati
 
-Mi occupo di disagio psicologico nelle sue diverse manifestazioni:
+Mi occupo di disagio psicologico nelle sue diverse manifestazioni
 
 - Ansia
 - Attacchi di panico
@@ -309,7 +303,7 @@ Ogni persona viene incontrata nella sua specificità, senza etichette riduttive.
 
 Lo psicoterapeuta è un professionista che, dopo la laurea in Psicologia o Medicina, ha completato una specializzazione quadriennale in psicoterapia.
 
-È formato per trattare il disagio psicologico e i disturbi emotivi attraverso strumenti clinici specifici, fondati sul colloquio e sulla relazione terapeutica.
+È formato per trattare il disagio psicologico e i disturbi emotivi attraverso strumenti clinici specifici, fondati sul colloquio, sulla relazione terapeutica e altri strumenti.
 
 ## Differenze tra le figure professionali
 
@@ -324,10 +318,8 @@ Si occupa di:
 È uno psicologo o un medico che ha completato una specifica specializzazione e può condurre percorsi di psicoterapia.
 
 ### Psichiatra
-È un medico specializzato in psichiatria che può:
-- Formulare diagnosi mediche
+È un medico specializzato in psichiatria che può
 - Prescrivere farmaci
-- Integrare il trattamento con altri interventi
 
 A seconda del bisogno della persona, queste figure possono collaborare tra loro offrendo un intervento integrato e adeguato alla complessità della situazione.
 
@@ -343,7 +335,7 @@ Prima dell’avvio del percorso vengono fornite le informazioni necessarie sul t
 
 ## Consenso informato
 
-Prima dell’inizio di un percorso psicologico o psicoterapeutico viene richiesto il consenso informato, che permette alla persona di ricevere informazioni chiare riguardo a:
+Prima dell’inizio di un percorso psicologico viene richiesto il consenso informato, che permette alla persona di ricevere informazioni chiare riguardo a
 
 - Obiettivi del percorso
 - Modalità di svolgimento
@@ -382,7 +374,7 @@ No. Molte persone si rivolgono a uno psicoterapeuta non solo in presenza di un f
 
 ### Quanto dura un percorso?
 
-La durata varia in base alla situazione, agli obiettivi e ai bisogni della persona. Ogni percorso viene costruito in modo personalizzato.
+La durata non si può stabilire e varia in base alla situazione, agli obiettivi e ai bisogni della persona. Ogni percorso viene costruito in modo personalizzato.
 
 ### Come si capisce se la psicoterapia è adatta?
 
@@ -410,7 +402,7 @@ Sì. La psicoterapia può rappresentare uno spazio di crescita, riflessione e so
 
 ### Come prenotare?
 
-È possibile richiedere informazioni o concordare un appuntamento attraverso i recapiti indicati nella pagina Contatti.
+È possibile richiedere informazioni attraverso i recapiti indicati nella pagina Contatti, ma per fissare un appuntamento è necessario telefonare in studio. Inoltre vengono richiesti dei dati di solito contenuti nella tessera sanitaria e nella carta di identità personale.
 
 ### Come si svolgono gli incontri?
 

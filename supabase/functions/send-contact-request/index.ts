@@ -20,8 +20,8 @@ serve(async (req) => {
   }
 
   try {
-    const { name, surname, email, title, message } = await req.json();
-    if (!name || !surname || !email || !title || !message) {
+    const { name, surname, email, title, message, tesseraBase64, tesseraFileName } = await req.json();
+    if (!name || !surname || !email || !title || !message || !tesseraBase64 || !tesseraFileName) {
       return new Response(
         JSON.stringify({ error: 'Tutti i campi sono obbligatori' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
@@ -30,9 +30,31 @@ serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    // Upload tessera sanitaria to storage
+    const fileBytes = Uint8Array.from(atob(tesseraBase64), c => c.charCodeAt(0));
+    const ext = tesseraFileName.split('.').pop() ?? 'bin';
+    const storagePath = `tessere/${Date.now()}_${tesseraFileName}`;
+    const mimeTypes: Record<string, string> = {
+      pdf: 'application/pdf',
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      png: 'image/png',
+    };
+    const contentType = mimeTypes[ext.toLowerCase()] ?? 'application/octet-stream';
+
+    const { error: uploadError } = await supabase.storage
+      .from('contact-attachments')
+      .upload(storagePath, fileBytes, { contentType });
+    if (uploadError) throw uploadError;
+
+    const { data: urlData } = supabase.storage
+      .from('contact-attachments')
+      .getPublicUrl(storagePath);
+    const tesseraSanitaria = urlData.publicUrl;
+
     const { error: insertError } = await supabase
       .from('contact_requests')
-      .insert({ name, surname, email, title, message });
+      .insert({ name, surname, email, title, message, tessera_sanitaria: tesseraSanitaria });
     if (insertError) throw insertError;
 
     // Send admin notification (non-blocking)
@@ -52,6 +74,7 @@ serve(async (req) => {
             <li><strong>Nome:</strong> ${name} ${surname}</li>
             <li><strong>Email:</strong> ${email}</li>
             <li><strong>Oggetto:</strong> ${title}</li>
+            <li><strong>Tessera sanitaria:</strong> <a href="${tesseraSanitaria}">${tesseraFileName}</a></li>
           </ul>
           <blockquote>${message}</blockquote>
         `,

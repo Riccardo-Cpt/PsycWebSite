@@ -21,7 +21,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final t = (scrollOffset / 80.0).clamp(0.0, 1.0);
     final bgColor =
-        Color.lerp(const Color(0x00FAFAFA), const Color(0xD2FAFAFA), t)!;
+        Color.lerp(const Color(0x00EBEBEB), const Color(0xF0EBEBEB), t)!;
 
     return AppBar(
       backgroundColor: bgColor,

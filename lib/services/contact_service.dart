@@ -9,6 +9,8 @@ class ContactService {
     required String email,
     required String title,
     required String message,
+    required String tesseraBase64,
+    required String tesseraFileName,
   }) async {
     final uri = Uri.parse(
         '${AdminConfig.supabaseUrl}/functions/v1/send-contact-request');
@@ -24,6 +26,8 @@ class ContactService {
         'email': email,
         'title': title,
         'message': message,
+        'tesseraBase64': tesseraBase64,
+        'tesseraFileName': tesseraFileName,
       }),
     );
     if (response.statusCode != 200) {

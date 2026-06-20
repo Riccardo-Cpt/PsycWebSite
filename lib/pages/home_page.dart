@@ -562,17 +562,17 @@ class _LabirintiSection extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
-                return const Column(
+                return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [content, SizedBox(height: 32)],
+                  children: [content, const SizedBox(height: 32), image],
                 );
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 2, child: image),
-                  const SizedBox(width: 40),
                   const Expanded(flex: 3, child: content),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: image),
                 ],
               );
             },
