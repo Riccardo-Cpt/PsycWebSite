@@ -150,11 +150,11 @@ class _CtaSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'Il primo colloquio è uno spazio di ascolto senza impegno, '
+                        'Il primo colloquio è uno spazio di ascolto '
                         'per cominciare a orientarsi insieme.',
                         style: TextStyle(
-                          fontSize: isWide ? 26 : 22,
-                          height: 1.65,
+                          fontSize: isWide ? 26 : 18,
+                          height: 1.55,
                           color: Colors.white70,
                         ),
                         textAlign: TextAlign.center,
