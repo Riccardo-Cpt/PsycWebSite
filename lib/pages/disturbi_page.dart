@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -61,26 +62,26 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Disturbi trattati',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Mi occupo di disagio psicologico nelle sue diverse manifestazioni. '
                 'Ogni persona viene incontrata nella sua specificità, senza etichette '
                 'riduttive.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -105,19 +106,19 @@ class _DisturbSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Aree di intervento',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Lavoro con persone che attraversano:',
-                style: TextStyle(
-                    fontSize: 17, height: 1.7, color: Color(0xFF4A4A4A)),
+                style: GoogleFonts.lato(
+                    fontSize: 17, height: 1.7, color: const Color(0xFF4A4A4A)),
               ),
               const SizedBox(height: 28),
               Wrap(
@@ -150,19 +151,19 @@ class _SituazioniSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Situazioni di vita',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Accolgo inoltre situazioni legate a:',
-                style: TextStyle(
-                    fontSize: 17, height: 1.7, color: Color(0xFF4A4A4A)),
+                style: GoogleFonts.lato(
+                    fontSize: 17, height: 1.7, color: const Color(0xFF4A4A4A)),
               ),
               const SizedBox(height: 28),
               Wrap(
@@ -192,15 +193,15 @@ class _ChiusuraSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Text(
+          child: Text(
             'Ogni persona viene incontrata nella sua specificità, senza etichette riduttive. '
             'La sofferenza non si riduce a una diagnosi: è sempre l\'espressione di una storia '
             'unica che merita ascolto e rispetto.',
-            style: TextStyle(
+            style: GoogleFonts.lato(
               fontSize: 18,
               height: 1.75,
               fontStyle: FontStyle.italic,
-              color: Color(0xFF2C2C2C),
+              color: const Color(0xFF2C2C2C),
             ),
             textAlign: TextAlign.center,
           ),
@@ -234,9 +235,9 @@ class _Chip extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             label,
-            style: const TextStyle(
+            style: GoogleFonts.lato(
               fontSize: 15,
-              color: Color(0xFF2C2C2C),
+              color: const Color(0xFF2C2C2C),
               fontWeight: FontWeight.w500,
             ),
           ),

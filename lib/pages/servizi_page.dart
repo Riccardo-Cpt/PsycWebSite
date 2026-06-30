@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
@@ -52,28 +53,28 @@ class ServiziPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-            const Text(
+            Text(
               'Di cosa mi occupo',
-              style: TextStyle(
+              style: GoogleFonts.playfairDisplay(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996)),
+                  color: const Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Mi occupo di benessere psicologico in tutte le sue forme. '
               'Attraverso un approccio personalizzato e basato sulla relazione terapeutica, '
               'accompagno le persone in percorsi di cambiamento, comprensione di sé e '
               'recupero dell\'equilibrio emotivo. Di seguito le principali aree in cui lavoro.',
-              style: TextStyle(fontSize: 16, height: 1.7, color: Colors.black87),
+              style: GoogleFonts.lato(fontSize: 16, height: 1.7, color: Colors.black87),
             ),
             const SizedBox(height: 40),
-            const Text(
+            Text(
               'A chi mi rivolgo',
-              style: TextStyle(
+              style: GoogleFonts.playfairDisplay(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996)),
+                  color: const Color(0xFF93a996)),
             ),
             const SizedBox(height: 16),
             LayoutBuilder(
@@ -141,7 +142,7 @@ class _CtaSection extends StatelessWidget {
                     children: [
                       Text(
                         'Hai domande sul percorso?',
-                        style: TextStyle(
+                        style: GoogleFonts.playfairDisplay(
                           fontSize: isWide ? 36 : 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -152,7 +153,7 @@ class _CtaSection extends StatelessWidget {
                       Text(
                         'Il primo colloquio è uno spazio di ascolto '
                         'per cominciare a orientarsi insieme.',
-                        style: TextStyle(
+                        style: GoogleFonts.lato(
                           fontSize: isWide ? 26 : 18,
                           height: 1.55,
                           color: Colors.white70,
@@ -169,7 +170,7 @@ class _CtaSection extends StatelessWidget {
                             color: Colors.white),
                         label: Text(
                           'Richiedi un primo colloquio',
-                          style: TextStyle(
+                          style: GoogleFonts.lato(
                               fontSize: isWide ? 20 : 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
@@ -232,13 +233,13 @@ class _AreaCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(titolo,
-                  style: const TextStyle(
+                  style: GoogleFonts.playfairDisplay(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF93a996))),
+                      color: const Color(0xFF93a996))),
               const SizedBox(height: 10),
               Text(descrizione,
-                  style: const TextStyle(
+                  style: GoogleFonts.lato(
                       fontSize: 17, color: Colors.black54, height: 1.5)),
             ],
           );

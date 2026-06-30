@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 import '../models/review.dart';
@@ -64,12 +65,12 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   'Recensioni',
-                  style: TextStyle(
+                  style: GoogleFonts.playfairDisplay(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF93a996)),
+                      color: const Color(0xFF93a996)),
                 ),
                 const SizedBox(height: 16),
                 FutureBuilder<List<Review>>(
@@ -81,16 +82,16 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                     if (snapshot.hasError) {
                       return Center(
                         child: Text('Errore: ${snapshot.error}',
-                            style: const TextStyle(color: Colors.red)),
+                            style: GoogleFonts.lato(color: Colors.red)),
                       );
                     }
                     final reviews = snapshot.data ?? [];
                     if (reviews.isEmpty) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 48),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 48),
                         child: Center(
                           child: Text('Nessuna recensione ancora.',
-                              style: TextStyle(
+                              style: GoogleFonts.lato(
                                   fontSize: 18, color: Colors.black54)),
                         ),
                       );
@@ -114,9 +115,9 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Lascia una recensione',
-                    style: TextStyle(fontSize: 16),
+                    style: GoogleFonts.lato(fontSize: 16),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -181,14 +182,13 @@ class _ReviewCard extends StatelessWidget {
             Row(
               children: [
                 Text(review.username,
-                    style: const TextStyle(
+                    style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold, fontSize: 14)),
                 const Spacer(),
                 if (review.createdAt != null)
                   Text(
                     DateFormat('yyyy-MM-dd').format(review.createdAt!),
-                    style:
-                        const TextStyle(color: Colors.black54, fontSize: 13),
+                    style: GoogleFonts.lato(color: Colors.black54, fontSize: 13),
                   ),
                 ValueListenableBuilder<bool>(
                   valueListenable: blogAuthService.isAdmin,
@@ -216,11 +216,11 @@ class _ReviewCard extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(review.title,
-                style: const TextStyle(
+                style: GoogleFonts.lato(
                     fontWeight: FontWeight.w600, fontSize: 15)),
             const SizedBox(height: 6),
             Text(review.description,
-                style: const TextStyle(
+                style: GoogleFonts.lato(
                     fontSize: 15, height: 1.5, fontStyle: FontStyle.italic)),
           ],
         ),
@@ -338,22 +338,22 @@ class _ReviewFlowState extends State<_ReviewFlow> {
   @override
   Widget build(BuildContext context) {
     if (_submitted) {
-      return const Padding(
-        padding: EdgeInsets.all(24),
+      return Padding(
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.check_circle_outline, color: Color(0xFF93a996), size: 64),
-            SizedBox(height: 16),
+            const Icon(Icons.check_circle_outline, color: Color(0xFF93a996), size: 64),
+            const SizedBox(height: 16),
             Text(
               'Recensione rilasciata.',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: GoogleFonts.playfairDisplay(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Deve essere approvata da un admin prima di essere pubblicata e visibile nel sito.',
-              style: TextStyle(fontSize: 15, color: Colors.black54),
+              style: GoogleFonts.lato(fontSize: 15, color: Colors.black54),
               textAlign: TextAlign.center,
             ),
           ],
@@ -378,7 +378,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
               if (!isVerified) ..._buildStep1() else ..._buildStep2(),
               if (_error != null) ...[
                 const SizedBox(height: 8),
-                Text(_error!, style: const TextStyle(color: Colors.red)),
+                Text(_error!, style: GoogleFonts.lato(color: Colors.red)),
               ],
               const SizedBox(height: 20),
               _loading
@@ -392,7 +392,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                       ),
                       child: Text(
                         isVerified ? 'Invia recensione' : 'Invia link di conferma',
-                        style: const TextStyle(fontSize: 16),
+                        style: GoogleFonts.lato(fontSize: 16),
                       ),
                     ),
             ],
@@ -403,12 +403,12 @@ class _ReviewFlowState extends State<_ReviewFlow> {
   }
 
   List<Widget> _buildStep1() => [
-        const Text('Lascia una recensione',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        Text('Lascia una recensione',
+            style: GoogleFonts.playfairDisplay(fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           'Inserisci i tuoi dati. Riceverai un link via email per confermare e inviare la tua recensione.',
-          style: TextStyle(color: Colors.black54),
+          style: GoogleFonts.lato(color: Colors.black54),
         ),
         const SizedBox(height: 16),
         TextField(
@@ -434,8 +434,8 @@ class _ReviewFlowState extends State<_ReviewFlow> {
       ];
 
   List<Widget> _buildStep2() => [
-        const Text('La tua recensione',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        Text('La tua recensione',
+            style: GoogleFonts.playfairDisplay(fontSize: 22, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
         Row(
           children: [

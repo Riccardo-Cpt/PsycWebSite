@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -103,26 +104,26 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 760),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Chi sono',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Psicologa e Psicoterapeuta con un approccio umanistico-relazionale. '
                 'Accolgo adulti, adolescenti, coppie e famiglie che desiderano uno spazio '
                 'di ascolto autentico e accompagnamento professionale.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -140,30 +141,30 @@ class _PresentazioneSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Icon(Icons.person_outline, color: Color(0xFF93a996), size: 24),
-            SizedBox(width: 10),
+            const Icon(Icons.person_outline, color: Color(0xFF93a996), size: 24),
+            const SizedBox(width: 10),
             Text(
               'Presentazione',
-              style: TextStyle(
+              style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996)),
+                  color: const Color(0xFF93a996)),
             ),
           ],
         ),
-        SizedBox(height: 4),
-        Divider(color: Color(0xFF93a996), thickness: 1),
-        SizedBox(height: 16),
+        const SizedBox(height: 4),
+        const Divider(color: Color(0xFF93a996), thickness: 1),
+        const SizedBox(height: 16),
         Text(
           'Nel mio lavoro accolgo adulti, adolescenti, coppie e famiglie che attraversano '
           'momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi '
           'ascoltati con rispetto, competenza e attenzione alla propria unicità.',
-          style: TextStyle(fontSize: 16, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 16, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
       ],
     );
@@ -183,16 +184,16 @@ class _ExperienceNote extends StatelessWidget {
         color: const Color(0xFFF0F7F4),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.info_outline, color: Color(0xFF93a996), size: 20),
-          SizedBox(width: 12),
+          const Icon(Icons.info_outline, color: Color(0xFF93a996), size: 20),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               'Nel corso degli anni ho maturato esperienza in consultori, ospedali, scuole, '
               'comuni, associazioni e altri contesti dell\'area sociale.',
-              style: TextStyle(fontSize: 15, height: 1.65, color: Color(0xFF2C2C2C)),
+              style: GoogleFonts.lato(fontSize: 15, height: 1.65, color: const Color(0xFF2C2C2C)),
             ),
           ),
         ],
@@ -226,28 +227,28 @@ class _ProfileCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const Text(
+        Text(
           'Dr.ssa Maria Bianchi',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 6),
-        const Text(
+        Text(
           'Psicologa e Psicoterapeuta',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.lato(
               fontSize: 18,
-              color: Color(0xFF93a996),
+              color: const Color(0xFF93a996),
               fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
-        const Text(
+        Text(
           'Iscritta all\'Albo degli Psicologi della Lombardia — n. 14872',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 13, color: Colors.black54),
+          style: GoogleFonts.lato(fontSize: 13, color: Colors.black54),
         ),
       ],
     );
@@ -278,10 +279,10 @@ class _Section extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               title,
-              style: const TextStyle(
+              style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996)),
+                  color: const Color(0xFF93a996)),
             ),
           ],
         ),
@@ -316,7 +317,7 @@ class _SectionItem extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(fontSize: 15, height: 1.6),
+              style: GoogleFonts.lato(fontSize: 15, height: 1.6),
             ),
           ),
         ],

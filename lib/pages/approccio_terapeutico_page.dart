@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
@@ -40,26 +41,26 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Approccio terapeutico',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 38,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Il lavoro terapeutico nasce dall\'incontro con una storia unica. '
                 'Non esiste un percorso standard: ogni cammino viene costruito '
                 'con rispetto dei tempi, delle risorse e della specificità di ciascuno.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -78,15 +79,15 @@ class _CentralitaPersonaSection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'La centralità della persona',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
             'Al centro del lavoro terapeutico c\'è la persona nella sua unicità, '
             'con la sua storia, i suoi vissuti e il significato che la sofferenza '
             'assume nella sua esperienza.'
@@ -97,7 +98,7 @@ class _CentralitaPersonaSection extends StatelessWidget {
             'Questo orientamento richiede tempo, presenza e disponibilità a stare '
             'vicino all\'esperienza dell\'altro senza fretta di interpretarla o '
             'di ricondurla a schemi prestabiliti.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
       ],
@@ -153,15 +154,15 @@ class _RelazioneSection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'La relazione terapeutica',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
               'L\'ascolto e la relazione terapeutica sono strumenti fondamentali del '
               'lavoro clinico.'
               'Attraverso una relazione fondata su fiducia, rispetto e continuità, '
@@ -172,7 +173,7 @@ class _RelazioneSection extends StatelessWidget {
               'viene vissuta e attraversata, offre la possibilità di riconoscere schemi '
               'relazionali profondi e di sperimentare nuove forme di connessione con sé '
               'stessi e con l\'altro.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
       ],
@@ -227,15 +228,15 @@ class _PercorsoSection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'La centralità della persona',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
             'La psicoterapia non è una risposta standard a un sintomo, ma un percorso '
             'costruito insieme, che tiene conto dei tempi, delle risorse, delle fragilità '
             'e delle possibilità di cambiamento di ciascuno.'
@@ -244,7 +245,7 @@ class _PercorsoSection extends StatelessWidget {
             'già definito, ma con la disponibilità a costruirlo insieme, incontro dopo incontro.'
             'La durata e l\'intensità del lavoro vengono valutate in modo flessibile, '
             'in relazione all\'evoluzione della situazione e agli obiettivi condivisi.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
       ],
@@ -315,21 +316,21 @@ class _CambiamentoSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Cambiamento e consapevolezza',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'L\'obiettivo del lavoro terapeutico è aiutare la persona ad avvicinarsi a sé stessa '
                 'con maggiore chiarezza, a riconoscere ciò che la muove e ciò che la trattiene, '
                 'e a trovare una direzione più autentica.',
-                style: TextStyle(
-                    fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
               const SizedBox(height: 32),
               ..._obiettivi.map((item) => Padding(
@@ -353,10 +354,10 @@ class _CambiamentoSection extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
                               item.$2,
-                              style: const TextStyle(
+                              style: GoogleFonts.lato(
                                   fontSize: 17,
                                   height: 1.6,
-                                  color: Color(0xFF2C2C2C)),
+                                  color: const Color(0xFF2C2C2C)),
                             ),
                           ),
                         ),
@@ -402,9 +403,9 @@ class _EmdrSection extends StatelessWidget {
                       color: const Color(0xFF93a996),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
+                    child: Text(
                       'EMDR',
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -415,28 +416,28 @@ class _EmdrSection extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Eye Movement Desensitization and Reprocessing',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Tra gli strumenti clinici che utilizzo vi è anche l\'EMDR, un approccio '
                 'terapeutico riconosciuto dall\'OMS e utilizzato in particolare per '
                 'l\'elaborazione di esperienze traumatiche o emotivamente molto intense.',
-                style: TextStyle(
-                    fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Può essere utile quando alcuni eventi del passato continuano a produrre '
                 'sofferenza nel presente, manifestandosi attraverso:',
-                style: TextStyle(
-                    fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
               const SizedBox(height: 16),
               Container(
@@ -461,10 +462,10 @@ class _EmdrSection extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(s,
-                                      style: const TextStyle(
+                                      style: GoogleFonts.lato(
                                           fontSize: 17,
                                           height: 1.6,
-                                          color: Color(0xFF2C2C2C))),
+                                          color: const Color(0xFF2C2C2C))),
                                 ),
                               ],
                             ),
@@ -473,14 +474,14 @@ class _EmdrSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'L\'integrazione dell\'EMDR all\'interno del percorso psicoterapeutico viene '
                 'valutata in base al bisogno della persona, alla fase del lavoro clinico e agli '
                 'obiettivi condivisi. Non si tratta di una tecnica applicata in modo automatico, '
                 'ma di uno strumento inserito con attenzione e competenza all\'interno di un '
                 'percorso costruito su misura.',
-                style: TextStyle(
-                    fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
             ],
           ),
@@ -525,7 +526,7 @@ class _CtaSection extends StatelessWidget {
                     children: [
                       Text(
                         'Hai domande sul percorso?',
-                        style: TextStyle(
+                        style: GoogleFonts.playfairDisplay(
                           fontSize: isWide ? 36 : 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -536,7 +537,7 @@ class _CtaSection extends StatelessWidget {
                       Text(
                         'Il primo colloquio è uno spazio di ascolto '
                         'per cominciare a orientarsi insieme.',
-                        style: TextStyle(
+                        style: GoogleFonts.lato(
                           fontSize: isWide ? 26 : 18,
                           height: 1.55,
                           color: Colors.white70,
@@ -553,7 +554,7 @@ class _CtaSection extends StatelessWidget {
                             color: Colors.white),
                         label: Text(
                           'Richiedi un primo colloquio',
-                          style: TextStyle(
+                          style: GoogleFonts.lato(
                               fontSize: isWide ? 20 : 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),

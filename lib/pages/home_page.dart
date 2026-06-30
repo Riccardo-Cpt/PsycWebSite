@@ -189,7 +189,7 @@ class _IntroSection extends StatelessWidget {
       color: Colors.white,
       shadows: [Shadow(color: Colors.black.withValues(alpha: 0.55), blurRadius: 8, offset: Offset(0, 2))],
     );
-    final bodyStyle = GoogleFonts.cormorantGaramond(
+    final bodyStyle = GoogleFonts.lato(
       fontSize: 22,
       height: 1.65,
       color: const Color(0xFF4A4A4A),
@@ -215,7 +215,7 @@ class _IntroSection extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(14),
                       child: AspectRatio(
-                        aspectRatio: 340 / 420,
+                        aspectRatio: 340 / 320,
                         child: Image.asset(
                           'assets/images/foto_donna_seduta.webp',
                           fit: BoxFit.cover,
@@ -304,19 +304,21 @@ class _AChiMiRivolgoSection extends StatelessWidget {
         'Fasi delicate come adolescenza, maternità, genitorialità, crisi affettive, lutto, traumi, menopausa e stress lavorativo.'),
   ];
 
+  Widget _buildImage(double aspectRatio) => ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: Image.asset(
+            'assets/images/AlberoVento.webp',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 320 / 400,
-        child: Image.asset(
-          'assets/images/AlberoVento.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -371,29 +373,20 @@ class _AChiMiRivolgoSection extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [content, const SizedBox(height: 32), image],
+                  children: [
+                    content,
+                    const SizedBox(height: 32),
+                    _buildImage(320 / 280),
+                  ],
                 );
               }
-              return IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(14),
-                        child: Image.asset(
-                          'assets/images/AlberoVento.webp',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 40),
-                    Expanded(flex: 3, child: content),
-                  ],
-                ),
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 2, child: _buildImage(320 / 270)),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 3, child: content),
+                ],
               );
             },
           ),
@@ -407,6 +400,19 @@ class _AChiMiRivolgoSection extends StatelessWidget {
 
 class _PrimoColloquioBox extends StatelessWidget {
   const _PrimoColloquioBox();
+
+  Widget _buildImage(double aspectRatio) => ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: Image.asset(
+            'assets/images/SassoParticolare.webp',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -451,17 +457,6 @@ class _PrimoColloquioBox extends StatelessWidget {
       ],
     );
 
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 400 / 380,
-        child: Image.asset(
-          'assets/images/SassoParticolare.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -474,29 +469,20 @@ class _PrimoColloquioBox extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), image],
+                  children: [
+                    textContent,
+                    const SizedBox(height: 32),
+                    _buildImage(400 / 240),
+                  ],
                 );
               }
-              return IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(flex: 3, child: textContent),
-                    const SizedBox(width: 40),
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(14),
-                        child: Image.asset(
-                          'assets/images/SassoParticolare.webp',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: textContent),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: _buildImage(400 / 240)),
+                ],
               );
             },
           ),
@@ -598,19 +584,21 @@ class _AreaChip extends StatelessWidget {
 class _LabirintiSection extends StatelessWidget {
   const _LabirintiSection();
 
+  Widget _buildImage(double aspectRatio) => ClipRRect(
+        borderRadius: BorderRadius.circular(14),
+        child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: Image.asset(
+            'assets/images/Maze.webp',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 360 / 420,
-        child: Image.asset(
-          'assets/images/Maze.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -650,29 +638,20 @@ class _LabirintiSection extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [content, const SizedBox(height: 32), image],
+                  children: [
+                    content,
+                    const SizedBox(height: 32),
+                    _buildImage(360 / 220),
+                  ],
                 );
               }
-              return IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(flex: 3, child: content),
-                    const SizedBox(width: 40),
-                    Expanded(
-                      flex: 2,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(14),
-                        child: Image.asset(
-                          'assets/images/Maze.webp',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: content),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: _buildImage(360 / 220)),
+                ],
               );
             },
           ),

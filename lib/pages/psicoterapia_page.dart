@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
@@ -39,26 +40,26 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1100),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Psicoterapia',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 38,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'La psicoterapia è un percorso di cura e conoscenza di sé che aiuta a '
                 'comprendere il significato del disagio psicologico, dei sintomi e delle '
                 'difficoltà relazionali.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -77,15 +78,15 @@ class _CosESection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Che cos\'è la psicoterapia',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
             'La psicoterapia è un percorso di cura che si sviluppa attraverso la '
             'relazione tra terapeuta e persona, nel tempo e nello spazio del colloquio.'
             'Non si tratta di ricevere consigli o soluzioni preconfezionate, ma di '
@@ -94,7 +95,7 @@ class _CosESection extends StatelessWidget {
             'È un lavoro che richiede tempo, fiducia e disponibilità ad osservare '
             'se stessi con onestà e curiosità. Il cambiamento che ne può nascere '
             'è autentico, radicato nella propria storia e nelle proprie risorse.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
       ],
@@ -160,50 +161,50 @@ class _QuandoSection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Quando può essere utile',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
-                      'La psicoterapia può essere utile in presenza di:',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
-                    const SizedBox(height: 16),
-                    ..._situazioni.map((s) => Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(top: 7),
-                                child: Icon(Icons.circle,
-                                    size: 8, color: Color(0xFF93a996)),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(s,
-                                    style: const TextStyle(
-                                        fontSize: 17,
-                                        height: 1.6,
-                                        color: Color(0xFF2C2C2C))),
-                              ),
-                            ],
-                          ),
-                        )),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Non è necessario stare molto male per iniziare: molte persone '
-                      'si rivolgono alla psicoterapia anche per affrontare momenti di '
-                      'cambiamento, prendere decisioni importanti o approfondire la '
-                      'conoscenza di sé.',
-                      style: TextStyle(
-                          fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
-                    ),
+        Text(
+          'La psicoterapia può essere utile in presenza di:',
+          style: GoogleFonts.lato(
+              fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+        ),
+        const SizedBox(height: 16),
+        ..._situazioni.map((s) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 7),
+                    child: Icon(Icons.circle,
+                        size: 8, color: Color(0xFF93a996)),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(s,
+                        style: GoogleFonts.lato(
+                            fontSize: 17,
+                            height: 1.6,
+                            color: const Color(0xFF2C2C2C))),
+                  ),
+                ],
+              ),
+            )),
+        const SizedBox(height: 8),
+        Text(
+          'Non è necessario stare molto male per iniziare: molte persone '
+          'si rivolgono alla psicoterapia anche per affrontare momenti di '
+          'cambiamento, prendere decisioni importanti o approfondire la '
+          'conoscenza di sé.',
+          style: GoogleFonts.lato(
+              fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+        ),
         const SizedBox(height: 16),
       ],
     );
@@ -257,15 +258,15 @@ class _ComeSiSvolgeSection extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Come si svolge il percorso',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
               'Ogni percorso viene costruito in modo personalizzato, nel rispetto '
               'della storia, dei tempi e delle caratteristiche della persona.'
               'I primi incontri sono dedicati alla conoscenza reciproca, alla '
@@ -276,7 +277,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
               'elaborare e trasformare il disagio. La durata e l\'intensità del '
               'lavoro vengono valutate in modo flessibile, in relazione '
               'all\'evoluzione della situazione e agli obiettivi condivisi.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
       ],
@@ -322,6 +323,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
     );
   }
 }
+
 class _ObiettiviSection extends StatelessWidget {
   const _ObiettiviSection();
 
@@ -344,20 +346,20 @@ class _ObiettiviSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Come si svolge il percorso',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'L\'obiettivo non è soltanto ridurre la sofferenza, ma favorire una '
                 'trasformazione più profonda e duratura.',
-                style: TextStyle(
-                    fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
               const SizedBox(height: 32),
               ..._obiettivi.map((item) => Padding(
@@ -382,10 +384,10 @@ class _ObiettiviSection extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
                               item.$2,
-                              style: const TextStyle(
+                              style: GoogleFonts.lato(
                                   fontSize: 17,
                                   height: 1.6,
-                                  color: Color(0xFF2C2C2C)),
+                                  color: const Color(0xFF2C2C2C)),
                             ),
                           ),
                         ),
@@ -435,7 +437,7 @@ class _CtaSection extends StatelessWidget {
                     children: [
                       Text(
                         'Hai domande sul percorso?',
-                        style: TextStyle(
+                        style: GoogleFonts.playfairDisplay(
                           fontSize: isWide ? 36 : 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -446,7 +448,7 @@ class _CtaSection extends StatelessWidget {
                       Text(
                         'Il primo colloquio è uno spazio di ascolto '
                         'per cominciare a orientarsi insieme.',
-                        style: TextStyle(
+                        style: GoogleFonts.lato(
                           fontSize: isWide ? 26 : 18,
                           height: 1.55,
                           color: Colors.white70,
@@ -463,7 +465,7 @@ class _CtaSection extends StatelessWidget {
                             color: Colors.white),
                         label: Text(
                           'Richiedi un primo colloquio',
-                          style: TextStyle(
+                          style: GoogleFonts.lato(
                               fontSize: isWide ? 20 : 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),

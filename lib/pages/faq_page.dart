@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -135,25 +136,25 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Domande frequenti',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Alcune delle domande più comuni sulla psicoterapia, sul percorso terapeutico '
                 'e sugli aspetti pratici. Se hai altre domande, puoi contattarmi direttamente.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -179,10 +180,10 @@ class _FaqGroup extends StatelessWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 16),
           child: Text(
             title,
-            style: const TextStyle(
+            style: GoogleFonts.playfairDisplay(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996),
+              color: const Color(0xFF93a996),
             ),
           ),
         ),
@@ -219,19 +220,19 @@ class _FaqTile extends StatelessWidget {
         collapsedShape: const Border(),
         title: Text(
           question,
-          style: const TextStyle(
+          style: GoogleFonts.lato(
             fontSize: 17,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF2C2C2C),
+            color: const Color(0xFF2C2C2C),
           ),
         ),
         children: [
           Text(
             answer,
-            style: const TextStyle(
+            style: GoogleFonts.lato(
               fontSize: 16,
               height: 1.7,
-              color: Color(0xFF4A4A4A),
+              color: const Color(0xFF4A4A4A),
             ),
           ),
         ],

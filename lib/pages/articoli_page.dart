@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 import '../models/articolo.dart';
@@ -75,10 +76,10 @@ class _ArticoliPageState extends State<ArticoliPage>
                 padding: const EdgeInsets.fromLTRB(24, 20, 8, 8),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
                         'Indice post',
-                        style: TextStyle(
+                        style: GoogleFonts.playfairDisplay(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -92,10 +93,10 @@ class _ArticoliPageState extends State<ArticoliPage>
               const Divider(height: 1),
               Flexible(
                 child: articoli.isEmpty
-                    ? const Padding(
-                        padding: EdgeInsets.all(24),
+                    ? Padding(
+                        padding: const EdgeInsets.all(24),
                         child: Text('Nessun articolo',
-                            style: TextStyle(color: Colors.black54)),
+                            style: GoogleFonts.lato(color: Colors.black54)),
                       )
                     : ListView.builder(
                         shrinkWrap: true,
@@ -167,9 +168,9 @@ class _ArticoliPageState extends State<ArticoliPage>
                         'assets/images/firma.png',
                         height: 40,
                         fit: BoxFit.fitHeight,
-                        errorBuilder: (_, _, _) => const Text(
+                        errorBuilder: (_, _, _) => Text(
                           'Dr.ssa Maria Bianchi',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF93a996)),
+                          style: GoogleFonts.lato(fontWeight: FontWeight.bold, color: const Color(0xFF93a996)),
                         ),
                       ),
                     ],
@@ -177,13 +178,13 @@ class _ArticoliPageState extends State<ArticoliPage>
                 ),
                 actions: [
                   if (MediaQuery.of(context).size.width >= 600)
-                    const Padding(
-                      padding: EdgeInsets.only(right: 4),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
                       child: Center(
                         child: Text(
                           'Naviga nel sito',
-                          style: TextStyle(
-                              color: Color(0xFF93a996),
+                          style: GoogleFonts.lato(
+                              color: const Color(0xFF93a996),
                               fontSize: 28,
                               fontWeight: FontWeight.w600),
                         ),
@@ -221,21 +222,21 @@ class _ArticoliPageState extends State<ArticoliPage>
                             children: [
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: Text(
                                 'Il mio blog',
-                                style: TextStyle(
+                                style: GoogleFonts.playfairDisplay(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF93a996)),
+                                    color: const Color(0xFF93a996)),
                               ),
                             ),
-                            const Text(
+                            Text(
                               'Naviga tra i post',
-                              style: TextStyle(
+                              style: GoogleFonts.lato(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF93a996)),
+                                  color: const Color(0xFF93a996)),
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
@@ -251,14 +252,14 @@ class _ArticoliPageState extends State<ArticoliPage>
                         else if (snapshot.hasError)
                           Center(
                               child: Text('Errore: ${snapshot.error}',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.lato(
                                       color: Colors.red)))
                         else if (articoli.isEmpty)
-                          const Center(
+                          Center(
                             child: Padding(
-                              padding: EdgeInsets.all(48),
+                              padding: const EdgeInsets.all(48),
                               child: Text('Nessun articolo pubblicato.',
-                                  style: TextStyle(
+                                  style: GoogleFonts.lato(
                                       fontSize: 18,
                                       color: Colors.black54)),
                             ),
@@ -342,7 +343,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
     return ListTile(
       leading: const Icon(Icons.expand_more, color: Color(0xFF93a996)),
       title: Text(a.titolo,
-          style: const TextStyle(fontWeight: FontWeight.bold)),
+          style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
       subtitle: Text(
         a.pubblicatoAt != null
             ? DateFormat('yyyy-MM-dd').format(a.pubblicatoAt!)
@@ -374,20 +375,19 @@ class _ArticoloCardState extends State<_ArticoloCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(a.titolo,
-                    style: const TextStyle(
+                    style: GoogleFonts.playfairDisplay(
                         fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 Text(
                   a.pubblicatoAt != null
                       ? DateFormat('yyyy-MM-dd').format(a.pubblicatoAt!)
                       : '',
-                  style: const TextStyle(
+                  style: GoogleFonts.lato(
                       color: Colors.black54, fontSize: 14),
                 ),
                 const SizedBox(height: 12),
                 Text(a.corpo,
-                    style:
-                        const TextStyle(fontSize: 16, height: 1.6)),
+                    style: GoogleFonts.lato(fontSize: 16, height: 1.6)),
               ],
             );
 

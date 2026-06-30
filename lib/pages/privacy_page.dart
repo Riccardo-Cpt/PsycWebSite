@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
 
@@ -37,26 +38,26 @@ class _HeroHeader extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Privacy e consenso informato',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'La riservatezza e la chiarezza sono elementi fondamentali della relazione '
                 'terapeutica. Prima di iniziare un percorso vengono fornite tutte le '
                 'informazioni necessarie per una scelta libera e consapevole.',
-                style: TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 19,
                   height: 1.75,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                 ),
               ),
             ],
@@ -78,35 +79,35 @@ class _PrivacySection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Privacy',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'La riservatezza è una parte essenziale della relazione terapeutica.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Tutte le informazioni condivise durante i colloqui sono trattate con '
                 'attenzione e nel rispetto della normativa vigente in materia di protezione '
                 'dei dati personali.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Prima dell\'avvio del percorso vengono fornite le informazioni necessarie '
                 'sul trattamento dei dati e sulle modalità di conservazione della '
                 'documentazione professionale.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
             ],
           ),
@@ -140,20 +141,20 @@ class _ConsensoSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Consenso informato',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Prima dell\'inizio di un percorso psicologico o psicoterapeutico viene '
                 'richiesto il consenso informato, che permette alla persona di ricevere '
                 'informazioni chiare riguardo a:',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
               const SizedBox(height: 20),
               Container(
@@ -178,10 +179,10 @@ class _ConsensoSection extends StatelessWidget {
                         const SizedBox(width: 14),
                         Expanded(
                           child: Text(v,
-                              style: const TextStyle(
+                              style: GoogleFonts.lato(
                                   fontSize: 17,
                                   height: 1.6,
-                                  color: Color(0xFF2C2C2C))),
+                                  color: const Color(0xFF2C2C2C))),
                         ),
                       ],
                     ),
@@ -189,9 +190,9 @@ class _ConsensoSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Questo consente una scelta libera, consapevole e informata.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
             ],
           ),
@@ -212,29 +213,29 @@ class _ConsensoMinoriSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Consenso informato per i minori',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996),
+                  color: const Color(0xFF93a996),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Nel caso di minori, il consenso informato deve essere firmato da entrambi '
                 'i genitori esercenti la responsabilità genitoriale, anche se separati o '
                 'divorziati, salvo diversa disposizione dell\'autorità competente.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Questo aspetto è particolarmente importante nelle situazioni di separazione '
                 'familiare e viene discusso con attenzione prima dell\'avvio del percorso.',
-                style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+                style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
               ),
             ],
           ),
@@ -256,14 +257,14 @@ class _ChiusuraSection extends StatelessWidget {
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),
-          child: const Text(
+          child: Text(
             'Privacy e consenso informato rappresentano strumenti fondamentali di tutela, '
             'chiarezza e fiducia all\'interno della relazione professionale.',
-            style: TextStyle(
+            style: GoogleFonts.lato(
               fontSize: 18,
               height: 1.75,
               fontStyle: FontStyle.italic,
-              color: Color(0xFF2C2C2C),
+              color: const Color(0xFF2C2C2C),
             ),
             textAlign: TextAlign.center,
           ),
