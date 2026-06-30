@@ -1,6 +1,7 @@
 // lib/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../config/contatti.dart';
 import '../main.dart';
@@ -110,29 +111,29 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Dr.ssa Maria Bianchi',
-                      style: TextStyle(
+                      style: GoogleFonts.pacifico(
                           fontSize: 48,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFF5F5F5)),
+                          color: const Color(0xFFF5F5F5)),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie',
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Color(0xFFFFFFF0),
+                      style: GoogleFonts.lato(
+                          fontSize: 24,
+                          color: const Color(0xFFFFFFF0),
                           fontWeight: FontWeight.w500,
                           height: 1.4),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       'Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                           fontSize: 20,
-                          color: Color(0xFFFFFFF0),
-                          height: 1.6),
+                          color: const Color(0xFFFFFFF0),
+                          height: 1.6,
+                          fontStyle: FontStyle.italic),
                     ),
                       const SizedBox(height: 50),
                       ElevatedButton.icon(
@@ -141,9 +142,8 @@ class _HeroSectionState extends State<_HeroSection>
                           builder: (_) => const ContactFormDialog(),
                         ),
                         icon: const Icon(Icons.calendar_today_outlined),
-                        label: const Text('Richiedi un primo colloquio',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
+                        label: Text('Richiedi un primo colloquio',
+                            style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF93a996),
                           foregroundColor: Colors.white,
@@ -172,52 +172,112 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const text = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
+    const lead = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
         'le relazioni si complicano, l\'ansia prende spazio, il dolore emotivo diventa difficile da sostenere '
-        'o ci si sente semplicemente smarriti.\n\n'
-        'In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione '
-        'di sé e verso la possibilità di ritrovare equilibrio.\n\n'
+        'o ci si sente semplicemente smarriti.';
+    const body = 'In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione '
+        'di sé e verso la possibilità di ritrovare equilibrio. '
         'Nel mio studio offro uno spazio di ascolto professionale, riservato e accogliente, in cui la persona '
-        'possa sentirsi riconosciuta nella propria esperienza e accompagnata con rispetto, sensibilità e competenza.\n\n'
+        'possa sentirsi riconosciuta nella propria esperienza e accompagnata con rispetto, sensibilità e competenza. '
         'Il percorso psicologico o psicoterapeutico nasce dall\'incontro con una storia unica e viene costruito '
         'con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.';
 
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 340 / 420,
-        child: Image.asset(
-          'assets/images/foto_donna_seduta.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
+    final leadStyle = GoogleFonts.playfairDisplay(
+      fontSize: 26,
+      fontStyle: FontStyle.italic,
+      height: 1.5,
+      color: Colors.white,
+      shadows: [Shadow(color: Colors.black.withValues(alpha: 0.55), blurRadius: 8, offset: Offset(0, 2))],
     );
-    final textWidget = Text(
-      text,
-      style: const TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+    final bodyStyle = GoogleFonts.cormorantGaramond(
+      fontSize: 22,
+      height: 1.65,
+      color: const Color(0xFF4A4A4A),
     );
+
     return Container(
       width: double.infinity,
       color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
+          constraints: const BoxConstraints(maxWidth: 1400),
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textWidget, const SizedBox(height: 32), image],
+                  children: [
+                    Text(lead, style: leadStyle),
+                    const SizedBox(height: 20),
+                    Text(body, style: bodyStyle),
+                    const SizedBox(height: 32),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: AspectRatio(
+                        aspectRatio: 340 / 420,
+                        child: Image.asset(
+                          'assets/images/foto_donna_seduta.webp',
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
-              return Row(
+
+              // Desktop: lead overlaps image from the left, body below
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 3, child: textWidget),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: image),
+                  SizedBox(
+                    height: 420,
+                    width: constraints.maxWidth,
+                    child: Stack(
+                      children: [
+                        // Image — centered (middle of the section)
+                        Positioned(
+                          left: constraints.maxWidth * 0.28,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Image.asset(
+                              'assets/images/foto_donna_seduta.webp',
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                            ),
+                          ),
+                        ),
+                        // Lead sentence — gradient band fading left-to-right into the image
+                        Positioned(
+                          left: 0,
+                          top: 40,
+                          width: constraints.maxWidth * 0.62,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Colors.black.withValues(alpha: 0.68),
+                                  Colors.black.withValues(alpha: 0.40),
+                                  Colors.black.withValues(alpha: 0.0),
+                                ],
+                                stops: const [0.0, 0.65, 1.0],
+                              ),
+                            ),
+                            child: Text(lead, style: leadStyle),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+                  Text(body, style: bodyStyle),
                 ],
               );
             },
@@ -260,12 +320,12 @@ class _AChiMiRivolgoSection extends StatelessWidget {
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'A chi mi rivolgo',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF93a996),
+            color: const Color(0xFF93a996),
           ),
         ),
         const SizedBox(height: 24),
@@ -281,16 +341,16 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(c.$2,
-                        style: const TextStyle(
+                        style: GoogleFonts.lato(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
-                            color: Color(0xFF93a996))),
+                            color: const Color(0xFF93a996))),
                     const SizedBox(height: 4),
                     Text(c.$3,
-                        style: const TextStyle(
+                        style: GoogleFonts.lato(
                             fontSize: 16,
                             height: 1.55,
-                            color: Color(0xFF2C2C2C))),
+                            color: const Color(0xFF2C2C2C))),
                   ],
                 ),
               ),
@@ -302,10 +362,10 @@ class _AChiMiRivolgoSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
+          constraints: const BoxConstraints(maxWidth: 1400),
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
@@ -314,13 +374,26 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                   children: [content, const SizedBox(height: 32), image],
                 );
               }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 2, child: image),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 3, child: content),
-                ],
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.asset(
+                          'assets/images/AlberoVento.webp',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 40),
+                    Expanded(flex: 3, child: content),
+                  ],
+                ),
               );
             },
           ),
@@ -340,22 +413,22 @@ class _PrimoColloquioBox extends StatelessWidget {
     final textContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Il primo colloquio',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 10),
-        const Text(
+        Text(
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: TextStyle(fontSize: 18, height: 1.7, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -364,8 +437,8 @@ class _PrimoColloquioBox extends StatelessWidget {
             builder: (_) => const ContactFormDialog(),
           ),
           icon: const Icon(Icons.calendar_today_outlined),
-          label: const Text('Richiedi un primo colloquio',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          label: Text('Richiedi un primo colloquio',
+              style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold)),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF2E8494),
             foregroundColor: Colors.white,
@@ -392,10 +465,10 @@ class _PrimoColloquioBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
+          constraints: const BoxConstraints(maxWidth: 1400),
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
@@ -404,13 +477,26 @@ class _PrimoColloquioBox extends StatelessWidget {
                   children: [textContent, const SizedBox(height: 32), image],
                 );
               }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: textContent),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: image),
-                ],
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(flex: 3, child: textContent),
+                    const SizedBox(width: 40),
+                    Expanded(
+                      flex: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.asset(
+                          'assets/images/SassoParticolare.webp',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -449,16 +535,16 @@ class _AreeInterventoSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 0),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 900),
+          constraints: const BoxConstraints(maxWidth: 1200),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Aree di lavoro',
-                style: TextStyle(
+                style: GoogleFonts.playfairDisplay(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF93a996)),
+                    color: const Color(0xFF93a996)),
               ),
               const SizedBox(height: 24),
               Wrap(
@@ -497,9 +583,9 @@ class _AreaChip extends StatelessWidget {
           Icon(icon, size: 18, color: const Color(0xFF93a996)),
           const SizedBox(width: 7),
           Text(label,
-              style: const TextStyle(
+              style: GoogleFonts.lato(
                   fontSize: 14,
-                  color: Color(0xFF2C2C2C),
+                  color: const Color(0xFF2C2C2C),
                   fontWeight: FontWeight.w500)),
         ],
       ),
@@ -525,40 +611,40 @@ class _LabirintiSection extends StatelessWidget {
         ),
       ),
     );
-    const content = Column(
+    final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Labirinti',
-          style: TextStyle(
+          style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF93a996)),
+              color: const Color(0xFF93a996)),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
-          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
-          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
-          style: TextStyle(fontSize: 18, height: 1.75, color: Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
       ],
     );
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
+          constraints: const BoxConstraints(maxWidth: 1400),
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
@@ -567,13 +653,26 @@ class _LabirintiSection extends StatelessWidget {
                   children: [content, const SizedBox(height: 32), image],
                 );
               }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Expanded(flex: 3, child: content),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: image),
-                ],
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(flex: 3, child: content),
+                    const SizedBox(width: 40),
+                    Expanded(
+                      flex: 2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.asset(
+                          'assets/images/Maze.webp',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -625,16 +724,16 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
           padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
           child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 900),
+              constraints: const BoxConstraints(maxWidth: 1200),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Ultimo articolo pubblicato',
-                    style: TextStyle(
+                    style: GoogleFonts.playfairDisplay(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996)),
+                        color: const Color(0xFF93a996)),
                   ),
                   const SizedBox(height: 24),
                   ...articoli.map((a) => Padding(
@@ -709,13 +808,13 @@ class _ArticoloCard extends StatelessWidget {
                             fontSize: 12, color: Colors.black45)),
                   const SizedBox(height: 4),
                   Text(articolo.titolo,
-                      style: const TextStyle(
+                      style: GoogleFonts.playfairDisplay(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF134456))),
+                          color: const Color(0xFF134456))),
                   const SizedBox(height: 6),
                   Text(corpo,
-                      style: const TextStyle(
+                      style: GoogleFonts.lato(
                           fontSize: 14, height: 1.6, color: Colors.black87)),
                 ],
               ),
@@ -760,16 +859,16 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 900),
+              constraints: const BoxConstraints(maxWidth: 1200),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Le ultime 3 recensioni',
-                    style: TextStyle(
+                    style: GoogleFonts.playfairDisplay(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF93a996)),
+                        color: const Color(0xFF93a996)),
                   ),
                   const SizedBox(height: 24),
                   LayoutBuilder(
@@ -840,7 +939,7 @@ class _ReviewPreviewCard extends StatelessWidget {
           children: [
             Text(
               review.username,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              style: GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             const SizedBox(height: 4),
             Row(
@@ -856,14 +955,14 @@ class _ReviewPreviewCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               review.title,
-              style: const TextStyle(
+              style: GoogleFonts.playfairDisplay(
                   fontWeight: FontWeight.w600,
                   fontSize: 15),
             ),
             const SizedBox(height: 6),
             Text(
               _truncateWords(review.description, 50),
-              style: const TextStyle(
+              style: GoogleFonts.lato(
                   fontSize: 14,
                   height: 1.5,
                   fontStyle: FontStyle.italic,
@@ -884,16 +983,16 @@ class _CtaSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 60),
+      padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 24),
       color: Colors.transparent,
       child: Column(
         children: [
-          const Text(
+          Text(
             'Inizia il tuo percorso',
-            style: TextStyle(
+            style: GoogleFonts.playfairDisplay(
                 fontSize: 45,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF93a996)),
+                color: const Color(0xFF93a996)),
           ),
           const SizedBox(height: 32),
           Wrap(
@@ -957,10 +1056,7 @@ class _CtaButton extends StatelessWidget {
         onPressed: onPressed,
         icon: Icon(icon, size: 28),
         label: Text(label,
-            style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5)),
+            style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold)),
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
@@ -989,11 +1085,11 @@ class _ContactFooter extends StatelessWidget {
       color: Colors.transparent,
       child: Column(
         children: [
-          const Text('Contatti',
-              style: TextStyle(
+          Text('Contatti',
+              style: GoogleFonts.playfairDisplay(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF93a996))),
+                  color: const Color(0xFF93a996))),
           const SizedBox(height: 24),
           SelectionArea(
             child: Wrap(
