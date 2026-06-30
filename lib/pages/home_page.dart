@@ -105,7 +105,7 @@ class _HeroSectionState extends State<_HeroSection>
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 96, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 760),
                 child: Column(
@@ -113,7 +113,7 @@ class _HeroSectionState extends State<_HeroSection>
                   children: [
                     Text(
                       'Dr.ssa Maria Bianchi',
-                      style: GoogleFonts.pacifico(
+                      style: GoogleFonts.playfairDisplay(
                           fontSize: 48,
                           color: const Color(0xFFF5F5F5)),
                     ),
@@ -172,22 +172,25 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lead = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
+    const lead = 'Un percorso di ascolto, comprensione e cura dove la guarigione passa dal cuore, dalla mente, dal corpo e dall\'anima';
+    const body = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
         'le relazioni si complicano, l\'ansia prende spazio, il dolore emotivo diventa difficile da sostenere '
-        'o ci si sente semplicemente smarriti.';
-    const body = 'In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione '
+        'o ci si sente semplicemente smarriti.'
+        'In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione '
         'di sé e verso la possibilità di ritrovare equilibrio. '
         'Nel mio studio offro uno spazio di ascolto professionale, riservato e accogliente, in cui la persona '
         'possa sentirsi riconosciuta nella propria esperienza e accompagnata con rispetto, sensibilità e competenza. '
         'Il percorso psicologico o psicoterapeutico nasce dall\'incontro con una storia unica e viene costruito '
         'con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.';
 
-    final leadStyle = GoogleFonts.playfairDisplay(
+    final leadStyle = GoogleFonts.dancingScript(
       fontSize: 26,
       fontStyle: FontStyle.italic,
       height: 1.5,
-      color: Colors.white,
-      shadows: [Shadow(color: Colors.black.withValues(alpha: 0.55), blurRadius: 8, offset: Offset(0, 2))],
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+
+      //shadows: [Shadow(color: Colors.black.withValues(alpha: 0.55), blurRadius: 8, offset: Offset(0, 2))],
     );
     final bodyStyle = GoogleFonts.lato(
       fontSize: 22,
@@ -258,18 +261,6 @@ class _IntroSection extends StatelessWidget {
                           width: constraints.maxWidth * 0.62,
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [
-                                  Colors.black.withValues(alpha: 0.68),
-                                  Colors.black.withValues(alpha: 0.40),
-                                  Colors.black.withValues(alpha: 0.0),
-                                ],
-                                stops: const [0.0, 0.65, 1.0],
-                              ),
-                            ),
                             child: Text(lead, style: leadStyle),
                           ),
                         ),
