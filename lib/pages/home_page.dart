@@ -172,7 +172,7 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lead = 'Un percorso di ascolto, comprensione e cura dove la guarigione passa dal cuore, dalla mente, dal corpo e dall\'anima';
+    const lead = 'Un percorso di ascolto, comprensione e cura\ndove la guarigione passa dal cuore,\n dalla mente,dal corpo e dall\'anima';
     const body = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
         'le relazioni si complicano, l\'ansia prende spazio, il dolore emotivo diventa difficile da sostenere '
         'o ci si sente semplicemente smarriti.'
@@ -183,14 +183,20 @@ class _IntroSection extends StatelessWidget {
         'Il percorso psicologico o psicoterapeutico nasce dall\'incontro con una storia unica e viene costruito '
         'con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.';
 
+    final isWide = MediaQuery.of(context).size.width >= 600;
     final leadStyle = GoogleFonts.dancingScript(
-      fontSize: 26,
+      fontSize: isWide ? 35 : 24,
       fontStyle: FontStyle.italic,
       height: 1.5,
-      color: Colors.black,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
-
-      //shadows: [Shadow(color: Colors.black.withValues(alpha: 0.55), blurRadius: 8, offset: Offset(0, 2))],
+    );
+    Widget leadText(String text) => ShaderMask(
+      shaderCallback: (bounds) => const LinearGradient(
+        colors: [Color(0xFF93a996), Color(0xFFa07858)],
+        stops: [0.5, 0.5],
+      ).createShader(bounds),
+      child: Text(text, style: leadStyle, textAlign: TextAlign.center),
     );
     final bodyStyle = GoogleFonts.lato(
       fontSize: 22,
@@ -211,9 +217,7 @@ class _IntroSection extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(lead, style: leadStyle),
-                    const SizedBox(height: 20),
-                    Text(body, style: bodyStyle),
+                    leadText(lead),
                     const SizedBox(height: 32),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(14),
@@ -226,6 +230,8 @@ class _IntroSection extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    Text(body, style: bodyStyle),
                   ],
                 );
               }
@@ -261,7 +267,7 @@ class _IntroSection extends StatelessWidget {
                           width: constraints.maxWidth * 0.62,
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                            child: Text(lead, style: leadStyle),
+                            child: leadText(lead),
                           ),
                         ),
                       ],
