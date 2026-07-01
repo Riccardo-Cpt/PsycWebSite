@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:js_interop';
 import 'pages/home_page.dart';
 import 'pages/servizi_page.dart';
 import 'pages/articoli_page.dart';
@@ -20,6 +22,25 @@ import 'services/review_auth_service.dart';
 import 'services/reviews_service.dart';
 import 'services/contact_service.dart';
 
+const _siteName = 'Dr.ssa Maria Bianchi — Psicologa';
+
+const _pageTitles = {
+  '/': 'Psicologa e Psicoterapeuta a Firenze | $_siteName',
+  '/servizi': 'Servizi di psicoterapia | $_siteName',
+  '/chi-sono': 'Chi sono | $_siteName',
+  '/approccio-terapeutico': 'Approccio terapeutico | $_siteName',
+  '/psicoterapia': 'Psicoterapia | $_siteName',
+  '/disturbi': 'Disturbi trattati | $_siteName',
+  '/figure-professionali': 'Psicologo, psicoterapeuta e psichiatra | $_siteName',
+  '/faq': 'Domande frequenti | $_siteName',
+  '/articoli': 'Articoli | $_siteName',
+  '/recensioni': 'Recensioni | $_siteName',
+  '/privacy': 'Privacy e consenso informato | $_siteName',
+};
+
+@JS('document.title')
+external set _documentTitle(String value);
+
 final articoliService = ArticoliService();
 final storageService = StorageService();
 final blogAuthService = BlogAuthService();
@@ -28,6 +49,7 @@ final reviewsService = ReviewsService();
 final contactService = ContactService();
 
 final _router = GoRouter(
+  observers: [_TitleObserver()],
   errorBuilder: (context, state) => Scaffold(
     appBar: NavBar(onToggleDrawer: () {}),
     body: const Center(
@@ -60,7 +82,21 @@ final _router = GoRouter(
 );
 
 void main() {
+  usePathUrlStrategy();
   runApp(const PsicApp());
+}
+
+class _TitleObserver extends NavigatorObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) => _update(route);
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) => _update(newRoute);
+
+  void _update(Route? route) {
+    final path = route?.settings.name ?? '/';
+    _documentTitle = _pageTitles[path] ?? _siteName;
+  }
 }
 
 class PsicApp extends StatelessWidget {

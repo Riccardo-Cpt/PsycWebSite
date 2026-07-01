@@ -1,32 +1,32 @@
 {
-    "name": "psic_app",
-    "short_name": "psic_app",
+    "name": "Dr.ssa Maria Bianchi — Psicologa e Psicoterapeuta",
+    "short_name": "Dr.ssa Bianchi",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F0F7F4",
+    "theme_color": "#93a996",
+    "description": "Psicologa e psicoterapeuta a Firenze. Percorsi di psicoterapia per adulti e adolescenti.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.webp",
+            "src": "icons/Icon-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.webp",
+            "src": "icons/Icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-maskable-192.webp",
+            "src": "icons/Icon-maskable-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "icons/Icon-maskable-512.webp",
+            "src": "icons/Icon-maskable-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
