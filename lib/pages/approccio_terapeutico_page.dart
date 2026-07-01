@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
+import '../widgets/cta_banner.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_hero_header.dart';
 import '../widgets/section_image.dart';
 import '../widgets/site_footer.dart';
+import '../widgets/text_image_section.dart';
 
 class ApproccioTerapeuticoPage extends StatelessWidget {
   const ApproccioTerapeuticoPage({super.key});
@@ -14,15 +18,22 @@ class ApproccioTerapeuticoPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            _HeroHeader(),
-            _CentralitaPersonaSection(),
-            _RelazioneSection(),
-            _PercorsoSection(),
-            _CambiamentoSection(),
-            _EmdrSection(),
-            _CtaSection(),
-            SiteFooter(),
+          children: [
+            const PageHeroHeader(
+              title: 'Approccio terapeutico',
+              subtitle: 'Il lavoro terapeutico nasce dall\'incontro con una storia unica. '
+                  'Non esiste un percorso standard: ogni cammino viene costruito '
+                  'con rispetto dei tempi, delle risorse e della specificità di ciascuno.',
+              maxWidth: 1100,
+              titleFontSize: 38,
+            ),
+            const _CentralitaPersonaSection(),
+            const _RelazioneSection(),
+            const _PercorsoSection(),
+            const _CambiamentoSection(),
+            const _EmdrSection(),
+            const CtaBanner(imagePath: 'assets/images/NinfeeStagno2.webp'),
+            const SiteFooter(),
           ],
         ),
       ),
@@ -30,47 +41,6 @@ class ApproccioTerapeuticoPage extends StatelessWidget {
   }
 }
 
-class _HeroHeader extends StatelessWidget {
-  const _HeroHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Approccio terapeutico',
-                style: GoogleFonts.playfairDisplay(
-                  fontSize: 38,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Il lavoro terapeutico nasce dall\'incontro con una storia unica. '
-                'Non esiste un percorso standard: ogni cammino viene costruito '
-                'con rispetto dei tempi, delle risorse e della specificità di ciascuno.',
-                style: GoogleFonts.lato(
-                  fontSize: 19,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class _CentralitaPersonaSection extends StatelessWidget {
   const _CentralitaPersonaSection();
@@ -85,7 +55,7 @@ class _CentralitaPersonaSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
@@ -99,39 +69,16 @@ class _CentralitaPersonaSection extends StatelessWidget {
             'Questo orientamento richiede tempo, presenza e disponibilità a stare '
             'vicino all\'esperienza dell\'altro senza fretta di interpretarla o '
             'di ricondurla a schemi prestabiliti.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
 
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/NinfeeStagno.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: textContent),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/NinfeeStagno.webp', 400 / 380)),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/NinfeeStagno.webp',
+      aspectRatio: 400 / 380,
     );
   }
 }
@@ -149,7 +96,7 @@ class _RelazioneSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
@@ -163,38 +110,16 @@ class _RelazioneSection extends StatelessWidget {
               'viene vissuta e attraversata, offre la possibilità di riconoscere schemi '
               'relazionali profondi e di sperimentare nuove forme di connessione con sé '
               'stessi e con l\'altro.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/TaleaPiantaGrassa.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/TaleaPiantaGrassa.webp', 400 / 380)),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 3, child: textContent),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/TaleaPiantaGrassa.webp',
+      aspectRatio: 400 / 380,
+      imageOnLeft: true,
     );
   }
 }
@@ -212,7 +137,7 @@ class _PercorsoSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
@@ -224,39 +149,16 @@ class _PercorsoSection extends StatelessWidget {
             'già definito, ma con la disponibilità a costruirlo insieme, incontro dopo incontro.'
             'La durata e l\'intensità del lavoro vengono valutate in modo flessibile, '
             'in relazione all\'evoluzione della situazione e agli obiettivi condivisi.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
 
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: textContent),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/fallingLeaves.webp',
+      aspectRatio: 400 / 380,
     );
   }
 }
@@ -276,7 +178,7 @@ class _CambiamentoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
@@ -289,7 +191,7 @@ class _CambiamentoSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -298,7 +200,7 @@ class _CambiamentoSection extends StatelessWidget {
                 'con maggiore chiarezza, a riconoscere ciò che la muove e ciò che la trattiene, '
                 'e a trovare una direzione più autentica.',
                 style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
               ),
               const SizedBox(height: 32),
               ..._obiettivi.map((item) => Padding(
@@ -310,11 +212,11 @@ class _CambiamentoSection extends StatelessWidget {
                           width: 44,
                           height: 44,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF93a996).withValues(alpha: 0.15),
+                            color: AppColors.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(item.$1,
-                              color: const Color(0xFF93a996), size: 22),
+                              color: AppColors.primary, size: 22),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -325,7 +227,7 @@ class _CambiamentoSection extends StatelessWidget {
                               style: GoogleFonts.lato(
                                   fontSize: 17,
                                   height: 1.6,
-                                  color: const Color(0xFF2C2C2C)),
+                                  color: AppColors.textDark),
                             ),
                           ),
                         ),
@@ -368,7 +270,7 @@ class _EmdrSection extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF93a996),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -389,7 +291,7 @@ class _EmdrSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -398,20 +300,20 @@ class _EmdrSection extends StatelessWidget {
                 'terapeutico riconosciuto dall\'OMS e utilizzato in particolare per '
                 'l\'elaborazione di esperienze traumatiche o emotivamente molto intense.',
                 style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
               ),
               const SizedBox(height: 16),
               Text(
                 'Può essere utile quando alcuni eventi del passato continuano a produrre '
                 'sofferenza nel presente, manifestandosi attraverso:',
                 style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
               ),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF0F7F4),
+                  color: AppColors.backgroundLight,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -425,7 +327,7 @@ class _EmdrSection extends StatelessWidget {
                                   padding: EdgeInsets.only(top: 7),
                                   child: Icon(Icons.circle,
                                       size: 8,
-                                      color: Color(0xFF93a996)),
+                                      color: AppColors.primary),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
@@ -433,7 +335,7 @@ class _EmdrSection extends StatelessWidget {
                                       style: GoogleFonts.lato(
                                           fontSize: 17,
                                           height: 1.6,
-                                          color: const Color(0xFF2C2C2C))),
+                                          color: AppColors.textDark)),
                                 ),
                               ],
                             ),
@@ -449,7 +351,7 @@ class _EmdrSection extends StatelessWidget {
                 'ma di uno strumento inserito con attenzione e competenza all\'interno di un '
                 'percorso costruito su misura.',
                 style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
               ),
             ],
           ),
@@ -459,90 +361,3 @@ class _EmdrSection extends StatelessWidget {
   }
 }
 
-class _CtaSection extends StatelessWidget {
-  const _CtaSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth >= 720;
-        return Container(
-          width: double.infinity,
-          color: const Color(0xFF93a996),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: isWide ? 330 : 330,
-                child: Image.asset(
-                  'assets/images/NinfeeStagno2.webp',
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                ),
-              ),
-              Positioned.fill(
-                child: Container(
-                  color: Colors.black.withValues(alpha: 0.50),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 40),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hai domande sul percorso?',
-                        style: GoogleFonts.playfairDisplay(
-                          fontSize: isWide ? 36 : 26,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'Il primo colloquio è uno spazio di ascolto '
-                        'per cominciare a orientarsi insieme.',
-                        style: GoogleFonts.lato(
-                          fontSize: isWide ? 26 : 18,
-                          height: 1.55,
-                          color: Colors.white70,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
-                      OutlinedButton.icon(
-                        onPressed: () => showDialog(
-                          context: context,
-                          builder: (_) => const ContactFormDialog(),
-                        ),
-                        icon: const Icon(Icons.calendar_today_outlined,
-                            color: Colors.white),
-                        label: Text(
-                          'Richiedi un primo colloquio',
-                          style: GoogleFonts.lato(
-                              fontSize: isWide ? 20 : 17,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.white, width: 2),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 28, vertical: 23),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}

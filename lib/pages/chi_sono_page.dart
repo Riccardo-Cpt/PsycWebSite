@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_hero_header.dart';
 import '../widgets/site_footer.dart';
 
 class ChiSonoPage extends StatelessWidget {
@@ -20,7 +22,13 @@ class _ChiSonoBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const _HeroHeader(),
+          const PageHeroHeader(
+            title: 'Chi sono',
+            subtitle: 'Psicologa e Psicoterapeuta con un approccio umanistico-relazionale. '
+                'Accolgo adulti, adolescenti, coppie e famiglie che desiderano uno spazio '
+                'di ascolto autentico e accompagnamento professionale.',
+            maxWidth: 760,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
             child: Center(
@@ -90,49 +98,6 @@ class _ChiSonoBody extends StatelessWidget {
   }
 }
 
-// ── Hero header ───────────────────────────────────────────────────────────────
-
-class _HeroHeader extends StatelessWidget {
-  const _HeroHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 760),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Chi sono',
-                style: GoogleFonts.playfairDisplay(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Psicologa e Psicoterapeuta con un approccio umanistico-relazionale. '
-                'Accolgo adulti, adolescenti, coppie e famiglie che desiderano uno spazio '
-                'di ascolto autentico e accompagnamento professionale.',
-                style: GoogleFonts.lato(
-                  fontSize: 19,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 // ── Presentazione ─────────────────────────────────────────────────────────────
 
@@ -146,25 +111,25 @@ class _PresentazioneSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(Icons.person_outline, color: Color(0xFF93a996), size: 24),
+            const Icon(Icons.person_outline, color: AppColors.primary, size: 24),
             const SizedBox(width: 10),
             Text(
               'Presentazione',
               style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996)),
+                  color: AppColors.primary),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        const Divider(color: Color(0xFF93a996), thickness: 1),
+        const Divider(color: AppColors.primary, thickness: 1),
         const SizedBox(height: 16),
         Text(
           'Nel mio lavoro accolgo adulti, adolescenti, coppie e famiglie che attraversano '
           'momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi '
           'ascoltati con rispetto, competenza e attenzione alla propria unicità.',
-          style: GoogleFonts.lato(fontSize: 16, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 16, height: 1.7, color: AppColors.textDark),
         ),
       ],
     );
@@ -181,19 +146,19 @@ class _ExperienceNote extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF0F7F4),
+        color: AppColors.backgroundLight,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.info_outline, color: Color(0xFF93a996), size: 20),
+          const Icon(Icons.info_outline, color: AppColors.primary, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               'Nel corso degli anni ho maturato esperienza in consultori, ospedali, scuole, '
               'comuni, associazioni e altri contesti dell\'area sociale.',
-              style: GoogleFonts.lato(fontSize: 15, height: 1.65, color: const Color(0xFF2C2C2C)),
+              style: GoogleFonts.lato(fontSize: 15, height: 1.65, color: AppColors.textDark),
             ),
           ),
         ],
@@ -222,7 +187,7 @@ class _ProfileCard extends StatelessWidget {
               width: 180,
               height: 180,
               color: const Color(0xFFE0F0F3),
-              child: const Icon(Icons.person, size: 80, color: Color(0xFF93a996)),
+              child: const Icon(Icons.person, size: 80, color: AppColors.primary),
             ),
           ),
         ),
@@ -233,7 +198,7 @@ class _ProfileCard extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 6),
         Text(
@@ -241,7 +206,7 @@ class _ProfileCard extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.lato(
               fontSize: 18,
-              color: const Color(0xFF93a996),
+              color: AppColors.primary,
               fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 4),
@@ -275,19 +240,19 @@ class _Section extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: const Color(0xFF93a996), size: 24),
+            Icon(icon, color: AppColors.primary, size: 24),
             const SizedBox(width: 10),
             Text(
               title,
               style: GoogleFonts.playfairDisplay(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996)),
+                  color: AppColors.primary),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        const Divider(color: Color(0xFF93a996), thickness: 1),
+        const Divider(color: AppColors.primary, thickness: 1),
         const SizedBox(height: 12),
         ...items,
       ],
@@ -311,7 +276,7 @@ class _SectionItem extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 7),
-            child: Icon(Icons.circle, size: 7, color: Color(0xFF93a996)),
+            child: Icon(Icons.circle, size: 7, color: AppColors.primary),
           ),
           const SizedBox(width: 12),
           Expanded(

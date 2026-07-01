@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -155,7 +156,7 @@ class _ArticoliPageState extends State<ArticoliPage>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: appBarBg,
-                foregroundColor: const Color(0xFF93a996),
+                foregroundColor: AppColors.primary,
                 elevation: t * 3.0,
                 scrolledUnderElevation: 0,
                 title: InkWell(
@@ -170,7 +171,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                         fit: BoxFit.fitHeight,
                         errorBuilder: (_, _, _) => Text(
                           'Dr.ssa Maria Bianchi',
-                          style: GoogleFonts.lato(fontWeight: FontWeight.bold, color: const Color(0xFF93a996)),
+                          style: GoogleFonts.lato(fontWeight: FontWeight.bold, color: AppColors.primary),
                         ),
                       ),
                     ],
@@ -184,7 +185,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                         child: Text(
                           'Naviga nel sito',
                           style: GoogleFonts.lato(
-                              color: const Color(0xFF93a996),
+                              color: AppColors.primary,
                               fontSize: 28,
                               fontWeight: FontWeight.w600),
                         ),
@@ -228,7 +229,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF93a996)),
+                                    color: AppColors.primary),
                               ),
                             ),
                             Text(
@@ -236,7 +237,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                               style: GoogleFonts.lato(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF93a996)),
+                                  color: AppColors.primary),
                             ),
                             IconButton(
                               icon: const Icon(Icons.list),
@@ -341,7 +342,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
 
   Widget _buildCollapsed(Articolo a) {
     return ListTile(
-      leading: const Icon(Icons.expand_more, color: Color(0xFF93a996)),
+      leading: const Icon(Icons.expand_more, color: AppColors.primary),
       title: Text(a.titolo,
           style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
       subtitle: Text(

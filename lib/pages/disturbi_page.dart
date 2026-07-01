@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_hero_header.dart';
 import '../widgets/site_footer.dart';
 
 class DisturbPage extends StatelessWidget {
@@ -37,55 +39,18 @@ class DisturbPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            _HeroHeader(),
-            _DisturbSection(),
-            _SituazioniSection(),
-            _ChiusuraSection(),
-            SiteFooter(),
+          children: [
+            const PageHeroHeader(
+              title: 'Disturbi trattati',
+              subtitle: 'Mi occupo di disagio psicologico nelle sue diverse manifestazioni. '
+                  'Ogni persona viene incontrata nella sua specificità, senza etichette '
+                  'riduttive.',
+            ),
+            const _DisturbSection(),
+            const _SituazioniSection(),
+            const _ChiusuraSection(),
+            const SiteFooter(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _HeroHeader extends StatelessWidget {
-  const _HeroHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 900),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Disturbi trattati',
-                style: GoogleFonts.playfairDisplay(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Mi occupo di disagio psicologico nelle sue diverse manifestazioni. '
-                'Ogni persona viene incontrata nella sua specificità, senza etichette '
-                'riduttive.',
-                style: GoogleFonts.lato(
-                  fontSize: 19,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -111,14 +76,14 @@ class _DisturbSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Lavoro con persone che attraversano:',
                 style: GoogleFonts.lato(
-                    fontSize: 17, height: 1.7, color: const Color(0xFF4A4A4A)),
+                    fontSize: 17, height: 1.7, color: AppColors.textMid),
               ),
               const SizedBox(height: 28),
               Wrap(
@@ -143,7 +108,7 @@ class _SituazioniSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF9F9F9),
+      color: AppColors.backgroundAlt,
       padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
@@ -156,14 +121,14 @@ class _SituazioniSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Accolgo inoltre situazioni legate a:',
                 style: GoogleFonts.lato(
-                    fontSize: 17, height: 1.7, color: const Color(0xFF4A4A4A)),
+                    fontSize: 17, height: 1.7, color: AppColors.textMid),
               ),
               const SizedBox(height: 28),
               Wrap(
@@ -188,7 +153,7 @@ class _ChiusuraSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
@@ -201,7 +166,7 @@ class _ChiusuraSection extends StatelessWidget {
               fontSize: 18,
               height: 1.75,
               fontStyle: FontStyle.italic,
-              color: const Color(0xFF2C2C2C),
+              color: AppColors.textDark,
             ),
             textAlign: TextAlign.center,
           ),
@@ -224,20 +189,20 @@ class _Chip extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFF93a996).withValues(alpha: 0.45),
+          color: AppColors.primary.withValues(alpha: 0.45),
           width: 1,
         ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: const Color(0xFF93a996)),
+          Icon(icon, size: 18, color: AppColors.primary),
           const SizedBox(width: 8),
           Text(
             label,
             style: GoogleFonts.lato(
               fontSize: 15,
-              color: const Color(0xFF2C2C2C),
+              color: AppColors.textDark,
               fontWeight: FontWeight.w500,
             ),
           ),

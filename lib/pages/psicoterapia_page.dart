@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
+import '../widgets/cta_banner.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_hero_header.dart';
 import '../widgets/section_image.dart';
 import '../widgets/site_footer.dart';
+import '../widgets/text_image_section.dart';
 
 class PsicoterapiaPage extends StatelessWidget {
   const PsicoterapiaPage({super.key});
@@ -14,57 +18,22 @@ class PsicoterapiaPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            _HeroHeader(),
-            _CosESection(),
-            _QuandoSection(),
-            _ComeSiSvolgeSection(),
-            _ObiettiviSection(),
-            _CtaSection(),
-            SiteFooter(),
+          children: [
+            const PageHeroHeader(
+              title: 'Psicoterapia',
+              subtitle: 'La psicoterapia è un percorso di cura e conoscenza di sé che aiuta a '
+                  'comprendere il significato del disagio psicologico, dei sintomi e delle '
+                  'difficoltà relazionali.',
+              maxWidth: 1100,
+              titleFontSize: 38,
+            ),
+            const _CosESection(),
+            const _QuandoSection(),
+            const _ComeSiSvolgeSection(),
+            const _ObiettiviSection(),
+            const CtaBanner(imagePath: 'assets/images/forestTrees.webp'),
+            const SiteFooter(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _HeroHeader extends StatelessWidget {
-  const _HeroHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Psicoterapia',
-                style: GoogleFonts.playfairDisplay(
-                  fontSize: 38,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'La psicoterapia è un percorso di cura e conoscenza di sé che aiuta a '
-                'comprendere il significato del disagio psicologico, dei sintomi e delle '
-                'difficoltà relazionali.',
-                style: GoogleFonts.lato(
-                  fontSize: 19,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -84,7 +53,7 @@ class _CosESection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
@@ -96,38 +65,15 @@ class _CosESection extends StatelessWidget {
             'È un lavoro che richiede tempo, fiducia e disponibilità ad osservare '
             'se stessi con onestà e curiosità. Il cambiamento che ne può nascere '
             'è autentico, radicato nella propria storia e nelle proprie risorse.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/Arcobaleno.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: textContent),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/Arcobaleno.webp', 400 / 380)),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/Arcobaleno.webp',
+      aspectRatio: 400 / 380,
     );
   }
 }
@@ -156,13 +102,13 @@ class _QuandoSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
           'La psicoterapia può essere utile in presenza di:',
           style: GoogleFonts.lato(
-              fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+              fontSize: 18, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         ..._situazioni.map((s) => Padding(
@@ -173,7 +119,7 @@ class _QuandoSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 7),
                     child: Icon(Icons.circle,
-                        size: 8, color: Color(0xFF93a996)),
+                        size: 8, color: AppColors.primary),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -181,7 +127,7 @@ class _QuandoSection extends StatelessWidget {
                         style: GoogleFonts.lato(
                             fontSize: 17,
                             height: 1.6,
-                            color: const Color(0xFF2C2C2C))),
+                            color: AppColors.textDark)),
                   ),
                 ],
               ),
@@ -193,38 +139,16 @@ class _QuandoSection extends StatelessWidget {
           'cambiamento, prendere decisioni importanti o approfondire la '
           'conoscenza di sé.',
           style: GoogleFonts.lato(
-              fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+              fontSize: 18, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 3, child: textContent),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/fallingLeaves.webp',
+      aspectRatio: 400 / 380,
+      imageOnLeft: true,
     );
   }
 }
@@ -242,7 +166,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
@@ -256,38 +180,15 @@ class _ComeSiSvolgeSection extends StatelessWidget {
               'elaborare e trasformare il disagio. La durata e l\'intensità del '
               'lavoro vengono valutate in modo flessibile, in relazione '
               'all\'evoluzione della situazione e agli obiettivi condivisi.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
       ],
     );
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1100),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/lilium.webp', 400 / 380)],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: textContent),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: buildSectionImage('assets/images/lilium.webp', 400 / 380)),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
+    return TextImageSection(
+      content: textContent,
+      imagePath: 'assets/images/lilium.webp',
+      aspectRatio: 400 / 380,
     );
   }
 }
@@ -306,7 +207,7 @@ class _ObiettiviSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
       child: Center(
         child: ConstrainedBox(
@@ -319,7 +220,7 @@ class _ObiettiviSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -327,7 +228,7 @@ class _ObiettiviSection extends StatelessWidget {
                 'L\'obiettivo non è soltanto ridurre la sofferenza, ma favorire una '
                 'trasformazione più profonda e duratura.',
                 style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
               ),
               const SizedBox(height: 32),
               ..._obiettivi.map((item) => Padding(
@@ -339,12 +240,12 @@ class _ObiettiviSection extends StatelessWidget {
                           width: 44,
                           height: 44,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF93a996)
+                            color: AppColors.primary
                                 .withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(item.$1,
-                              color: const Color(0xFF93a996), size: 22),
+                              color: AppColors.primary, size: 22),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -355,7 +256,7 @@ class _ObiettiviSection extends StatelessWidget {
                               style: GoogleFonts.lato(
                                   fontSize: 17,
                                   height: 1.6,
-                                  color: const Color(0xFF2C2C2C)),
+                                  color: AppColors.textDark),
                             ),
                           ),
                         ),
@@ -370,90 +271,3 @@ class _ObiettiviSection extends StatelessWidget {
   }
 }
 
-class _CtaSection extends StatelessWidget {
-  const _CtaSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth >= 720;
-        return Container(
-          width: double.infinity,
-          color: const Color(0xFF93a996),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: isWide ? 330 : 330,
-                child: Image.asset(
-                  'assets/images/forestTrees.webp',
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                ),
-              ),
-              Positioned.fill(
-                child: Container(
-                  color: Colors.black.withValues(alpha: 0.50),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 40),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hai domande sul percorso?',
-                        style: GoogleFonts.playfairDisplay(
-                          fontSize: isWide ? 36 : 26,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'Il primo colloquio è uno spazio di ascolto '
-                        'per cominciare a orientarsi insieme.',
-                        style: GoogleFonts.lato(
-                          fontSize: isWide ? 26 : 18,
-                          height: 1.55,
-                          color: Colors.white70,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 32),
-                      OutlinedButton.icon(
-                        onPressed: () => showDialog(
-                          context: context,
-                          builder: (_) => const ContactFormDialog(),
-                        ),
-                        icon: const Icon(Icons.calendar_today_outlined,
-                            color: Colors.white),
-                        label: Text(
-                          'Richiedi un primo colloquio',
-                          style: GoogleFonts.lato(
-                              fontSize: isWide ? 20 : 17,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.white, width: 2),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 28, vertical: 23),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import '../main.dart';
 
 class ContactFormDialog extends StatefulWidget {
@@ -98,7 +99,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(Icons.check_circle_outline, color: Color(0xFF93a996), size: 64),
+        const Icon(Icons.check_circle_outline, color: AppColors.primary, size: 64),
         const SizedBox(height: 16),
         const Text(
           'Richiesta inviata!',
@@ -179,7 +180,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
             onPressed: _pickTessera,
             icon: Icon(
               _tessera != null ? Icons.check_circle_outline : Icons.attach_file,
-              color: _tessera != null ? const Color(0xFF93a996) : null,
+              color: _tessera != null ? AppColors.primary : null,
             ),
             label: Text(
               _tessera != null ? _tessera!.name : 'Allega tessera sanitaria *',
@@ -187,7 +188,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
             ),
             style: OutlinedButton.styleFrom(
               side: BorderSide(
-                color: _tessera != null ? const Color(0xFF93a996) : Colors.grey,
+                color: _tessera != null ? AppColors.primary : Colors.grey,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
@@ -202,7 +203,7 @@ class _ContactFormDialogState extends State<ContactFormDialog> {
               : ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF93a996),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),

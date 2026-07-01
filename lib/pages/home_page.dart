@@ -1,5 +1,6 @@
 // lib/pages/home_page.dart
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +13,7 @@ import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/section_image.dart';
+import '../widgets/star_rating.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -155,7 +157,7 @@ class _HeroSectionState extends State<_HeroSection>
                         label: Text('Richiedi un primo colloquio',
                             style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF93a996),
+                          backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 36, vertical: 28),
@@ -195,7 +197,7 @@ class _IntroSection extends StatelessWidget {
     );
     Widget leadText(String text) => ShaderMask(
       shaderCallback: (bounds) => const LinearGradient(
-        colors: [Color(0xFF93a996), Color(0xFFa07858)],
+        colors: [AppColors.primary, Color(0xFFa07858)],
         stops: [0.5, 0.5],
       ).createShader(bounds),
       child: Text(text, style: leadStyle, textAlign: TextAlign.center),
@@ -203,7 +205,7 @@ class _IntroSection extends StatelessWidget {
     final bodyStyle = GoogleFonts.lato(
       fontSize: 22,
       height: 1.65,
-      color: const Color(0xFF4A4A4A),
+      color: AppColors.textMid,
     );
 
     return Container(
@@ -307,7 +309,7 @@ class _AdditionalIntro extends StatelessWidget {
           style: GoogleFonts.lato(
             fontSize: 22,
             height: 1.85,
-            color: const Color(0xFF2C2C2C),
+            color: AppColors.textDark,
           ),
         ),
         const SizedBox(height: 20),
@@ -319,14 +321,14 @@ class _AdditionalIntro extends StatelessWidget {
           style: GoogleFonts.lato(
             fontSize: 22,
             height: 1.85,
-            color: const Color(0xFF2C2C2C),
+            color: AppColors.textDark,
           ),
         ),
       ],
     );
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
@@ -386,7 +388,7 @@ class _AChiMiRivolgoSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF93a996),
+            color: AppColors.primary,
           ),
         ),
         const SizedBox(height: 24),
@@ -395,7 +397,7 @@ class _AChiMiRivolgoSection extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(c.$1, color: const Color(0xFF93a996), size: 28),
+              Icon(c.$1, color: AppColors.primary, size: 28),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -405,13 +407,13 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: const Color(0xFF93a996))),
+                            color: AppColors.primary)),
                     const SizedBox(height: 4),
                     Text(c.$3,
                         style: GoogleFonts.lato(
                             fontSize: 20,
                             height: 1.55,
-                            color: const Color(0xFF2C2C2C))),
+                            color: AppColors.textDark)),
                   ],
                 ),
               ),
@@ -422,7 +424,7 @@ class _AChiMiRivolgoSection extends StatelessWidget {
     );
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
@@ -470,17 +472,17 @@ class _PrimoColloquioBox extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 12),
         Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 10),
         Text(
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -563,7 +565,7 @@ class _AreeInterventoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 0),
       child: Center(
         child: ConstrainedBox(
@@ -576,7 +578,7 @@ class _AreeInterventoSection extends StatelessWidget {
                 style: GoogleFonts.playfairDisplay(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF93a996)),
+                    color: AppColors.primary),
               ),
               const SizedBox(height: 24),
               Wrap(
@@ -607,17 +609,17 @@ class _AreaChip extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-            color: const Color(0xFF93a996).withValues(alpha: 0.5), width: 1),
+            color: AppColors.primary.withValues(alpha: 0.5), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: const Color(0xFF93a996)),
+          Icon(icon, size: 18, color: AppColors.primary),
           const SizedBox(width: 7),
           Text(label,
               style: GoogleFonts.lato(
                   fontSize: 14,
-                  color: const Color(0xFF2C2C2C),
+                  color: AppColors.textDark,
                   fontWeight: FontWeight.w500)),
         ],
       ),
@@ -640,28 +642,28 @@ class _LabirintiSection extends StatelessWidget {
           style: GoogleFonts.playfairDisplay(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996)),
+              color: AppColors.primary),
         ),
         const SizedBox(height: 20),
         Text(
           'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         Text(
           'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         Text(
           'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
       ],
     );
     return Container(
       width: double.infinity,
-      color: const Color(0xFFF0F7F4),
+      color: AppColors.backgroundLight,
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
@@ -745,7 +747,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                     style: GoogleFonts.playfairDisplay(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF93a996)),
+                        color: AppColors.primary),
                   ),
                   const SizedBox(height: 24),
                   ...articoli.map((a) => Padding(
@@ -760,11 +762,11 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                   TextButton.icon(
                     onPressed: () => context.go('/articoli'),
                     icon: const Icon(Icons.arrow_forward,
-                        color: Color(0xFF93a996)),
+                        color: AppColors.primary),
                     label: const Text(
                       'Leggi tutti i post del blog',
                       style: TextStyle(
-                          color: Color(0xFF93a996),
+                          color: AppColors.primary,
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
                     ),
@@ -880,7 +882,7 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                     style: GoogleFonts.playfairDisplay(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFF93a996)),
+                        color: AppColors.primary),
                   ),
                   const SizedBox(height: 24),
                   LayoutBuilder(
@@ -911,11 +913,11 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                   TextButton.icon(
                     onPressed: () => context.go('/recensioni'),
                     icon: const Icon(Icons.arrow_forward,
-                        color: Color(0xFF93a996)),
+                        color: AppColors.primary),
                     label: const Text(
                       'Leggi tutte le recensioni',
                       style: TextStyle(
-                          color: Color(0xFF93a996),
+                          color: AppColors.primary,
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
                     ),
@@ -954,16 +956,7 @@ class _ReviewPreviewCard extends StatelessWidget {
               style: GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             const SizedBox(height: 4),
-            Row(
-              children: [
-                for (int i = 1; i <= 5; i++)
-                  Icon(
-                    i <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFFFFC107),
-                    size: 18,
-                  ),
-              ],
-            ),
+            StarRating(stars: review.stars, size: 18),
             const SizedBox(height: 8),
             Text(
               review.title,
@@ -1004,7 +997,7 @@ class _CtaSection extends StatelessWidget {
             style: GoogleFonts.playfairDisplay(
                 fontSize: 45,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF93a996)),
+                color: AppColors.primary),
           ),
           const SizedBox(height: 32),
           Wrap(
@@ -1015,14 +1008,14 @@ class _CtaSection extends StatelessWidget {
               _CtaButton(
                 icon: Icons.psychology,
                 label: 'Di cosa mi occupo',
-                backgroundColor: const Color(0xFF93a996),
+                backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/servizi'),
               ),
               _CtaButton(
                 icon: Icons.calendar_today_outlined,
                 label: 'Contattami',
-                backgroundColor: const Color(0xFF93a996),
+                backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 onPressed: () => showDialog(
                   context: context,
@@ -1032,7 +1025,7 @@ class _CtaSection extends StatelessWidget {
               _CtaButton(
                 icon: Icons.person_3_rounded ,
                 label: 'Lo psicoterapeuta',
-                backgroundColor: const Color(0xFF93a996),
+                backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 onPressed: () => context.go('/figure-professionali'),
               ),
@@ -1101,7 +1094,7 @@ class _ContactFooter extends StatelessWidget {
               style: GoogleFonts.playfairDisplay(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996))),
+                  color: AppColors.primary)),
           const SizedBox(height: 24),
           SelectionArea(
             child: Wrap(
@@ -1112,28 +1105,28 @@ class _ContactFooter extends StatelessWidget {
                 ContactChip(
                   icon: Icons.phone,
                   text: Contatti.telefono,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                   hoverColor: const Color(0xFF134456),
                   onTap: () => chiamaTelefono(Contatti.telefono),
                 ),
                 ContactChip(
                   icon: Icons.location_on,
                   text: Contatti.indirizzo,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                   hoverColor: const Color(0xFF134456),
                   onTap: () => apriMappa(Contatti.indirizzo),
                 ),
                 ContactChip(
                   icon: Icons.email,
                   text: Contatti.email,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                   hoverColor: const Color(0xFF134456),
                   onTap: () => inviaEmail(Contatti.email),
                 ),
                 ContactChip(
                   icon: Icons.facebook,
                   text: 'Facebook',
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                   hoverColor: const Color(0xFF134456),
                   onTap: () => launchUrl(Uri.parse(Contatti.facebook),
                       webOnlyWindowName: '_blank'),

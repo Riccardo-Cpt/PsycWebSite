@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'nav_drawer.dart';
 
@@ -25,7 +26,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       backgroundColor: bgColor,
-      foregroundColor: const Color(0xFF93a996),
+      foregroundColor: AppColors.primary,
       automaticallyImplyLeading: false,
       elevation: t * 2.0,
       scrolledUnderElevation: 0,
@@ -42,7 +43,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               fit: BoxFit.fitWidth,  // Scales to fill width, height follows aspect ratio
               errorBuilder: (_, _, _) => const Text(
                 'Dr.ssa Maria Bianchi',
-                style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF93a996)),
+                style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
               ),
             ),
           ],
@@ -56,7 +57,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               child: Text(
                 'Naviga nel sito',
                 style: TextStyle(
-                  color: Color(0xFF93a996),
+                  color: AppColors.primary,
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
                 ),

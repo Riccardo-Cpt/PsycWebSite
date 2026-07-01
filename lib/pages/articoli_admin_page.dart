@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/star_rating.dart';
 import '../main.dart';
 import '../models/articolo.dart';
 import '../models/review.dart';
@@ -76,7 +78,7 @@ class _PasswordGateState extends State<_PasswordGate> {
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF93a996),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -105,8 +107,8 @@ class _AdminPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TabBar(
-            labelColor: Color(0xFF93a996),
-            indicatorColor: Color(0xFF93a996),
+            labelColor: AppColors.primary,
+            indicatorColor: AppColors.primary,
             tabs: [
               Tab(text: 'Blog'),
               Tab(text: 'Recensioni'),
@@ -222,7 +224,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
                 icon: const Icon(Icons.add),
                 label: const Text('Nuovo articolo'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF93a996),
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                 ),
               ),
@@ -267,7 +269,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit,
-                                color: Color(0xFF93a996)),
+                                color: AppColors.primary),
                             tooltip: 'Modifica',
                             onPressed: () =>
                                 _openForm(context, articolo: a),
@@ -505,12 +507,7 @@ class _ReviewTile extends StatelessWidget {
                 Text(review.username,
                     style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(width: 8),
-                for (int s = 1; s <= 5; s++)
-                  Icon(
-                    s <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFFFFC107),
-                    size: 16,
-                  ),
+                StarRating(stars: review.stars, size: 16),
               ],
             ),
             subtitle: Column(
@@ -741,7 +738,7 @@ class _ArticoloFormState extends State<_ArticoloForm> {
               : ElevatedButton(
                   onPressed: _save,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF93a996),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding:
                         const EdgeInsets.symmetric(vertical: 16),
@@ -767,7 +764,7 @@ class _ArticoloFormPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF93a996),
+        foregroundColor: AppColors.primary,
         title: Text(
             articolo == null ? 'Nuovo articolo' : 'Modifica articolo'),
       ),

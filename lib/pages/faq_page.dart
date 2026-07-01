@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_hero_header.dart';
 import '../widgets/site_footer.dart';
 
 class FaqPage extends StatelessWidget {
@@ -9,6 +11,7 @@ class FaqPage extends StatelessWidget {
   static const _faq = [
     (
       'Prima di iniziare',
+      Icons.help_outline,
       [
         (
           'Quando può essere utile rivolgersi a uno psicoterapeuta?',
@@ -32,6 +35,7 @@ class FaqPage extends StatelessWidget {
     ),
     (
       'Sul percorso terapeutico',
+      Icons.timeline_outlined,
       [
         (
           'Quanto dura un percorso?',
@@ -53,6 +57,7 @@ class FaqPage extends StatelessWidget {
     ),
     (
       'Dubbi frequenti',
+      Icons.psychology_outlined,
       [
         (
           'Qual è la differenza tra psicologo e psicoterapeuta?',
@@ -73,6 +78,7 @@ class FaqPage extends StatelessWidget {
     ),
     (
       'Aspetti pratici',
+      Icons.calendar_today_outlined,
       [
         (
           'Come prenotare?',
@@ -100,7 +106,11 @@ class FaqPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _HeroHeader(),
+            const PageHeroHeader(
+              title: 'Domande frequenti',
+              subtitle: 'Alcune delle domande più comuni sulla psicoterapia, sul percorso terapeutico '
+                  'e sugli aspetti pratici. Se hai altre domande, puoi contattarmi direttamente.',
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 40),
               child: Center(
@@ -110,7 +120,8 @@ class FaqPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: _faq.map((group) => _FaqGroup(
                       title: group.$1,
-                      items: group.$2,
+                      icon: group.$2,
+                      items: group.$3,
                     )).toList(),
                   ),
                 ),
@@ -124,115 +135,109 @@ class FaqPage extends StatelessWidget {
   }
 }
 
-class _HeroHeader extends StatelessWidget {
-  const _HeroHeader();
+class _FaqGroup extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final List<(String, String)> items;
+
+  const _FaqGroup({required this.title, required this.icon, required this.items});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: const Color(0xFFF0F7F4),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 40),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 900),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.only(top: 40, bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Text(
-                'Domande frequenti',
-                style: GoogleFonts.playfairDisplay(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF93a996),
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                child: Icon(icon, color: Colors.white, size: 22),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(width: 14),
               Text(
-                'Alcune delle domande più comuni sulla psicoterapia, sul percorso terapeutico '
-                'e sugli aspetti pratici. Se hai altre domande, puoi contattarmi direttamente.',
-                style: GoogleFonts.lato(
-                  fontSize: 19,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
+                title,
+                style: GoogleFonts.playfairDisplay(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
                 ),
               ),
             ],
           ),
-        ),
+          const SizedBox(height: 16),
+          ...items.map((item) => _FaqTile(question: item.$1, answer: item.$2)),
+        ],
       ),
     );
   }
 }
 
-class _FaqGroup extends StatelessWidget {
-  final String title;
-  final List<(String, String)> items;
-
-  const _FaqGroup({required this.title, required this.items});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 40, bottom: 16),
-          child: Text(
-            title,
-            style: GoogleFonts.playfairDisplay(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF93a996),
-            ),
-          ),
-        ),
-        ...items.map((item) => _FaqTile(question: item.$1, answer: item.$2)),
-      ],
-    );
-  }
-}
-
-class _FaqTile extends StatelessWidget {
+class _FaqTile extends StatefulWidget {
   final String question;
   final String answer;
 
   const _FaqTile({required this.question, required this.answer});
 
   @override
+  State<_FaqTile> createState() => _FaqTileState();
+}
+
+class _FaqTileState extends State<_FaqTile> {
+  bool _expanded = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: const Color(0xFF93a996).withValues(alpha: 0.25),
-        ),
-      ),
+    return Card(
+      margin: const EdgeInsets.only(bottom: 10),
+      elevation: _expanded ? 3 : 1,
+      shadowColor: AppColors.primary.withValues(alpha: 0.15),
+      color: _expanded ? const Color(0xFFCFA090) : const Color(0xFFDEB8AC),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      clipBehavior: Clip.antiAlias,
       child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-        childrenPadding:
-            const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        iconColor: const Color(0xFF93a996),
-        collapsedIconColor: const Color(0xFF93a996),
+        onExpansionChanged: (v) => setState(() => _expanded = v),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        childrenPadding: EdgeInsets.zero,
+        iconColor: Colors.white,
+        collapsedIconColor: Colors.white,
         shape: const Border(),
         collapsedShape: const Border(),
         title: Text(
-          question,
+          widget.question,
           style: GoogleFonts.lato(
             fontSize: 17,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF2C2C2C),
+            color: AppColors.textDark,
           ),
         ),
         children: [
-          Text(
-            answer,
-            style: GoogleFonts.lato(
-              fontSize: 16,
-              height: 1.7,
-              color: const Color(0xFF4A4A4A),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(width: 4, color: AppColors.primary),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
+                    child: Text(
+                      widget.answer,
+                      style: GoogleFonts.lato(
+                        fontSize: 16,
+                        height: 1.75,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textDark,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

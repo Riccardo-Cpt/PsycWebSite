@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../main.dart';
 import '../models/review.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/site_footer.dart';
+import '../widgets/star_rating.dart';
 
 class RecensioniPage extends StatelessWidget {
   const RecensioniPage({super.key});
@@ -70,7 +72,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                   style: GoogleFonts.playfairDisplay(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF93a996)),
+                      color: AppColors.primary),
                 ),
                 const SizedBox(height: 16),
                 FutureBuilder<List<Review>>(
@@ -111,7 +113,7 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
                 ElevatedButton(
                   onPressed: _openForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF93a996),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -204,16 +206,7 @@ class _ReviewCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4),
-            Row(
-              children: [
-                for (int i = 1; i <= 5; i++)
-                  Icon(
-                    i <= review.stars ? Icons.star : Icons.star_border,
-                    color: const Color(0xFFFFC107),
-                    size: 20,
-                  ),
-              ],
-            ),
+            StarRating(stars: review.stars, size: 20),
             const SizedBox(height: 6),
             Text(review.title,
                 style: GoogleFonts.lato(
@@ -343,7 +336,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.check_circle_outline, color: Color(0xFF93a996), size: 64),
+            const Icon(Icons.check_circle_outline, color: AppColors.primary, size: 64),
             const SizedBox(height: 16),
             Text(
               'Recensione rilasciata.',
@@ -386,7 +379,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                   : ElevatedButton(
                       onPressed: isVerified ? _submitReview : _sendLink,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF93a996),
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
@@ -445,7 +438,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                 constraints: const BoxConstraints(),
                 icon: Icon(
                   i <= _stars ? Icons.star : Icons.star_border,
-                  color: const Color(0xFF93a996),
+                  color: AppColors.primary,
                   size: 32,
                 ),
                 onPressed: () => setState(() => _stars = i),
@@ -479,7 +472,7 @@ class _ReviewFlowPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAFAFA),
-        foregroundColor: const Color(0xFF93a996),
+        foregroundColor: AppColors.primary,
         title: const Text('Lascia una recensione'),
       ),
       body: Center(
