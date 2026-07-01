@@ -180,7 +180,7 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lead = 'Un percorso di ascolto, comprensione e cura\n dove la guarigione passa dal cuore,\n dalla mente, dal corpo e dall\'anima';
+    const lead = 'Un percorso di ascolto,\n comprensione e cura\n dove la guarigione passa dal cuore,\n dalla mente, dal corpo e dall\'anima';
     const body = 'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento e desidera comprendere meglio ciò che sta vivendo';
 
     final isWide = MediaQuery.of(context).size.width >= 600;
