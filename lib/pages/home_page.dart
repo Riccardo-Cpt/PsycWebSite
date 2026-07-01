@@ -119,7 +119,7 @@ class _HeroSectionState extends State<_HeroSection>
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Psicologa e Psicoterapeuta per adulti, adolescenti, coppie e famiglie',
+                      'Psicologa e Psicoterapeuta\nEsperta in psicologia dell\'emergenza',
                       style: GoogleFonts.lato(
                           fontSize: 24,
                           color: const Color(0xFFFFFFF0),
@@ -128,7 +128,7 @@ class _HeroSectionState extends State<_HeroSection>
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'Uno spazio di ascolto professionale, riservato e accogliente per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
+                      'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
                       style: GoogleFonts.lato(
                           fontSize: 20,
                           color: const Color(0xFFFFFFF0),
@@ -172,16 +172,8 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lead = 'Un percorso di ascolto, comprensione e cura\ndove la guarigione passa dal cuore,\n dalla mente,dal corpo e dall\'anima';
-    const body = 'Ci sono momenti della vita in cui tutto può sembrare più faticoso: '
-        'le relazioni si complicano, l\'ansia prende spazio, il dolore emotivo diventa difficile da sostenere '
-        'o ci si sente semplicemente smarriti.'
-        'In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione '
-        'di sé e verso la possibilità di ritrovare equilibrio. '
-        'Nel mio studio offro uno spazio di ascolto professionale, riservato e accogliente, in cui la persona '
-        'possa sentirsi riconosciuta nella propria esperienza e accompagnata con rispetto, sensibilità e competenza. '
-        'Il percorso psicologico o psicoterapeutico nasce dall\'incontro con una storia unica e viene costruito '
-        'con attenzione ai tempi, ai bisogni e alla specificità di ciascuno.';
+    const lead = 'Il cammino verso se stessi passa attraverso\n il cuore, la mente, il corpo e l\'anima';
+    const body = 'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento e desidera comprendere meglio ciò che sta vivendo';
 
     final isWide = MediaQuery.of(context).size.width >= 600;
     final leadStyle = GoogleFonts.dancingScript(
