@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
           children: [
             _HeroSection(),
             _IntroSection(),
+            _AdditionalIntro(),
             _AChiMiRivolgoSection(),
             _PrimoColloquioBox(),
             _AreeInterventoSection(),
@@ -278,6 +279,53 @@ class _IntroSection extends StatelessWidget {
                 ],
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Breve intro ─────────────────────────────────────────────────────────── 
+class _AdditionalIntro extends StatelessWidget {
+  const _AdditionalIntro();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFFF0F7F4),
+      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 760),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Chiedere aiuto può rappresentare un passo importante verso una maggiore '
+                'comprensione di sé e verso la possibilità di ritrovare equilibrio. '
+                'La sofferenza psicologica, quando viene accolta in uno spazio professionale, '
+                'può diventare l\'inizio di un lavoro di consapevolezza, trasformazione e cura.',
+                style: GoogleFonts.lato(
+                  fontSize: 18,
+                  height: 1.75,
+                  color: const Color(0xFF2C2C2C),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Nel mio lavoro accolgo persone che attraversano momenti complessi della loro '
+                'vita e che sentono il bisogno di essere ascoltate con rispetto, attenzione e '
+                'competenza. Ogni percorso nasce dall\'incontro con una storia unica e viene '
+                'costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.',
+                style: GoogleFonts.lato(
+                  fontSize: 18,
+                  height: 1.75,
+                  color: const Color(0xFF2C2C2C),
+                ),
+              ),
+            ],
           ),
         ),
       ),
