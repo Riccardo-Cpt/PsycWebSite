@@ -119,12 +119,20 @@ class _HeroSectionState extends State<_HeroSection>
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Psicologa e Psicoterapeuta\nEsperta in psicologia dell\'emergenza',
+                      'Psicologa e Psicoterapeuta',
                       style: GoogleFonts.lato(
                           fontSize: 24,
                           color: const Color(0xFFFFFFF0),
                           fontWeight: FontWeight.w500,
                           height: 1.4),
+                    ),
+                    const SizedBox(height: 8),
+                    Text("Esperta in psicologia dell'emergenza",
+                      style: GoogleFonts.lato(
+                            fontSize: 12,
+                            color: const Color(0xFFFFFFF0),
+                            fontWeight: FontWeight.w500,
+                            height: 0.8),
                     ),
                     const SizedBox(height: 20),
                     Text(
@@ -172,7 +180,7 @@ class _IntroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lead = 'Il cammino verso se stessi passa attraverso\n il cuore, la mente, il corpo e l\'anima';
+    const lead = 'Un percorso di ascolto, comprensione e cura\n dove la guarigione passa dal cuore,\n dalla mente, dal corpo e dall\'anima';
     const body = 'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento e desidera comprendere meglio ciò che sta vivendo';
 
     final isWide = MediaQuery.of(context).size.width >= 600;
