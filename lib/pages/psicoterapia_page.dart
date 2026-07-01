@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/section_image.dart';
 import '../widgets/site_footer.dart';
 
 class PsicoterapiaPage extends StatelessWidget {
@@ -100,17 +101,6 @@ class _CosESection extends StatelessWidget {
         const SizedBox(height: 16),
       ],
     );
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 400 / 380,
-        child: Image.asset(
-          'assets/images/Arcobaleno.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -123,7 +113,7 @@ class _CosESection extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), image],
+                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/Arcobaleno.webp', 400 / 380)],
                 );
               }
               return Row(
@@ -131,7 +121,7 @@ class _CosESection extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: textContent),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/Arcobaleno.webp', 400 / 380)),
                 ],
               );
             },
@@ -208,17 +198,6 @@ class _QuandoSection extends StatelessWidget {
         const SizedBox(height: 16),
       ],
     );
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 400 / 380,
-        child: Image.asset(
-          'assets/images/fallingLeaves.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -231,13 +210,13 @@ class _QuandoSection extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), image],
+                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)],
                 );
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/fallingLeaves.webp', 400 / 380)),
                   const SizedBox(width: 40),
                   Expanded(flex: 3, child: textContent),
                 ],
@@ -282,17 +261,6 @@ class _ComeSiSvolgeSection extends StatelessWidget {
         const SizedBox(height: 16),
       ],
     );
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 400 / 380,
-        child: Image.asset(
-          'assets/images/lilium.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     return Container(
       width: double.infinity,
       color: Colors.transparent,
@@ -305,7 +273,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
               if (constraints.maxWidth < 600) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [textContent, const SizedBox(height: 32), image],
+                  children: [textContent, const SizedBox(height: 32), buildSectionImage('assets/images/lilium.webp', 400 / 380)],
                 );
               }
               return Row(
@@ -313,7 +281,7 @@ class _ComeSiSvolgeSection extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: textContent),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/lilium.webp', 400 / 380)),
                 ],
               );
             },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/contact_form_dialog.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/section_image.dart';
 import '../widgets/site_footer.dart';
 
 class ServiziPage extends StatelessWidget {
@@ -217,15 +218,9 @@ class _AreaCard extends StatelessWidget {
         builder: (context, constraints) {
           final isWide = constraints.maxWidth >= 600;
 
-          final picture = ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              imagePath,
-              width: isWide ? 220 : double.infinity,
-              height: isWide ? 180 : 200,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => const SizedBox.shrink(),
-            ),
+          final picture = SizedBox(
+            width: isWide ? 220 : double.infinity,
+            child: buildSectionImage(imagePath, isWide ? 220 / 180 : 16 / 9),
           );
 
           final textBlock = Column(

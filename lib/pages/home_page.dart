@@ -11,6 +11,7 @@ import '../widgets/site_footer.dart';
 import '../widgets/contact_chip.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/contact_form_dialog.dart';
+import '../widgets/section_image.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -286,46 +287,71 @@ class _IntroSection extends StatelessWidget {
   }
 }
 
-// ── Breve intro ─────────────────────────────────────────────────────────── 
+Widget _buildImage(String imageName, double aspectRatio) =>
+    buildSectionImage('assets/images/$imageName', aspectRatio);
+
+// ── Breve intro ───────────────────────────────────────────────────────────
 class _AdditionalIntro extends StatelessWidget {
   const _AdditionalIntro();
 
   @override
   Widget build(BuildContext context) {
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Chiedere aiuto può rappresentare un passo importante verso una maggiore '
+          'comprensione di sé e verso la possibilità di ritrovare equilibrio. '
+          'La sofferenza psicologica, quando viene accolta in uno spazio professionale, '
+          'può diventare l\'inizio di un lavoro di consapevolezza, trasformazione e cura.',
+          style: GoogleFonts.lato(
+            fontSize: 22,
+            height: 1.85,
+            color: const Color(0xFF2C2C2C),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'Nel mio lavoro accolgo persone che attraversano momenti complessi della loro '
+          'vita e che sentono il bisogno di essere ascoltate con rispetto, attenzione e '
+          'competenza. Ogni percorso nasce dall\'incontro con una storia unica e viene '
+          'costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.',
+          style: GoogleFonts.lato(
+            fontSize: 22,
+            height: 1.85,
+            color: const Color(0xFF2C2C2C),
+          ),
+        ),
+      ],
+    );
     return Container(
       width: double.infinity,
       color: const Color(0xFFF0F7F4),
       padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 760),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Chiedere aiuto può rappresentare un passo importante verso una maggiore '
-                'comprensione di sé e verso la possibilità di ritrovare equilibrio. '
-                'La sofferenza psicologica, quando viene accolta in uno spazio professionale, '
-                'può diventare l\'inizio di un lavoro di consapevolezza, trasformazione e cura.',
-                style: GoogleFonts.lato(
-                  fontSize: 18,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'Nel mio lavoro accolgo persone che attraversano momenti complessi della loro '
-                'vita e che sentono il bisogno di essere ascoltate con rispetto, attenzione e '
-                'competenza. Ogni percorso nasce dall\'incontro con una storia unica e viene '
-                'costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.',
-                style: GoogleFonts.lato(
-                  fontSize: 18,
-                  height: 1.75,
-                  color: const Color(0xFF2C2C2C),
-                ),
-              ),
-            ],
+          constraints: const BoxConstraints(maxWidth: 1400),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    content,
+                    const SizedBox(height: 32),
+                    _buildImage('lilium.webp', 360 / 220),
+                  ],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 3, child: content),
+                  const SizedBox(width: 40),
+                  Expanded(flex: 2, child: _buildImage('lilium.webp', 360 / 220)),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -349,18 +375,6 @@ class _AChiMiRivolgoSection extends StatelessWidget {
         'Fasi delicate come adolescenza, maternità, genitorialità, crisi affettive, lutto, traumi, menopausa e stress lavorativo.'),
   ];
 
-  Widget _buildImage(double aspectRatio) => ClipRRect(
-        borderRadius: BorderRadius.circular(14),
-        child: AspectRatio(
-          aspectRatio: aspectRatio,
-          child: Image.asset(
-            'assets/images/AlberoVento.webp',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            errorBuilder: (_, _, _) => const SizedBox.shrink(),
-          ),
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -390,12 +404,12 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                     Text(c.$2,
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            fontSize: 20,
                             color: const Color(0xFF93a996))),
                     const SizedBox(height: 4),
                     Text(c.$3,
                         style: GoogleFonts.lato(
-                            fontSize: 16,
+                            fontSize: 20,
                             height: 1.55,
                             color: const Color(0xFF2C2C2C))),
                   ],
@@ -421,14 +435,14 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                   children: [
                     content,
                     const SizedBox(height: 32),
-                    _buildImage(320 / 280),
+                    _buildImage('AlberoVento.webp', 320 / 280),
                   ],
                 );
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 2, child: _buildImage(320 / 270)),
+                  Expanded(flex: 2, child: _buildImage('AlberoVento.webp', 320 / 300)),
                   const SizedBox(width: 40),
                   Expanded(flex: 3, child: content),
                 ],
@@ -446,19 +460,6 @@ class _AChiMiRivolgoSection extends StatelessWidget {
 class _PrimoColloquioBox extends StatelessWidget {
   const _PrimoColloquioBox();
 
-  Widget _buildImage(double aspectRatio) => ClipRRect(
-        borderRadius: BorderRadius.circular(14),
-        child: AspectRatio(
-          aspectRatio: aspectRatio,
-          child: Image.asset(
-            'assets/images/SassoParticolare.webp',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            errorBuilder: (_, _, _) => const SizedBox.shrink(),
-          ),
-        ),
-      );
-
   @override
   Widget build(BuildContext context) {
     final textContent = Column(
@@ -474,12 +475,12 @@ class _PrimoColloquioBox extends StatelessWidget {
         const SizedBox(height: 12),
         Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 10),
         Text(
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.7, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -517,7 +518,7 @@ class _PrimoColloquioBox extends StatelessWidget {
                   children: [
                     textContent,
                     const SizedBox(height: 32),
-                    _buildImage(400 / 240),
+                    _buildImage('SassoParticolare.webp', 400 / 240),
                   ],
                 );
               }
@@ -526,7 +527,7 @@ class _PrimoColloquioBox extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: textContent),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage(400 / 240)),
+                  Expanded(flex: 2, child: _buildImage('SassoParticolare.webp', 400 / 240)),
                 ],
               );
             },
@@ -629,19 +630,6 @@ class _AreaChip extends StatelessWidget {
 class _LabirintiSection extends StatelessWidget {
   const _LabirintiSection();
 
-  Widget _buildImage(double aspectRatio) => ClipRRect(
-        borderRadius: BorderRadius.circular(14),
-        child: AspectRatio(
-          aspectRatio: aspectRatio,
-          child: Image.asset(
-            'assets/images/Maze.webp',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            errorBuilder: (_, _, _) => const SizedBox.shrink(),
-          ),
-        ),
-      );
-
   @override
   Widget build(BuildContext context) {
     final content = Column(
@@ -657,17 +645,17 @@ class _LabirintiSection extends StatelessWidget {
         const SizedBox(height: 20),
         Text(
           'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
         Text(
           'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
         const SizedBox(height: 16),
         Text(
           'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
-          style: GoogleFonts.lato(fontSize: 18, height: 1.75, color: const Color(0xFF2C2C2C)),
+          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: const Color(0xFF2C2C2C)),
         ),
       ],
     );
@@ -686,7 +674,7 @@ class _LabirintiSection extends StatelessWidget {
                   children: [
                     content,
                     const SizedBox(height: 32),
-                    _buildImage(360 / 220),
+                    _buildImage('Maze.webp', 360 / 240),
                   ],
                 );
               }
@@ -694,8 +682,8 @@ class _LabirintiSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(flex: 3, child: content),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage(360 / 220)),
+                  const SizedBox(width: 40, height: 20),
+                  Expanded(flex: 2, child: _buildImage('Maze.webp', 380 / 300)),
                 ],
               );
             },

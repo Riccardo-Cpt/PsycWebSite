@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/section_image.dart';
 import '../widgets/site_footer.dart';
 
 class FigureProfessionaliPage extends StatelessWidget {
@@ -73,17 +74,6 @@ class _PsicologoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 340 / 420,
-        child: Image.asset(
-          'assets/images/NinfeeSottAcqua.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -135,7 +125,7 @@ class _PsicologoSection extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 48),
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/NinfeeSottAcqua.webp', 340 / 420)),
                 ],
               );
             },
@@ -151,17 +141,6 @@ class _PsicoterapeutaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 320 / 400,
-        child: Image.asset(
-          'assets/images/TaleaPiantaGrassa.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -213,7 +192,7 @@ class _PsicoterapeutaSection extends StatelessWidget {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/TaleaPiantaGrassa.webp', 320 / 400)),
                   const SizedBox(width: 48),
                   Expanded(flex: 3, child: content),
                 ],
@@ -231,17 +210,6 @@ class _PsichiatraSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: AspectRatio(
-        aspectRatio: 340 / 420,
-        child: Image.asset(
-          'assets/images/fallingLeaves.webp',
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-        ),
-      ),
-    );
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -293,7 +261,7 @@ class _PsichiatraSection extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 48),
-                  Expanded(flex: 2, child: image),
+                  Expanded(flex: 2, child: buildSectionImage('assets/images/fallingLeaves.webp', 340 / 420)),
                 ],
               );
             },
