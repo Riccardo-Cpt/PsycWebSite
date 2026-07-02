@@ -197,16 +197,16 @@ class _FaqTileState extends State<_FaqTile> {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       elevation: _expanded ? 3 : 1,
-      shadowColor: AppColors.primary.withValues(alpha: 0.15),
-      color: _expanded ? const Color(0xFFCFA090) : const Color(0xFFDEB8AC),
+      shadowColor: AppColors.primaryShadow,
+      color: _expanded ? AppColors.primary : AppColors.primaryLight,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       clipBehavior: Clip.antiAlias,
       child: ExpansionTile(
         onExpansionChanged: (v) => setState(() => _expanded = v),
-        tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         childrenPadding: EdgeInsets.zero,
         iconColor: Colors.white,
-        collapsedIconColor: Colors.white,
+        collapsedIconColor: AppColors.textDark,
         shape: const Border(),
         collapsedShape: const Border(),
         title: Text(
@@ -218,26 +218,29 @@ class _FaqTileState extends State<_FaqTile> {
           ),
         ),
         children: [
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(width: 4, color: AppColors.primary),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
-                    child: Text(
-                      widget.answer,
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
-                        height: 1.75,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textDark,
-                      ),
+          ColoredBox(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+              child: DecoratedBox(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: AppColors.primary, width: 4),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text(
+                    widget.answer,
+                    style: GoogleFonts.lato(
+                      fontSize: 16,
+                      height: 1.75,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textDark,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],
