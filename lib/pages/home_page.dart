@@ -112,8 +112,10 @@ class _HeroSectionState extends State<_HeroSection>
                 child: child,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
+            child: Builder(builder: (context) {
+              final isMobile = screenWidth < 600;
+              return Padding(
+              padding: EdgeInsets.symmetric(vertical: isMobile ? 24 : 50, horizontal: isMobile ? 16 : 40),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 760),
                 child: Column(
@@ -122,58 +124,61 @@ class _HeroSectionState extends State<_HeroSection>
                     Text(
                       'Dr.ssa Maria Bianchi',
                       style: GoogleFonts.playfairDisplay(
-                          fontSize: 48,
+                          fontSize: isMobile ? 35 : 48,
                           color: const Color(0xFFF5F5F5)),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     Text(
                       'Psicologa e Psicoterapeuta',
                       style: GoogleFonts.lato(
-                          fontSize: 24,
+                          fontSize: 15,
                           color: const Color(0xFFFFFFF0),
                           fontWeight: FontWeight.w500,
                           height: 1.4),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     Text("Esperta in psicologia dell'emergenza",
                       style: GoogleFonts.lato(
-                            fontSize: 12,
+                            fontSize: 10,
                             color: const Color(0xFFFFFFF0),
                             fontWeight: FontWeight.w500,
                             height: 0.8),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 21),
                     Text(
                       'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
                       style: GoogleFonts.lato(
-                          fontSize: 20,
+                          fontSize: isMobile ? 16 : 20,
                           color: const Color(0xFFFFFFF0),
-                          height: 1.6,
+                          height: 1.5,
                           fontStyle: FontStyle.italic),
                     ),
-                      const SizedBox(height: 50),
-                      ElevatedButton.icon(
-                        onPressed: () => showDialog(
-                          context: context,
-                          builder: (_) => const ContactFormDialog(),
-                        ),
-                        icon: const Icon(Icons.calendar_today_outlined),
-                        label: Text('Richiedi un primo colloquio',
-                            style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 36, vertical: 28),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 3,
-                        ),
+                    SizedBox(height: isMobile ? 35 : 50),
+                    ElevatedButton.icon(
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (_) => const ContactFormDialog(),
                       ),
-                    ],
-                  ),
+                      icon: Icon(Icons.calendar_today_outlined, size: 24),
+                      label: Text('Richiedi un primo colloquio',
+                          style: GoogleFonts.lato(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: isMobile ? 26 : 36,
+                            vertical: isMobile ? 21 : 28),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        elevation: 3,
+                      ),
+                    ),
+                  ],
                 ),
-            ),
+              ),
+            );}),
           ),
         ],
       ),
@@ -196,15 +201,8 @@ class _IntroSection extends StatelessWidget {
       fontSize: isWide ? 48 : 24,
       fontStyle: FontStyle.italic,
       height: 1.5,
-      color: Colors.white,
+      color: AppColors.textDark,
       fontWeight: FontWeight.bold,
-    );
-    Widget leadText(String text) => ShaderMask(
-      shaderCallback: (bounds) => const LinearGradient(
-        colors: [AppColors.primary, Color(0xFFa07858)],
-        stops: [0.5, 0.5],
-      ).createShader(bounds),
-      child: Text(text, style: leadStyle, textAlign: TextAlign.center),
     );
     final bodyStyle = GoogleFonts.lato(
       fontSize: 22,
@@ -223,9 +221,9 @@ class _IntroSection extends StatelessWidget {
             builder: (context, constraints) {
               if (constraints.maxWidth < 600) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    leadText(lead),
+                    Text(lead, style: leadStyle, textAlign: TextAlign.center),
                     const SizedBox(height: 32),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(14),
@@ -275,7 +273,7 @@ class _IntroSection extends StatelessWidget {
                           width: constraints.maxWidth * 0.62,
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                            child: leadText(lead),
+                            child: Text(lead, style: leadStyle, textAlign: TextAlign.center),
                           ),
                         ),
                       ],
@@ -1046,6 +1044,7 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                         );
                       }
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: reviews
                             .map((r) => Padding(
                                   padding: const EdgeInsets.only(bottom: 12),
@@ -1095,7 +1094,7 @@ class _ReviewPreviewCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               review.username,
