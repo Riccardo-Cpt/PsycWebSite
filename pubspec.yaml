@@ -57,6 +57,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/MazeDescription.webp
     - assets/images/forestTrees.webp
     - assets/images/firma.png
     - assets/images/foto_psicologa.webp

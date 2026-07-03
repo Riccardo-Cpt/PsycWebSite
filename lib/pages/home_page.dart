@@ -29,8 +29,9 @@ class HomePage extends StatelessWidget {
             _IntroSection(),
             _AdditionalIntro(),
             _AChiMiRivolgoSection(),
-            _PrimoColloquioBox(),
+            _ComeLavoroSection(),
             _AreeInterventoSection(),
+            _PrimoColloquioBox(),
             _LabirintiSection(),
             _UltimoArticoloSection(),
             _UltimeRecensioniSection(),
@@ -81,8 +82,11 @@ class _HeroSectionState extends State<_HeroSection>
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final minHeight = (screenWidth * (1240 / 1860)).clamp(360.0, 520.0);
     return SizedBox(
       width: double.infinity,
+      height: minHeight,
       child: Stack(
         children: [
           // Background image
@@ -189,7 +193,7 @@ class _IntroSection extends StatelessWidget {
 
     final isWide = MediaQuery.of(context).size.width >= 600;
     final leadStyle = GoogleFonts.dancingScript(
-      fontSize: isWide ? 35 : 24,
+      fontSize: isWide ? 48 : 24,
       fontStyle: FontStyle.italic,
       height: 1.5,
       color: Colors.white,
@@ -341,7 +345,7 @@ class _AdditionalIntro extends StatelessWidget {
                   children: [
                     content,
                     const SizedBox(height: 32),
-                    _buildImage('lilium.webp', 360 / 220),
+                    _buildImage('MazeDescription.webp', 360 / 220),
                   ],
                 );
               }
@@ -350,7 +354,7 @@ class _AdditionalIntro extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage('lilium.webp', 360 / 220)),
+                  Expanded(flex: 2, child: _buildImage('MazeDescription.webp', 360 / 280)),
                 ],
               );
             },
@@ -476,12 +480,13 @@ class _PrimoColloquioBox extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.',
+          'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.'
+          'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
           style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 10),
         Text(
-          'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
+          'Ogni contatto ed ogni colloquio avvengono in un contesto professionale e riservato, nel rispetto della privacy e della persona.',
           style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
@@ -540,6 +545,120 @@ class _PrimoColloquioBox extends StatelessWidget {
   }
 }
 
+// ── Come lavoro ────────────────────────────────────────────────────────────────
+
+class _ComeLavoroSection extends StatelessWidget {
+  const _ComeLavoroSection();
+
+  static const _pillars = [
+    (
+      Icons.psychology_outlined,
+      'Approccio',
+      'Umanistico-relazionale con radici psicoanalitiche contemporanee, centrato sulla persona nella sua unicità.',
+    ),
+    (
+      Icons.handshake_outlined,
+      'Relazione terapeutica',
+      'Uno spazio fondamentale di ascolto, fiducia e continuità, orientato a costruire un percorso condiviso.',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Come lavoro',
+                style: GoogleFonts.playfairDisplay(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Il mio approccio è umanistico-relazionale, con formazione psicoanalitica contemporanea. '
+                'Al centro del lavoro terapeutico c\'è la persona nella sua unicità: la sua storia, i suoi vissuti, '
+                'le sue relazioni significative e il modo in cui il disagio prende forma nella sua esperienza.',
+                style: GoogleFonts.lato(
+                    fontSize: 18, height: 1.75, color: AppColors.textDark),
+              ),
+              const SizedBox(height: 36),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final tiles = _pillars
+                      .map((p) => _PillarTile(icon: p.$1, title: p.$2, body: p.$3))
+                      .toList();
+                  if (constraints.maxWidth < 600) {
+                    return Column(
+                      children: [
+                        tiles[0],
+                        const SizedBox(height: 16),
+                        tiles[1],
+                      ],
+                    );
+                  }
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: tiles[0]),
+                      const SizedBox(width: 20),
+                      Expanded(child: tiles[1]),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PillarTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String body;
+  const _PillarTile({required this.icon, required this.title, required this.body});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundLight,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+            color: AppColors.primary.withValues(alpha: 0.25), width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: AppColors.primary, size: 32),
+          const SizedBox(height: 12),
+          Text(title,
+              style: GoogleFonts.playfairDisplay(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary)),
+          Divider(color: AppColors.primary.withValues(alpha: 0.3), height: 24),
+          Text(body,
+              style: GoogleFonts.lato(
+                  fontSize: 15, height: 1.65, color: AppColors.textDark)),
+        ],
+      ),
+    );
+  }
+}
+
 // ── Aree di intervento ─────────────────────────────────────────────────────────
 
 class _AreeInterventoSection extends StatelessWidget {
@@ -559,6 +678,10 @@ class _AreeInterventoSection extends StatelessWidget {
     (Icons.spa_outlined, 'Problematiche della sessualità'),
     (Icons.restaurant_menu_outlined, 'Disturbi alimentari'),
     (Icons.timeline_outlined, 'Crisi del ciclo di vita'),
+    (Icons.bedtime_outlined, 'Disturbi del sonno'),
+    (Icons.monitor_heart_outlined, 'Sintomi psicofisici'),
+    (Icons.work_history_outlined, 'Difficoltà legate al lavoro'),
+    (Icons.psychology_outlined, 'Problematiche della personalità'),
   ];
 
   @override
@@ -574,19 +697,46 @@ class _AreeInterventoSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Aree di lavoro',
+                'Aree di intervento',
                 style: GoogleFonts.playfairDisplay(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primary),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
+              Text(
+                'Mi occupo del disagio psicologico nelle sue diverse manifestazioni:',
+                style: GoogleFonts.lato(
+                    fontSize: 16,
+                    color: AppColors.textDark,
+                    fontStyle: FontStyle.italic),
+              ),
+              const SizedBox(height: 20),
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: _aree
                     .map((a) => _AreaChip(icon: a.$1, label: a.$2))
                     .toList(),
+              ),
+              const SizedBox(height: 32),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.07),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.25),
+                      width: 1),
+                ),
+                child: Text(
+                  'Il lavoro clinico può integrare strumenti differenti, scelti in base al bisogno della persona, al momento del percorso e agli obbiettivi condivisi, compreso l\'utilizzo dell\'EMDR quando indicato per l\'elaborazione di esperienze traumatiche o emotivamente stressanti.',
+                  style: GoogleFonts.lato(
+                      fontSize: 15,
+                      height: 1.65,
+                      color: AppColors.textDark),
+                ),
               ),
             ],
           ),
@@ -646,17 +796,13 @@ class _LabirintiSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'In alcuni momenti della vita ci si può sentire smarriti. La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza.',
+          'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara.'
+          'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
           style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         Text(
-          'Il disagio psicologico può assumere la forma di un cammino complesso, faticoso, a tratti senza uscita apparente. Non si tratta di debolezza, ma di un segnale che qualcosa chiede attenzione e cura.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'La psicoterapia non propone scorciatoie, ma aiuta a dare senso ai propri vissuti, a riconoscere ciò che si ripete e ciò che fa soffrire, e a ritrovare una direzione più autentica. Anche nei momenti di maggiore smarrimento può aprirsi la possibilità di un incontro più profondo con se stessi.',
+          'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
           style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
       ],
