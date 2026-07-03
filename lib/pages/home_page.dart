@@ -129,7 +129,7 @@ class _HeroSectionState extends State<_HeroSection>
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Psicologa e Psicoterapeuta',
+                      'Psicologa Psicoterapeuta',
                       style: GoogleFonts.lato(
                           fontSize: 15,
                           color: const Color(0xFFFFFFF0),
