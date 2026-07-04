@@ -26,8 +26,26 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             _HeroSection(),
-            _IntroSection(),
             _AdditionalIntro(),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final isDesktop = constraints.maxWidth >= 600;
+                if (!isDesktop) {
+                  return Image.asset(
+                    'assets/images/MazeDescription.webp',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  );
+                }
+                return Image.asset(
+                  'assets/images/MazeDescription.webp',
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                );
+              },
+            ),
             _AChiMiRivolgoSection(),
             _ComeLavoroSection(),
             _AreeInterventoSection(),
@@ -186,110 +204,6 @@ class _HeroSectionState extends State<_HeroSection>
   }
 }
 
-// ── Intro section ──────────────────────────────────────────────────────────────
-
-class _IntroSection extends StatelessWidget {
-  const _IntroSection();
-
-  @override
-  Widget build(BuildContext context) {
-    const lead = 'Un percorso di ascolto,\n comprensione e cura\n dove la guarigione passa dal cuore,\n dalla mente, dal corpo e dall\'anima';
-    const body = 'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento e desidera comprendere meglio ciò che sta vivendo';
-
-    final isWide = MediaQuery.of(context).size.width >= 600;
-    final leadStyle = GoogleFonts.dancingScript(
-      fontSize: isWide ? 48 : 24,
-      fontStyle: FontStyle.italic,
-      height: 1.5,
-      color: AppColors.textDark,
-      fontWeight: FontWeight.bold,
-    );
-    final bodyStyle = GoogleFonts.lato(
-      fontSize: 22,
-      height: 1.65,
-      color: AppColors.textMid,
-    );
-
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(lead, style: leadStyle, textAlign: TextAlign.center),
-                    const SizedBox(height: 32),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: AspectRatio(
-                        aspectRatio: 340 / 320,
-                        child: Image.asset(
-                          'assets/images/foto_donna_seduta.webp',
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(body, style: bodyStyle),
-                  ],
-                );
-              }
-
-              // Desktop: lead overlaps image from the left, body below
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 420,
-                    width: constraints.maxWidth,
-                    child: Stack(
-                      children: [
-                        // Image — centered (middle of the section)
-                        Positioned(
-                          left: constraints.maxWidth * 0.28,
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(14),
-                            child: Image.asset(
-                              'assets/images/foto_donna_seduta.webp',
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                            ),
-                          ),
-                        ),
-                        // Lead sentence — gradient band fading left-to-right into the image
-                        Positioned(
-                          left: 0,
-                          top: 40,
-                          width: constraints.maxWidth * 0.62,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                            child: Text(lead, style: leadStyle, textAlign: TextAlign.center),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 28),
-                  Text(body, style: bodyStyle),
-                ],
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 Widget _buildImage(String imageName, double aspectRatio) =>
     buildSectionImage('assets/images/$imageName', aspectRatio);
@@ -343,7 +257,7 @@ class _AdditionalIntro extends StatelessWidget {
                   children: [
                     content,
                     const SizedBox(height: 32),
-                    _buildImage('MazeDescription.webp', 360 / 220),
+                    _buildImage('foto_donna_seduta.webp', 360 / 220),
                   ],
                 );
               }
@@ -352,7 +266,7 @@ class _AdditionalIntro extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage('MazeDescription.webp', 360 / 280)),
+                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 360 / 280)),
                 ],
               );
             },
@@ -523,7 +437,7 @@ class _PrimoColloquioBox extends StatelessWidget {
                   children: [
                     textContent,
                     const SizedBox(height: 32),
-                    _buildImage('SassoParticolare.webp', 400 / 240),
+                    _buildImage('flowers_on_table.webp', 210 / 190),
                   ],
                 );
               }
@@ -532,7 +446,7 @@ class _PrimoColloquioBox extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: textContent),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage('SassoParticolare.webp', 400 / 240)),
+                  Expanded(flex: 2, child: _buildImage('flowers_on_table.webp', 275 / 240)),
                 ],
               );
             },
@@ -552,12 +466,17 @@ class _ComeLavoroSection extends StatelessWidget {
     (
       Icons.psychology_outlined,
       'Approccio',
-      'Umanistico-relazionale con radici psicoanalitiche contemporanee, centrato sulla persona nella sua unicità.',
+      'Umanistico-relazionale con formazione psicoanalitica contemporanea, centrato sulla persona nella sua unicità.',
     ),
     (
       Icons.handshake_outlined,
       'Relazione terapeutica',
       'Uno spazio fondamentale di ascolto, fiducia e continuità, orientato a costruire un percorso condiviso.',
+    ),
+    (
+      Icons.remove_red_eye_outlined,
+      'EMDR',
+      'Uno strumento clinico che può essere integrato nel percorso psicoterapeutico per elaborare esperienze traumatiche o emotivamente intense.',
     ),
   ];
 
@@ -580,14 +499,6 @@ class _ComeLavoroSection extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: AppColors.primary),
               ),
-              const SizedBox(height: 20),
-              Text(
-                'Il mio approccio è umanistico-relazionale, con formazione psicoanalitica contemporanea. '
-                'Al centro del lavoro terapeutico c\'è la persona nella sua unicità: la sua storia, i suoi vissuti, '
-                'le sue relazioni significative e il modo in cui il disagio prende forma nella sua esperienza.',
-                style: GoogleFonts.lato(
-                    fontSize: 18, height: 1.75, color: AppColors.textDark),
-              ),
               const SizedBox(height: 36),
               LayoutBuilder(
                 builder: (context, constraints) {
@@ -597,18 +508,20 @@ class _ComeLavoroSection extends StatelessWidget {
                   if (constraints.maxWidth < 600) {
                     return Column(
                       children: [
-                        tiles[0],
-                        const SizedBox(height: 16),
-                        tiles[1],
+                        for (int i = 0; i < tiles.length; i++) ...[
+                          if (i > 0) const SizedBox(height: 16),
+                          tiles[i],
+                        ],
                       ],
                     );
                   }
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: tiles[0]),
-                      const SizedBox(width: 20),
-                      Expanded(child: tiles[1]),
+                      for (int i = 0; i < tiles.length; i++) ...[
+                        if (i > 0) const SizedBox(width: 20),
+                        Expanded(child: tiles[i]),
+                      ],
                     ],
                   );
                 },
@@ -687,7 +600,7 @@ class _AreeInterventoSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.backgroundLight,
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 0),
+      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1200),
