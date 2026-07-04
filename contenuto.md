@@ -9,7 +9,7 @@
 3. A chi mi rivolgo
    - 3.1 Adulti
    - 3.2 Adolescenti
-   - 3.3 Coppie e famiglie
+   - 3.3 Coppie e famiglie e terza età
    - 3.4 Momenti del ciclo di vita
 4. Approccio terapeutico
    - 4.1 La centralità della persona
@@ -56,7 +56,7 @@ Il contenuto viene sparso su più pagine per snellire e facilitare la fruizione 
 
 ### Titolo
 
-**Psicologa Psicoterapeuta per adulti, adolescenti, coppie e famiglie**
+**Psicologa Psicoterapeuta per adulti, adolescenti, coppie, famiglie e terza età**
 
 ### Sottotitolo
 
@@ -66,9 +66,12 @@ Uno spazio di ascolto professionale e riservato per chi sta attraversando un mom
 
 **Richiedi un primo colloquio**
 
-## Psicologa Psicoterapeuta per adulti, adolescenti, coppie e famiglie
+## Psicologa Psicoterapeuta per adulti, adolescenti, coppie, famiglie e terza età ##
 
-Chiedere aiuto no è un segno di debolezza, ma un passo importante verso una maggiore consapevolezza di sé. La psicoterapia può aiutare a comprendere il proprio disagio, ritrovare equilibrio, affrontare crisi personali o relazionali e sviluppare nuove risorse interiori.
+Chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione di sé e verso la possibilità di ritrovare equilibrio. La sofferenza psicologica quando viene accolta in uno spazio professionale, può diventare l'inizio di un lavoro di consapevolezza, trasformazione e cura di sé.
+Nel mio lavoro accolgo persone che attraversano momenti complessi della loro vita che se sentono il bisogno di essere ascoltate co rispetto, attenzione e competenza. Ogni percorso nasce dall'incontro con una storia unica e viene costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.
+
+La psicoterapia può aiutare a comprendere il proprio disagio, ritrovare equilibrio, affrontare crisi personali o relazionali e sviluppare nuove risorse interiori.
 
 In questi momenti, chiedere aiuto può rappresentare un passo importante verso una maggiore comprensione di sé e verso la possibilità di ritrovare maggiore equilibrio.
 
