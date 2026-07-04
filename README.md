@@ -1,6 +1,6 @@
-# Dr.ssa Maria Bianchi — Sito Web
+# Dott. Maria Bianchi — Sito Web
 
-Sito web professionale per la Dr.ssa Maria Bianchi, Psicologa e Psicoterapeuta. Sviluppato con Flutter Web e Supabase come backend.
+Sito web professionale per la Dott. Maria Bianchi, Psicologa Psicoterapeuta. Sviluppato con Flutter Web e Supabase come backend.
 
 ## Pagine pubbliche
 
