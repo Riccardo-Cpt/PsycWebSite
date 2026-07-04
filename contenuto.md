@@ -104,7 +104,7 @@ Spiegazione sintetica dell'approccio terapeutico.
 - Traumi, esperienze di maltrattamento, violenza familiare, trascuratezza, abuso, separazioni difficili, lutti e altre ferite emotive significative.
 - Stress lavorativo, mobbing, burnout e difficoltà psicologiche legate al contesto professionale.
 - Disturbi dissociativi, disturbi della personalità (borderline, paranoide, schizoide, antisociale, istrionico, narcisistico, evitante, dipendente, ossessivo-compulsivo ecc).
-- Neurodivergenza, sovraccarico emotivo, burout autistico.
+- Neurodivergenza, sovraccarico emotivo, burnout autistico.
 
 ## Primo colloquio
 
