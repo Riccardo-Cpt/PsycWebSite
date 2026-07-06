@@ -22,7 +22,7 @@ import 'services/review_auth_service.dart';
 import 'services/reviews_service.dart';
 import 'services/contact_service.dart';
 
-const _siteName = 'Dr.ssa Maria Bianchi — Psicologa';
+const _siteName = 'Dott. Antonella Petrini — Psicologa e Psicoterapeuta';
 
 const _pageTitles = {
   '/': 'Psicologa e Psicoterapeuta a Firenze | $_siteName',
@@ -105,7 +105,7 @@ class PsicApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Dr.ssa Maria Bianchi — Psicologa',
+      title: 'Dott Antonella Petrini — Psicologa e Psicoterapeuta',
       routerConfig: _router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),

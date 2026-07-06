@@ -1,6 +1,6 @@
-# Dott. Maria Bianchi — Sito Web
+# Dott. Antonella Petrini — Sito Web
 
-Sito web professionale per la Dott. Maria Bianchi, Psicologa Psicoterapeuta. Sviluppato con Flutter Web e Supabase come backend.
+Sito web professionale per la Dott. Antonella Petrini, Psicologa Psicoterapeuta. Sviluppato con Flutter Web e Supabase come backend.
 
 ## Pagine pubbliche
 

@@ -38,7 +38,7 @@ class NavDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Dr.ssa Maria Bianchi',
+                      'Dr.ssa Antonella Petrini',
                       style: TextStyle(
                           color: AppColors.primary,
                           fontSize: 18,

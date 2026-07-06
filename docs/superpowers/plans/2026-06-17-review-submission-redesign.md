@@ -1156,7 +1156,7 @@ class PsicApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Dr.ssa Maria Bianchi — Psicologa',
+      title: 'Dr.ssa Antonella Petrini — Psicologa',
       routerConfig: _router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF93a996)),

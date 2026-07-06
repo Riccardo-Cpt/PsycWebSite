@@ -42,7 +42,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
               width: 270,  // Desired width
               fit: BoxFit.fitWidth,  // Scales to fill width, height follows aspect ratio
               errorBuilder: (_, _, _) => const Text(
-                'Dr.ssa Maria Bianchi',
+                'Dr.ssa Antonella Petrini',
                 style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
               ),
             ),

@@ -170,7 +170,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                         height: 40,
                         fit: BoxFit.fitHeight,
                         errorBuilder: (_, _, _) => Text(
-                          'Dr.ssa Maria Bianchi',
+                          'Dr.ssa Antonella Petrini',
                           style: GoogleFonts.lato(fontWeight: FontWeight.bold, color: AppColors.primary),
                         ),
                       ),

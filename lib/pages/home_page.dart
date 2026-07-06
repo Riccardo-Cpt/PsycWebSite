@@ -27,25 +27,7 @@ class HomePage extends StatelessWidget {
           children: [
             _HeroSection(),
             _AdditionalIntro(),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final isDesktop = constraints.maxWidth >= 600;
-                if (!isDesktop) {
-                  return Image.asset(
-                    'assets/images/MazeDescription.webp',
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                  );
-                }
-                return Image.asset(
-                  'assets/images/MazeDescription.webp',
-                  width: double.infinity,
-                  fit: BoxFit.fitWidth,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                );
-              },
-            ),
+            _MazePicture(),
             _AChiMiRivolgoSection(),
             _ComeLavoroSection(),
             _AreeInterventoSection(),
@@ -118,7 +100,7 @@ class _HeroSectionState extends State<_HeroSection>
           ),
           // Soft overlay so text stays readable
           Positioned.fill(
-            child: Container(color: Colors.black.withValues(alpha: 0.4)),
+            child: Container(color: Colors.black.withValues(alpha: 0.1)),
           ),
           // Content
           AnimatedBuilder(
@@ -139,22 +121,7 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Dr.ssa Maria Bianchi',
-                      style: GoogleFonts.playfairDisplay(
-                          fontSize: isMobile ? 35 : 48,
-                          color: const Color(0xFFF5F5F5)),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Psicologa Psicoterapeuta',
-                      style: GoogleFonts.lato(
-                          fontSize: 15,
-                          color: const Color(0xFFFFFFF0),
-                          fontWeight: FontWeight.w500,
-                          height: 1.4),
-                    ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: isMobile ? 135  : 200),
                     Text("Esperta in psicologia dell'emergenza",
                       style: GoogleFonts.lato(
                             fontSize: 10,
@@ -204,7 +171,26 @@ class _HeroSectionState extends State<_HeroSection>
   }
 }
 
+// ── Maze Picture ───────────────────────────────────────────────────────────
+class _MazePicture extends StatelessWidget {
+  const _MazePicture();
 
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesktop = constraints.maxWidth >= 600;
+        return Image.asset(
+          'assets/images/MazeDescription.webp',
+          width: double.infinity,
+          height: isDesktop ? null : (constraints.maxWidth * (1240 / 1860)).clamp(360.0, 520.0),
+          fit: isDesktop ? BoxFit.fitWidth : BoxFit.cover,
+          errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+        );
+      },
+    );
+  }
+}
 Widget _buildImage(String imageName, double aspectRatio) =>
     buildSectionImage('assets/images/$imageName', aspectRatio);
 

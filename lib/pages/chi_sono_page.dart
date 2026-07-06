@@ -193,7 +193,7 @@ class _ProfileCard extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Dr.ssa Maria Bianchi',
+          'Dr.ssa Antonella Petrini',
           textAlign: TextAlign.center,
           style: GoogleFonts.playfairDisplay(
               fontSize: 30,
