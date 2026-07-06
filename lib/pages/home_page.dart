@@ -138,7 +138,7 @@ class _HeroSectionState extends State<_HeroSection>
                           height: 1.5,
                           fontStyle: FontStyle.italic),
                     ),
-                    SizedBox(height: isMobile ? 35 : 50),
+                    SizedBox(height: isMobile ? 18 : 50),
                     ElevatedButton.icon(
                       onPressed: () => showDialog(
                         context: context,
