@@ -134,7 +134,7 @@ class _HeroSectionState extends State<_HeroSection>
                             fontSize: isMobile ? 31 : 40,
                             color: const Color(0xFFFFFFF0),
                             fontWeight: FontWeight.w500,
-                            height: 2.1),
+                            height: 0.7),
                     ),
                     Text(
                       'ESPERA IN PSICOLOGIA DELL\'EMERGENZA',
