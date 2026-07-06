@@ -100,7 +100,7 @@ class _HeroSectionState extends State<_HeroSection>
           ),
           // Soft overlay so text stays readable
           Positioned.fill(
-            child: Container(color: Colors.black.withValues(alpha: 0.1)),
+            child: Container(color: Colors.black.withValues(alpha: 0.5)),
           ),
           // Content
           AnimatedBuilder(
@@ -121,24 +121,38 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: isMobile ? 135  : 200),
-                    Text("Esperta in psicologia dell'emergenza",
-                      style: GoogleFonts.lato(
-                            fontSize: 10,
+                  SizedBox(height: isMobile ? 15 : 10,),
+                  Text("Dott. Antonella Petrini",
+                                        style: GoogleFonts.montserrat(
+                                              fontSize: isMobile ? 40 : 60,
+                                              color: const Color(0xFFFFFFF0),
+                                              fontWeight: FontWeight.w500,
+                                              height: 1.0),
+                                    ),
+                    Text("Psicologa Psicoterapeuta",
+                      style: GoogleFonts.montserrat(
+                            fontSize: isMobile ? 31 : 40,
                             color: const Color(0xFFFFFFF0),
                             fontWeight: FontWeight.w500,
-                            height: 0.8),
+                            height: 2.1),
                     ),
-                    const SizedBox(height: 21),
                     Text(
-                      'Uno spazio di ascolto professionale e riservato per chi sta attraversando un momento di difficoltà, sofferenza o cambiamento.',
+                      'ESPERA IN PSICOLOGIA DELL\'EMERGENZA',
                       style: GoogleFonts.lato(
-                          fontSize: isMobile ? 16 : 20,
+                          fontSize: isMobile ? 12 : 15,
                           color: const Color(0xFFFFFFF0),
                           height: 1.5,
-                          fontStyle: FontStyle.italic),
+                          ),
                     ),
-                    SizedBox(height: isMobile ? 18 : 50),
+                    Text(
+                      'PER ADULTI, ADOLESCENTI, COPPIE, FAMIGLIE\n E TERZA ETÀ',
+                      style: GoogleFonts.lato(
+                          fontSize: isMobile ? 12 : 15,
+                          color: const Color(0xFFFFFFF0),
+                          height: 1.5,
+                          ),
+                    ),
+                    SizedBox(height: isMobile ? 30 : 55),
                     ElevatedButton.icon(
                       onPressed: () => showDialog(
                         context: context,
