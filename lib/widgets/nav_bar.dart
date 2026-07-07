@@ -38,7 +38,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             const SizedBox(width: 10),
             Image.asset(
-              'assets/images/firma.png',
+              'assets/images/firma.webp',
               width: 270,  // Desired width
               fit: BoxFit.fitWidth,  // Scales to fill width, height follows aspect ratio
               errorBuilder: (_, _, _) => const Text(

@@ -57,6 +57,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/firma.webp
     - assets/images/MazeDescription.webp
     - assets/images/forestTrees.webp
     - assets/images/firma.png
@@ -73,7 +74,6 @@ flutter:
     - assets/images/NinfeeStagnoOpache.webp
     - assets/images/AlberoVento.webp
     - assets/images/flowers_on_table.webp
-    - assets/images/Logo.webp
     - assets/images/Maze.webp
     - assets/images/NinfeeStagno2.webp
     - assets/images/TaleaPiantaGrassa.webp

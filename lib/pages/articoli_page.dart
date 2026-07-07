@@ -166,7 +166,7 @@ class _ArticoliPageState extends State<ArticoliPage>
                     children: [
                       const SizedBox(width: 50),
                       Image.asset(
-                        'assets/images/firma.png',
+                        'assets/images/firma.webp',
                         height: 40,
                         fit: BoxFit.fitHeight,
                         errorBuilder: (_, _, _) => Text(
