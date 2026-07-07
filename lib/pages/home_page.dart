@@ -121,7 +121,7 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: isMobile ? 20 : 20,),
+                    SizedBox(height: isMobile ? 15 : 20,),
                     Text("Dott. Antonella Petrini",
                                         style: GoogleFonts.montserrat(
                                               fontSize: isMobile ? 35 : 60,
@@ -155,7 +155,7 @@ class _HeroSectionState extends State<_HeroSection>
                           height: 1.5,
                           ),
                     ),
-                    SizedBox(height: isMobile ? 40 : 60),
+                    SizedBox(height: isMobile ? 30 : 60),
                     ElevatedButton.icon(
                       onPressed: () => showDialog(
                         context: context,
@@ -258,9 +258,9 @@ class _AdditionalIntro extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    _buildImage('foto_donna_seduta.webp', 230 / 220),
+                    const SizedBox(height: 36),
                     content,
-                    const SizedBox(height: 32),
-                    _buildImage('foto_donna_seduta.webp', 360 / 220),
                   ],
                 );
               }
@@ -268,8 +268,8 @@ class _AdditionalIntro extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(flex: 3, child: content),
-                  const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 360 / 280)),
+                  const SizedBox(width: 50),
+                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 340 / 320)),
                 ],
               );
             },

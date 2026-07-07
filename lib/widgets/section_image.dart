@@ -6,7 +6,7 @@ Widget buildSectionImage(String imagePath, double aspectRatio) => ClipRRect(
         aspectRatio: aspectRatio,
         child: Image.asset(
           imagePath,
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
           width: double.infinity,
           errorBuilder: (_, _, _) => const SizedBox.shrink(),
         ),
