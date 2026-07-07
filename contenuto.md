@@ -146,7 +146,7 @@ Aggiungere piccole icone per indicare un nuovo punto, bisogna rendere questa sez
 
 ## Presentazione e il mio lavoro oggi 
 
-Sono la Dott.ssa Antonella Petrini, Psicologa e Psicoterapeuta.
+Sono la Dott. Antonella Petrini, Psicologa e Psicoterapeuta.
 
 Nel mio lavoro accolgo persone che sentono il bisogno di comprendere meglio ciò che stanno vivendo, che attraversano momenti complessi della loro vita e che desiderano uno spazio in cui sentirsi ascoltati con rispetto, competenza e attenzione alla propria unicità.
 
