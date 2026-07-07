@@ -121,7 +121,7 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: isMobile ? 37 : 20,),
+                    SizedBox(height: isMobile ? 20 : 20,),
                     Text("Dott. Antonella Petrini",
                                         style: GoogleFonts.montserrat(
                                               fontSize: isMobile ? 35 : 60,
