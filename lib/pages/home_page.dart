@@ -121,38 +121,41 @@ class _HeroSectionState extends State<_HeroSection>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  SizedBox(height: isMobile ? 15 : 10,),
-                  Text("Dott. Antonella Petrini",
+                    SizedBox(height: isMobile ? 37 : 20,),
+                    Text("Dott. Antonella Petrini",
                                         style: GoogleFonts.montserrat(
-                                              fontSize: isMobile ? 40 : 60,
+                                              fontSize: isMobile ? 35 : 60,
                                               color: const Color(0xFFFFFFF0),
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w700,
                                               height: 1.0),
                                     ),
+                    SizedBox(height: isMobile ? 15 : 25,),
                     Text("Psicologa Psicoterapeuta",
                       style: GoogleFonts.montserrat(
-                            fontSize: isMobile ? 31 : 40,
+                            fontSize: isMobile ? 22 : 41,
                             color: const Color(0xFFFFFFF0),
                             fontWeight: FontWeight.w500,
                             height: 0.7),
                     ),
+                    SizedBox(height: isMobile ? 16 : 22,),
                     Text(
                       'ESPERA IN PSICOLOGIA DELL\'EMERGENZA',
                       style: GoogleFonts.lato(
-                          fontSize: isMobile ? 12 : 15,
+                          fontSize: isMobile ? 16 : 22,
                           color: const Color(0xFFFFFFF0),
                           height: 1.5,
                           ),
                     ),
+                    SizedBox(height: isMobile ? 4 : 8,),
                     Text(
-                      'PER ADULTI, ADOLESCENTI, COPPIE, FAMIGLIE\n E TERZA ETÀ',
+                      'PER ADULTI, ADOLESCENTI, COPPIE, FAMIGLIE E TERZA ETÀ',
                       style: GoogleFonts.lato(
-                          fontSize: isMobile ? 12 : 15,
+                          fontSize: isMobile ? 16 : 22,
                           color: const Color(0xFFFFFFF0),
                           height: 1.5,
                           ),
                     ),
-                    SizedBox(height: isMobile ? 30 : 55),
+                    SizedBox(height: isMobile ? 40 : 60),
                     ElevatedButton.icon(
                       onPressed: () => showDialog(
                         context: context,
@@ -167,8 +170,8 @@ class _HeroSectionState extends State<_HeroSection>
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(
-                            horizontal: isMobile ? 26 : 36,
-                            vertical: isMobile ? 21 : 28),
+                            horizontal: isMobile ? 31 : 36,
+                            vertical: isMobile ? 27 : 32),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         elevation: 3,
@@ -222,7 +225,7 @@ class _AdditionalIntro extends StatelessWidget {
           'comprensione di sé e verso la possibilità di ritrovare equilibrio. '
           'La sofferenza psicologica, quando viene accolta in uno spazio professionale, '
           'può diventare l\'inizio di un lavoro di consapevolezza, trasformazione e cura.',
-          style: GoogleFonts.lato(
+          style: GoogleFonts.montserrat(
             fontSize: 22,
             height: 1.85,
             color: AppColors.textDark,
@@ -234,7 +237,7 @@ class _AdditionalIntro extends StatelessWidget {
           'vita e che sentono il bisogno di essere ascoltate con rispetto, attenzione e '
           'competenza. Ogni percorso nasce dall\'incontro con una storia unica e viene '
           'costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.',
-          style: GoogleFonts.lato(
+          style: GoogleFonts.montserrat(
             fontSize: 22,
             height: 1.85,
             color: AppColors.textDark,
@@ -302,7 +305,7 @@ class _AChiMiRivolgoSection extends StatelessWidget {
         Text(
           'A chi mi rivolgo',
           style: GoogleFonts.playfairDisplay(
-            fontSize: 32,
+            fontSize: 36,
             fontWeight: FontWeight.bold,
             color: AppColors.primary,
           ),
@@ -320,13 +323,13 @@ class _AChiMiRivolgoSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(c.$2,
-                        style: GoogleFonts.lato(
+                        style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: AppColors.primary)),
                     const SizedBox(height: 4),
                     Text(c.$3,
-                        style: GoogleFonts.lato(
+                        style: GoogleFonts.montserrat(
                             fontSize: 20,
                             height: 1.55,
                             color: AppColors.textDark)),
@@ -386,7 +389,7 @@ class _PrimoColloquioBox extends StatelessWidget {
         Text(
           'Il primo colloquio',
           style: GoogleFonts.playfairDisplay(
-              fontSize: 28,
+              fontSize: 36,
               fontWeight: FontWeight.bold,
               color: AppColors.primary),
         ),
@@ -394,12 +397,12 @@ class _PrimoColloquioBox extends StatelessWidget {
         Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.'
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 10),
         Text(
           'Ogni contatto ed ogni colloquio avvengono in un contesto professionale e riservato, nel rispetto della privacy e della persona.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.85, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.85, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -413,7 +416,7 @@ class _PrimoColloquioBox extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF2E8494),
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 30),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)),
             elevation: 3,
@@ -484,7 +487,7 @@ class _ComeLavoroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.white,
+      color: Colors.transparent,
       padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
@@ -495,7 +498,7 @@ class _ComeLavoroSection extends StatelessWidget {
               Text(
                 'Come lavoro',
                 style: GoogleFonts.playfairDisplay(
-                    fontSize: 28,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primary),
               ),
@@ -545,7 +548,7 @@ class _PillarTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.backgroundLight,
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
             color: AppColors.primary.withValues(alpha: 0.25), width: 1),
@@ -610,17 +613,17 @@ class _AreeInterventoSection extends StatelessWidget {
               Text(
                 'Aree di intervento',
                 style: GoogleFonts.playfairDisplay(
-                    fontSize: 28,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primary),
               ),
               const SizedBox(height: 16),
               Text(
                 'Mi occupo del disagio psicologico nelle sue diverse manifestazioni:',
-                style: GoogleFonts.lato(
-                    fontSize: 16,
+                style: GoogleFonts.montserrat(
+                    fontSize: 18,
                     color: AppColors.textDark,
-                    fontStyle: FontStyle.italic),
+                    ),
               ),
               const SizedBox(height: 20),
               Wrap(
@@ -635,7 +638,7 @@ class _AreeInterventoSection extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.07),
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                       color: AppColors.primary.withValues(alpha: 0.25),
@@ -643,9 +646,10 @@ class _AreeInterventoSection extends StatelessWidget {
                 ),
                 child: Text(
                   'Il lavoro clinico può integrare strumenti differenti, scelti in base al bisogno della persona, al momento del percorso e agli obbiettivi condivisi, compreso l\'utilizzo dell\'EMDR quando indicato per l\'elaborazione di esperienze traumatiche o emotivamente stressanti.',
-                  style: GoogleFonts.lato(
+                  style: GoogleFonts.montserrat(
                       fontSize: 15,
                       height: 1.65,
+                      fontWeight: FontWeight.w400,
                       color: AppColors.textDark),
                 ),
               ),
@@ -701,7 +705,7 @@ class _LabirintiSection extends StatelessWidget {
         Text(
           'Labirinti',
           style: GoogleFonts.playfairDisplay(
-              fontSize: 28,
+              fontSize: 36,
               fontWeight: FontWeight.bold,
               color: AppColors.primary),
         ),
@@ -709,12 +713,12 @@ class _LabirintiSection extends StatelessWidget {
         Text(
           'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara.'
           'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         Text(
           'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
-          style: GoogleFonts.lato(fontSize: 22, height: 1.75, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.75, color: AppColors.textDark),
         ),
       ],
     );
