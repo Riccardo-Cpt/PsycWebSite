@@ -1,36 +1,30 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { checkOrigin, optionsResponse, corsHeaders } from '../_shared/cors.ts';
+import { makeServiceClient } from '../_shared/client.ts';
 
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
 const RESEND_FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL')!;
 const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL')!;
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers':
-    'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
-
 serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
-  }
+  if (req.method === 'OPTIONS') return optionsResponse(req);
+  const originError = checkOrigin(req);
+  if (originError) return originError;
+
+  const origin = req.headers.get('origin');
+  const headers = { ...corsHeaders(origin), 'Content-Type': 'application/json' };
 
   try {
     const { email, title, description, stars } = await req.json();
-    if (!email || !title || !description || !stars) {
-      return new Response(
-        JSON.stringify({ error: 'Tutti i campi sono obbligatori' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-      );
+    if (!email || !title || !description || !stars ||
+        email.length > 254 || title.length > 200 ||
+        description.length > 2000 || typeof stars !== 'number' ||
+        stars < 1 || stars > 5) {
+      return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
     }
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const supabase = makeServiceClient();
 
-    // Fetch user details for the review row and admin email
     const { data: users, error: userError } = await supabase
       .from('reviewer_users')
       .select('username, name, surname')
@@ -38,14 +32,10 @@ serve(async (req) => {
       .limit(1);
     if (userError) throw userError;
     if (!users || users.length === 0) {
-      return new Response(JSON.stringify({ error: 'Utente non trovato' }), {
-        status: 404,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      return new Response(JSON.stringify({ error: 'Utente non trovato' }), { status: 404, headers });
     }
     const user = users[0];
 
-    // Insert review
     const { error: insertError } = await supabase.from('reviews').insert({
       email,
       username: user.username,
@@ -55,49 +45,25 @@ serve(async (req) => {
       approved: false,
     });
     if (insertError) {
-      // Unique constraint on email = duplicate review
       if (insertError.code === '23505') {
-        return new Response(JSON.stringify({ error: 'duplicate' }), {
-          status: 409,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        });
+        return new Response(JSON.stringify({ error: 'duplicate' }), { status: 409, headers });
       }
       throw insertError;
     }
 
-    // Send admin notification (non-blocking — review already saved)
     fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: RESEND_FROM_EMAIL,
         to: ADMIN_EMAIL,
         subject: 'Nuova recensione in attesa di approvazione',
-        html: `
-          <p>È stata ricevuta una nuova recensione che richiede la tua approvazione.</p>
-          <ul>
-            <li><strong>Username:</strong> ${user.username}</li>
-            <li><strong>Nome:</strong> ${user.name} ${user.surname}</li>
-            <li><strong>Email:</strong> ${email}</li>
-            <li><strong>Stelle:</strong> ${stars}/5</li>
-            <li><strong>Titolo:</strong> ${title}</li>
-          </ul>
-          <blockquote>${description}</blockquote>
-          <p>Accedi al pannello admin per approvarla o rifiutarla.</p>
-        `,
+        html: `<p>Nuova recensione da approvare.</p><ul><li><strong>Username:</strong> ${user.username}</li><li><strong>Stelle:</strong> ${stars}/5</li><li><strong>Titolo:</strong> ${title}</li></ul><blockquote>${description}</blockquote>`,
       }),
     }).catch(() => {});
 
-    return new Response(JSON.stringify({ ok: true }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
-  } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    return new Response(JSON.stringify({ ok: true }), { headers });
+  } catch (_) {
+    return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
   }
 });
