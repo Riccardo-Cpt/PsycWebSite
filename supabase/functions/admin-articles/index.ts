@@ -9,6 +9,9 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') return optionsResponse(req);
+  if (req.method !== 'POST') {
+    return new Response(null, { status: 405 });
+  }
   const originError = checkOrigin(req);
   if (originError) return originError;
   const authError = await verifyAdmin(req);
@@ -42,12 +45,15 @@ serve(async (req) => {
         .insert({ titolo, corpo, pubblicato_at: new Date().toISOString(), immagine_url: immagine_url ?? null })
         .select('id, titolo, corpo, pubblicato_at, immagine_url');
       if (error) throw error;
-      return new Response(JSON.stringify(data![0]), { headers });
+      if (!data || data.length === 0) {
+        throw new Error('Insert returned no data');
+      }
+      return new Response(JSON.stringify(data[0]), { headers });
     }
 
     if (action === 'update') {
       const { id, titolo, corpo, immagine_url } = body;
-      if (!id || !titolo || !corpo || titolo.length > 500 || corpo.length > 100000) {
+      if (id == null || !titolo || !corpo || titolo.length > 500 || corpo.length > 100000) {
         return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
       }
       const { error } = await supabase
@@ -60,7 +66,7 @@ serve(async (req) => {
 
     if (action === 'delete') {
       const { id } = body;
-      if (!id) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
+      if (id == null) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
       const { error } = await supabase.from('articoli').delete().eq('id', Number(id));
       if (error) throw error;
       return new Response(JSON.stringify({ ok: true }), { headers });
@@ -71,9 +77,18 @@ serve(async (req) => {
       if (!imageBase64 || !mimeType) {
         return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
       }
+      const allowedMimes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      if (!allowedMimes.includes(mimeType)) {
+        return new Response(JSON.stringify({ error: 'Tipo file non supportato' }), { status: 400, headers });
+      }
       const ext = mimeType.split('/')[1] ?? 'jpg';
       const filename = `${crypto.randomUUID()}.${ext}`;
-      const bytes = Uint8Array.from(atob(imageBase64), c => c.charCodeAt(0));
+      let bytes: Uint8Array;
+      try {
+        bytes = Uint8Array.from(atob(imageBase64), c => c.charCodeAt(0));
+      } catch (_) {
+        return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
+      }
       const { error } = await storageClient.storage
         .from('articoli-images')
         .upload(filename, bytes, { contentType: mimeType });
@@ -92,6 +107,9 @@ serve(async (req) => {
         return new Response(JSON.stringify({ error: 'url non valido' }), { status: 400, headers });
       }
       const filename = url.substring(prefix.length);
+      if (!filename || filename.includes('..') || filename.includes('/')) {
+        return new Response(JSON.stringify({ error: 'url non valido' }), { status: 400, headers });
+      }
       const { error } = await storageClient.storage.from('articoli-images').remove([filename]);
       if (error) throw error;
       return new Response(JSON.stringify({ ok: true }), { headers });
@@ -102,3 +120,4 @@ serve(async (req) => {
     return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
   }
 });
+

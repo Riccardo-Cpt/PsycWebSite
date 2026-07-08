@@ -5,6 +5,9 @@ import { makeServiceClient } from '../_shared/client.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') return optionsResponse(req);
+  if (req.method !== 'POST') {
+    return new Response(null, { status: 405 });
+  }
   const originError = checkOrigin(req);
   if (originError) return originError;
   const authError = await verifyAdmin(req);
@@ -27,14 +30,14 @@ serve(async (req) => {
     }
 
     if (action === 'approve') {
-      if (!id) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
+      if (id == null) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
       const { error } = await supabase.from('reviews').update({ approved: true }).eq('id', Number(id));
       if (error) throw error;
       return new Response(JSON.stringify({ ok: true }), { headers });
     }
 
     if (action === 'delete') {
-      if (!id) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
+      if (id == null) return new Response(JSON.stringify({ error: 'id mancante' }), { status: 400, headers });
       const { error } = await supabase.from('reviews').delete().eq('id', Number(id));
       if (error) throw error;
       return new Response(JSON.stringify({ ok: true }), { headers });

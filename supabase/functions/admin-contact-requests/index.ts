@@ -5,6 +5,9 @@ import { makeServiceClient } from '../_shared/client.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') return optionsResponse(req);
+  if (req.method !== 'POST') {
+    return new Response(null, { status: 405 });
+  }
   const originError = checkOrigin(req);
   if (originError) return originError;
   const authError = await verifyAdmin(req);
