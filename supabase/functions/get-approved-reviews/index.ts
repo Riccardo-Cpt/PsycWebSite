@@ -7,6 +7,10 @@ serve(async (req) => {
   const originError = checkOrigin(req);
   if (originError) return originError;
 
+  if (req.method !== 'GET') {
+    return new Response(null, { status: 405 });
+  }
+
   const origin = req.headers.get('origin');
   const headers = { ...corsHeaders(origin), 'Content-Type': 'application/json' };
 
@@ -19,7 +23,8 @@ serve(async (req) => {
       .order('created_at', { ascending: false });
     if (error) throw error;
     return new Response(JSON.stringify(data ?? []), { headers });
-  } catch (_) {
+  } catch (e) {
+    console.error('get-approved-reviews error:', e);
     return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
   }
 });

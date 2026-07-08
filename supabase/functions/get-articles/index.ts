@@ -7,6 +7,10 @@ serve(async (req) => {
   const originError = checkOrigin(req);
   if (originError) return originError;
 
+  if (req.method !== 'GET') {
+    return new Response(null, { status: 405 });
+  }
+
   const origin = req.headers.get('origin');
   const headers = { ...corsHeaders(origin), 'Content-Type': 'application/json' };
 
@@ -16,10 +20,14 @@ serve(async (req) => {
     const supabase = makeServiceClient();
 
     if (id) {
+      const numId = parseInt(id, 10);
+      if (isNaN(numId) || numId <= 0 || String(numId) !== id) {
+        return new Response(JSON.stringify({ error: 'id non valido' }), { status: 400, headers });
+      }
       const { data, error } = await supabase
         .from('articoli')
         .select('id, titolo, corpo, pubblicato_at, immagine_url')
-        .eq('id', Number(id))
+        .eq('id', numId)
         .limit(1);
       if (error) throw error;
       if (!data || data.length === 0) {
@@ -30,11 +38,12 @@ serve(async (req) => {
 
     const { data, error } = await supabase
       .from('articoli')
-      .select('id, titolo, corpo, pubblicato_at, immagine_url')
+      .select('id, titolo, pubblicato_at, immagine_url')
       .order('pubblicato_at', { ascending: false });
     if (error) throw error;
     return new Response(JSON.stringify(data ?? []), { headers });
-  } catch (_) {
+  } catch (e) {
+    console.error('get-articles error:', e);
     return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
   }
 });
