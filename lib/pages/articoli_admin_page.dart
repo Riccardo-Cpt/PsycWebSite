@@ -18,36 +18,48 @@ class ArticoliAdminPage extends StatelessWidget {
       body: ValueListenableBuilder<bool>(
         valueListenable: blogAuthService.isAdmin,
         builder: (context, isAdmin, _) =>
-            isAdmin ? const _AdminPanel() : const _PasswordGate(),
+            isAdmin ? const _AdminPanel() : const _LoginGate(),
       ),
     );
   }
 }
 
-// ── Password gate ─────────────────────────────────────────────────────────────
+// ── Login gate ────────────────────────────────────────────────────────────────
 
-class _PasswordGate extends StatefulWidget {
-  const _PasswordGate();
+class _LoginGate extends StatefulWidget {
+  const _LoginGate();
 
   @override
-  State<_PasswordGate> createState() => _PasswordGateState();
+  State<_LoginGate> createState() => _LoginGateState();
 }
 
-class _PasswordGateState extends State<_PasswordGate> {
-  final _controller = TextEditingController();
+class _LoginGateState extends State<_LoginGate> {
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  bool _loading = false;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
     super.dispose();
   }
 
-  void _login() {
-    blogAuthService.login(_controller.text);
-    if (!blogAuthService.isAdmin.value && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password errata')),
+  Future<void> _login() async {
+    setState(() => _loading = true);
+    try {
+      await blogAuthService.signIn(
+        email: _emailCtrl.text.trim(),
+        password: _passwordCtrl.text,
       );
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Credenziali non valide')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -64,27 +76,33 @@ class _PasswordGateState extends State<_PasswordGate> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text('Accesso Admin',
-                    style: TextStyle(
-                        fontSize: 28, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 24),
                 TextField(
-                  controller: _controller,
+                  controller: _emailCtrl,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(labelText: 'Email'),
+                  onSubmitted: (_) => _login(),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _passwordCtrl,
                   obscureText: true,
-                  decoration:
-                      const InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                   onSubmitted: (_) => _login(),
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _login,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: const Text('Accedi',
-                      style: TextStyle(fontSize: 16)),
-                ),
+                _loading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ElevatedButton(
+                        onPressed: _login,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: const Text('Accedi', style: TextStyle(fontSize: 16)),
+                      ),
               ],
             ),
           ),
@@ -106,12 +124,23 @@ class _AdminPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TabBar(
-            labelColor: AppColors.primary,
-            indicatorColor: AppColors.primary,
-            tabs: [
-              Tab(text: 'Blog'),
-              Tab(text: 'Recensioni'),
+          Row(
+            children: [
+              const Expanded(
+                child: TabBar(
+                  labelColor: AppColors.primary,
+                  indicatorColor: AppColors.primary,
+                  tabs: [
+                    Tab(text: 'Blog'),
+                    Tab(text: 'Recensioni'),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.logout),
+                tooltip: 'Esci',
+                onPressed: () => blogAuthService.signOut(),
+              ),
             ],
           ),
           const Expanded(
@@ -172,10 +201,7 @@ class _ArticoliTabState extends State<_ArticoliTab> {
     );
     if (ok == true) {
       try {
-        if (articolo.immagineUrl != null) {
-          await storageService.deleteImmagine(articolo.immagineUrl!);
-        }
-        await articoliService.cancella(articolo.id);
+        await articoliService.cancella(articolo.id, immagineUrl: articolo.immagineUrl);
         _refresh();
       } catch (e) {
         if (context.mounted) {
@@ -615,33 +641,22 @@ class _ArticoloFormState extends State<_ArticoloForm> {
     }
     setState(() => _saving = true);
     try {
-      String? immagineUrl = _currentImageUrl;
-
-      if (_newImageBytes != null) {
-        if (widget.articolo?.immagineUrl != null) {
-          await storageService
-              .deleteImmagine(widget.articolo!.immagineUrl!);
-        }
-        immagineUrl = await storageService.uploadImmagine(
-            _newImageBytes!, _newImageMime!);
-      } else if (_removeImage && widget.articolo?.immagineUrl != null) {
-        await storageService
-            .deleteImmagine(widget.articolo!.immagineUrl!);
-        immagineUrl = null;
-      }
-
       if (widget.articolo == null) {
         await articoliService.inserisci(
           titolo: _titoloCtrl.text.trim(),
           corpo: _corpoCtrl.text.trim(),
-          immagineUrl: immagineUrl,
+          imageBytes: _newImageBytes,
+          imageMime: _newImageMime,
         );
       } else {
         await articoliService.aggiorna(
           id: widget.articolo!.id,
           titolo: _titoloCtrl.text.trim(),
           corpo: _corpoCtrl.text.trim(),
-          immagineUrl: immagineUrl,
+          newImageBytes: _newImageBytes,
+          newImageMime: _newImageMime,
+          existingImageUrl: widget.articolo!.immagineUrl,
+          removeImage: _removeImage,
         );
       }
       if (mounted) widget.onSaved();
