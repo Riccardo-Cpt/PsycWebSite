@@ -16,11 +16,11 @@ import 'pages/chi_sono_page.dart';
 import 'pages/recensioni_page.dart';
 import 'widgets/nav_bar.dart';
 import 'services/articoli_service.dart';
-import 'services/storage_service.dart';
 import 'services/blog_auth_service.dart';
 import 'services/review_auth_service.dart';
 import 'services/reviews_service.dart';
 import 'services/contact_service.dart';
+import 'services/admin_contact_service.dart';
 
 const _siteName = 'Dott. Antonella Petrini — Psicologa e Psicoterapeuta';
 
@@ -42,11 +42,11 @@ const _pageTitles = {
 external set _documentTitle(String value);
 
 final articoliService = ArticoliService();
-final storageService = StorageService();
 final blogAuthService = BlogAuthService();
 final reviewAuthService = ReviewAuthService();
 final reviewsService = ReviewsService();
 final contactService = ContactService();
+final adminContactService = AdminContactService();
 
 final _router = GoRouter(
   observers: [_TitleObserver()],
@@ -81,8 +81,9 @@ final _router = GoRouter(
   ],
 );
 
-void main() {
+void main() async {
   usePathUrlStrategy();
+  await BlogAuthService.initialize();
   runApp(const PsicApp());
 }
 
