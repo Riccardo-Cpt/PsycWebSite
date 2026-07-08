@@ -2,8 +2,9 @@
 const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN') ?? '';
 
 export function corsHeaders(origin: string | null): Record<string, string> {
+  const allowOrigin = origin === ALLOWED_ORIGIN ? ALLOWED_ORIGIN : (ALLOWED_ORIGIN || '*');
   return {
-    'Access-Control-Allow-Origin': origin === ALLOWED_ORIGIN ? ALLOWED_ORIGIN : '',
+    'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   };

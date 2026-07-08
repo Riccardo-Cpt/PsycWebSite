@@ -3,6 +3,10 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { checkOrigin, optionsResponse, corsHeaders } from '../_shared/cors.ts';
 import { makeServiceClient } from '../_shared/client.ts';
 
+function escHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
 const RESEND_FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL')!;
 const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL')!;
@@ -20,20 +24,31 @@ serve(async (req) => {
   const origin = req.headers.get('origin');
   const headers = { ...corsHeaders(origin), 'Content-Type': 'application/json' };
 
+  try {
+
   const { name, surname, email, title, message, tesseraBase64, tesseraFileName } =
     await req.json().catch(() => ({}));
 
   if (
     !name || !surname || !email || !title || !message || !tesseraBase64 || !tesseraFileName ||
     name.length > 100 || surname.length > 100 || email.length > 254 ||
-    title.length > 200 || message.length > 5000 || tesseraFileName.length > 255
+    title.length > 200 || message.length > 5000 || tesseraFileName.length > 255 ||
+    tesseraBase64.length > 1_400_000
   ) {
     return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
   }
 
   // Decode attachment and prepare storage path before the try/finally block
-  const fileBytes = Uint8Array.from(atob(tesseraBase64), (c) => c.charCodeAt(0));
-  const ext = tesseraFileName.split('.').pop() ?? 'bin';
+  let fileBytes: Uint8Array;
+  try {
+    fileBytes = Uint8Array.from(atob(tesseraBase64), c => c.charCodeAt(0));
+  } catch (_) {
+    return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
+  }
+  const ext = tesseraFileName.split('.').pop()?.toLowerCase() ?? 'bin';
+  if (!/^[a-zA-Z0-9]{1,10}$/.test(ext)) {
+    return new Response(JSON.stringify({ error: 'Dati non validi' }), { status: 400, headers });
+  }
   const storagePath = `tessere/${crypto.randomUUID()}.${ext}`;
   const mimeTypes: Record<string, string> = {
     pdf: 'application/pdf',
@@ -41,7 +56,7 @@ serve(async (req) => {
     jpeg: 'image/jpeg',
     png: 'image/png',
   };
-  const contentType = mimeTypes[ext.toLowerCase()] ?? 'application/octet-stream';
+  const contentType = mimeTypes[ext] ?? 'application/octet-stream';
 
   // Upload tessera to transient staging bucket
   const { error: uploadError } = await storageClient.storage
@@ -70,7 +85,7 @@ serve(async (req) => {
           from: RESEND_FROM_EMAIL,
           to: ADMIN_EMAIL,
           subject: 'Nuova richiesta di primo colloquio',
-          html: `<p>Nuova richiesta di colloquio.</p><ul><li><strong>Nome:</strong> ${name} ${surname}</li><li><strong>Email:</strong> ${email}</li><li><strong>Oggetto:</strong> ${title}</li></ul><blockquote>${message}</blockquote>`,
+          html: `<p>Nuova richiesta di colloquio.</p><ul><li><strong>Nome:</strong> ${escHtml(name)} ${escHtml(surname)}</li><li><strong>Email:</strong> ${escHtml(email)}</li><li><strong>Oggetto:</strong> ${escHtml(title)}</li></ul><blockquote>${escHtml(message)}</blockquote>`,
           attachments: [{ filename: tesseraFileName, content: tesseraBase64 }],
         }),
       });
@@ -102,7 +117,8 @@ serve(async (req) => {
 
   // If email failed, fire-and-forget a fallback alert to admin (no attachment)
   if (!emailOk) {
-    fetch('https://api.resend.com/emails', {
+    // @ts-ignore — EdgeRuntime is available in Supabase Deno Deploy
+    EdgeRuntime.waitUntil(fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${RESEND_API_KEY}`,
@@ -112,10 +128,14 @@ serve(async (req) => {
         from: RESEND_FROM_EMAIL,
         to: ADMIN_EMAIL,
         subject: '[ATTENZIONE] Richiesta colloquio ricevuta — allegato non consegnato',
-        html: `<p><strong>Attenzione:</strong> una richiesta di colloquio è stata ricevuta ma l'allegato (tessera sanitaria) non è stato consegnato per un errore tecnico.</p><ul><li><strong>Nome:</strong> ${name} ${surname}</li><li><strong>Email:</strong> ${email}</li></ul><p>Contattare il paziente per richiedere nuovamente il documento.</p>`,
+        html: `<p><strong>Attenzione:</strong> una richiesta di colloquio è stata ricevuta ma l'allegato (tessera sanitaria) non è stato consegnato per un errore tecnico.</p><ul><li><strong>Nome:</strong> ${escHtml(name)} ${escHtml(surname)}</li><li><strong>Email:</strong> ${escHtml(email)}</li></ul><p>Contattare il paziente per richiedere nuovamente il documento.</p>`,
       }),
-    }).catch(() => {});
+    }).catch(() => {}));
   }
 
   return new Response(JSON.stringify({ ok: true }), { headers });
+
+  } catch (_) {
+    return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
+  }
 });
