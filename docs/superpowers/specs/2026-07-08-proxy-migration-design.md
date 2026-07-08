@@ -87,7 +87,7 @@ All secrets live as Supabase project secrets (dashboard → Edge Functions → S
 |---|---|---|---|
 | `get-articles` | GET | `GET /rest/v1/articoli` | Returns all articles, or single article if `?id=` param provided |
 | `get-approved-reviews` | GET | `GET /rest/v1/reviews?approved=eq.true` | Returns approved reviews only |
-| `send-contact-request` | POST | existing | Validates form, uploads attachment to private bucket, emails admin via Resend, inserts record into `psyc_app.contact_requests`. Attachment URL is never returned to client. |
+| `send-contact-request` | POST | existing | Validates form, uploads attachment to private bucket (temporary), emails admin via Resend, **immediately deletes attachment from storage** (regardless of email outcome), inserts record into `psyc_app.contact_requests` with no attachment reference. See Article 9 compliance section. |
 | `send-review-magic-link` | POST | existing | Generates one-time token, stores in `psyc_app.email_approval`, sends magic link email |
 | `verify-review-token` | POST | existing | Validates token, enforces 1-hour expiry, deletes on first use |
 | `submit-review` | POST | existing | Inserts verified review into `psyc_app.reviews` with `approved=false` |
@@ -166,7 +166,7 @@ RLS is enabled on all `psyc_app` tables with **default-deny** — no access unle
 ### Storage
 
 - `articoli-images` — remains accessible for public image display; write/delete restricted to service_role
-- `contact-attachments` — **private bucket**; no public URLs; attachment emailed directly, never retrieved by client
+- `contact-attachments` — **private bucket**; no public URLs; used as a transient staging area only (see Article 9 compliance section)
 
 ### Query safety
 
@@ -194,6 +194,41 @@ Flutter client shows generic user-facing error messages for all non-2xx response
 - **Stolen JWT from browser memory** — mitigated by 1-hour expiry and session invalidation
 - **Spoofed Origin header from non-browser clients** — origin check is a deterrent only; JWT + RLS is the real boundary
 - **Network-level DDoS** — mitigated in future by optional Cloudflare layer
+
+---
+
+## Article 9 Compliance — Tessera Sanitaria Handling
+
+The tessera sanitaria is special category health data under GDPR Article 9. The following measures implement the **data minimization** and **storage limitation** principles:
+
+### Transient storage only
+
+The `contact-attachments` bucket is used as a **staging area only**, not a data store. The attachment lifecycle within `send-contact-request` is:
+
+1. Validate all form input (length, required fields)
+2. Upload attachment to `contact-attachments` bucket (private, no public URL)
+3. Attach file to admin notification email via Resend
+4. **Delete attachment from storage immediately** — this step executes regardless of whether step 3 succeeded or failed
+5. Insert record into `psyc_app.contact_requests` — **no file path, no URL, no attachment reference**
+6. Return response to client
+
+If email delivery fails, the attachment is still deleted and the admin is notified of the failure via a fallback mechanism (e.g. a secondary notification without the attachment). The tessera sanitaria is never retained in the system beyond the email send attempt.
+
+### No persistent storage of health data
+
+- `psyc_app.contact_requests` stores only: name, surname, email, title, message, created_at
+- No column for attachment path or URL exists or will be added
+- The `contact-attachments` bucket will be empty at rest — any file found there is an orphan from a prior failed cleanup and should be deleted
+
+### Orphan cleanup
+
+If step 4 fails (storage deletion error), the Edge Function logs the orphaned file path server-side and returns `500`. A manual cleanup procedure must be run on any orphaned files. Consider adding a Supabase scheduled function or cron job to purge all files in `contact-attachments` older than 5 minutes as a safety net.
+
+### Transmission security
+
+- Attachment is transmitted client → Edge Function over HTTPS only
+- Attachment is transmitted Edge Function → Resend over HTTPS only
+- At no point is the attachment accessible via a public URL
 
 ---
 
