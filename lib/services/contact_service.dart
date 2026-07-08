@@ -12,14 +12,10 @@ class ContactService {
     required String tesseraBase64,
     required String tesseraFileName,
   }) async {
-    final uri = Uri.parse(
-        '${AdminConfig.supabaseUrl}/functions/v1/send-contact-request');
+    final uri = Uri.parse('${AdminConfig.functionsUrl}/send-contact-request');
     final response = await http.post(
       uri,
-      headers: {
-        'Authorization': 'Bearer ${AdminConfig.supabaseAnonKey}',
-        'Content-Type': 'application/json',
-      },
+      headers: const {'Content-Type': 'application/json'},
       body: jsonEncode({
         'name': name,
         'surname': surname,

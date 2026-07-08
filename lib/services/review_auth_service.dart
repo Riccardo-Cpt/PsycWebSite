@@ -25,13 +25,10 @@ class ReviewAuthService {
       return overrideSendMagicLinkForTest!(email, username, name, surname);
     }
     final uri = Uri.parse(
-        '${AdminConfig.supabaseUrl}/functions/v1/send-review-magic-link');
+        '${AdminConfig.functionsUrl}/send-review-magic-link');
     final response = await http.post(
       uri,
-      headers: {
-        'Authorization': 'Bearer ${AdminConfig.supabaseAnonKey}',
-        'Content-Type': 'application/json',
-      },
+      headers: const {'Content-Type': 'application/json'},
       body: jsonEncode({
         'email': email,
         'username': username,
@@ -53,13 +50,10 @@ class ReviewAuthService {
       data = await overrideVerifyTokenForTest!(token);
     } else {
       final uri = Uri.parse(
-          '${AdminConfig.supabaseUrl}/functions/v1/verify-review-token');
+          '${AdminConfig.functionsUrl}/verify-review-token');
       final response = await http.post(
         uri,
-        headers: {
-          'Authorization': 'Bearer ${AdminConfig.supabaseAnonKey}',
-          'Content-Type': 'application/json',
-        },
+        headers: const {'Content-Type': 'application/json'},
         body: jsonEncode({'token': token}),
       );
       if (response.statusCode != 200) {
