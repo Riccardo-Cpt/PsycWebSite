@@ -1,6 +1,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { checkOrigin, optionsResponse, corsHeaders } from '../_shared/cors.ts';
 import { makeServiceClient } from '../_shared/client.ts';
+import { escHtml } from '../_shared/utils.ts';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
 const RESEND_FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL')!;
@@ -58,7 +59,7 @@ serve(async (req) => {
         from: RESEND_FROM_EMAIL,
         to: ADMIN_EMAIL,
         subject: 'Nuova recensione in attesa di approvazione',
-        html: `<p>Nuova recensione da approvare.</p><ul><li><strong>Username:</strong> ${user.username}</li><li><strong>Stelle:</strong> ${stars}/5</li><li><strong>Titolo:</strong> ${title}</li></ul><blockquote>${description}</blockquote>`,
+        html: `<p>Nuova recensione da approvare.</p><ul><li><strong>Username:</strong> ${escHtml(user.username)}</li><li><strong>Stelle:</strong> ${escHtml(String(stars))}/5</li><li><strong>Titolo:</strong> ${escHtml(title)}</li></ul><blockquote>${escHtml(description)}</blockquote>`,
       }),
     }).catch(() => {});
 

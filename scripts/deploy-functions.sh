@@ -41,22 +41,36 @@ echo ""
 echo "Step 3: Deploying all 9 Edge Functions..."
 echo ""
 
-# Deploy each function
-FUNCTIONS=(
+FAILED=0
+
+# Public functions — JWT verification disabled (accept anonymous requests)
+PUBLIC_FUNCTIONS=(
     "get-articles"
     "get-approved-reviews"
     "send-contact-request"
     "send-review-magic-link"
     "verify-review-token"
     "submit-review"
+)
+
+# Admin functions — JWT verification ON (default)
+ADMIN_FUNCTIONS=(
     "admin-articles"
     "admin-reviews"
     "admin-contact-requests"
 )
 
-FAILED=0
+for func in "${PUBLIC_FUNCTIONS[@]}"; do
+    echo -n "Deploying $func (--no-verify-jwt)... "
+    if supabase functions deploy "$func" --no-verify-jwt 2>&1 | grep -q "Deployed Function"; then
+        echo "✓ Success"
+    else
+        echo "✗ Failed"
+        ((FAILED++))
+    fi
+done
 
-for func in "${FUNCTIONS[@]}"; do
+for func in "${ADMIN_FUNCTIONS[@]}"; do
     echo -n "Deploying $func... "
     if supabase functions deploy "$func" 2>&1 | grep -q "Deployed Function"; then
         echo "✓ Success"

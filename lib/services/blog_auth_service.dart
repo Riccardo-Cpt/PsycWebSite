@@ -5,25 +5,21 @@ import '../config/admin_config.dart';
 class BlogAuthService {
   final ValueNotifier<bool> isAdmin = ValueNotifier(false);
 
+  BlogAuthService() {
+    // Wire auth state listener — fires on session restore and login/logout
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      isAdmin.value = data.session != null;
+    });
+    // Check for already-restored session (synchronous after initialize())
+    final session = Supabase.instance.client.auth.currentSession;
+    if (session != null) isAdmin.value = true;
+  }
+
   static Future<void> initialize() async {
     await Supabase.initialize(
       url: AdminConfig.supabaseUrl,
-      anonKey: '',
+      anonKey: AdminConfig.supabaseAnonKey,
     );
-    // Restore session on hot reload / page refresh
-    final session = Supabase.instance.client.auth.currentSession;
-    if (session != null) {
-      _instance?.isAdmin.value = true;
-    }
-    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
-      _instance?.isAdmin.value = data.session != null;
-    });
-  }
-
-  static BlogAuthService? _instance;
-
-  BlogAuthService() {
-    _instance = this;
   }
 
   Future<void> signIn({required String email, required String password}) async {

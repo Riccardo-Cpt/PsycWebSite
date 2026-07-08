@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../config/admin_config.dart';
 import '../models/articolo.dart';
@@ -10,6 +11,7 @@ class ArticoliService {
 
   Map<String, String> get _publicHeaders => const {
         'Content-Type': 'application/json',
+        'apikey': AdminConfig.supabaseAnonKey,
       };
 
   Map<String, String> get _adminHeaders => {
@@ -111,8 +113,12 @@ class ArticoliService {
 
   Future<void> _deleteImage(String url) async {
     final uri = Uri.parse('${AdminConfig.functionsUrl}/admin-articles');
-    await http.post(uri,
+    final response = await http.post(uri,
         headers: _adminHeaders,
         body: jsonEncode({'action': 'delete-image', 'url': url}));
+    if (response.statusCode != 200) {
+      // Log but don't throw — image orphan is recoverable
+      debugPrint('Warning: image delete failed for $url: ${response.statusCode}');
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { checkOrigin, optionsResponse, corsHeaders } from '../_shared/cors.ts';
 import { makeServiceClient } from '../_shared/client.ts';
+import { escHtml } from '../_shared/utils.ts';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
 const SITE_URL = Deno.env.get('SITE_URL')!;
@@ -57,7 +58,7 @@ serve(async (req) => {
         from: RESEND_FROM_EMAIL,
         to: email,
         subject: 'Conferma la tua email per inviare la recensione',
-        html: `<p>Ciao ${name},</p><p>Clicca il link per confermare la tua email e inviare la recensione. Valido 1 ora.</p><p><a href="${magicLink}">${magicLink}</a></p><p>Se non hai richiesto questo link, ignoralo.</p>`,
+        html: `<p>Ciao ${escHtml(name)},</p><p>Clicca il link per confermare la tua email e inviare la recensione. Valido 1 ora.</p><p><a href="${magicLink}">${magicLink}</a></p><p>Se non hai richiesto questo link, ignoralo.</p>`,
       }),
     }).catch(() => {});
 
@@ -66,3 +67,4 @@ serve(async (req) => {
     return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
   }
 });
+

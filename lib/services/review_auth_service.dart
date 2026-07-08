@@ -28,7 +28,10 @@ class ReviewAuthService {
         '${AdminConfig.functionsUrl}/send-review-magic-link');
     final response = await http.post(
       uri,
-      headers: const {'Content-Type': 'application/json'},
+      headers: const {
+        'Content-Type': 'application/json',
+        'apikey': AdminConfig.supabaseAnonKey,
+      },
       body: jsonEncode({
         'email': email,
         'username': username,
@@ -53,7 +56,10 @@ class ReviewAuthService {
           '${AdminConfig.functionsUrl}/verify-review-token');
       final response = await http.post(
         uri,
-        headers: const {'Content-Type': 'application/json'},
+        headers: const {
+          'Content-Type': 'application/json',
+          'apikey': AdminConfig.supabaseAnonKey,
+        },
         body: jsonEncode({'token': token}),
       );
       if (response.statusCode != 200) {

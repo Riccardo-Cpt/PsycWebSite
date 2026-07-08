@@ -15,7 +15,10 @@ class ContactService {
     final uri = Uri.parse('${AdminConfig.functionsUrl}/send-contact-request');
     final response = await http.post(
       uri,
-      headers: const {'Content-Type': 'application/json'},
+      headers: const {
+        'Content-Type': 'application/json',
+        'apikey': AdminConfig.supabaseAnonKey,
+      },
       body: jsonEncode({
         'name': name,
         'surname': surname,

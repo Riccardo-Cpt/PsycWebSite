@@ -9,6 +9,7 @@ class ReviewsService {
 
   Map<String, String> get _publicHeaders => const {
         'Content-Type': 'application/json',
+        'apikey': AdminConfig.supabaseAnonKey,
       };
 
   Map<String, String> get _adminHeaders => {

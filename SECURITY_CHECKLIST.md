@@ -54,16 +54,15 @@ All rows must show `rowsecurity = true`.
 
 In the Supabase dashboard → Edge Functions, verify the following functions are present and active:
 
-- `get-articoli`
-- `get-reviews`
+- `get-articles`
+- `get-approved-reviews`
 - `send-contact-request`
-- `admin-get-contacts`
-- `admin-update-contact`
-- `admin-create-articolo`
-- `admin-update-articolo`
-- `admin-delete-articolo`
-- `admin-approve-review`
-- `admin-reject-review`
+- `send-review-magic-link`
+- `verify-review-token`
+- `submit-review`
+- `admin-articles`
+- `admin-reviews`
+- `admin-contact-requests`
 
 ---
 

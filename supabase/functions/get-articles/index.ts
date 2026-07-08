@@ -38,7 +38,7 @@ serve(async (req) => {
 
     const { data, error } = await supabase
       .from('articoli')
-      .select('id, titolo, pubblicato_at, immagine_url')
+      .select('id, titolo, corpo, pubblicato_at, immagine_url')
       .order('pubblicato_at', { ascending: false });
     if (error) throw error;
     return new Response(JSON.stringify(data ?? []), { headers });
