@@ -387,7 +387,7 @@ class _ArticoloCardState extends State<_ArticoloCard> {
                       color: Colors.black54, fontSize: 14),
                 ),
                 const SizedBox(height: 12),
-                Text(a.corpo,
+                Text(a.corpo ?? '',
                     style: GoogleFonts.lato(fontSize: 16, height: 1.6)),
               ],
             );

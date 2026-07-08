@@ -816,7 +816,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                         child: _ArticoloCard(
                           articolo: a,
                           dataTesto: _formatDate(a.pubblicatoAt),
-                          corpo: _truncate(a.corpo),
+                          corpo: _truncate(a.corpo ?? ''),
                         ),
                       )),
                   const SizedBox(height: 4),
