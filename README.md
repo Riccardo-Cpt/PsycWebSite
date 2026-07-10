@@ -84,6 +84,62 @@ Nessuna `service_role` key nel bundle client. La `service_role` key vive esclusi
 
 ---
 
+## Setup iniziale Supabase
+
+Questi passaggi vanno eseguiti **una sola volta** nel Supabase Dashboard prima del primo deploy. Le Edge Functions non creano automaticamente nulla di quanto segue.
+
+### 1. Schema `psyc_app`
+
+Lo schema deve esistere prima di eseguire le migration. Nel **Dashboard → SQL Editor**:
+
+```sql
+CREATE SCHEMA IF NOT EXISTS psyc_app;
+```
+
+Poi eseguire le migration in ordine (incollare e lanciare ciascuna nel SQL Editor):
+
+1. `supabase/migrations/create_contact_requests.sql`
+2. `supabase/migrations/20260708000000_rls_psyc_app.sql`
+
+### 2. Esporre `psyc_app` all'API
+
+Il client Supabase JS nelle Edge Functions usa `db: { schema: 'psyc_app' }`. Senza questo passaggio le query restituiscono 404.
+
+**Dashboard → Project Settings → API → Extra schemas** — aggiungere `psyc_app`.
+
+### 3. Storage buckets
+
+Due bucket devono esistere prima del deploy delle funzioni che li usano:
+
+| Bucket | Tipo | Note |
+|---|---|---|
+| `articoli-images` | **Pubblico** | Immagini degli articoli — lettura pubblica abilitata |
+| `contact-attachments` | **Privato** | Area di staging temporanea — nessun URL pubblico |
+
+**Dashboard → Storage → New bucket** per ciascuno.
+
+### 4. Utente admin
+
+L'accesso al pannello usa Supabase Auth. Creare l'account admin:
+
+**Dashboard → Authentication → Users → Add user** (inserire email e password).
+
+### 5. Secrets
+
+```bash
+supabase secrets set \
+  SUPABASE_SERVICE_ROLE_KEY=<service_role_key> \
+  ALLOWED_ORIGIN=https://riccardo-cpt.github.io \
+  RESEND_API_KEY=re_xxxxxxxxxxxx \
+  SITE_URL=https://riccardo-cpt.github.io \
+  RESEND_FROM_EMAIL=noreply@tuodominio.com \
+  ADMIN_EMAIL=admin@tuodominio.com
+```
+
+`SUPABASE_URL` e `SUPABASE_ANON_KEY` sono iniettati automaticamente — non vanno impostati.
+
+---
+
 ## Struttura del database Supabase
 
 Tutte le tabelle sono nello schema `psyc_app` con **Row Level Security abilitata (default-deny)**. Le Edge Functions accedono tramite `service_role` (bypassa RLS). Il ruolo `anon` ha accesso solo dove esplicitamente concesso.
@@ -213,16 +269,21 @@ Il JWT viene verificato via `supabase.auth.getUser(jwt)` ad ogni chiamata. JWT n
 
 ### Deploy
 
+Le funzioni pubbliche richiedono `--no-verify-jwt` perché non usano il JWT Supabase a livello di gateway (gestiscono il controllo origin internamente). Le funzioni admin omettono il flag: il gateway Supabase impone la presenza del JWT prima ancora che la funzione venga eseguita.
+
 ```bash
 supabase login
 supabase link --project-ref snsvamcecgizhecvtpwk
 
-supabase functions deploy get-articles
-supabase functions deploy get-approved-reviews
-supabase functions deploy send-contact-request
-supabase functions deploy send-review-magic-link
-supabase functions deploy verify-review-token
-supabase functions deploy submit-review
+# Funzioni pubbliche
+supabase functions deploy --no-verify-jwt get-articles
+supabase functions deploy --no-verify-jwt get-approved-reviews
+supabase functions deploy --no-verify-jwt send-contact-request
+supabase functions deploy --no-verify-jwt send-review-magic-link
+supabase functions deploy --no-verify-jwt verify-review-token
+supabase functions deploy --no-verify-jwt submit-review
+
+# Funzioni admin (JWT obbligatorio a livello gateway)
 supabase functions deploy admin-articles
 supabase functions deploy admin-reviews
 supabase functions deploy admin-contact-requests
@@ -232,17 +293,7 @@ supabase functions deploy admin-contact-requests
 
 ## Secrets (variabili d'ambiente)
 
-Tutti i segreti vivono come Supabase project secrets (Dashboard → Edge Functions → Secrets). Nessuno è nel repository.
-
-```bash
-supabase secrets set \
-  SUPABASE_SERVICE_ROLE_KEY=<service_role_key> \
-  ALLOWED_ORIGIN=https://riccardo-cpt.github.io \
-  RESEND_API_KEY=re_xxxxxxxxxxxx \
-  SITE_URL=https://riccardo-cpt.github.io \
-  RESEND_FROM_EMAIL=noreply@tuodominio.com \
-  ADMIN_EMAIL=admin@tuodominio.com
-```
+Tutti i segreti vivono come Supabase project secrets (Dashboard → Edge Functions → Secrets). Nessuno è nel repository. Per il comando di impostazione iniziale vedi la sezione [Setup iniziale Supabase](#setup-iniziale-supabase).
 
 | Secret | Descrizione |
 |---|---|
