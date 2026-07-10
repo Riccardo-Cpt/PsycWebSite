@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
             _UltimoArticoloSection(),
             _UltimeRecensioniSection(),
             _CtaSection(),
+            _LasciaRecensioneSection(),
             _ContactFooter(),
             const SiteFooter(),
           ],
@@ -1133,6 +1134,62 @@ class _CtaButton extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           padding:
               const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Lascia una recensione ──────────────────────────────────────────────────────
+
+class _LasciaRecensioneSection extends StatelessWidget {
+  const _LasciaRecensioneSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      color: Colors.transparent,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: Column(
+            children: [
+              Text(
+                'Hai già sostenuto una seduta?',
+                style: GoogleFonts.playfairDisplay(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'La tua esperienza può essere utile ad altre persone.',
+                style: GoogleFonts.lato(
+                    fontSize: 16, height: 1.5, color: AppColors.textDark),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: () => context.go('/recensioni'),
+                icon: const Icon(Icons.star_outline),
+                label: Text('Lascia una recensione',
+                    style: GoogleFonts.lato(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 32, vertical: 18),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  elevation: 3,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
