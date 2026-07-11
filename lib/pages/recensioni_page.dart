@@ -9,18 +9,20 @@ import '../widgets/site_footer.dart';
 import '../widgets/star_rating.dart';
 
 class RecensioniPage extends StatelessWidget {
-  const RecensioniPage({super.key});
+  final String? pendingToken;
+  const RecensioniPage({super.key, this.pendingToken});
 
   @override
   Widget build(BuildContext context) {
-    return const NavScaffold(body: _RecensioniBody());
+    return NavScaffold(body: _RecensioniBody(pendingToken: pendingToken));
   }
 }
 
 // ── Body ───────────────────────────────────────────────────────────────────────
 
 class _RecensioniBody extends StatefulWidget {
-  const _RecensioniBody();
+  final String? pendingToken;
+  const _RecensioniBody({this.pendingToken});
 
   @override
   State<_RecensioniBody> createState() => _RecensioniBodyState();
@@ -33,6 +35,25 @@ class _RecensioniBodyState extends State<_RecensioniBody> {
   void initState() {
     super.initState();
     _futureReviews = reviewsService.tutti();
+    if (widget.pendingToken != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _handlePendingToken(widget.pendingToken!));
+    }
+  }
+
+  Future<void> _handlePendingToken(String token) async {
+    try {
+      await reviewAuthService.verifyToken(token);
+      if (mounted) _openForm();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceFirst('Exception: ', '')),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   void _refresh() {
