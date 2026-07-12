@@ -50,7 +50,7 @@ serve(async (req) => {
     });
     if (insertError) throw insertError;
 
-    const magicLink = `${SITE_URL}/recensioni?token=${token}`;
+    const magicLink = `${SITE_URL}recensioni?token=${token}`;
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },

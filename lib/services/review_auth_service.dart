@@ -40,7 +40,7 @@ class ReviewAuthService {
       }),
     );
     if (response.statusCode == 409) {
-      throw Exception('Hai già inviato una recensione. Puoi contattarci per modificarla.');
+      throw Exception('Risulta chr hai già inviato una recensione. Se vuoi modificarla devi inviarmi una mail, puoi trovare l\'indirizzo nella sezione contatti.');
     }
     if (response.statusCode != 200) {
       throw Exception('Errore: riprova più tardi.');

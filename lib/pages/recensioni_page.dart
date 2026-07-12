@@ -438,7 +438,7 @@ class _ReviewFlowState extends State<_ReviewFlow> {
                 constraints: const BoxConstraints(),
                 icon: Icon(
                   i <= _stars ? Icons.star : Icons.star_border,
-                  color: AppColors.primary,
+                  color: AppColors.star,
                   size: 32,
                 ),
                 onPressed: () => setState(() => _stars = i),

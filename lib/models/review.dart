@@ -1,7 +1,7 @@
 class Review {
   final int id;
   final String username;
-  final String email;
+  //final String email;
   final String title;
   final String description;
   final DateTime? createdAt;
@@ -11,7 +11,7 @@ class Review {
   const Review({
     required this.id,
     required this.username,
-    required this.email,
+    // required this.email, --> information not publically exposed
     required this.title,
     required this.description,
     this.createdAt,
@@ -23,7 +23,7 @@ class Review {
     return Review(
       id: json['id'] as int,
       username: json['username'] as String,
-      email: json['email'] as String,
+      // email: json['email'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       createdAt: json['created_at'] != null

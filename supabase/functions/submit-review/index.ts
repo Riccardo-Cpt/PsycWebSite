@@ -6,6 +6,7 @@ import { escHtml } from '../_shared/utils.ts';
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
 const RESEND_FROM_EMAIL = Deno.env.get('RESEND_FROM_EMAIL')!;
 const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL')!;
+const SITE_URL = Deno.env.get('SITE_URL')!;
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') return optionsResponse(req);
@@ -59,7 +60,7 @@ serve(async (req) => {
         from: RESEND_FROM_EMAIL,
         to: ADMIN_EMAIL,
         subject: 'Nuova recensione in attesa di approvazione',
-        html: `<p>Nuova recensione da approvare.</p><ul><li><strong>Username:</strong> ${escHtml(user.username)}</li><li><strong>Stelle:</strong> ${escHtml(String(stars))}/5</li><li><strong>Titolo:</strong> ${escHtml(title)}</li></ul><blockquote>${escHtml(description)}</blockquote>`,
+        html: `<p>Nuova recensione da approvare.</p><ul><li><strong>Username:</strong> ${escHtml(user.username)}</li><li><strong>Stelle:</strong> ${escHtml(String(stars))}/5</li><li><strong>Titolo:</strong> ${escHtml(title)}</li><strong>Recensione rilasciata:</strong>${escHtml(description)}<br><br>Per approvare accedere alla console di Admin:  ${SITE_URL}/admin`,
       }),
     }).catch(() => {});
 
