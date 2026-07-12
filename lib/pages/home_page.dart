@@ -792,7 +792,7 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
     return FutureBuilder<List<Articolo>>(
       future: _futureArticoli,
       builder: (context, snapshot) {
-        final articoli = (snapshot.data ?? []).take(3).toList();
+        final articoli = (snapshot.data ?? []).take(1).toList();
         if (articoli.isEmpty) return const SizedBox.shrink();
         return Container(
           width: double.infinity,
