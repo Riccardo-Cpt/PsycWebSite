@@ -116,8 +116,9 @@ serve(async (req) => {
     }
 
     return new Response(JSON.stringify({ error: 'Azione non valida' }), { status: 400, headers });
-  } catch (_) {
-    return new Response(JSON.stringify({ error: 'Errore interno' }), { status: 500, headers });
+  } catch (e) {
+    console.error('admin-articles error:', e);
+    return new Response(JSON.stringify({ error: 'Errore interno', detail: String(e) }), { status: 500, headers });
   }
 });
 

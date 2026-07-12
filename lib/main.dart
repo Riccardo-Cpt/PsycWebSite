@@ -64,10 +64,9 @@ final _router = GoRouter(
       path: '/recensioni',
       builder: (_, state) {
         final token = state.uri.queryParameters['token'];
-        if (token != null && token.isNotEmpty) {
-          reviewAuthService.verifyToken(token).catchError((_) {});
-        }
-        return const RecensioniPage();
+        return RecensioniPage(
+          pendingToken: (token != null && token.isNotEmpty) ? token : null,
+        );
       },
     ),
     GoRoute(path: '/admin', builder: (_, _) => const ArticoliAdminPage()),

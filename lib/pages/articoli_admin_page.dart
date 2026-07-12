@@ -52,10 +52,10 @@ class _LoginGateState extends State<_LoginGate> {
         email: _emailCtrl.text.trim(),
         password: _passwordCtrl.text,
       );
-    } catch (_) {
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Credenziali non valide')),
+          SnackBar(content: Text(e.toString())),
         );
       }
     } finally {

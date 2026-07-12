@@ -53,7 +53,7 @@ PUBLIC_FUNCTIONS=(
     "submit-review"
 )
 
-# Admin functions — JWT verification ON (default)
+# Admin functions — JWT verification disabled at gateway; auth handled inside via verifyAdmin()
 ADMIN_FUNCTIONS=(
     "admin-articles"
     "admin-reviews"
@@ -71,8 +71,8 @@ for func in "${PUBLIC_FUNCTIONS[@]}"; do
 done
 
 for func in "${ADMIN_FUNCTIONS[@]}"; do
-    echo -n "Deploying $func... "
-    if supabase functions deploy "$func" 2>&1 | grep -q "Deployed Function"; then
+    echo -n "Deploying $func (--no-verify-jwt)... "
+    if supabase functions deploy "$func" --no-verify-jwt 2>&1 | grep -q "Deployed Function"; then
         echo "✓ Success"
     else
         echo "✗ Failed"

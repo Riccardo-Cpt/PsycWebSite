@@ -49,6 +49,16 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script>
+    // Restore path saved by 404.html so go_router handles deep links on GitHub Pages
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
