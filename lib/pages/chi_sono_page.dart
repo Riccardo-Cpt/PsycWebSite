@@ -178,7 +178,7 @@ class _ProfileCard extends StatelessWidget {
       children: [
         ClipOval(
           child: Image.asset(
-            'assets/images/foto_psicologa.webp',
+            'assets/images/FotoBollino.webp',
             width: 180,
             height: 180,
             fit: BoxFit.cover,

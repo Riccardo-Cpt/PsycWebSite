@@ -140,7 +140,7 @@ class _HeroSectionState extends State<_HeroSection>
                     ),
                     SizedBox(height: isMobile ? 16 : 22,),
                     Text(
-                      'ESPERA IN PSICOLOGIA DELL\'EMERGENZA',
+                      'ESPERTA IN PSICOLOGIA DELL\'EMERGENZA',
                       style: GoogleFonts.lato(
                           fontSize: isMobile ? 16 : 22,
                           color: const Color(0xFFFFFFF0),
@@ -228,7 +228,7 @@ class _AdditionalIntro extends StatelessWidget {
           'può diventare l\'inizio di un lavoro di consapevolezza, trasformazione e cura.',
           style: GoogleFonts.montserrat(
             fontSize: 22,
-            height: 1.85,
+            height: 1.55,
             color: AppColors.textDark,
           ),
         ),
@@ -240,7 +240,7 @@ class _AdditionalIntro extends StatelessWidget {
           'costruito tenendo conto dei tempi, dei bisogni e delle risorse di ciascuno.',
           style: GoogleFonts.montserrat(
             fontSize: 22,
-            height: 1.85,
+            height: 1.65,
             color: AppColors.textDark,
           ),
         ),
@@ -270,7 +270,7 @@ class _AdditionalIntro extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 50),
-                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 340 / 320)),
+                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 360 / 320)),
                 ],
               );
             },
@@ -398,12 +398,12 @@ class _PrimoColloquioBox extends StatelessWidget {
         Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato.'
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.85, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.45, color: AppColors.textDark),
         ),
         const SizedBox(height: 10),
         Text(
           'Ogni contatto ed ogni colloquio avvengono in un contesto professionale e riservato, nel rispetto della privacy e della persona.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.85, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(fontSize: 22, height: 1.45, color: AppColors.textDark),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -415,7 +415,7 @@ class _PrimoColloquioBox extends StatelessWidget {
           label: Text('Richiedi un primo colloquio',
               style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold)),
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF2E8494),
+            backgroundColor: AppColors.primaryLight,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 30),
             shape: RoundedRectangleBorder(
@@ -552,7 +552,7 @@ class _PillarTile extends StatelessWidget {
         color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.25), width: 1),
+            color: AppColors.primaryShadow, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -694,69 +694,94 @@ class _AreaChip extends StatelessWidget {
 }
 
 // ── Labirinti section ──────────────────────────────────────────────────────────
-
 class _LabirintiSection extends StatelessWidget {
   const _LabirintiSection();
 
   @override
   Widget build(BuildContext context) {
-    final content = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Labirinti',
-          style: GoogleFonts.playfairDisplay(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara.'
-          'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.75, color: AppColors.textDark),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.75, color: AppColors.textDark),
-        ),
-      ],
-    );
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      color: AppColors.backgroundLight,
-      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    content,
-                    const SizedBox(height: 32),
-                    _buildImage('Maze.webp', 360 / 240),
-                  ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 3, child: content),
-                  const SizedBox(width: 40, height: 20),
-                  Expanded(flex: 2, child: _buildImage('Maze.webp', 380 / 300)),
-                ],
-              );
-            },
+      height: 700,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Sfondo
+          Image.asset(
+            'assets/images/Maze.webp',
+            fit: BoxFit.cover,
           ),
-        ),
+
+          // Gradiente
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color.fromARGB(190, 0, 0, 0),
+                  Color.fromARGB(120, 0, 0, 0),
+                  Color.fromARGB(190, 0, 0, 0),
+                ],
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Titolo
+                Text(
+                  'Labirinti',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+
+                const Spacer(),
+
+                // Testo centrato
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 900),
+                  child: Column(
+                    children: [
+                      Text(
+                        'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara. '
+                        'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 22,
+                          height: 1.8,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 22,
+                          height: 1.8,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Spacer(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
 
 class _UltimoArticoloSection extends StatefulWidget {
   const _UltimoArticoloSection();
@@ -854,53 +879,105 @@ class _ArticoloCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (articolo.immagineUrl != null) ...[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  articolo.immagineUrl!,
-                  width: 100,
-                  height: 80,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, _, _) => const SizedBox.shrink(),
+    return Container(
+      width: double.infinity,
+      color: AppColors.backgroundLight,
+      padding: const EdgeInsets.symmetric(vertical: 64),
+
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200), // larghezza massima
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Titolo FUORI dall'immagine
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  'Labirinti',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
-              const SizedBox(width: 16),
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (dataTesto.isNotEmpty)
-                    Text(dataTesto,
-                        style: const TextStyle(
-                            fontSize: 12, color: Colors.black45)),
-                  const SizedBox(height: 4),
-                  Text(articolo.titolo,
-                      style: GoogleFonts.playfairDisplay(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF134456))),
-                  const SizedBox(height: 6),
-                  Text(corpo,
-                      style: GoogleFonts.lato(
-                          fontSize: 14, height: 1.6, color: Colors.black87)),
-                ],
+
+              const SizedBox(height: 30),
+
+              // Box con immagine
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: SizedBox(
+                  height: 620,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        'assets/images/Maze.webp',
+                        fit: BoxFit.cover,
+                      ),
+
+                      // Gradiente
+                      Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(110, 0, 0, 0),
+                              Color.fromARGB(200, 0, 0, 0),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 80),
+                          child: ConstrainedBox(
+                            constraints:
+                                const BoxConstraints(maxWidth: 850),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara. '
+                                  'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 22,
+                                    height: 1.8,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 28),
+                                Text(
+                                  'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 22,
+                                    height: 1.8,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
+  }
 
 class _UltimeRecensioniSection extends StatefulWidget {
   const _UltimeRecensioniSection();
@@ -1149,7 +1226,7 @@ class _LasciaRecensioneSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 18),
       color: Colors.transparent,
       child: Center(
         child: ConstrainedBox(
@@ -1182,9 +1259,9 @@ class _LasciaRecensioneSection extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 32, vertical: 18),
+                      horizontal: 32, vertical: 32),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.horizontal()),
                   elevation: 3,
                 ),
               ),

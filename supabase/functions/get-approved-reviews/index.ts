@@ -18,7 +18,7 @@ serve(async (req) => {
     const supabase = makeServiceClient();
     const { data, error } = await supabase
       .from('reviews')
-      .select('id, username, title, description, stars, created_at')
+      .select('id, username, title, email, description, stars, created_at')
       .eq('approved', true)
       .order('created_at', { ascending: false });
     if (error) throw error;
