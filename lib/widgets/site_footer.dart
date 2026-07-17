@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/app_colors.dart';
 
 class SiteFooter extends StatelessWidget {
   const SiteFooter({super.key});
@@ -7,7 +8,7 @@ class SiteFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: const Color(0xFF134456),
+      color: AppColors.primaryDark,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: const Text(
         '© 2026 Antonella Petrini — Tutti i diritti riservati',
