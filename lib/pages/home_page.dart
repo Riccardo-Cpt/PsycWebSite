@@ -66,8 +66,10 @@ class _HeroSectionState extends State<_HeroSection>
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
-    _leftDx = Tween<double>(begin: -60, end: 0)
-        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic));
+    _leftDx = Tween<double>(
+      begin: -60,
+      end: 0,
+    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic));
     _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);
     // Start after first frame so the initial offset is visible before animating
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -113,75 +115,90 @@ class _HeroSectionState extends State<_HeroSection>
                 child: child,
               ),
             ),
-            child: Builder(builder: (context) {
-              final isMobile = screenWidth < 600;
-              return Padding(
-              padding: EdgeInsets.symmetric(vertical: isMobile ? 24 : 50, horizontal: isMobile ? 16 : 40),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 760),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: isMobile ? 15 : 20,),
-                    Text("Dott. Antonella Petrini",
-                                        style: GoogleFonts.montserrat(
-                                              fontSize: isMobile ? 35 : 60,
-                                              color: const Color(0xFFFFFFF0),
-                                              fontWeight: FontWeight.w700,
-                                              height: 1.0),
-                                    ),
-                    SizedBox(height: isMobile ? 15 : 25,),
-                    Text("Psicologa Psicoterapeuta",
-                      style: GoogleFonts.montserrat(
+            child: Builder(
+              builder: (context) {
+                final isMobile = screenWidth < 600;
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: isMobile ? 24 : 50,
+                    horizontal: isMobile ? 16 : 40,
+                  ),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 760),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: isMobile ? 15 : 20),
+                        Text(
+                          "Dott. Antonella Petrini",
+                          style: GoogleFonts.montserrat(
+                            fontSize: isMobile ? 35 : 60,
+                            color: const Color(0xFFFFFFF0),
+                            fontWeight: FontWeight.w700,
+                            height: 1.0,
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 15 : 25),
+                        Text(
+                          "Psicologa Psicoterapeuta",
+                          style: GoogleFonts.montserrat(
                             fontSize: isMobile ? 22 : 41,
                             color: const Color(0xFFFFFFF0),
                             fontWeight: FontWeight.w500,
-                            height: 0.7),
-                    ),
-                    SizedBox(height: isMobile ? 16 : 22,),
-                    Text(
-                      'ESPERTA IN PSICOLOGIA DELL\'EMERGENZA',
-                      style: GoogleFonts.lato(
-                          fontSize: isMobile ? 16 : 22,
-                          color: const Color(0xFFFFFFF0),
-                          height: 1.5,
+                            height: 0.7,
                           ),
-                    ),
-                    SizedBox(height: isMobile ? 4 : 8,),
-                    Text(
-                      'PER ADULTI, ADOLESCENTI, COPPIE, FAMIGLIE E TERZA ETÀ',
-                      style: GoogleFonts.lato(
-                          fontSize: isMobile ? 16 : 22,
-                          color: const Color(0xFFFFFFF0),
-                          height: 1.5,
-                          ),
-                    ),
-                    SizedBox(height: isMobile ? 30 : 60),
-                    ElevatedButton.icon(
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (_) => const ContactFormDialog(),
-                      ),
-                      icon: Icon(Icons.calendar_today_outlined, size: 24),
-                      label: Text('Richiedi un primo colloquio',
+                        ),
+                        SizedBox(height: isMobile ? 16 : 22),
+                        Text(
+                          'ESPERTA IN PSICOLOGIA DELL\'EMERGENZA',
                           style: GoogleFonts.lato(
+                            fontSize: isMobile ? 16 : 22,
+                            color: const Color(0xFFFFFFF0),
+                            height: 1.5,
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 4 : 8),
+                        Text(
+                          'PER ADULTI, ADOLESCENTI, COPPIE, FAMIGLIE E TERZA ETÀ',
+                          style: GoogleFonts.lato(
+                            fontSize: isMobile ? 16 : 22,
+                            color: const Color(0xFFFFFFF0),
+                            height: 1.5,
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 30 : 60),
+                        ElevatedButton.icon(
+                          onPressed: () => showDialog(
+                            context: context,
+                            builder: (_) => const ContactFormDialog(),
+                          ),
+                          icon: Icon(Icons.calendar_today_outlined, size: 24),
+                          label: Text(
+                            'Richiedi un primo colloquio',
+                            style: GoogleFonts.lato(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: isMobile ? 31 : 36,
-                            vertical: isMobile ? 27 : 32),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        elevation: 3,
-                      ),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isMobile ? 31 : 36,
+                              vertical: isMobile ? 27 : 32,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 3,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            );}),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -201,7 +218,9 @@ class _MazePicture extends StatelessWidget {
         return Image.asset(
           'assets/images/MazeDescription.webp',
           width: double.infinity,
-          height: isDesktop ? null : (constraints.maxWidth * (1240 / 1860)).clamp(360.0, 520.0),
+          height: isDesktop
+              ? null
+              : (constraints.maxWidth * (1240 / 1860)).clamp(360.0, 520.0),
           fit: isDesktop ? BoxFit.fitWidth : BoxFit.cover,
           errorBuilder: (_, __, ___) => const SizedBox.shrink(),
         );
@@ -209,6 +228,7 @@ class _MazePicture extends StatelessWidget {
     );
   }
 }
+
 Widget _buildImage(String imageName, double aspectRatio) =>
     buildSectionImage('assets/images/$imageName', aspectRatio);
 
@@ -270,7 +290,10 @@ class _AdditionalIntro extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: content),
                   const SizedBox(width: 50),
-                  Expanded(flex: 2, child: _buildImage('foto_donna_seduta.webp', 360 / 320)),
+                  Expanded(
+                    flex: 2,
+                    child: _buildImage('foto_donna_seduta.webp', 360 / 320),
+                  ),
                 ],
               );
             },
@@ -287,16 +310,27 @@ class _AChiMiRivolgoSection extends StatelessWidget {
   const _AChiMiRivolgoSection();
 
   static const _categorie = [
-    (Icons.person_outline, 'Adulti',
-        'Adulti che attraversano momenti di difficoltà, crisi personali, sofferenza emotiva, problemi relazionali o passaggi delicati del ciclo di vita.'),
-    (Icons.school_outlined, 'Adolescenti',
-        'Adolescenti che vivono fragilità, difficoltà scolastiche, crisi identitarie, conflitti familiari o ansia durante questa fase della crescita.'),
-    (Icons.people_outline, 'Coppie e famiglie',
-        'Coppie e famiglie che attraversano conflitti, difficoltà comunicative, crisi affettive o momenti di trasformazione.'),
-    (Icons.timeline_outlined, 'Crisi del ciclo di vita',
-        'Fasi delicate come adolescenza, maternità, genitorialità, crisi affettive, lutto, traumi, menopausa e stress lavorativo.'),
+    (
+      Icons.person_outline,
+      'Adulti',
+      'Adulti che attraversano momenti di difficoltà, crisi personali, sofferenza emotiva, problemi relazionali o passaggi delicati del ciclo di vita.',
+    ),
+    (
+      Icons.school_outlined,
+      'Adolescenti',
+      'Adolescenti che vivono fragilità, difficoltà scolastiche, crisi identitarie, conflitti familiari o ansia durante questa fase della crescita.',
+    ),
+    (
+      Icons.people_outline,
+      'Coppie e famiglie',
+      'Coppie e famiglie che attraversano conflitti, difficoltà comunicative, crisi affettive o momenti di trasformazione.',
+    ),
+    (
+      Icons.timeline_outlined,
+      'Crisi del ciclo di vita',
+      'Fasi delicate come adolescenza, maternità, genitorialità, crisi affettive, lutto, traumi, menopausa e stress lavorativo.',
+    ),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -312,34 +346,42 @@ class _AChiMiRivolgoSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        ..._categorie.map((c) => Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(c.$1, color: AppColors.primary, size: 28),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(c.$2,
+        ..._categorie.map(
+          (c) => Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(c.$1, color: AppColors.primary, size: 28),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        c.$2,
                         style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: AppColors.primary)),
-                    const SizedBox(height: 4),
-                    Text(c.$3,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        c.$3,
                         style: GoogleFonts.montserrat(
-                            fontSize: 20,
-                            height: 1.55,
-                            color: AppColors.textDark)),
-                  ],
+                          fontSize: 20,
+                          height: 1.55,
+                          color: AppColors.textDark,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     );
     return Container(
@@ -364,7 +406,10 @@ class _AChiMiRivolgoSection extends StatelessWidget {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(flex: 2, child: _buildImage('AlberoVento.webp', 320 / 300)),
+                  Expanded(
+                    flex: 2,
+                    child: _buildImage('AlberoVento.webp', 320 / 300),
+                  ),
                   const SizedBox(width: 40),
                   Expanded(flex: 3, child: content),
                 ],
@@ -390,20 +435,29 @@ class _PrimoColloquioBox extends StatelessWidget {
         Text(
           'Il primo colloquio',
           style: GoogleFonts.playfairDisplay(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary),
+            fontSize: 36,
+            fontWeight: FontWeight.bold,
+            color: AppColors.primary,
+          ),
         ),
         const SizedBox(height: 12),
         Text(
           'Il primo incontro è uno spazio dedicato all\'ascolto della domanda di aiuto e alla comprensione del bisogno portato. '
           'È un momento utile per iniziare a orientarsi, chiarire eventuali dubbi e valutare insieme il percorso più adatto.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.45, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(
+            fontSize: 22,
+            height: 1.45,
+            color: AppColors.textDark,
+          ),
         ),
         const SizedBox(height: 10),
         Text(
           'Ogni contatto ed ogni colloquio avvengono in un contesto professionale e riservato, nel rispetto della privacy e della persona.',
-          style: GoogleFonts.montserrat(fontSize: 22, height: 1.45, color: AppColors.textDark),
+          style: GoogleFonts.montserrat(
+            fontSize: 22,
+            height: 1.45,
+            color: AppColors.textDark,
+          ),
         ),
         const SizedBox(height: 16),
         ElevatedButton.icon(
@@ -412,14 +466,17 @@ class _PrimoColloquioBox extends StatelessWidget {
             builder: (_) => const ContactFormDialog(),
           ),
           icon: const Icon(Icons.calendar_today_outlined),
-          label: Text('Richiedi un primo colloquio',
-              style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold)),
+          label: Text(
+            'Richiedi un primo colloquio',
+            style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryLight,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 30),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(10),
+            ),
             elevation: 3,
           ),
         ),
@@ -450,7 +507,10 @@ class _PrimoColloquioBox extends StatelessWidget {
                 children: [
                   Expanded(flex: 3, child: textContent),
                   const SizedBox(width: 40),
-                  Expanded(flex: 2, child: _buildImage('flowers_on_table.webp', 275 / 240)),
+                  Expanded(
+                    flex: 2,
+                    child: _buildImage('flowers_on_table.webp', 275 / 240),
+                  ),
                 ],
               );
             },
@@ -470,17 +530,20 @@ class _ComeLavoroSection extends StatelessWidget {
     (
       Icons.psychology_outlined,
       'Approccio',
-      'Umanistico-relazionale con formazione psicoanalitica contemporanea, centrato sulla persona nella sua unicità.',
+      'Umanistico-relazionale con formazione psicoanalitica contemporanea, centrato sulla persona nella sua unicità: '
+      'la sua storia, i suoi vissuti, le sue relazioni significative e il modo in cui il disagio prende forma nella sua esperienza.',
     ),
     (
       Icons.handshake_outlined,
       'Relazione terapeutica',
-      'Uno spazio fondamentale di ascolto, fiducia e continuità, orientato a costruire un percorso condiviso.',
+      'Uno spazio fondamentale di ascolto, fiducia e continuità. La psicoterapia non offre risposte standard, ma permette di costruire.'
+      'un percorso condiviso, rispettoso dei tempi della persona e orientato ad una maggiore consapevolezza di sè.',
     ),
     (
       Icons.remove_red_eye_outlined,
-      'EMDR',
-      'Uno strumento clinico che può essere integrato nel percorso psicoterapeutico per elaborare esperienze traumatiche o emotivamente intense.',
+      'Lavoro clinico',
+      'Può integrare strumenti differenti, scelti in base al bisogno della persona, al momento del percorso e agli obbiettivi condivisi, compreso l\'utilizzo'
+      'dell\' EMDR quando indicato per elaborare esperienze traumatiche o emotivamente intense.',
     ),
   ];
 
@@ -499,15 +562,18 @@ class _ComeLavoroSection extends StatelessWidget {
               Text(
                 'Come lavoro',
                 style: GoogleFonts.playfairDisplay(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary),
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ),
               const SizedBox(height: 36),
               LayoutBuilder(
                 builder: (context, constraints) {
                   final tiles = _pillars
-                      .map((p) => _PillarTile(icon: p.$1, title: p.$2, body: p.$3))
+                      .map(
+                        (p) => _PillarTile(icon: p.$1, title: p.$2, body: p.$3),
+                      )
                       .toList();
                   if (constraints.maxWidth < 600) {
                     return Column(
@@ -542,7 +608,11 @@ class _PillarTile extends StatelessWidget {
   final IconData icon;
   final String title;
   final String body;
-  const _PillarTile({required this.icon, required this.title, required this.body});
+  const _PillarTile({
+    required this.icon,
+    required this.title,
+    required this.body,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -551,23 +621,30 @@ class _PillarTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-            color: AppColors.primaryShadow, width: 1),
+        border: Border.all(color: AppColors.primaryShadow, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: AppColors.primary, size: 32),
           const SizedBox(height: 12),
-          Text(title,
-              style: GoogleFonts.playfairDisplay(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary)),
+          Text(
+            title,
+            style: GoogleFonts.playfairDisplay(
+              fontSize: 21,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
+          ),
           Divider(color: AppColors.primary.withValues(alpha: 0.3), height: 24),
-          Text(body,
-              style: GoogleFonts.lato(
-                  fontSize: 15, height: 1.65, color: AppColors.textDark)),
+          Text(
+            body,
+            style: GoogleFonts.lato(
+              fontSize: 17,
+              height: 1.65,
+              color: AppColors.textDark,
+            ),
+          ),
         ],
       ),
     );
@@ -614,17 +691,18 @@ class _AreeInterventoSection extends StatelessWidget {
               Text(
                 'Aree di intervento',
                 style: GoogleFonts.playfairDisplay(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary),
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
                 'Mi occupo del disagio psicologico nelle sue diverse manifestazioni:',
                 style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    color: AppColors.textDark,
-                    ),
+                  fontSize: 18,
+                  color: AppColors.textDark,
+                ),
               ),
               const SizedBox(height: 20),
               Wrap(
@@ -633,26 +711,6 @@ class _AreeInterventoSection extends StatelessWidget {
                 children: _aree
                     .map((a) => _AreaChip(icon: a.$1, label: a.$2))
                     .toList(),
-              ),
-              const SizedBox(height: 32),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainerLow,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.25),
-                      width: 1),
-                ),
-                child: Text(
-                  'Il lavoro clinico può integrare strumenti differenti, scelti in base al bisogno della persona, al momento del percorso e agli obiettivi condivisi, compreso l\'utilizzo dell\'EMDR quando indicato per l\'elaborazione di esperienze traumatiche o emotivamente stressanti.',
-                  style: GoogleFonts.montserrat(
-                      fontSize: 15,
-                      height: 1.65,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textDark),
-                ),
               ),
             ],
           ),
@@ -675,18 +733,23 @@ class _AreaChip extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.5), width: 1),
+          color: AppColors.primary.withValues(alpha: 0.5),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 18, color: AppColors.primary),
           const SizedBox(width: 7),
-          Text(label,
-              style: GoogleFonts.lato(
-                  fontSize: 14,
-                  color: AppColors.textDark,
-                  fontWeight: FontWeight.w500)),
+          Text(
+            label,
+            style: GoogleFonts.lato(
+              fontSize: 14,
+              color: AppColors.textDark,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
     );
@@ -699,126 +762,87 @@ class _LabirintiSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: AppColors.backgroundLight,
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isMobile = constraints.maxWidth < 600;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Titolo fuori dal box, centrato sullo schermo
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      'Labirinti',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: isMobile ? 30 : 42,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
-                    ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        return SizedBox(
+          width: double.infinity,
+          height: isMobile ? 520 : 640,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Sfondo a piena larghezza
+              Image.asset('assets/images/Maze.webp', fit: BoxFit.cover),
+
+              // Gradiente
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color.fromARGB(190, 0, 0, 0),
+                      Color.fromARGB(150, 0, 0, 0),
+                      Color.fromARGB(180, 0, 0, 0),
+                    ],
                   ),
-                  SizedBox(height: isMobile ? 16 : 24),
+                ),
+              ),
 
-                  // Box con immagine, limitato all'80% della larghezza disponibile
-                  Center(
-                    child: FractionallySizedBox(
-                      widthFactor: 0.95,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(
-                              color: AppColors.primary.withValues(alpha: 0.4),
-                              width: 2),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: SizedBox(
-                            height: isMobile ? 420 : 600,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                // Sfondo
-                                Image.asset(
-                                  'assets/images/Maze.webp',
-                                  fit: BoxFit.cover,
-                                ),
-
-                                // Gradiente
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        Color.fromARGB(190, 0, 0, 0),
-                                        Color.fromARGB(120, 0, 0, 0),
-                                        Color.fromARGB(190, 0, 0, 0),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: isMobile ? 16 : 32,
-                                      vertical: isMobile ? 24 : 48),
-                                  child: Center(
-                                    child: ConstrainedBox(
-                                      constraints:
-                                          const BoxConstraints(maxWidth: 1000),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara. '
-                                            'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: isMobile ? 15 : 22,
-                                              height: isMobile ? 1.5 : 1.8,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(height: isMobile ? 14 : 24),
-                                          Text(
-                                            'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: isMobile ? 15 : 22,
-                                              height: isMobile ? 1.5 : 1.8,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 16 : 32,
+                  vertical: isMobile ? 24 : 48,
+                ),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1000),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Labirinti',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.playfairDisplay(
+                            fontSize: isMobile ? 35 : 52,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
-                      ),
+                        SizedBox(height: isMobile ? 16 : 24),
+                        Text(
+                          'In alcuni momenti della vita ci si può sentire smarriti, confusi o intrappolati in passaggi difficili e ripetitivi, come se fosse impossibile trovare una direzione chiara. '
+                          'Il labirinto rappresenta la metafora di questo percorso interiore: un cammino complesso, a volte faticoso, nel quale il disagio può assumere la forma di qualcosa che si ripete e che sembra non trovare uscita.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                            fontSize: isMobile ? 15 : 22,
+                            height: isMobile ? 1.5 : 1.8,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 14 : 24),
+                        Text(
+                          'La psicoterapia può offrire uno spazio in cui attraversare questo labirinto con maggiore consapevolezza. Non propone scorciatoie, ma aiuta a dare senso ai vissuti, a riconoscere ciò che fa soffrire e a individuare nuove possibilità di cambiamento.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.montserrat(
+                            fontSize: isMobile ? 15 : 22,
+                            height: isMobile ? 1.5 : 1.8,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
-
 
 class _UltimoArticoloSection extends StatefulWidget {
   const _UltimoArticoloSection();
@@ -869,30 +893,36 @@ class _UltimoArticoloSectionState extends State<_UltimoArticoloSection> {
                   Text(
                     'Ultimo articolo pubblicato',
                     style: GoogleFonts.playfairDisplay(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary),
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  ...articoli.map((a) => Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: _ArticoloCard(
-                          articolo: a,
-                          dataTesto: _formatDate(a.pubblicatoAt),
-                          corpo: _truncate(a.corpo ?? ''),
-                        ),
-                      )),
+                  ...articoli.map(
+                    (a) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: _ArticoloCard(
+                        articolo: a,
+                        dataTesto: _formatDate(a.pubblicatoAt),
+                        corpo: _truncate(a.corpo ?? ''),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 4),
                   TextButton.icon(
                     onPressed: () => context.go('/articoli'),
-                    icon: const Icon(Icons.arrow_forward,
-                        color: AppColors.primary),
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: AppColors.primary,
+                    ),
                     label: const Text(
                       'Leggi tutti i post del blog',
                       style: TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                        color: AppColors.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -909,10 +939,11 @@ class _ArticoloCard extends StatelessWidget {
   final Articolo articolo;
   final String dataTesto;
   final String corpo;
-  const _ArticoloCard(
-      {required this.articolo,
-      required this.dataTesto,
-      required this.corpo});
+  const _ArticoloCard({
+    required this.articolo,
+    required this.dataTesto,
+    required this.corpo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -941,19 +972,31 @@ class _ArticoloCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (dataTesto.isNotEmpty)
-                    Text(dataTesto,
-                        style: const TextStyle(
-                            fontSize: 12, color: Colors.black45)),
+                    Text(
+                      dataTesto,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black45,
+                      ),
+                    ),
                   const SizedBox(height: 4),
-                  Text(articolo.titolo,
-                      style: GoogleFonts.playfairDisplay(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF134456))),
+                  Text(
+                    articolo.titolo,
+                    style: GoogleFonts.playfairDisplay(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF134456),
+                    ),
+                  ),
                   const SizedBox(height: 6),
-                  Text(corpo,
-                      style: GoogleFonts.lato(
-                          fontSize: 14, height: 1.6, color: Colors.black87)),
+                  Text(
+                    corpo,
+                    style: GoogleFonts.lato(
+                      fontSize: 14,
+                      height: 1.6,
+                      color: Colors.black87,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1004,9 +1047,10 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                   Text(
                     'Le ultime 3 recensioni',
                     style: GoogleFonts.playfairDisplay(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary),
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   LayoutBuilder(
@@ -1026,10 +1070,12 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: reviews
-                            .map((r) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 12),
-                                  child: _ReviewPreviewCard(r),
-                                ))
+                            .map(
+                              (r) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: _ReviewPreviewCard(r),
+                              ),
+                            )
                             .toList(),
                       );
                     },
@@ -1037,14 +1083,17 @@ class _UltimeRecensioniSectionState extends State<_UltimeRecensioniSection> {
                   const SizedBox(height: 24),
                   TextButton.icon(
                     onPressed: () => context.go('/recensioni'),
-                    icon: const Icon(Icons.arrow_forward,
-                        color: AppColors.primary),
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: AppColors.primary,
+                    ),
                     label: const Text(
                       'Leggi tutte le recensioni',
                       style: TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                        color: AppColors.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -1078,7 +1127,10 @@ class _ReviewPreviewCard extends StatelessWidget {
           children: [
             Text(
               review.username,
-              style: GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),
+              style: GoogleFonts.lato(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
             const SizedBox(height: 4),
             StarRating(stars: review.stars, size: 18),
@@ -1086,17 +1138,19 @@ class _ReviewPreviewCard extends StatelessWidget {
             Text(
               review.title,
               style: GoogleFonts.playfairDisplay(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15),
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
               _truncateWords(review.description, 50),
               style: GoogleFonts.lato(
-                  fontSize: 14,
-                  height: 1.5,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.black87),
+                fontSize: 14,
+                height: 1.5,
+                fontStyle: FontStyle.italic,
+                color: Colors.black87,
+              ),
             ),
           ],
         ),
@@ -1119,9 +1173,10 @@ class _CtaSection extends StatelessWidget {
           Text(
             'Inizia il tuo percorso',
             style: GoogleFonts.playfairDisplay(
-                fontSize: 45,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary),
+              fontSize: 45,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
           ),
           const SizedBox(height: 32),
           Wrap(
@@ -1147,7 +1202,7 @@ class _CtaSection extends StatelessWidget {
                 ),
               ),
               _CtaButton(
-                icon: Icons.person_3_rounded ,
+                icon: Icons.person_3_rounded,
                 label: 'Lo psicoterapeuta',
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -1184,17 +1239,19 @@ class _CtaButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: onPressed,
         icon: Icon(icon, size: 28),
-        label: Text(label,
-            style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold)),
+        label: Text(
+          label,
+          style: GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           elevation: 4,
           shadowColor: Colors.black38,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding:
-              const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
         ),
       ),
     );
@@ -1220,32 +1277,43 @@ class _LasciaRecensioneSection extends StatelessWidget {
               Text(
                 'Hai già sostenuto una seduta?',
                 style: GoogleFonts.playfairDisplay(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 'La tua esperienza può essere utile ad altre persone.',
                 style: GoogleFonts.lato(
-                    fontSize: 16, height: 1.5, color: AppColors.textDark),
+                  fontSize: 16,
+                  height: 1.5,
+                  color: AppColors.textDark,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () => context.go('/recensioni'),
                 icon: const Icon(Icons.star_outline),
-                label: Text('Lascia una recensione',
-                    style: GoogleFonts.lato(
-                        fontSize: 16, fontWeight: FontWeight.bold)),
+                label: Text(
+                  'Lascia una recensione',
+                  style: GoogleFonts.lato(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 32, vertical: 32),
+                    horizontal: 32,
+                    vertical: 32,
+                  ),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.horizontal()),
+                    borderRadius: BorderRadius.horizontal(),
+                  ),
                   elevation: 3,
                 ),
               ),
@@ -1270,11 +1338,14 @@ class _ContactFooter extends StatelessWidget {
       color: Colors.transparent,
       child: Column(
         children: [
-          Text('Contatti',
-              style: GoogleFonts.playfairDisplay(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary)),
+          Text(
+            'Contatti',
+            style: GoogleFonts.playfairDisplay(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
+          ),
           const SizedBox(height: 24),
           SelectionArea(
             child: Wrap(
@@ -1308,8 +1379,10 @@ class _ContactFooter extends StatelessWidget {
                   text: 'Facebook',
                   color: AppColors.primary,
                   hoverColor: const Color(0xFF134456),
-                  onTap: () => launchUrl(Uri.parse(Contatti.facebook),
-                      webOnlyWindowName: '_blank'),
+                  onTap: () => launchUrl(
+                    Uri.parse(Contatti.facebook),
+                    webOnlyWindowName: '_blank',
+                  ),
                 ),
               ],
             ),
