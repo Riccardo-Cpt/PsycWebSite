@@ -782,9 +782,9 @@ class _LabirintiSection extends StatelessWidget {
                     end: Alignment.centerRight,
                     colors: isMobile
                         ? const [
+                            Color.fromARGB(120, 0, 0, 0),
                             Color.fromARGB(140, 0, 0, 0),
-                            Color.fromARGB(180, 0, 0, 0),
-                            Color.fromARGB(130, 0, 0, 0),
+                            Color.fromARGB(110, 0, 0, 0),
                           ]
                         : const [
                             Color.fromARGB(190, 0, 0, 0),
