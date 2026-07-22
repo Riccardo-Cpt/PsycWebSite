@@ -776,15 +776,21 @@ class _LabirintiSection extends StatelessWidget {
 
               // Gradiente
               Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    colors: [
-                      Color.fromARGB(190, 0, 0, 0),
-                      Color.fromARGB(150, 0, 0, 0),
-                      Color.fromARGB(180, 0, 0, 0),
-                    ],
+                    colors: isMobile
+                        ? const [
+                            Color.fromARGB(140, 0, 0, 0),
+                            Color.fromARGB(180, 0, 0, 0),
+                            Color.fromARGB(130, 0, 0, 0),
+                          ]
+                        : const [
+                            Color.fromARGB(190, 0, 0, 0),
+                            Color.fromARGB(150, 0, 0, 0),
+                            Color.fromARGB(180, 0, 0, 0),
+                          ],
                   ),
                 ),
               ),
